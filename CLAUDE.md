@@ -20,7 +20,16 @@ Read it once at the start of a session; don't re-read it every turn.
 4. Batch: present everything for a gate in one message, then wait for the user's batched feedback.
 5. Don't read back files you just wrote, don't paste whole files into chat, keep messages short.
 6. The user previews in Remotion Studio (`npm run studio`) themselves — that's free; rely on it.
-7. Commit after every approved gate, with a clear message. Push to `origin main` only when the user asks.
+7. Commit after every approved gate, with a clear message, and push to `origin main` (cloud containers are wiped; unpushed work is lost).
+
+## Running in a Claude Code cloud session
+- First command of every session: `source tools/setup_cloud.sh` (npm install, Python deps, Kokoro models, and
+  `REMOTION_BROWSER` → preinstalled Chromium). Takes ~1–2 min; re-run it in any new shell that renders.
+- The user can't open Remotion Studio from the cloud, so previews are: stills you send with SendUserFile, and,
+  when asked, a half-size scene MP4 (`npx remotion render Ep02-S4 out/s4-preview.mp4 --scale=0.5`).
+- Full voice for Ep 2 takes ~2 min on CPU; re-voice single scenes whenever possible.
+- Known fixes already in tools: Whisper's "chat GPT" → "ChatGPT" (captions.py MERGE/FIX); audio is fed to
+  Whisper as a numpy array because current PyAV breaks faster-whisper's file decoder.
 
 ## Gates (stop for the user's OK at each)
 G0 pre-checks (pronunciation test clip, facts flagged in the script doc) → G1 shared kit (Dot moods + style frame, 1 still sheet)

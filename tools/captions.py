@@ -18,6 +18,8 @@ import math
 import sys
 from pathlib import Path
 
+import numpy as np
+import soundfile as sf
 from faster_whisper import WhisperModel
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -30,12 +32,50 @@ MAX_SECONDS = 2.6    # per cue
 MIN_GAP = 0.001      # seconds between consecutive cues
 
 
+def load_16k(path: Path) -> np.ndarray:
+    """Read a WAV and resample to 16 kHz mono float32 for Whisper.
+    Done here (not via PyAV) because recent PyAV releases break faster-whisper's decoder."""
+    audio, sr = sf.read(str(path), dtype="float32", always_2d=True)
+    mono = audio.mean(axis=1)
+    if sr == 16000:
+        return mono
+    n_out = int(round(len(mono) * 16000 / sr))
+    x_old = np.linspace(0.0, 1.0, num=len(mono), endpoint=False)
+    x_new = np.linspace(0.0, 1.0, num=n_out, endpoint=False)
+    return np.interp(x_new, x_old, mono).astype(np.float32)
+
+
 def srt_time(t: float) -> str:
     ms = int(round(t * 1000))
     h, ms = divmod(ms, 3_600_000)
     m, ms = divmod(ms, 60_000)
     s, ms = divmod(ms, 1000)
     return f"{h:02}:{m:02}:{s:02},{ms:03}"
+
+
+# Whisper hears some names as two words or misspells them. Fix them before building cues.
+# MERGE: (first word, second word starts with) -> the joined word keeps the second word's punctuation.
+MERGE = [("chat", "GPT")]
+FIX = {"Chat GPT": "ChatGPT", "chatGPT": "ChatGPT", "Chatgpt": "ChatGPT"}
+
+
+def clean_words(words: list[dict]) -> list[dict]:
+    out: list[dict] = []
+    for w in words:
+        if out:
+            prev = out[-1]
+            for first, second in MERGE:
+                if prev["word"].lower() == first and w["word"].startswith(second):
+                    prev["word"] = "ChatGPT" + w["word"][len(second):] if second == "GPT" else prev["word"] + w["word"]
+                    prev["end"] = w["end"]
+                    break
+            else:
+                out.append(dict(w))
+            continue
+        out.append(dict(w))
+    for w in out:
+        w["word"] = FIX.get(w["word"], w["word"])
+    return out
 
 
 def group_words(words: list[dict]) -> list[dict]:
@@ -77,11 +117,12 @@ def main() -> None:
         sid = scene["id"]
         if sid not in durations:
             sys.exit(f"{sid} has no voice yet: run tools/tts.py {ep} first")
-        segments, _ = model.transcribe(str(audio_dir / f"{sid}.wav"), word_timestamps=True, language="en")
+        segments, _ = model.transcribe(load_16k(audio_dir / f"{sid}.wav"), word_timestamps=True, language="en")
         words = [
             {"word": w.word.strip(), "start": round(w.start, 3), "end": round(w.end, 3)}
             for seg in segments for w in (seg.words or []) if w.word.strip()
         ]
+        words = clean_words(words)
         per_scene[sid] = words
         for cue in group_words(words):
             all_cues.append({"start": cue["start"] + offset, "end": cue["end"] + offset, "text": cue["text"]})

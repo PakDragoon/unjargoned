@@ -1,0 +1,579 @@
+1
+00:00:00,000 --> 00:00:01,099
+You type a question into
+
+2
+00:00:01,100 --> 00:00:03,519
+ChatGPT, and a second later
+
+3
+00:00:03,520 --> 00:00:05,499
+an answer starts appearing, word
+
+4
+00:00:05,500 --> 00:00:06,100
+by word.
+
+5
+00:00:06,640 --> 00:00:07,980
+But where is it coming from?
+
+6
+00:00:08,540 --> 00:00:09,860
+There's no person typing.
+
+7
+00:00:10,580 --> 00:00:11,860
+It isn't copying a webpage.
+
+8
+00:00:12,740 --> 00:00:14,379
+Most of the time, it isn't
+
+9
+00:00:14,380 --> 00:00:15,580
+looking anything up at all.
+
+10
+00:00:16,500 --> 00:00:17,779
+So where does the answer come
+
+11
+00:00:17,780 --> 00:00:18,140
+from?
+
+12
+00:00:19,180 --> 00:00:21,459
+Quick test, finish this sentence
+
+13
+00:00:21,460 --> 00:00:22,660
+once upon A.
+
+14
+00:00:24,460 --> 00:00:26,300
+You said time, didn't you?
+
+15
+00:00:27,000 --> 00:00:28,459
+then you just did exactly what
+
+16
+00:00:28,460 --> 00:00:29,620
+ChatGPT does.
+
+17
+00:00:30,760 --> 00:00:32,640
+ChatGPT is a guessing machine.
+
+18
+00:00:33,180 --> 00:00:35,079
+It looks at the word so far and
+
+19
+00:00:35,080 --> 00:00:36,599
+guesses the most likely next
+
+20
+00:00:36,600 --> 00:00:36,860
+word.
+
+21
+00:00:37,420 --> 00:00:39,260
+It adds that word, looks again,
+
+22
+00:00:39,520 --> 00:00:41,439
+and guesses the next one, and
+
+23
+00:00:41,440 --> 00:00:41,860
+the next.
+
+24
+00:00:42,940 --> 00:00:43,620
+That's it.
+
+25
+00:00:44,340 --> 00:00:45,739
+Every answer it has ever given
+
+26
+00:00:45,740 --> 00:00:47,519
+you was built like that, one
+
+27
+00:00:47,520 --> 00:00:48,380
+guess at a time.
+
+28
+00:00:49,320 --> 00:00:50,360
+So three questions.
+
+29
+00:00:51,200 --> 00:00:51,980
+Guessing from what?
+
+30
+00:00:52,620 --> 00:00:53,819
+Why can't it count letters?
+
+31
+00:00:53,820 --> 00:00:55,939
+And why does the same question
+
+32
+00:00:55,940 --> 00:00:56,940
+get different answers?
+
+33
+00:00:57,700 --> 00:00:59,239
+Question one, guessing from
+
+34
+00:00:59,240 --> 00:00:59,520
+what?
+
+35
+00:01:00,140 --> 00:01:01,759
+You knew time because you've
+
+36
+00:01:01,760 --> 00:01:03,320
+heard that line 100 times.
+
+37
+00:01:04,100 --> 00:01:05,820
+ChatGPT learned the same way,
+
+38
+00:01:06,120 --> 00:01:07,380
+just on a giant scale.
+
+39
+00:01:08,460 --> 00:01:09,499
+Remember, fill in the blank
+
+40
+00:01:09,500 --> 00:01:10,560
+worksheets from school.
+
+41
+00:01:11,260 --> 00:01:12,280
+The cat sat on the blank.
+
+42
+00:01:13,000 --> 00:01:13,760
+That's its training.
+
+43
+00:01:14,460 --> 00:01:15,980
+It was shown a mountain of text,
+
+44
+00:01:16,300 --> 00:01:18,339
+books, websites, articles, with
+
+45
+00:01:18,340 --> 00:01:19,260
+the next word hidden.
+
+46
+00:01:19,840 --> 00:01:20,320
+It guessed.
+
+47
+00:01:21,000 --> 00:01:21,980
+The guess was checked.
+
+48
+00:01:22,620 --> 00:01:24,299
+If it was wrong, it got adjusted
+
+49
+00:01:24,300 --> 00:01:25,100
+a tiny bit.
+
+50
+00:01:25,630 --> 00:01:27,960
+Then again, billions of times.
+
+51
+00:01:29,000 --> 00:01:30,520
+Nobody gave it a list of facts.
+
+52
+00:01:31,160 --> 00:01:32,679
+It just got incredibly good at
+
+53
+00:01:32,680 --> 00:01:33,000
+blanks.
+
+54
+00:01:33,660 --> 00:01:35,419
+That's why this kind of AI is
+
+55
+00:01:35,420 --> 00:01:36,540
+called a language model.
+
+56
+00:01:37,200 --> 00:01:38,639
+Then people trained it some more
+
+57
+00:01:38,640 --> 00:01:39,879
+to answer like a helpful
+
+58
+00:01:39,880 --> 00:01:40,340
+assistant.
+
+59
+00:01:41,000 --> 00:01:42,619
+But underneath, it's still the
+
+60
+00:01:42,620 --> 00:01:43,959
+world's best fill in the blank
+
+61
+00:01:43,960 --> 00:01:44,260
+player.
+
+62
+00:01:44,967 --> 00:01:47,246
+Question two, how many R's are
+
+63
+00:01:47,247 --> 00:01:47,787
+in strawberry?
+
+64
+00:01:49,067 --> 00:01:51,287
+Three, but for a long time,
+
+65
+00:01:51,627 --> 00:01:53,426
+ChatGPT would confidently say
+
+66
+00:01:53,427 --> 00:01:54,107
+two.
+
+67
+00:01:55,087 --> 00:01:55,827
+Here's why.
+
+68
+00:01:56,527 --> 00:01:57,846
+I've been saying it guesses the
+
+69
+00:01:57,847 --> 00:01:58,427
+next word.
+
+70
+00:01:58,987 --> 00:02:00,307
+That was a little white lie.
+
+71
+00:02:00,947 --> 00:02:02,567
+It doesn't see words or letters.
+
+72
+00:02:03,227 --> 00:02:04,747
+It sees chunks called tokens.
+
+73
+00:02:05,567 --> 00:02:07,046
+Your message gets chopped into
+
+74
+00:02:07,047 --> 00:02:09,226
+pieces and each piece becomes a
+
+75
+00:02:09,227 --> 00:02:09,447
+number.
+
+76
+00:02:10,567 --> 00:02:11,646
+Strawberry might get chopped
+
+77
+00:02:11,647 --> 00:02:13,147
+into three pieces like this.
+
+78
+00:02:13,867 --> 00:02:15,646
+Now imagine I text you a
+
+79
+00:02:15,647 --> 00:02:17,706
+strawberry emoji and ask how
+
+80
+00:02:17,707 --> 00:02:18,787
+many R's are in it.
+
+81
+00:02:19,207 --> 00:02:20,446
+The picture doesn't show any
+
+82
+00:02:20,447 --> 00:02:20,747
+letters.
+
+83
+00:02:21,507 --> 00:02:22,546
+You'd have to remember the
+
+84
+00:02:22,547 --> 00:02:22,887
+spelling.
+
+85
+00:02:23,567 --> 00:02:25,107
+That's ChatGPT's problem.
+
+86
+00:02:25,907 --> 00:02:27,606
+Newer versions usually work
+
+87
+00:02:27,607 --> 00:02:29,006
+around it by spelling the word
+
+88
+00:02:29,007 --> 00:02:29,567
+out first.
+
+89
+00:02:30,187 --> 00:02:31,427
+But the chunks are still there,
+
+90
+00:02:31,687 --> 00:02:33,306
+so letter puzzles can still trip
+
+91
+00:02:33,307 --> 00:02:33,607
+it up.
+
+92
+00:02:34,167 --> 00:02:36,366
+Question three, ask the same
+
+93
+00:02:36,367 --> 00:02:38,326
+question twice and you'll often
+
+94
+00:02:38,327 --> 00:02:39,547
+get two different answers.
+
+95
+00:02:40,167 --> 00:02:40,487
+Why?
+
+96
+00:02:41,147 --> 00:02:42,586
+Because it doesn't always pick
+
+97
+00:02:42,587 --> 00:02:43,647
+the single top guess.
+
+98
+00:02:44,727 --> 00:02:45,706
+Think about your favorite
+
+99
+00:02:45,707 --> 00:02:46,347
+restaurant.
+
+100
+00:02:47,047 --> 00:02:48,867
+Most days you order your usual.
+
+101
+00:02:49,527 --> 00:02:51,146
+Some days you try the dish you
+
+102
+00:02:51,147 --> 00:02:51,887
+almost ordered.
+
+103
+00:02:52,427 --> 00:02:53,966
+The setting that controls this
+
+104
+00:02:53,967 --> 00:02:55,067
+is called temperature.
+
+105
+00:02:56,207 --> 00:02:58,066
+Turn it down and it orders the
+
+106
+00:02:58,067 --> 00:02:59,627
+usual every single time.
+
+107
+00:03:00,047 --> 00:03:01,367
+Safe but a bit boring.
+
+108
+00:03:01,967 --> 00:03:03,246
+Turn it up and it gets
+
+109
+00:03:03,247 --> 00:03:03,787
+adventurous.
+
+110
+00:03:04,527 --> 00:03:06,586
+More creative and too far up it
+
+111
+00:03:06,587 --> 00:03:07,647
+starts ordering nonsense.
+
+112
+00:03:08,567 --> 00:03:10,326
+ChatGPT keeps it turned up a
+
+113
+00:03:10,327 --> 00:03:10,467
+little.
+
+114
+00:03:11,147 --> 00:03:13,326
+And once one word changes, every
+
+115
+00:03:13,327 --> 00:03:14,787
+guess after it changes too.
+
+116
+00:03:15,433 --> 00:03:16,573
+So put it all together.
+
+117
+00:03:17,293 --> 00:03:18,872
+Your message gets chopped into
+
+118
+00:03:18,873 --> 00:03:19,373
+tokens.
+
+119
+00:03:20,273 --> 00:03:22,032
+ChatGPT guesses the next one
+
+120
+00:03:22,033 --> 00:03:23,832
+from patterns in a mountain of
+
+121
+00:03:23,833 --> 00:03:24,193
+text.
+
+122
+00:03:24,973 --> 00:03:25,892
+Picks one with a little
+
+123
+00:03:25,893 --> 00:03:26,533
+randomness.
+
+124
+00:03:27,273 --> 00:03:29,233
+Adds it and guesses again.
+
+125
+00:03:30,253 --> 00:03:31,612
+There's no finished answer
+
+126
+00:03:31,613 --> 00:03:32,413
+waiting somewhere.
+
+127
+00:03:32,853 --> 00:03:34,513
+It's built one guess at a time,
+
+128
+00:03:34,793 --> 00:03:36,352
+the same way you finished once
+
+129
+00:03:36,353 --> 00:03:36,953
+upon A.
+
+130
+00:03:37,813 --> 00:03:39,233
+And notice what it's guessing.
+
+131
+00:03:40,773 --> 00:03:42,972
+What sounds right, not what is
+
+132
+00:03:42,973 --> 00:03:43,313
+right.
+
+133
+00:03:44,193 --> 00:03:46,092
+Most of the time, those are the
+
+134
+00:03:46,093 --> 00:03:46,633
+same thing.
+
+135
+00:03:47,300 --> 00:03:48,620
+But sometimes they're not.
+
+136
+00:03:49,240 --> 00:03:50,559
+And that's when AI makes
+
+137
+00:03:50,560 --> 00:03:51,919
+something up, with total
+
+138
+00:03:51,920 --> 00:03:52,440
+confidence.
+
+139
+00:03:53,160 --> 00:03:54,899
+It's called a hallucination, and
+
+140
+00:03:54,900 --> 00:03:55,400
+it's next.
+
+141
+00:03:56,940 --> 00:03:58,359
+Subscribe so you don't miss why
+
+142
+00:03:58,360 --> 00:03:59,620
+AI hallucinates.
+
+143
+00:04:00,140 --> 00:04:01,300
+And tell me in the comments,
+
+144
+00:04:02,000 --> 00:04:03,799
+what's the strangest thing an AI
+
+145
+00:04:03,800 --> 00:04:04,880
+has ever told you?
