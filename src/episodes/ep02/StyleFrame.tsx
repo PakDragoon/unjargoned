@@ -38,7 +38,7 @@ export const StyleFrame: React.FC = () => (
       </div>
       <div style={{ fontSize: 56, fontWeight: 600, color: colors.subtext, marginTop: 8 }}>3 tokens, 0 letters</div>
     </AbsoluteFill>
-    <Dot x={330} y={860} size={92} tailLength={2.2} mood="curious" look={{ x: 0.4, y: -0.3 }} blinks={false} />
+    <Dot x={1560} y={870} mood="curious" blinks={false} />
   </AbsoluteFill>
 );
 

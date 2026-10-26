@@ -274,7 +274,7 @@ const S4Content: React.FC = () => {
         </div>
       </AbsoluteFill>
 
-      <Dot x={250} y={880} size={84} track={TRACK} look={{ x: 0.35, y: -0.25 }} seed="s4" tailLength={2.2} />
+      <Dot x={1560} y={880} track={TRACK} look={{ x: 0, y: -0.15 }} seed="s4" />
     </AbsoluteFill>
   );
 };
