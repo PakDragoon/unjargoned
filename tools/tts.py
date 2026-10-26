@@ -40,8 +40,11 @@ SENTENCE_GAP = 0.35    # seconds between sentences
 BEAT = 0.6             # seconds for [beat], before PAUSE_SCALE (→ ~0.78 s)
 
 # Spelling fixes applied ONLY to what the voice reads (captions keep the real text).
-# Fill these in after the G0 test, e.g. {"r's": "Rs"}.
-PRONOUNCE: dict[str, str] = {}
+# Check a fix with: python3 -c "from kokoro_onnx import Kokoro; print(Kokoro('models/kokoro-v1.0.onnx','models/voices-v1.0.bin').tokenizer.phonemize('TEXT','en-us'))"
+# G0: "a" alone was read as the letter A (/eɪ/). Leave "r's" alone — it reads /ɑːɹz/; "Rs" breaks it.
+PRONOUNCE: dict[str, str] = {
+    "Once upon a": "Once upon uh",
+}
 
 MARKER = re.compile(r"\[(beat|silence\s+[\d.]+)\]", re.IGNORECASE)
 SENTENCE_END = re.compile(r"(?<=[.!?…])[\"”']?\s+")

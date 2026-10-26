@@ -9,6 +9,8 @@ import { S4 } from "./scenes/S4";
 import { S5 } from "./scenes/S5";
 import { S6 } from "./scenes/S6";
 import { S7 } from "./scenes/S7";
+import { G1Sheet, StyleFrame } from "./StyleFrame";
+import { DotSheet } from "../../shared/DotSheet";
 
 const components: Record<string, React.FC> = { S1, S2, S3, S4, S5, S6, S7 };
 
@@ -40,6 +42,8 @@ export const Ep02Compositions: React.FC = () => (
         height={VIDEO.height}
       />
     ))}
+    <Composition id="Ep02-StyleFrame" component={StyleFrame} durationInFrames={1} fps={VIDEO.fps} width={VIDEO.width} height={VIDEO.height} />
+    <Composition id="Ep02-G1Sheet" component={() => <G1Sheet Sheet={DotSheet} />} durationInFrames={1} fps={VIDEO.fps} width={VIDEO.width} height={2180} />
     <Composition
       id="Ep02-Full"
       component={Ep02Full}
