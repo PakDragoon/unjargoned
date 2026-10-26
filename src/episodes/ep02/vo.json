@@ -1,0 +1,51 @@
+{
+  "episode": "ep02",
+  "title": "How ChatGPT Actually Works (Explained Simply)",
+  "scriptDoc": "https://claude.ai/artifact/DS9njvUGCA6VKfG7ibjfK4",
+  "markup": "[beat] = short pause; [silence N] = N-second pause with music dipped. Everything else is read word for word.",
+  "scenes": [
+    {
+      "id": "S1",
+      "title": "Hook",
+      "estSeconds": 29,
+      "vo": "You type a question into ChatGPT, and a second later an answer starts appearing, word by word. But where is it coming from? There's no person typing. It isn't copying a web page. Most of the time, it isn't looking anything up at all. [beat] So where does the answer come from? [beat] Quick test. Finish this sentence: \"Once upon a…\" [silence 1.5] You said \"time,\" didn't you?"
+    },
+    {
+      "id": "S2",
+      "title": "It's a guessing machine",
+      "estSeconds": 36,
+      "vo": "Then you just did exactly what ChatGPT does. [beat] ChatGPT is a guessing machine. It looks at the words so far and guesses the most likely next word. It adds that word, looks again, and guesses the next one. And the next. [beat] That's it. Every answer it has ever given you was built like that, one guess at a time. [beat] So, three questions. Guessing from what? Why can't it count letters? And why does the same question get different answers?"
+    },
+    {
+      "id": "S3",
+      "title": "Guessing from what?",
+      "estSeconds": 57,
+      "vo": "Question one: guessing from what? You knew \"time\" because you've heard that line a hundred times. ChatGPT learned the same way, just on a giant scale. [beat] Remember fill-in-the-blank worksheets from school? \"The cat sat on the blank.\" That's its training. It was shown a mountain of text, books, websites, articles, with the next word hidden. It guessed. The guess was checked. If it was wrong, it got adjusted a tiny bit. Then again. Billions of times. [beat] Nobody gave it a list of facts. It just got incredibly good at blanks. That's why this kind of AI is called a language model. Then people trained it some more to answer like a helpful assistant. But underneath, it's still the world's best fill-in-the-blank player."
+    },
+    {
+      "id": "S4",
+      "title": "The strawberry problem",
+      "estSeconds": 55,
+      "vo": "Question two. How many r's are in \"strawberry\"? [beat] Three. But for a long time, ChatGPT would confidently say: two. [beat] Here's why. I've been saying it guesses the next word. That was a little white lie. It doesn't see words, or letters. It sees chunks, called tokens. Your message gets chopped into pieces, and each piece becomes a number. \"Strawberry\" might get chopped into three pieces, like this. [beat] Now imagine I text you a strawberry emoji and ask how many r's are in it. The picture doesn't show any letters. You'd have to remember the spelling. That's ChatGPT's problem. Newer versions usually work around it by spelling the word out first. But the chunks are still there, so letter puzzles can still trip it up."
+    },
+    {
+      "id": "S5",
+      "title": "Same question, different answers",
+      "estSeconds": 46,
+      "vo": "Question three. Ask the same question twice, and you'll often get two different answers. Why? Because it doesn't always pick the single top guess. [beat] Think about your favorite restaurant. Most days, you order your usual. Some days, you try the dish you almost ordered. The setting that controls this is called temperature. [beat] Turn it down, and it orders the usual every single time. Safe, but a bit boring. Turn it up, and it gets adventurous. More creative, and too far up, it starts ordering nonsense. ChatGPT keeps it turned up a little. And once one word changes, every guess after it changes too."
+    },
+    {
+      "id": "S6",
+      "title": "Putting it together",
+      "estSeconds": 35,
+      "vo": "So put it all together. Your message gets chopped into tokens. ChatGPT guesses the next one from patterns in a mountain of text. Picks one, with a little randomness. Adds it. And guesses again. [beat] There's no finished answer waiting somewhere. It's built one guess at a time, the same way you finished \"Once upon a.\" [beat] And notice what it's guessing. [silence 1.0] What sounds right. Not what is right. [beat] Most of the time, those are the same thing."
+    },
+    {
+      "id": "S7",
+      "title": "Next: Why AI Hallucinates",
+      "estSeconds": 22,
+      "endScreenSeconds": 8,
+      "vo": "But sometimes they're not. And that's when AI makes something up, with total confidence. It's called a hallucination, and it's next. [beat] Subscribe so you don't miss \"Why AI Hallucinates.\" And tell me in the comments: what's the strangest thing an AI has ever told you?"
+    }
+  ]
+}

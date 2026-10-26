@@ -1,0 +1,13 @@
+node_modules/
+out/
+.venv/
+__pycache__/
+*.pyc
+
+# Voice/ASR models: downloaded locally, never committed (see tools/README.md)
+models/
+
+# Remotion / OS noise
+.remotion/
+.DS_Store
+Thumbs.db

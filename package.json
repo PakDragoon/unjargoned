@@ -1,0 +1,25 @@
+{
+  "name": "unjargoned",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Unjargoned — faceless explainer videos built with Remotion",
+  "scripts": {
+    "studio": "remotion studio",
+    "typecheck": "tsc --noEmit",
+    "still": "remotion still",
+    "render": "remotion render",
+    "tts": "python3 tools/tts.py",
+    "captions": "python3 tools/captions.py"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.534",
+    "@remotion/google-fonts": "4.0.534",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.534"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}
