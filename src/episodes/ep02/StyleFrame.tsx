@@ -2,6 +2,7 @@ import React from "react";
 import { AbsoluteFill } from "remotion";
 import { colors, fontFamily } from "../../shared/brand";
 import { Dot } from "../../shared/Dot";
+import { QuestionStrip } from "./QuestionStrip";
 
 // G1 style frame: the S4 token beat. Split verified with OpenAI's o200k_base
 // tokenizer (GPT-4o and later): "strawberry" → st | raw | berry = 302 · 1618 · 19772.
@@ -10,30 +11,6 @@ const TOKENS = [
   { text: "raw", id: 1618 },
   { text: "berry", id: 19772 },
 ];
-const QUESTIONS = ["From what?", "Counting letters", "Different answers"];
-
-/** Progress strip: the three questions from S2, the current one in yellow. */
-export const QuestionStrip: React.FC<{ active: number }> = ({ active }) => (
-  <div style={{ position: "absolute", top: 56, left: 120, right: 120, display: "flex", gap: 24, justifyContent: "center" }}>
-    {QUESTIONS.map((q, i) => (
-      <div
-        key={q}
-        style={{
-          padding: "14px 32px",
-          borderRadius: 999,
-          fontSize: 44,
-          fontWeight: 600,
-          backgroundColor: i === active ? colors.yellow : colors.panel,
-          color: i === active ? colors.ink : colors.subtext,
-          border: `3px solid ${i === active ? colors.yellow : colors.line}`,
-        }}
-      >
-        {i + 1} · {q}
-      </div>
-    ))}
-  </div>
-);
-
 export const StyleFrame: React.FC = () => (
   <AbsoluteFill style={{ backgroundColor: colors.ink, fontFamily, color: colors.white }}>
     <QuestionStrip active={1} />
