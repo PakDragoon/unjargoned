@@ -32,7 +32,7 @@
   },
   {
    "word": "and",
-   "start": 2.8,
+   "start": 2.84,
    "end": 2.9
   },
   {
@@ -43,11 +43,11 @@
   {
    "word": "second",
    "start": 3.02,
-   "end": 3.26
+   "end": 3.28
   },
   {
    "word": "later",
-   "start": 3.26,
+   "start": 3.28,
    "end": 3.52
   },
   {
@@ -133,11 +133,11 @@
   {
    "word": "typing.",
    "start": 9.46,
-   "end": 9.86
+   "end": 9.84
   },
   {
    "word": "It",
-   "start": 10.58,
+   "start": 10.6,
    "end": 10.74
   },
   {
@@ -153,12 +153,17 @@
   {
    "word": "a",
    "start": 11.38,
-   "end": 11.6
+   "end": 11.58
   },
   {
-   "word": "webpage.",
-   "start": 11.6,
-   "end": 11.86
+   "word": "web",
+   "start": 11.58,
+   "end": 11.76
+  },
+  {
+   "word": "page.",
+   "start": 11.76,
+   "end": 12.06
   },
   {
    "word": "Most",
@@ -168,11 +173,11 @@
   {
    "word": "of",
    "start": 13.0,
-   "end": 13.16
+   "end": 13.18
   },
   {
    "word": "the",
-   "start": 13.16,
+   "start": 13.18,
    "end": 13.26
   },
   {
@@ -198,11 +203,11 @@
   {
    "word": "anything",
    "start": 14.6,
-   "end": 14.92
+   "end": 14.9
   },
   {
    "word": "up",
-   "start": 14.92,
+   "start": 14.9,
    "end": 15.18
   },
   {
@@ -217,7 +222,7 @@
   },
   {
    "word": "So",
-   "start": 16.5,
+   "start": 16.48,
    "end": 16.74
   },
   {
@@ -248,7 +253,7 @@
   {
    "word": "from?",
    "start": 17.78,
-   "end": 18.14
+   "end": 18.1
   },
   {
    "word": "Quick",
@@ -262,7 +267,7 @@
   },
   {
    "word": "finish",
-   "start": 20.44,
+   "start": 20.46,
    "end": 20.66
   },
   {
@@ -276,44 +281,44 @@
    "end": 21.46
   },
   {
-   "word": "once",
+   "word": "Once",
    "start": 21.46,
-   "end": 22.04
+   "end": 22.06
   },
   {
    "word": "upon",
-   "start": 22.04,
+   "start": 22.06,
    "end": 22.36
   },
   {
-   "word": "A.",
+   "word": "a\u2026",
    "start": 22.36,
-   "end": 22.66
+   "end": 22.68
   },
   {
    "word": "You",
-   "start": 24.46,
-   "end": 25.02
+   "start": 24.5,
+   "end": 25.06
   },
   {
    "word": "said",
-   "start": 25.02,
-   "end": 25.24
+   "start": 25.06,
+   "end": 25.28
   },
   {
    "word": "time,",
-   "start": 25.24,
-   "end": 25.64
+   "start": 25.28,
+   "end": 25.68
   },
   {
    "word": "didn't",
-   "start": 25.84,
-   "end": 26.1
+   "start": 25.86,
+   "end": 26.14
   },
   {
    "word": "you?",
-   "start": 26.1,
-   "end": 26.3
+   "start": 26.14,
+   "end": 26.34
   }
  ],
  "S2": [
@@ -2517,7 +2522,7 @@
   },
   {
    "word": "Your",
-   "start": 1.86,
+   "start": 1.88,
    "end": 2.0
   },
   {
@@ -2543,7 +2548,7 @@
   {
    "word": "tokens.",
    "start": 3.44,
-   "end": 3.94
+   "end": 3.92
   },
   {
    "word": "ChatGPT",
@@ -2583,11 +2588,11 @@
   {
    "word": "in",
    "start": 7.24,
-   "end": 7.82
+   "end": 7.8
   },
   {
    "word": "a",
-   "start": 7.82,
+   "start": 7.8,
    "end": 7.94
   },
   {
@@ -2607,7 +2612,7 @@
   },
   {
    "word": "Picks",
-   "start": 9.54,
+   "start": 9.52,
    "end": 9.56
   },
   {
@@ -2637,7 +2642,7 @@
   },
   {
    "word": "Adds",
-   "start": 11.84,
+   "start": 11.86,
    "end": 11.94
   },
   {
@@ -2662,7 +2667,7 @@
   },
   {
    "word": "There's",
-   "start": 14.82,
+   "start": 14.84,
    "end": 15.16
   },
   {
@@ -2727,148 +2732,148 @@
   },
   {
    "word": "the",
-   "start": 19.36,
-   "end": 19.56
+   "start": 19.34,
+   "end": 19.54
   },
   {
    "word": "same",
-   "start": 19.56,
-   "end": 19.8
+   "start": 19.54,
+   "end": 19.78
   },
   {
    "word": "way",
-   "start": 19.8,
-   "end": 20.0
+   "start": 19.78,
+   "end": 19.96
   },
   {
    "word": "you",
-   "start": 20.0,
-   "end": 20.2
+   "start": 19.96,
+   "end": 20.16
   },
   {
    "word": "finished",
-   "start": 20.2,
-   "end": 20.58
+   "start": 20.16,
+   "end": 20.56
   },
   {
-   "word": "once",
-   "start": 20.58,
-   "end": 20.92
+   "word": "Once",
+   "start": 20.56,
+   "end": 20.94
   },
   {
    "word": "upon",
-   "start": 20.92,
-   "end": 21.24
+   "start": 20.94,
+   "end": 21.3
   },
   {
-   "word": "A.",
-   "start": 21.24,
-   "end": 21.52
+   "word": "a.",
+   "start": 21.3,
+   "end": 21.56
   },
   {
    "word": "And",
-   "start": 22.38,
-   "end": 22.64
+   "start": 22.36,
+   "end": 22.7
   },
   {
    "word": "notice",
-   "start": 22.64,
-   "end": 22.98
+   "start": 22.7,
+   "end": 23.02
   },
   {
    "word": "what",
-   "start": 22.98,
-   "end": 23.26
+   "start": 23.02,
+   "end": 23.3
   },
   {
    "word": "it's",
-   "start": 23.26,
-   "end": 23.44
+   "start": 23.3,
+   "end": 23.48
   },
   {
    "word": "guessing.",
-   "start": 23.44,
-   "end": 23.8
+   "start": 23.48,
+   "end": 23.84
   },
   {
    "word": "What",
-   "start": 25.34,
-   "end": 25.6
+   "start": 25.42,
+   "end": 25.66
   },
   {
    "word": "sounds",
-   "start": 25.6,
-   "end": 25.94
+   "start": 25.66,
+   "end": 26.0
   },
   {
    "word": "right,",
-   "start": 25.94,
-   "end": 26.3
+   "start": 26.0,
+   "end": 26.36
   },
   {
    "word": "not",
-   "start": 26.88,
-   "end": 27.2
+   "start": 26.94,
+   "end": 27.24
   },
   {
    "word": "what",
-   "start": 27.2,
-   "end": 27.4
+   "start": 27.24,
+   "end": 27.44
   },
   {
    "word": "is",
-   "start": 27.4,
-   "end": 27.54
+   "start": 27.44,
+   "end": 27.6
   },
   {
    "word": "right.",
-   "start": 27.54,
-   "end": 27.88
+   "start": 27.6,
+   "end": 27.92
   },
   {
    "word": "Most",
-   "start": 28.76,
-   "end": 29.16
+   "start": 28.82,
+   "end": 29.22
   },
   {
    "word": "of",
-   "start": 29.16,
-   "end": 29.36
+   "start": 29.22,
+   "end": 29.4
   },
   {
    "word": "the",
-   "start": 29.36,
-   "end": 29.46
+   "start": 29.4,
+   "end": 29.52
   },
   {
    "word": "time,",
-   "start": 29.46,
-   "end": 29.8
+   "start": 29.52,
+   "end": 29.84
   },
   {
    "word": "those",
-   "start": 30.2,
-   "end": 30.3
+   "start": 30.24,
+   "end": 30.34
   },
   {
    "word": "are",
-   "start": 30.3,
-   "end": 30.5
+   "start": 30.34,
+   "end": 30.54
   },
   {
    "word": "the",
-   "start": 30.5,
-   "end": 30.66
+   "start": 30.54,
+   "end": 30.7
   },
   {
    "word": "same",
-   "start": 30.66,
-   "end": 30.9
+   "start": 30.7,
+   "end": 30.94
   },
   {
    "word": "thing.",
-   "start": 30.9,
-   "end": 31.2
+   "start": 30.94,
+   "end": 31.24
   }
  ],
  "S7": [

@@ -57,6 +57,8 @@ def srt_time(t: float) -> str:
 # MERGE: (first word, second word starts with) -> the joined word keeps the second word's punctuation.
 MERGE = [("chat", "GPT")]
 FIX = {"Chat GPT": "ChatGPT", "chatGPT": "ChatGPT", "Chatgpt": "ChatGPT"}
+# "Once upon a…" is voiced as "uh" (tts.py PRONOUNCE), which Whisper hears as "I." / "A.": restore the script's text.
+ONCE_UPON_TAIL = {"I.": "a…", "A.": "a…", "uh.": "a…", "Uh.": "a…", "I": "a…", "A": "a…"}
 
 
 def clean_words(words: list[dict]) -> list[dict]:
@@ -73,8 +75,12 @@ def clean_words(words: list[dict]) -> list[dict]:
                 out.append(dict(w))
             continue
         out.append(dict(w))
-    for w in out:
+    for i, w in enumerate(out):
         w["word"] = FIX.get(w["word"], w["word"])
+        if i + 1 < len(out) and w["word"].lower() == "once" and out[i + 1]["word"].lower() == "upon":
+            w["word"] = "Once"
+        if i > 0 and out[i - 1]["word"].lower() == "upon":
+            w["word"] = ONCE_UPON_TAIL.get(w["word"], w["word"])
     return out
 
 
@@ -84,7 +90,10 @@ def group_words(words: list[dict]) -> list[dict]:
     for w in words:
         text = " ".join(x["word"] for x in cur + [w])
         too_long = cur and (len(text) > MAX_CHARS or w["end"] - cur[0]["start"] > MAX_SECONDS)
-        if too_long:
+        if too_long and len(cur) > 1 and cur[-1]["word"] == "Once":  # keep "Once upon a" on one cue
+            cues.append(cur[:-1])
+            cur = cur[-1:]
+        elif too_long:
             cues.append(cur)
             cur = []
         cur.append(w)
