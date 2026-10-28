@@ -8,7 +8,7 @@ import { LogoMark, Wordmark } from "./Logo";
  * End screen layout (as Ep 1): a 16:9 slot on the left for YouTube's "Watch next" video element
  * and a round slot on the right for the Subscribe element. Place those elements over these slots.
  */
-export const EndScreen: React.FC<{ o: number; prompt?: React.ReactNode }> = ({ o, prompt }) => (
+export const EndScreen: React.FC<{ o: number; prompt?: React.ReactNode; dot?: boolean }> = ({ o, prompt, dot = true }) => (
   <AbsoluteFill style={{ opacity: o }}>
     <div style={{ position: "absolute", left: 120, top: 72, display: "flex", alignItems: "center", gap: 18 }}>
       <LogoMark size={84} />
@@ -41,6 +41,6 @@ export const EndScreen: React.FC<{ o: number; prompt?: React.ReactNode }> = ({ o
     {prompt ? (
       <div style={{ position: "absolute", left: 120, top: 880, width: 1000, fontSize: 44, fontWeight: 600, color: colors.subtext }}>{prompt}</div>
     ) : null}
-    <Dot x={1560} y={900} mood="happy" seed="end" />
+    {dot ? <Dot x={1560} y={900} mood="happy" seed="end" /> : null}
   </AbsoluteFill>
 );
