@@ -35,7 +35,7 @@ TAIL_SECONDS = 0.4  # must match timeline.ts
 MUSIC = {
     "ep02": {
         "file": "fade.mp3",
-        "start": 13.0,
+        "start": "auto",  # chosen so the song's own ending lands exactly on the video's end
         "loop_from": 23.0,
         "period": 48.0,
         "extra_loops": 3,
@@ -110,9 +110,15 @@ def main() -> None:
 
     # Music bed: start, then splice extra copies of the repeating section, then the track to its end.
     m = decode(ROOT / "public" / "episodes" / ep / "music" / plan["file"], 2)
-    s0 = int(plan["start"] * SR)
     lf = int(plan["loop_from"] * SR)
     per = int(round(plan["period"] * SR))
+    if plan["start"] == "auto":
+        s0 = (lf + per) - (n - plan["extra_loops"] * per - (len(m) - (lf + per)))
+        if not 0 <= s0 < lf + per:
+            sys.exit(f"music plan doesn't fit {total:.1f} s: change extra_loops")
+    else:
+        s0 = int(plan["start"] * SR)
+    print(f"music starts {s0 / SR:.2f} s into the track")
     parts = [m[s0 : lf + per]] + [m[lf : lf + per]] * plan["extra_loops"] + [m[lf + per :]]
     bed = np.concatenate(parts)
     if len(bed) < n:

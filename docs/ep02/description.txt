@@ -4,12 +4,12 @@ What is AI, really? This kind is called a language model. In under 5 minutes you
 
 Chapters
 0:00 Where do ChatGPT's answers come from?
-0:27 It's a guessing machine
-0:57 Guessing from what?
-1:45 The strawberry problem (tokens)
-2:34 Same question, different answers (temperature)
-3:15 Putting it together
-3:47 Next: Why AI Hallucinates
+0:29 It's a guessing machine
+0:59 Guessing from what?
+1:47 The strawberry problem (tokens)
+2:38 Same question, different answers (temperature)
+3:24 Putting it together
+3:55 Next: Why AI Hallucinates
 
 Next episode: Why AI Hallucinates
 Episode 1: What Actually Happens When You Tap Your Card
