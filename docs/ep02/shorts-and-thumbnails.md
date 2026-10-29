@@ -1,6 +1,12 @@
 # Ep 2 — Shorts and thumbnails
 
-## Thumbnails (1280×720, `out/thumbs/`, compositions `Ep02-ThumbA/B/C`)
+## Thumbnails — Ep 1 style (use these): `Ep02-ThumbD`, `Ep02-ThumbE`
+Warm blurred yellow backdrop, shaded Dot with brow/mouth and an arm holding the hero, glowing hero, white outlined words top-right (src/episodes/ep02/ThumbStyle.tsx).
+- **D · "HOW MANY R'S?"** — skeptical Dot holds up a strawberry; a "2?" chat bubble.
+- **E · "IT'S JUST GUESSING"** — smug Dot holds a chat bubble: "Once upon a ???".
+Test & Compare: D vs E.
+
+## Earlier flat thumbnails (1280×720, `out/thumbs/`, compositions `Ep02-ThumbA/B/C`)
 Run all three in YouTube **Test & Compare**. Bottom-right kept empty for the duration badge; checked at 168×94.
 - **A · "HOW MANY R'S?"** — drawn strawberry, coral "2", surprised Dot. Curiosity + the meme people know.
 - **B · "IT'S JUST GUESSING"** — the episode's reveal; "Once upon a time?" chat, smug Dot. Reads best when small.

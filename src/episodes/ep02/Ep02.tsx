@@ -11,7 +11,7 @@ import { S5 } from "./scenes/S5";
 import { S6 } from "./scenes/S6";
 import { S7 } from "./scenes/S7";
 import { G1Sheet, StyleFrame } from "./StyleFrame";
-import { ThumbA, ThumbB, ThumbC } from "./Thumbnails";
+import { ThumbA, ThumbB, ThumbC, ThumbD, ThumbE } from "./Thumbnails";
 import { Short1, Short2, Short3, shortFrames } from "./Shorts";
 import { DotSheet } from "../../shared/DotSheet";
 
@@ -51,6 +51,8 @@ export const Ep02Compositions: React.FC = () => (
     <Composition id="Ep02-ThumbA" component={ThumbA} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
     <Composition id="Ep02-ThumbB" component={ThumbB} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
     <Composition id="Ep02-ThumbC" component={ThumbC} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
+    <Composition id="Ep02-ThumbD" component={ThumbD} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
+    <Composition id="Ep02-ThumbE" component={ThumbE} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
     <Composition id="Ep02-StyleFrame" component={StyleFrame} durationInFrames={1} fps={VIDEO.fps} width={VIDEO.width} height={VIDEO.height} />
     <Composition id="Ep02-G1Sheet" component={() => <G1Sheet Sheet={DotSheet} />} durationInFrames={1} fps={VIDEO.fps} width={VIDEO.width} height={2180} />
     <Composition
