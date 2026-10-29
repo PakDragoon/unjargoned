@@ -1408,12 +1408,12 @@
   },
   {
    "word": "Three,",
-   "start": 4.1,
+   "start": 4.08,
    "end": 4.38
   },
   {
    "word": "but",
-   "start": 5.12,
+   "start": 5.1,
    "end": 5.32
   },
   {
@@ -1474,11 +1474,11 @@
   {
    "word": "I've",
    "start": 11.56,
-   "end": 11.78
+   "end": 11.76
   },
   {
    "word": "been",
-   "start": 11.78,
+   "start": 11.76,
    "end": 11.9
   },
   {
@@ -1658,12 +1658,12 @@
   },
   {
    "word": "Strawberry",
-   "start": 25.6,
-   "end": 25.6
+   "start": 25.58,
+   "end": 25.58
   },
   {
    "word": "might",
-   "start": 25.6,
+   "start": 25.58,
    "end": 26.18
   },
   {
@@ -1689,11 +1689,11 @@
   {
    "word": "pieces",
    "start": 27.18,
-   "end": 27.58
+   "end": 27.56
   },
   {
    "word": "like",
-   "start": 27.58,
+   "start": 27.56,
    "end": 27.86
   },
   {
@@ -1709,21 +1709,21 @@
   {
    "word": "imagine",
    "start": 29.42,
-   "end": 29.88
+   "end": 29.94
   },
   {
    "word": "I",
-   "start": 29.88,
+   "start": 29.94,
    "end": 30.18
   },
   {
    "word": "text",
    "start": 30.18,
-   "end": 30.4
+   "end": 30.42
   },
   {
    "word": "you",
-   "start": 30.4,
+   "start": 30.42,
    "end": 30.58
   },
   {
@@ -1734,16 +1734,16 @@
   {
    "word": "strawberry",
    "start": 30.68,
-   "end": 31.04
+   "end": 31.06
   },
   {
    "word": "emoji",
-   "start": 31.04,
-   "end": 31.56
+   "start": 31.06,
+   "end": 31.6
   },
   {
    "word": "and",
-   "start": 31.96,
+   "start": 31.6,
    "end": 32.22
   },
   {
@@ -1774,26 +1774,26 @@
   {
    "word": "in",
    "start": 33.4,
-   "end": 33.54
+   "end": 33.56
   },
   {
    "word": "it.",
-   "start": 33.54,
-   "end": 33.82
+   "start": 33.56,
+   "end": 33.84
   },
   {
    "word": "The",
-   "start": 34.24,
+   "start": 34.26,
    "end": 34.34
   },
   {
    "word": "picture",
    "start": 34.34,
-   "end": 34.62
+   "end": 34.64
   },
   {
    "word": "doesn't",
-   "start": 34.62,
+   "start": 34.64,
    "end": 35.08
   },
   {
@@ -1809,182 +1809,322 @@
   {
    "word": "letters.",
    "start": 35.48,
-   "end": 35.78
+   "end": 35.8
   },
   {
    "word": "You'd",
    "start": 36.54,
-   "end": 36.72
+   "end": 36.76
   },
   {
    "word": "have",
-   "start": 36.72,
+   "start": 36.76,
    "end": 36.88
   },
   {
    "word": "to",
    "start": 36.88,
-   "end": 37.08
+   "end": 37.1
   },
   {
    "word": "remember",
-   "start": 37.08,
+   "start": 37.1,
    "end": 37.38
   },
   {
    "word": "the",
    "start": 37.38,
-   "end": 37.58
+   "end": 37.6
   },
   {
    "word": "spelling.",
-   "start": 37.58,
+   "start": 37.6,
    "end": 37.92
   },
   {
    "word": "That's",
-   "start": 38.6,
-   "end": 38.94
+   "start": 38.62,
+   "end": 38.86
+  },
+  {
+   "word": "exactly",
+   "start": 38.86,
+   "end": 39.38
   },
   {
    "word": "ChatGPT's",
-   "start": 38.94,
-   "end": 39.82
+   "start": 39.38,
+   "end": 40.44
   },
   {
-   "word": "problem.",
-   "start": 39.82,
-   "end": 40.14
+   "word": "problem,",
+   "start": 40.44,
+   "end": 40.78
   },
   {
-   "word": "Newer",
-   "start": 40.94,
-   "end": 41.2
+   "word": "even",
+   "start": 41.26,
+   "end": 41.48
   },
   {
-   "word": "versions",
-   "start": 41.2,
-   "end": 41.6
+   "word": "when",
+   "start": 41.48,
+   "end": 41.66
   },
   {
-   "word": "usually",
-   "start": 41.6,
-   "end": 42.26
+   "word": "you",
+   "start": 41.66,
+   "end": 41.8
   },
   {
-   "word": "work",
-   "start": 42.26,
-   "end": 42.64
-  },
-  {
-   "word": "around",
-   "start": 42.64,
-   "end": 42.88
-  },
-  {
-   "word": "it",
-   "start": 42.88,
-   "end": 43.12
-  },
-  {
-   "word": "by",
-   "start": 43.12,
-   "end": 43.32
-  },
-  {
-   "word": "spelling",
-   "start": 43.32,
-   "end": 43.68
+   "word": "type",
+   "start": 41.8,
+   "end": 42.02
   },
   {
    "word": "the",
-   "start": 43.68,
+   "start": 42.02,
+   "end": 42.2
+  },
+  {
+   "word": "word.",
+   "start": 42.2,
+   "end": 42.38
+  },
+  {
+   "word": "It",
+   "start": 43.04,
+   "end": 43.14
+  },
+  {
+   "word": "only",
+   "start": 43.14,
+   "end": 43.4
+  },
+  {
+   "word": "gets",
+   "start": 43.4,
+   "end": 43.62
+  },
+  {
+   "word": "the",
+   "start": 43.62,
    "end": 43.86
   },
   {
-   "word": "word",
+   "word": "chunks,",
    "start": 43.86,
-   "end": 44.04
+   "end": 44.2
   },
   {
-   "word": "out",
-   "start": 44.04,
-   "end": 44.26
-  },
-  {
-   "word": "first.",
-   "start": 44.26,
-   "end": 44.6
-  },
-  {
-   "word": "But",
-   "start": 45.22,
-   "end": 45.38
+   "word": "never",
+   "start": 44.54,
+   "end": 44.66
   },
   {
    "word": "the",
-   "start": 45.38,
-   "end": 45.52
+   "start": 44.66,
+   "end": 44.86
   },
   {
-   "word": "chunks",
-   "start": 45.52,
-   "end": 45.72
+   "word": "letters.",
+   "start": 44.86,
+   "end": 45.2
   },
   {
-   "word": "are",
-   "start": 45.72,
-   "end": 45.9
-  },
-  {
-   "word": "still",
-   "start": 45.9,
-   "end": 46.14
-  },
-  {
-   "word": "there,",
-   "start": 46.14,
-   "end": 46.46
-  },
-  {
-   "word": "so",
-   "start": 46.72,
-   "end": 46.98
-  },
-  {
-   "word": "letter",
-   "start": 46.98,
-   "end": 47.22
-  },
-  {
-   "word": "puzzles",
-   "start": 47.22,
-   "end": 47.56
-  },
-  {
-   "word": "can",
-   "start": 47.56,
-   "end": 47.86
-  },
-  {
-   "word": "still",
-   "start": 47.86,
-   "end": 48.12
-  },
-  {
-   "word": "trip",
-   "start": 48.12,
-   "end": 48.34
+   "word": "So",
+   "start": 45.86,
+   "end": 46.02
   },
   {
    "word": "it",
-   "start": 48.34,
-   "end": 48.46
+   "start": 46.02,
+   "end": 46.12
+  },
+  {
+   "word": "does",
+   "start": 46.12,
+   "end": 46.26
+  },
+  {
+   "word": "what",
+   "start": 46.26,
+   "end": 46.4
+  },
+  {
+   "word": "it",
+   "start": 46.4,
+   "end": 46.54
+  },
+  {
+   "word": "always",
+   "start": 46.54,
+   "end": 46.82
+  },
+  {
+   "word": "does.",
+   "start": 46.82,
+   "end": 47.16
+  },
+  {
+   "word": "It",
+   "start": 47.54,
+   "end": 47.64
+  },
+  {
+   "word": "guesses",
+   "start": 47.64,
+   "end": 47.94
+  },
+  {
+   "word": "and",
+   "start": 47.94,
+   "end": 48.88
+  },
+  {
+   "word": "two",
+   "start": 48.88,
+   "end": 49.16
+  },
+  {
+   "word": "sounded",
+   "start": 49.16,
+   "end": 49.56
+  },
+  {
+   "word": "right.",
+   "start": 49.56,
+   "end": 49.88
+  },
+  {
+   "word": "Newer",
+   "start": 51.04,
+   "end": 51.32
+  },
+  {
+   "word": "versions",
+   "start": 51.32,
+   "end": 51.72
+  },
+  {
+   "word": "usually",
+   "start": 51.72,
+   "end": 52.38
+  },
+  {
+   "word": "work",
+   "start": 52.38,
+   "end": 52.76
+  },
+  {
+   "word": "around",
+   "start": 52.76,
+   "end": 53.0
+  },
+  {
+   "word": "it",
+   "start": 53.0,
+   "end": 53.22
+  },
+  {
+   "word": "by",
+   "start": 53.22,
+   "end": 53.44
+  },
+  {
+   "word": "spelling",
+   "start": 53.44,
+   "end": 53.8
+  },
+  {
+   "word": "the",
+   "start": 53.8,
+   "end": 54.0
+  },
+  {
+   "word": "word",
+   "start": 54.0,
+   "end": 54.16
+  },
+  {
+   "word": "out",
+   "start": 54.16,
+   "end": 54.4
+  },
+  {
+   "word": "first,",
+   "start": 54.4,
+   "end": 54.72
+  },
+  {
+   "word": "but",
+   "start": 55.2,
+   "end": 55.5
+  },
+  {
+   "word": "the",
+   "start": 55.5,
+   "end": 55.62
+  },
+  {
+   "word": "chunks",
+   "start": 55.62,
+   "end": 55.86
+  },
+  {
+   "word": "are",
+   "start": 55.86,
+   "end": 56.02
+  },
+  {
+   "word": "still",
+   "start": 56.02,
+   "end": 56.26
+  },
+  {
+   "word": "there.",
+   "start": 56.26,
+   "end": 56.58
+  },
+  {
+   "word": "So",
+   "start": 56.58,
+   "end": 57.06
+  },
+  {
+   "word": "letter",
+   "start": 57.06,
+   "end": 57.34
+  },
+  {
+   "word": "puzzles",
+   "start": 57.34,
+   "end": 57.68
+  },
+  {
+   "word": "can",
+   "start": 57.68,
+   "end": 57.98
+  },
+  {
+   "word": "still",
+   "start": 57.98,
+   "end": 58.22
+  },
+  {
+   "word": "trip",
+   "start": 58.22,
+   "end": 58.46
+  },
+  {
+   "word": "it",
+   "start": 58.46,
+   "end": 58.58
   },
   {
    "word": "up.",
-   "start": 48.46,
-   "end": 48.64
+   "start": 58.58,
+   "end": 58.76
   }
  ],
  "S5": [

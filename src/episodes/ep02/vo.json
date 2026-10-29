@@ -26,12 +26,12 @@
       "id": "S4",
       "title": "The strawberry problem",
       "estSeconds": 55,
-      "vo": "Question two. How many r's are in \"strawberry\"? [beat] Three. But for a long time, ChatGPT would confidently say: two. [beat] Here's why. I've been saying it guesses the next word. That was a little white lie. It doesn't see words, or letters. It sees chunks, called tokens. Your message gets chopped into pieces, and each piece becomes a number. \"Strawberry\" might get chopped into three pieces, like this. [beat] Now imagine I text you a strawberry emoji and ask how many r's are in it. The picture doesn't show any letters. You'd have to remember the spelling. That's ChatGPT's problem. Newer versions usually work around it by spelling the word out first. But the chunks are still there, so letter puzzles can still trip it up."
+      "vo": "Question two. How many r's are in \"strawberry\"? [beat] Three. But for a long time, ChatGPT would confidently say: two. [beat] Here's why. I've been saying it guesses the next word. That was a little white lie. It doesn't see words, or letters. It sees chunks, called tokens. Your message gets chopped into pieces, and each piece becomes a number. \"Strawberry\" might get chopped into three pieces, like this. [beat] Now imagine I text you a strawberry emoji and ask how many r's are in it. The picture doesn't show any letters. You'd have to remember the spelling. That's exactly ChatGPT's problem, even when you type the word. It only gets the chunks, never the letters. So it does what it always does: it guesses. And \"two\" sounded right. [beat] Newer versions usually work around it by spelling the word out first. But the chunks are still there, so letter puzzles can still trip it up."
     },
     {
       "id": "S4b",
       "title": "Gag: you haven't subscribed yet, huh?",
-      "estSeconds": 1.8,
+      "estSeconds": 2.8,
       "silent": true,
       "vo": ""
     },

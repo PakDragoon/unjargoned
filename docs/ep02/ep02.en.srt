@@ -259,7 +259,7 @@ Question two, how many R's are
 in strawberry?
 
 66
-00:01:51,300 --> 00:01:53,520
+00:01:51,280 --> 00:01:53,520
 Three, but for a long time,
 
 67
@@ -307,7 +307,7 @@ pieces and each piece becomes a
 number.
 
 78
-00:02:12,800 --> 00:02:13,879
+00:02:12,780 --> 00:02:13,879
 Strawberry might get chopped
 
 79
@@ -323,277 +323,305 @@ Now imagine I text you a
 strawberry emoji and ask how
 
 82
-00:02:19,940 --> 00:02:21,020
+00:02:19,940 --> 00:02:21,040
 many R's are in it.
 
 83
-00:02:21,440 --> 00:02:22,679
+00:02:21,460 --> 00:02:22,679
 The picture doesn't show any
 
 84
-00:02:22,680 --> 00:02:22,980
+00:02:22,680 --> 00:02:23,000
 letters.
 
 85
-00:02:23,740 --> 00:02:24,779
+00:02:23,740 --> 00:02:24,799
 You'd have to remember the
 
 86
-00:02:24,780 --> 00:02:25,120
+00:02:24,800 --> 00:02:25,120
 spelling.
 
 87
-00:02:25,800 --> 00:02:27,340
-That's ChatGPT's problem.
+00:02:25,820 --> 00:02:27,639
+That's exactly ChatGPT's
 
 88
-00:02:28,140 --> 00:02:29,839
-Newer versions usually work
+00:02:27,640 --> 00:02:29,399
+problem, even when you type the
 
 89
-00:02:29,840 --> 00:02:31,239
-around it by spelling the word
+00:02:29,400 --> 00:02:29,580
+word.
 
 90
-00:02:31,240 --> 00:02:31,800
-out first.
+00:02:30,240 --> 00:02:31,859
+It only gets the chunks, never
 
 91
-00:02:32,420 --> 00:02:33,660
-But the chunks are still there,
+00:02:31,860 --> 00:02:32,400
+the letters.
 
 92
-00:02:33,920 --> 00:02:35,539
-so letter puzzles can still trip
+00:02:33,060 --> 00:02:34,360
+So it does what it always does.
 
 93
-00:02:35,540 --> 00:02:35,840
-it up.
+00:02:34,740 --> 00:02:36,759
+It guesses and two sounded
 
 94
-00:02:38,600 --> 00:02:40,799
-Question three, ask the same
-
-95
-00:02:40,800 --> 00:02:42,759
-question twice and you'll often
-
-96
-00:02:42,760 --> 00:02:43,980
-get two different answers.
-
-97
-00:02:44,600 --> 00:02:44,920
-Why?
-
-98
-00:02:45,580 --> 00:02:47,019
-Because it doesn't always pick
-
-99
-00:02:47,020 --> 00:02:48,080
-the single top guess.
-
-100
-00:02:49,160 --> 00:02:50,139
-Think about your favorite
-
-101
-00:02:50,140 --> 00:02:50,780
-restaurant.
-
-102
-00:02:51,480 --> 00:02:53,300
-Most days, you order your usual.
-
-103
-00:02:53,960 --> 00:02:55,559
-Some days, you try the dish you
-
-104
-00:02:55,560 --> 00:02:56,320
-almost ordered.
-
-105
-00:02:56,920 --> 00:02:58,379
-There's a dial inside that
-
-106
-00:02:58,380 --> 00:02:59,160
-controls this.
-
-107
-00:03:00,080 --> 00:03:01,100
-Engineers call it temperature.
-
-108
-00:03:02,020 --> 00:03:03,519
-Think of it as an adventure
-
-109
-00:03:03,520 --> 00:03:03,860
-dial.
-
-110
-00:03:04,580 --> 00:03:06,699
-Turn it down and it orders the
-
-111
-00:03:06,700 --> 00:03:08,240
-usual every single time.
-
-112
-00:03:08,940 --> 00:03:09,960
-Safe but a bit boring.
-
-113
-00:03:10,640 --> 00:03:11,879
-Turn it up and it gets
-
-114
-00:03:11,880 --> 00:03:12,420
-adventurous.
-
-115
-00:03:13,180 --> 00:03:15,219
-More creative and too far up, it
-
-116
-00:03:15,220 --> 00:03:16,260
-starts ordering nonsense.
-
-117
-00:03:17,200 --> 00:03:18,959
-ChatGPT keeps it turned up a
-
-118
-00:03:18,960 --> 00:03:19,080
-little.
-
-119
-00:03:19,760 --> 00:03:21,959
-And once one word changes, every
-
-120
-00:03:21,960 --> 00:03:23,420
-guess after it changes too.
-
-121
-00:03:24,067 --> 00:03:25,207
-So put it all together.
-
-122
-00:03:25,947 --> 00:03:27,506
-Your message gets chopped into
-
-123
-00:03:27,507 --> 00:03:27,987
-tokens.
-
-124
-00:03:28,907 --> 00:03:30,666
-ChatGPT guesses the next one
-
-125
-00:03:30,667 --> 00:03:32,466
-from patterns in a mountain of
-
-126
-00:03:32,467 --> 00:03:32,827
-text.
-
-127
-00:03:33,587 --> 00:03:34,526
-Picks one with a little
-
-128
-00:03:34,527 --> 00:03:35,167
-randomness.
-
-129
-00:03:35,927 --> 00:03:37,867
-Adds it and guesses again.
-
-130
-00:03:38,907 --> 00:03:40,246
-There's no finished answer
-
-131
-00:03:40,247 --> 00:03:41,047
-waiting somewhere.
-
-132
-00:03:41,487 --> 00:03:43,147
-It's built one guess at a time,
-
-133
-00:03:43,407 --> 00:03:44,626
-the same way you finished
-
-134
-00:03:44,627 --> 00:03:45,627
-Once upon a.
-
-135
-00:03:46,427 --> 00:03:47,907
-And notice what it's guessing.
-
-136
-00:03:49,487 --> 00:03:51,666
-What sounds right, not what is
-
-137
-00:03:51,667 --> 00:03:51,987
+00:02:36,760 --> 00:02:37,080
 right.
 
+95
+00:02:38,240 --> 00:02:39,959
+Newer versions usually work
+
+96
+00:02:39,960 --> 00:02:41,359
+around it by spelling the word
+
+97
+00:02:41,360 --> 00:02:43,219
+out first, but the chunks are
+
+98
+00:02:43,220 --> 00:02:43,779
+still there.
+
+99
+00:02:43,780 --> 00:02:45,659
+So letter puzzles can still trip
+
+100
+00:02:45,660 --> 00:02:45,960
+it up.
+
+101
+00:02:49,733 --> 00:02:51,932
+Question three, ask the same
+
+102
+00:02:51,933 --> 00:02:53,892
+question twice and you'll often
+
+103
+00:02:53,893 --> 00:02:55,113
+get two different answers.
+
+104
+00:02:55,733 --> 00:02:56,053
+Why?
+
+105
+00:02:56,713 --> 00:02:58,152
+Because it doesn't always pick
+
+106
+00:02:58,153 --> 00:02:59,213
+the single top guess.
+
+107
+00:03:00,293 --> 00:03:01,272
+Think about your favorite
+
+108
+00:03:01,273 --> 00:03:01,913
+restaurant.
+
+109
+00:03:02,613 --> 00:03:04,433
+Most days, you order your usual.
+
+110
+00:03:05,093 --> 00:03:06,692
+Some days, you try the dish you
+
+111
+00:03:06,693 --> 00:03:07,453
+almost ordered.
+
+112
+00:03:08,053 --> 00:03:09,512
+There's a dial inside that
+
+113
+00:03:09,513 --> 00:03:10,293
+controls this.
+
+114
+00:03:11,213 --> 00:03:12,233
+Engineers call it temperature.
+
+115
+00:03:13,153 --> 00:03:14,652
+Think of it as an adventure
+
+116
+00:03:14,653 --> 00:03:14,993
+dial.
+
+117
+00:03:15,713 --> 00:03:17,832
+Turn it down and it orders the
+
+118
+00:03:17,833 --> 00:03:19,373
+usual every single time.
+
+119
+00:03:20,073 --> 00:03:21,093
+Safe but a bit boring.
+
+120
+00:03:21,773 --> 00:03:23,012
+Turn it up and it gets
+
+121
+00:03:23,013 --> 00:03:23,553
+adventurous.
+
+122
+00:03:24,313 --> 00:03:26,352
+More creative and too far up, it
+
+123
+00:03:26,353 --> 00:03:27,393
+starts ordering nonsense.
+
+124
+00:03:28,333 --> 00:03:30,092
+ChatGPT keeps it turned up a
+
+125
+00:03:30,093 --> 00:03:30,213
+little.
+
+126
+00:03:30,893 --> 00:03:33,092
+And once one word changes, every
+
+127
+00:03:33,093 --> 00:03:34,553
+guess after it changes too.
+
+128
+00:03:35,200 --> 00:03:36,340
+So put it all together.
+
+129
+00:03:37,080 --> 00:03:38,639
+Your message gets chopped into
+
+130
+00:03:38,640 --> 00:03:39,120
+tokens.
+
+131
+00:03:40,040 --> 00:03:41,799
+ChatGPT guesses the next one
+
+132
+00:03:41,800 --> 00:03:43,599
+from patterns in a mountain of
+
+133
+00:03:43,600 --> 00:03:43,960
+text.
+
+134
+00:03:44,720 --> 00:03:45,659
+Picks one with a little
+
+135
+00:03:45,660 --> 00:03:46,300
+randomness.
+
+136
+00:03:47,060 --> 00:03:49,000
+Adds it and guesses again.
+
+137
+00:03:50,040 --> 00:03:51,379
+There's no finished answer
+
 138
-00:03:52,887 --> 00:03:54,766
-Most of the time, those are the
+00:03:51,380 --> 00:03:52,180
+waiting somewhere.
 
 139
-00:03:54,767 --> 00:03:55,307
-same thing.
+00:03:52,620 --> 00:03:54,280
+It's built one guess at a time,
 
 140
-00:03:55,967 --> 00:03:57,287
-But sometimes they're not.
+00:03:54,540 --> 00:03:55,759
+the same way you finished
 
 141
-00:03:57,907 --> 00:03:59,226
-And that's when AI makes
+00:03:55,760 --> 00:03:56,760
+Once upon a.
 
 142
-00:03:59,227 --> 00:04:00,586
-something up, with total
+00:03:57,560 --> 00:03:59,040
+And notice what it's guessing.
 
 143
-00:04:00,587 --> 00:04:01,107
-confidence.
+00:04:00,620 --> 00:04:02,799
+What sounds right, not what is
 
 144
-00:04:01,827 --> 00:04:03,566
-It's called a hallucination, and
+00:04:02,800 --> 00:04:03,120
+right.
 
 145
-00:04:03,567 --> 00:04:04,067
-it's next.
+00:04:04,020 --> 00:04:05,899
+Most of the time, those are the
 
 146
-00:04:05,607 --> 00:04:07,026
-Subscribe so you don't miss why
+00:04:05,900 --> 00:04:06,440
+same thing.
 
 147
-00:04:07,027 --> 00:04:08,287
-AI hallucinates.
+00:04:07,100 --> 00:04:08,420
+But sometimes they're not.
 
 148
-00:04:08,807 --> 00:04:09,967
-And tell me in the comments,
+00:04:09,040 --> 00:04:10,359
+And that's when AI makes
 
 149
-00:04:10,667 --> 00:04:12,466
-what's the strangest thing an AI
+00:04:10,360 --> 00:04:11,719
+something up, with total
 
 150
-00:04:12,467 --> 00:04:13,547
+00:04:11,720 --> 00:04:12,240
+confidence.
+
+151
+00:04:12,960 --> 00:04:14,699
+It's called a hallucination, and
+
+152
+00:04:14,700 --> 00:04:15,200
+it's next.
+
+153
+00:04:16,740 --> 00:04:18,159
+Subscribe so you don't miss why
+
+154
+00:04:18,160 --> 00:04:19,420
+AI hallucinates.
+
+155
+00:04:19,940 --> 00:04:21,100
+And tell me in the comments,
+
+156
+00:04:21,800 --> 00:04:23,599
+what's the strangest thing an AI
+
+157
+00:04:23,600 --> 00:04:24,680
 has ever told you?

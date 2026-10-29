@@ -12,4 +12,4 @@
   starts where needed ("auto") so the song's ending lands on the end screen; the track's 48 s repeating section is spliced in 3 extra times so its own ending lands on the end screen;
   ~−26 LUFS under voice, ~−17 in gaps, −13 on the end screen; out during S1 "Once upon a…" pause and S6 before
   "What sounds right", dip on S7 "it's next". Final −13 LUFS, −1 dBTP. Credit block is in `description.txt`.
-- Chapters in `description.txt` are the real scene starts (S1 0:00 … S7 3:55). S4b (2:36) is the silent Dot stare gag; music cuts out for it.
+- Chapters in `description.txt` are the real scene starts (S1 0:00 … S7 4:07). S4b (2:46) is the Dot stare gag (no voice, music muffled).

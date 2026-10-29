@@ -8,16 +8,16 @@ import { scene } from "../timeline";
 
 const S = scene("S4b");
 
-// The meme beat: hard cut to Dot staring down the camera, music cut (tools/mix.py), no voice.
+// The meme beat: hard cut to Dot staring down the camera, music muffled (tools/mix.py), no voice.
 const TRACK: MoodKey[] = [
   { at: 0, mood: "neutral" },
-  { at: sec(1.15), mood: "smug" },
+  { at: sec(1.6), mood: "smug" },
 ];
 
 const S4bContent: React.FC = () => {
   const frame = useCurrentFrame();
   // Smash zoom on the cut, then a slow creep in.
-  const zoom = interpolate(frame, [0, 3, 66], [1.35, 1.12, 1.3], { extrapolateRight: "clamp" });
+  const zoom = interpolate(frame, [0, 3, 96], [1.35, 1.12, 1.34], { extrapolateRight: "clamp" });
   const shake = frame < 8 ? Math.sin(frame * 3.3) * (8 - frame) * 1.5 : 0;
   const textO = ramp(frame, 0.3, 0.2);
   return (

@@ -38,11 +38,11 @@ MUSIC = {
         "start": "auto",  # chosen so the song's own ending lands exactly on the video's end
         "loop_from": 23.0,
         "period": 48.0,
-        "extra_loops": 3,
+        "extra_loops": 4,
         # Planned silences: (scene, after word index text, before word text) → music out between them.
         "silences": [("S1", "a…", "You"), ("S6", "guessing.", "What")],
         # Short dips (scene, word, seconds after that word's end, length).
-        "dips": [("S7", "next.", 0.0, 0.9)],
+        "dips": [],  # (scene, word, seconds after that word ends, length); S7 "it's next" dip removed after G4 review
     }
 }
 
@@ -153,13 +153,15 @@ def main() -> None:
         a = word_end(sid, after)
         b = word_start_after(sid, before, a)
         g[int((a + 0.05) * hz) : int((b - 0.05) * hz)] = MUTE_DB
-    # Gag scenes: the music cuts out for the whole beat (the joke lands in silence).
+    # Gag scenes: the music keeps going but muffled ("music from the next room"), at gap level.
     scene_ids = [s["id"] for s in vo["scenes"]]
+    gags: list[tuple[float, float]] = []
     for sid in silent:
         a = offsets[sid]
         nxt = scene_ids.index(sid) + 1
         b = offsets[scene_ids[nxt]] if nxt < len(scene_ids) else total
-        g[int(a * hz) : int(b * hz)] = MUTE_DB
+        g[int(a * hz) : int(b * hz)] = GAP_DB + 3
+        gags.append((a, b))
     for sid, w, delay, length in plan["dips"]:
         a = word_end(sid, w) + delay
         g[int(a * hz) : int((a + length) * hz)] = -24.0
@@ -171,6 +173,19 @@ def main() -> None:
     for i, x in enumerate(g):
         cur += (x - cur) * (down if x < cur else up)
         out[i] = cur
+    if gags:
+        with tempfile.TemporaryDirectory() as d:
+            sf.write(f"{d}/a.wav", bed, SR, subtype="FLOAT")
+            ffmpeg("-i", f"{d}/a.wav", "-af", "lowpass=f=450,lowpass=f=450,volume=6dB", "-c:a", "pcm_f32le", f"{d}/m.wav")
+            muffled, _ = sf.read(f"{d}/m.wav", dtype="float32", always_2d=True)
+        w = np.zeros(n, dtype=np.float32)
+        fade = int(0.04 * SR)
+        for a, b in gags:
+            i, j = int(a * SR), int(b * SR)
+            w[i:j] = 1
+            w[i : i + fade] = np.linspace(0, 1, fade)
+            w[j - fade : j] = np.linspace(1, 0, fade)
+        bed = bed * (1 - w[:, None]) + muffled[:n] * w[:, None]
     gain = 10 ** (np.interp(np.arange(n) / SR, np.arange(len(out)) / hz, out) / 20)
     bed *= gain[:, None]
 

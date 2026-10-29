@@ -7,9 +7,9 @@ Chapters
 0:29 It's a guessing machine
 0:59 Guessing from what?
 1:47 The strawberry problem (tokens)
-2:38 Same question, different answers (temperature)
-3:24 Putting it together
-3:55 Next: Why AI Hallucinates
+2:49 Same question, different answers (temperature)
+3:35 Putting it together
+4:07 Next: Why AI Hallucinates
 
 Next episode: Why AI Hallucinates
 Episode 1: What Actually Happens When You Tap Your Card

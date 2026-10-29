@@ -15,7 +15,8 @@ const T = {
   rs: 1.82, three: 4.1, chatgpt: 6.66, two: 8.46, why: 10.12, saying: 11.9, lie: 14.9,
   letters: 16.6, chunks: 18.68, tokens: 19.38, message: 20.6, chopped: 21.44, piece: 23.42,
   strawberry: 25.6, likeThis: 27.58, imagine: 28.9, emoji: 30.68, ask: 32.48, picture: 34.24,
-  problem: 38.6, spelling: 43.32, still: 45.52, trip: 47.86,
+  problem: 38.62, typed: 41.26, onlyChunks: 43.04, soIt: 45.86, guesses: 47.64, two2: 48.88, newer: 51.04,
+  spelling: 53.44, count: 54.2, still: 55.62, trip: 58.22,
 };
 
 // o200k_base (GPT-4o and later), verified offline with js-tiktoken.
@@ -42,8 +43,11 @@ const TRACK: MoodKey[] = [
   { at: sec(T.emoji), mood: "curious" },
   { at: sec(T.picture), mood: "confused" },
   { at: sec(T.problem), mood: "neutral" },
-  { at: sec(44.4), mood: "happy" },
-  { at: sec(47.5), mood: "worried" },
+  { at: sec(T.guesses), mood: "curious" },
+  { at: sec(T.two2), mood: "deadpan" },
+  { at: sec(T.newer), mood: "neutral" },
+  { at: sec(T.count + 0.4), mood: "happy" },
+  { at: sec(57.6), mood: "worried" },
 ];
 
 const Label: React.FC<{ o: number; children: React.ReactNode; color?: string }> = ({ o, children, color = colors.subtext }) => (
@@ -180,10 +184,10 @@ const S4Content: React.FC = () => {
   const wordO = Math.max(wordIn, wordBack, wordEnd);
   const lit = [...Array(10)].map((_, i) =>
     R_INDEXES.includes(i) ? Math.min(ramp(frame, T.rs + R_INDEXES.indexOf(i) * 0.15, 0.25), 1 - ramp(frame, T.why, 0.4)) +
-      (frame > sec(42) ? ramp(frame, 44.0 + R_INDEXES.indexOf(i) * 0.3, 0.2) * (1 - ramp(frame, T.still, 0.3)) : 0) : 0,
+      (frame > sec(T.newer) ? ramp(frame, T.count + R_INDEXES.indexOf(i) * 0.3, 0.2) * (1 - ramp(frame, T.still, 0.3)) : 0) : 0,
   );
   const counts = [...Array(10)].map((_, i) =>
-    R_INDEXES.includes(i) ? pop(frame, 44.0 + R_INDEXES.indexOf(i) * 0.3) * (1 - ramp(frame, T.still, 0.3)) : 0,
+    R_INDEXES.includes(i) ? pop(frame, T.count + R_INDEXES.indexOf(i) * 0.3) * (1 - ramp(frame, T.still, 0.3)) : 0,
   );
   const split = frame < sec(T.problem)
     ? ramp(frame, T.likeThis, 0.35) * (1 - ramp(frame, T.imagine, 0.3))
@@ -191,7 +195,7 @@ const S4Content: React.FC = () => {
   const explode = ramp(frame, T.spelling, 0.45) * (1 - ramp(frame, T.still, 0.35));
   const dim = ramp(frame, T.letters, 0.6);
   const numbers = frame < sec(T.problem) ? during(frame, T.likeThis + 0.5, T.imagine, 0.3) : 0;
-  const wordY = interpolate(ramp(frame, T.why, 0.5), [0, 1], [0, 30]);
+  const wordY = interpolate(ramp(frame, T.why, 0.5), [0, 1], [0, 30]) - 90 * during(frame, T.guesses, T.newer, 0.4);
 
   // "Three" badge and the wrong answer.
   const threeO = pop(frame, T.three) * (1 - ramp(frame, T.why, 0.3));
@@ -228,6 +232,36 @@ const S4Content: React.FC = () => {
       </Label>
       <Label o={during(frame, T.likeThis + 0.6, T.imagine, 0.3)}>3 tokens, 0 letters</Label>
       <Label o={during(frame, T.picture, T.problem, 0.3)} color={colors.coral}>no letters in the picture</Label>
+      <Label o={during(frame, T.typed, T.guesses, 0.3)}>
+        even typed, it gets <span style={{ color: colors.yellow }}>chunks</span>, not letters
+      </Label>
+      <Label o={during(frame, T.guesses, T.newer, 0.3)}>
+        so it <span style={{ color: colors.yellow }}>guesses</span>…{" "}
+        <span style={{ color: colors.coral, opacity: ramp(frame, T.two2 + 0.3, 0.3) }}>"two" sounds right</span>
+      </Label>
+
+      {/* How many r's? It guesses, and "2" wins */}
+      <div
+        style={{
+          position: "absolute", left: 0, right: 0, top: 700, display: "flex", justifyContent: "center",
+          opacity: during(frame, T.guesses, T.newer, 0.3),
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: 14, padding: "22px 34px", borderRadius: 28, backgroundColor: colors.panel, border: `4px solid ${colors.line}` }}>
+          {([["2", 0.58, colors.coral], ["3", 0.31, colors.lineStrong], ["1", 0.07, colors.lineStrong]] as const).map(([w, pr, c], i) => (
+            <div
+              key={w}
+              style={{
+                display: "flex", alignItems: "center", gap: 24, padding: "4px 14px", borderRadius: 18,
+                boxShadow: i === 0 && frame >= sec(T.two2) ? `0 0 0 6px ${colors.coral}` : "none",
+              }}
+            >
+              <div style={{ width: 70, fontSize: 60, fontWeight: 800, color: i === 0 ? colors.coral : colors.subtext }}>{w}</div>
+              <div style={{ width: 420 * pr * ramp(frame, T.guesses + 0.1 + i * 0.1, 0.4), height: 28, borderRadius: 14, backgroundColor: c }} />
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* The word itself */}
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: wordO, transform: `translateY(${wordY}px)` }}>
