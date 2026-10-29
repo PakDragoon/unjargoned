@@ -149,7 +149,7 @@ const Message: React.FC<{ split: number; frame: number }> = ({ split, frame }) =
 );
 
 /** Drawn strawberry (no platform emoji). */
-const Strawberry: React.FC<{ size: number }> = ({ size }) => (
+export const Strawberry: React.FC<{ size: number }> = ({ size }) => (
   <svg width={size} height={size * 1.1} viewBox="0 0 200 220" aria-hidden>
     <path d="M100 212 C 42 192 10 124 28 80 C 46 44 154 44 172 80 C 190 124 158 192 100 212 Z" fill="#F0545C" />
     {[[70, 100], [110, 92], [145, 110], [55, 140], [95, 130], [135, 145], [80, 170], [115, 175], [100, 200 - 40]].map(([x, y], i) => (

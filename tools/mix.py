@@ -40,7 +40,7 @@ MUSIC = {
         "period": 48.0,
         "extra_loops": 4,
         # Planned silences: (scene, after word index text, before word text) → music out between them.
-        "silences": [("S1", "a…", "You"), ("S6", "guessing.", "What")],
+        "silences": [("S1", "a…", "You")],  # S6 pause before "What sounds right" removed after G4 review
         # Short dips (scene, word, seconds after that word's end, length).
         "dips": [],  # (scene, word, seconds after that word ends, length); S7 "it's next" dip removed after G4 review
     }
