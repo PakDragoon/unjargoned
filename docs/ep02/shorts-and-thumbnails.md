@@ -19,5 +19,13 @@ Post the first 1–2 days after the main video, then one every 2–3 days; set E
 - Description: Meet the "adventure dial" (engineers call it temperature). Full video: How ChatGPT Actually Works. #Unjargoned #ChatGPT #AI #Shorts
 - Music credit: as above.
 
-Re-render: `npx remotion render Ep02-Short1 out/short1-raw.mp4`, then
-`ffmpeg -i out/short1-raw.mp4 -af loudnorm=I=-14:TP=-1:LRA=11 -c:v copy -c:a aac -b:a 256k out/Unjargoned_Ep2_Short1.mp4`.
+### Short 3 — the guessing machine (`Ep02-Short3`, ~29 s, S1 test + S2)
+- Title: Finish this sentence: "Once upon a…" (that's how ChatGPT works)
+- Description: You just did what ChatGPT does — guess the next word. Full video: How ChatGPT Actually Works. #Unjargoned #ChatGPT #AI #Shorts
+- Music credit: as above.
+
+Suggested order: Short 1 (strongest hook) → Short 3 → Short 2.
+
+Re-render (clips are in `src/episodes/ep02/shorts.json`): run `python3 tools/mix.py ep02` once, then
+`npx remotion render Ep02-Short1 out/short1-video.mp4 --muted` and `python3 tools/shorts.py ep02 Short1`
+(the audio is cut from the episode mix, so voice, music and SFX match the long video).
