@@ -1,0 +1,22 @@
+How does ChatGPT work? It's a guessing machine: it predicts the next word, one guess at a time. Here's how AI like ChatGPT works, explained simply, with no jargon.
+
+What is AI, really? This kind is called a language model. In under 5 minutes you'll see what it learned from, why it couldn't count the r's in "strawberry", and why the same question gets different answers.
+
+Chapters
+0:00 Where do ChatGPT's answers come from?
+0:27 It's a guessing machine
+0:57 Guessing from what?
+1:45 The strawberry problem (tokens)
+2:34 Same question, different answers (temperature)
+3:15 Putting it together
+3:47 Next: Why AI Hallucinates
+
+Next episode: Why AI Hallucinates
+Episode 1: What Actually Happens When You Tap Your Card
+
+Music: Fade by Snoozy Beats https://soundcloud.com/snoozybeats
+License: Creative Commons — Attribution 3.0 Unported — CC BY 3.0
+Free Download / Stream: https://links.al/sUN
+Music promoted by Audio Library: https://links.al/youtube
+
+#Unjargoned #ChatGPT #HowAIWorks
