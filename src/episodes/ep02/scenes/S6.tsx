@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolate, interpolateColors, useCurrentFrame, useVideoConfig } from "remotion";
 import { colors } from "../../../shared/brand";
-import { Dot, MoodKey } from "../../../shared/Dot";
+import { Dot, MoodKey, glances, hops } from "../../../shared/Dot";
 import { FadeIn } from "../../../shared/FadeIn";
 import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
 import { SceneShell } from "../../../shared/SceneShell";
@@ -36,6 +36,30 @@ const NODES = [
 ];
 const rad = (a: number) => (a * Math.PI) / 180;
 
+/** Where the yellow runner is on the loop (degrees), so Dot can watch it from the middle. */
+const runnerAt = (s: number) =>
+  interpolate(
+    s,
+    [T.chop, T.guess - 0.4, T.guess, T.pick - 0.4, T.pick, T.add - 0.4, T.add, T.again, T.again + 1.2],
+    [-90, -90, 0, 0, 90, 90, 180, 180, 270 + 360],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+  );
+
+// Dot sits in the middle of the loop watching it run, then by the empty "finished answer?" box.
+const ROUTE = hops([
+  { at: 0, x: 1600, y: 900 }, { at: sec(2.0), x: CX, y: CY }, { at: sec(T.noFinished), x: 1450, y: 700 },
+  { at: sec(T.built), x: 1600, y: 900 }, { at: sec(T.same), x: 1600, y: 900 },
+]);
+const look = (frame: number) => {
+  const s = frame / 30;
+  if (s >= 2.0 && s < T.noFinished) {
+    const a = rad(runnerAt(s));
+    return { x: Math.cos(a) * 0.9, y: Math.sin(a) * 0.8 };
+  }
+  if (s >= T.noFinished && s < T.built) return { x: -0.6, y: -0.2 };
+  return { x: -0.4, y: -0.3 };
+};
+
 const S6Content: React.FC = () => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
@@ -43,12 +67,7 @@ const S6Content: React.FC = () => {
 
   const loopO = during(frame, 0.3, T.noFinished, 0.4);
   // The yellow dot runs the loop: node to node as each is named, then a full lap on "again".
-  const runner = interpolate(
-    s,
-    [T.chop, T.guess - 0.4, T.guess, T.pick - 0.4, T.pick, T.add - 0.4, T.add, T.again, T.again + 1.2],
-    [-90, -90, 0, 0, 90, 90, 180, 180, 270 + 360],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
-  );
+  const runner = runnerAt(s);
   const lit = (at: number) => ramp(frame, at, 0.25);
 
   const finishedO = during(frame, T.noFinished, T.built, 0.3);
@@ -154,7 +173,7 @@ const S6Content: React.FC = () => {
         </div>
       </AbsoluteFill>
 
-      <Dot x={1600} y={900} track={TRACK} seed="s6" look={{ x: 0, y: -0.15 }} />
+      <Dot path={ROUTE.path} squash={ROUTE.squash} track={TRACK} seed="s6" look={look} tailLength={0.55} />
     </AbsoluteFill>
   );
 };

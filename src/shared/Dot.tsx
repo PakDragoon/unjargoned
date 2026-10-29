@@ -142,7 +142,7 @@ type Props = {
   mood?: Mood;
   track?: MoodKey[];
   /** Extra glance on top of the mood (−1…1). */
-  look?: Point;
+  look?: Point | ((frame: number) => Point);
   /** Tail direction at rest, degrees (0 = trailing to the right, as in Ep 1). */
   tailAngle?: number;
   /** Tail length in body radii. */
@@ -154,6 +154,8 @@ type Props = {
   /** Render as of this frame instead of the current one (onion-skin / sheets). */
   frame?: number;
   opacity?: number;
+  /** Landing squash over time (0 = none, 0.2 = flattened), e.g. from hops(). */
+  squash?: (frame: number) => number;
 };
 
 const deg = (a: number) => (a * Math.PI) / 180;
@@ -175,6 +177,7 @@ export const Dot: React.FC<Props> = ({
   seed = "dot",
   frame: frameOverride,
   opacity = 1,
+  squash,
 }) => {
   const current = useCurrentFrame();
   const uid = React.useId().replace(/:/g, "");
@@ -202,11 +205,13 @@ export const Dot: React.FC<Props> = ({
   // Squash & stretch along the move, a little pop on each mood change, idle breathing.
   const moveStretch = 1 + Math.min(0.1, speed / 150);
   const popS = sinceChange < 10 ? 1 + 0.05 * Math.sin((sinceChange / 10) * Math.PI) : 1;
+  const sq = squash ? squash(frame) : 0;
   const breathe = 1 + 0.012 * Math.sin(frame / 22);
 
   const blink = blinks ? blinkAt(frame, seed) : 0;
-  const lookX = Math.max(-1, Math.min(1, lerp(a.lookX, b.lookX, t) + (look?.x ?? 0)));
-  const lookY = Math.max(-1, Math.min(1, lerp(a.lookY, b.lookY, t) + (look?.y ?? 0)));
+  const lookAt = typeof look === "function" ? look(frame) : look;
+  const lookX = Math.max(-1, Math.min(1, lerp(a.lookX, b.lookX, t) + (lookAt?.x ?? 0)));
+  const lookY = Math.max(-1, Math.min(1, lerp(a.lookY, b.lookY, t) + (lookAt?.y ?? 0)));
   const bodyTilt = lerp(a.tilt, b.tilt, t);
   const shakeAmt = lerp(a.shake, b.shake, t);
   const shake = shakeAmt ? { x: Math.sin(frame * 2.7) * shakeAmt, y: Math.cos(frame * 3.1) * shakeAmt * 0.5 } : { x: 0, y: 0 };
@@ -326,7 +331,7 @@ export const Dot: React.FC<Props> = ({
           </g>
         ) : null}
         <g transform={`rotate(${moveAngle}) scale(${moveStretch} ${1 / moveStretch}) rotate(${-moveAngle})`}>
-          <g transform={`rotate(${bodyTilt}) scale(${popS} ${popS * breathe})`}>
+          <g transform={`rotate(${bodyTilt}) scale(${popS * (1 + sq)} ${popS * breathe * (1 - sq)})`}>
             <circle r={100} fill={colors.white} />
             {sameEye ? (
               <>
@@ -371,3 +376,48 @@ export const moveBetween =
     });
     return { x: lerp(a.x, b.x, k), y: lerp(a.y, b.y, k) };
   };
+
+/** A stop on Dot's route: be at (x, y) from frame `at` (the hop ends there). */
+export type Stop = { at: number; x: number; y: number };
+
+/**
+ * Dot hops between stops: each hop takes `dur` frames, ends on its stop's frame, arcs up by `lift` px,
+ * and lands with a short squash. Returns props for <Dot path squash />.
+ */
+export const hops = (stops: Stop[], dur = 16, lift = 90) => {
+  const sorted = [...stops].sort((a, b) => a.at - b.at);
+  const path = (frame: number): Point => {
+    let pos = { x: sorted[0].x, y: sorted[0].y };
+    for (let i = 1; i < sorted.length; i++) {
+      const s = sorted[i];
+      const start = s.at - dur;
+      if (frame < start) break;
+      const t = Math.min(1, (frame - start) / dur);
+      const e = Easing.inOut(Easing.cubic)(t);
+      const prev = sorted[i - 1];
+      pos = { x: lerp(prev.x, s.x, e), y: lerp(prev.y, s.y, e) - Math.sin(t * Math.PI) * lift };
+    }
+    return pos;
+  };
+  const squash = (frame: number) => {
+    let k = 0;
+    for (let i = 1; i < sorted.length; i++) {
+      const d = frame - sorted[i].at;
+      if (d >= 0 && d < 8) k = Math.max(k, 0.16 * Math.sin((d / 8) * Math.PI) * (1 - d / 10));
+    }
+    return k;
+  };
+  return { path, squash };
+};
+
+/** Glance changes over time: [{ at: frame, x, y }], eased over 6 frames. */
+export const glances = (keys: { at: number; x: number; y: number }[]) => (frame: number): Point => {
+  const sorted = [...keys].sort((a, b) => a.at - b.at);
+  let cur = { x: sorted[0].x, y: sorted[0].y };
+  for (let i = 1; i < sorted.length; i++) {
+    if (frame < sorted[i].at) break;
+    const t = Easing.inOut(Easing.cubic)(Math.min(1, (frame - sorted[i].at) / 6));
+    cur = { x: lerp(cur.x, sorted[i].x, t), y: lerp(cur.y, sorted[i].y, t) };
+  }
+  return cur;
+};

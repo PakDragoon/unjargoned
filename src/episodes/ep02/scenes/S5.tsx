@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { colors } from "../../../shared/brand";
 import { ChatBubble, ChatWindow, StreamText } from "../../../shared/ChatWindow";
-import { Dot, MoodKey } from "../../../shared/Dot";
+import { Dot, MoodKey, glances, hops } from "../../../shared/Dot";
 import { LineWipeIn } from "../../../shared/LineWipe";
 import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
 import { SceneShell } from "../../../shared/SceneShell";
@@ -61,6 +61,23 @@ const tempAt = (frame: number) => {
   ];
   return interpolate(frame, keys.map(([s]) => sec(s)), keys.map(([, v]) => v), { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 };
+
+// Dot's route: by the two chats, beside the menu, then it rides the adventure dial (sits on top of the
+// fill, so it climbs and drops with the temperature), and hops off when the branching sentences start.
+const RIDE_X = 1090 + 190;
+const rideY = (frame: number) => Math.max(215, 686 - 456 * tempAt(frame) - 66); // stops below the progress strip
+const HOPS = hops([
+  { at: 0, x: 1600, y: 900 }, { at: sec(T.answers), x: 1600, y: 900 }, { at: sec(T.restaurant + 0.1), x: 1130, y: 760 },
+  { at: sec(T.setting + 0.3), x: RIDE_X, y: rideY(sec(T.setting + 0.3)) },
+  { at: sec(T.word + 0.6) - 16, x: RIDE_X, y: 686 - 456 * 0.3 - 66 }, // where the ride ends (dial at "a little")
+  { at: sec(T.word + 0.6), x: 1600, y: 900 },
+]);
+const ridePath = (frame: number) =>
+  frame >= sec(T.setting + 0.3) && frame < sec(T.word + 0.6) - 16 ? { x: RIDE_X, y: rideY(frame) } : HOPS.path(frame);
+const LOOK = glances([
+  { at: 0, x: -0.3, y: -0.2 }, { at: sec(T.restaurant + 0.1), x: -0.7, y: -0.2 }, { at: sec(T.setting + 0.3), x: -0.7, y: 0.1 },
+  { at: sec(T.word + 0.6), x: -0.5, y: -0.2 },
+]);
 
 const S5Content: React.FC = () => {
   const frame = useCurrentFrame();
@@ -192,7 +209,7 @@ const S5Content: React.FC = () => {
         </div>
       </AbsoluteFill>
 
-      <Dot x={1600} y={900} track={TRACK} seed="s5" look={{ x: 0, y: -0.15 }} />
+      <Dot path={ridePath} squash={HOPS.squash} size={72} track={TRACK} seed="s5" look={LOOK} />
     </AbsoluteFill>
   );
 };

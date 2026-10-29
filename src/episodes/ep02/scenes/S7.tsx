@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { colors } from "../../../shared/brand";
-import { Dot, MoodKey } from "../../../shared/Dot";
+import { Dot, MoodKey, glances, hops } from "../../../shared/Dot";
 import { EndScreen } from "../../../shared/EndScreen";
 import { FadeIn } from "../../../shared/FadeIn";
 import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
@@ -21,6 +21,16 @@ const TRACK: MoodKey[] = [
   { at: sec(T.comments), mood: "curious" },
   { at: sec(T.endScreen), mood: "happy" },
 ];
+
+// Dot's route: under the splitting circles, beside the Subscribe pill, by the comment prompt.
+const ROUTE = hops([
+  { at: 0, x: 1600, y: 900 }, { at: sec(0.8), x: 1350, y: 900 }, { at: sec(T.next + 0.1), x: 1350, y: 650 },
+  { at: sec(T.comments), x: 1560, y: 880 }, { at: sec(T.endScreen), x: 1560, y: 900 },
+]);
+const LOOK = glances([
+  { at: 0, x: -0.3, y: -0.2 }, { at: sec(0.8), x: -0.5, y: -0.7 }, { at: sec(T.next + 0.1), x: -0.7, y: 0 },
+  { at: sec(T.comments), x: -0.6, y: -0.1 }, { at: sec(T.endScreen), x: -0.3, y: -0.2 },
+]);
 
 const S7Content: React.FC = () => {
   const frame = useCurrentFrame();
@@ -97,7 +107,7 @@ const S7Content: React.FC = () => {
 
       <EndScreen o={endO} dot={false} prompt="What's the strangest thing an AI has ever told you? Tell me in the comments." />
 
-      <Dot x={1560} y={900} track={TRACK} seed="s7" look={{ x: 0, y: -0.15 }} />
+      <Dot path={ROUTE.path} squash={ROUTE.squash} track={TRACK} seed="s7" look={LOOK} />
     </AbsoluteFill>
   );
 };

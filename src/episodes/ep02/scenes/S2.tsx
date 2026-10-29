@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolateColors, useCurrentFrame, useVideoConfig } from "remotion";
 import { colors } from "../../../shared/brand";
-import { Dot, MoodKey } from "../../../shared/Dot";
+import { Dot, MoodKey, glances, hops } from "../../../shared/Dot";
 import { FadeIn } from "../../../shared/FadeIn";
 import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
 import { SceneShell } from "../../../shared/SceneShell";
@@ -23,6 +23,17 @@ const GUESSES = [
   { at: 14.2, land: 14.6, options: [["a", 0.66], ["an", 0.15], ["one", 0.09]] as const },
 ];
 const START = ["Once", "upon", "a", "time"];
+
+// Dot's route: it "feeds" each guess into the slot, then watches the three questions.
+const ROUTE = hops([
+  { at: 0, x: 1600, y: 900 }, { at: sec(5.0), x: 1600, y: 900 }, { at: sec(7.4), x: 1380, y: 840 },
+  { at: sec(10.6), x: 1490, y: 840 }, { at: sec(13.5), x: 1585, y: 840 }, { at: sec(14.6), x: 1625, y: 840 },
+  { at: sec(15.9), x: 1600, y: 900 }, { at: sec(22.3), x: 1590, y: 640 }, { at: sec(29.9), x: 1600, y: 900 },
+]);
+const LOOK = glances([
+  { at: 0, x: -0.3, y: -0.2 }, { at: sec(7.4), x: -0.1, y: -0.9 }, { at: sec(15.9), x: -0.4, y: -0.3 },
+  { at: sec(22.3), x: -0.5, y: -0.3 }, { at: sec(25.6), x: -0.5, y: 0 }, { at: sec(27.7), x: -0.5, y: 0.3 },
+]);
 
 const QUESTIONS = ["Guessing from what?", "Why can't it count letters?", "Why different answers?"];
 
@@ -171,7 +182,7 @@ const S2Content: React.FC = () => {
         <QuestionStrip active={-1} />
       </div>
 
-      <Dot x={1560} y={900} track={TRACK} seed="s2" look={{ x: 0, y: -0.15 }} />
+      <Dot path={ROUTE.path} squash={ROUTE.squash} track={TRACK} seed="s2" look={LOOK} />
     </AbsoluteFill>
   );
 };

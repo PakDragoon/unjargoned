@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolate, interpolateColors, useCurrentFrame, useVideoConfig } from "remotion";
 import { colors } from "../../../shared/brand";
-import { Dot, MoodKey } from "../../../shared/Dot";
+import { Dot, MoodKey, glances, hops } from "../../../shared/Dot";
 import { LineWipeIn } from "../../../shared/LineWipe";
 import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
 import { SceneShell } from "../../../shared/SceneShell";
@@ -49,6 +49,19 @@ const TRACK: MoodKey[] = [
   { at: sec(T.count + 0.4), mood: "happy" },
   { at: sec(57.6), mood: "worried" },
 ];
+
+// Dot's route: reacts to "two", stands by the chopped message, under the tiles, by the text thread
+// and the guess panel, and hops on each counted r.
+const ROUTE = hops([
+  { at: 0, x: 1600, y: 880 }, { at: sec(T.two), x: 1600, y: 880 }, { at: sec(T.message), x: 1650, y: 780 },
+  { at: sec(T.likeThis), x: 960, y: 870 }, { at: sec(T.imagine), x: 1350, y: 820 }, { at: sec(T.problem), x: 1600, y: 880 },
+  { at: sec(T.soIt + 0.4), x: 1420, y: 860 }, { at: sec(T.newer), x: 1600, y: 880 }, { at: sec(T.count + 0.6), x: 1600, y: 880 },
+]);
+const LOOK = glances([
+  { at: 0, x: -0.3, y: -0.2 }, { at: sec(T.message), x: -0.5, y: -0.5 }, { at: sec(T.likeThis), x: 0, y: -0.9 },
+  { at: sec(T.imagine), x: -0.6, y: -0.3 }, { at: sec(T.problem), x: -0.4, y: -0.4 }, { at: sec(T.soIt + 0.4), x: -0.6, y: 0 },
+  { at: sec(T.newer), x: -0.4, y: -0.4 },
+]);
 
 const Label: React.FC<{ o: number; children: React.ReactNode; color?: string }> = ({ o, children, color = colors.subtext }) => (
   <div
@@ -264,7 +277,7 @@ const S4Content: React.FC = () => {
       </div>
 
       {/* The word itself */}
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: wordO, transform: `translateY(${wordY}px)` }}>
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: wordO, transform: `translateY(${wordY}px) scale(${1 + 0.07 * Math.sin(Math.PI * ramp(frame, T.onlyChunks, 0.4))})` }}>
         <Word split={split} explode={explode} dim={frame < sec(T.strawberry) ? dim : 0} lit={lit} numbers={numbers} counts={counts} />
       </AbsoluteFill>
 
@@ -308,7 +321,7 @@ const S4Content: React.FC = () => {
         </div>
       </AbsoluteFill>
 
-      <Dot x={1560} y={880} track={TRACK} look={{ x: 0, y: -0.15 }} seed="s4" />
+      <Dot path={ROUTE.path} squash={ROUTE.squash} track={TRACK} look={LOOK} seed="s4" />
     </AbsoluteFill>
   );
 };

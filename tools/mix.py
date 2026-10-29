@@ -7,7 +7,7 @@ so a mix change never needs a new video render.
   python3 tools/mix.py ep02                          # -> out/ep02-mix.wav
   python3 tools/mix.py ep02 --mux out/ep02-full-video.mp4 out/ep02-full.mp4
 
-Reads   src/episodes/<ep>/vo.json, durations.json, captions.json (word timings → when the voice speaks)
+Reads   src/episodes/<ep>/vo.json, durations.json, captions.json (word timings → when the voice speaks), sfx.json
         public/episodes/<ep>/audio/S*.wav, public/episodes/<ep>/music/<MUSIC>
 Music levels (Master Handoff): bed at about −26 LUFS under the voice, −17 in gaps, −13 on the end screen.
 """
@@ -196,7 +196,22 @@ def main() -> None:
 
     # Voice to about −16 LUFS before mixing, then the whole mix to the house loudness.
     voice *= 10 ** ((-16.0 - lufs(voice[:, None])) / 20)
-    mix = bed + voice[:, None]
+    # Sound effects (tools/sfx.py kit) at their cue times.
+    sfx = np.zeros(n, dtype=np.float32)
+    sfx_path = ep_dir / "sfx.json"
+    if sfx_path.exists():
+        plan_sfx = json.loads(sfx_path.read_text())
+        kit: dict[str, np.ndarray] = {}
+        for sid, cues in plan_sfx["cues"].items():
+            for at, name in cues:
+                if name not in kit:
+                    kit[name] = decode(ROOT / "public" / "sfx" / f"{name}.wav", 1)[:, 0]
+                clip = kit[name]
+                i = int(round((offsets[sid] + at) * SR))
+                j = min(n, i + len(clip))
+                sfx[i:j] += clip[: j - i]
+        sfx *= 10 ** (plan_sfx.get("gain_db", -8) / 20)
+    mix = bed + voice[:, None] + sfx[:, None]
     out_dir = ROOT / "out"
     out_dir.mkdir(exist_ok=True)
     raw = out_dir / f"{ep}-mix-raw.wav"

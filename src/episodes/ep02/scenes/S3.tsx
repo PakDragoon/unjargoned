@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolate, random, useCurrentFrame, useVideoConfig } from "remotion";
 import { colors } from "../../../shared/brand";
-import { Dot, MoodKey } from "../../../shared/Dot";
+import { Dot, MoodKey, glances, hops } from "../../../shared/Dot";
 import { LineWipeIn } from "../../../shared/LineWipe";
 import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
 import { SceneShell } from "../../../shared/SceneShell";
@@ -31,6 +31,19 @@ const TRACK: MoodKey[] = [
   { at: sec(T.model), mood: "aha" },
   { at: sec(T.underneath), mood: "smug" },
 ];
+
+// Dot's route: under the pile of pages, then beside the worksheet, the dial, the facts list.
+const ROUTE = hops([
+  { at: 0, x: 1600, y: 900 }, { at: sec(2.6), x: 960, y: 900 }, { at: sec(9.0), x: 960, y: 900 },
+  { at: sec(10.9), x: 1420, y: 450 }, { at: sec(23.9), x: 1420, y: 450 }, { at: sec(26.2), x: 1440, y: 770 },
+  { at: sec(28.2), x: 1420, y: 450 }, { at: sec(31.3), x: 1350, y: 760 }, { at: sec(34.0), x: 1420, y: 450 },
+  { at: sec(45.5), x: 1650, y: 880 },
+]);
+const LOOK = glances([
+  { at: 0, x: -0.3, y: -0.2 }, { at: sec(2.6), x: 0.4, y: -0.8 }, { at: sec(10.9), x: -0.5, y: 0.2 },
+  { at: sec(26.2), x: 0.8, y: -0.6 }, { at: sec(28.2), x: -0.5, y: 0.2 }, { at: sec(31.3), x: -0.6, y: -0.2 },
+  { at: sec(34.0), x: -0.5, y: 0.2 }, { at: sec(45.5), x: -0.5, y: -0.1 },
+]);
 
 const PAPER = "#F3EBDD";
 
@@ -256,7 +269,7 @@ const S3Content: React.FC = () => {
         the world's best <span style={{ color: colors.yellow }}>fill-in-the-blank</span> player
       </div>
 
-      <Dot x={1560} y={900} track={TRACK} seed="s3" look={{ x: 0, y: -0.15 }} />
+      <Dot path={ROUTE.path} squash={ROUTE.squash} track={TRACK} seed="s3" look={LOOK} />
     </AbsoluteFill>
   );
 };

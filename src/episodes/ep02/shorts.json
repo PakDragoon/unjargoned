@@ -1,0 +1,15 @@
+{
+  "_doc": "Vertical Shorts: each is one or more clips (scene, seconds into the scene). Video: Shorts.tsx; audio: tools/shorts.py cuts the same clips from the episode mix.",
+  "Short1": {
+    "hook": "Why can't ChatGPT count the ", "hookHighlight": "r's in strawberry?",
+    "clips": [{ "scene": "S4", "from": 1.45, "to": 59.2 }]
+  },
+  "Short2": {
+    "hook": "Why does ChatGPT give ", "hookHighlight": "different answers?",
+    "clips": [{ "scene": "S5", "from": 1.4, "to": 45.3 }]
+  },
+  "Short3": {
+    "hook": "How does ChatGPT ", "hookHighlight": "come up with answers?",
+    "clips": [{ "scene": "S1", "from": 21.3, "to": 29.1 }, { "scene": "S2", "from": 0.0, "to": 21.8 }]
+  }
+}

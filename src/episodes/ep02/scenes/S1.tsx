@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { colors } from "../../../shared/brand";
 import { ChatBubble, ChatWindow, StreamText } from "../../../shared/ChatWindow";
-import { Dot, MoodKey } from "../../../shared/Dot";
+import { Dot, MoodKey, glances, hops } from "../../../shared/Dot";
 import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
 import { LogoMark, Wordmark } from "../../../shared/Logo";
 import { SceneShell } from "../../../shared/SceneShell";
@@ -25,6 +25,16 @@ const TRACK: MoodKey[] = [
   { at: sec(T.test), mood: "neutral" },
   { at: sec(T.didnt), mood: "smug" },
 ];
+
+// Dot's route (frame, x, y) and where it looks.
+const ROUTE = hops([
+  { at: 0, x: 1600, y: 900 }, { at: sec(2.8), x: 1580, y: 770 }, { at: sec(6.9), x: 1180, y: 880 },
+  { at: sec(16.6), x: 1450, y: 760 }, { at: sec(21.5), x: 1560, y: 880 }, { at: sec(27.25), x: 1560, y: 880 },
+]);
+const LOOK = glances([
+  { at: 0, x: -0.2, y: -0.1 }, { at: sec(2.8), x: -0.4, y: 0 }, { at: sec(6.9), x: 0.9, y: -0.6 },
+  { at: sec(16.6), x: -0.4, y: -0.3 }, { at: sec(21.5), x: -0.5, y: -0.4 },
+]);
 
 const ANSWER = "Rainbows form when sunlight passes through raindrops. Each drop bends the light and splits it into colours.";
 
@@ -149,7 +159,7 @@ const S1Content: React.FC = () => {
         </div>
       </AbsoluteFill>
 
-      <Dot x={1560} y={900} track={TRACK} seed="s1" look={{ x: 0, y: -0.15 }} />
+      <Dot path={ROUTE.path} squash={ROUTE.squash} track={TRACK} seed="s1" look={LOOK} />
     </AbsoluteFill>
   );
 };
