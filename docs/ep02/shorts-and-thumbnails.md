@@ -1,5 +1,7 @@
 # Ep 2 — Shorts and thumbnails
 
+**Shipped thumbnail:** `docs/ep02/thumbnail-final.jpg` (Hassan's pick: illustrated strawberry in a forest, Dot with a magnifying glass, "HOW MANY R'S?"). The D/E/A/B/C below were the candidates.
+
 ## Thumbnails — Ep 1 style (use these): `Ep02-ThumbD`, `Ep02-ThumbE`
 Warm blurred yellow backdrop, shaded Dot with brow/mouth and an arm holding the hero, glowing hero, white outlined words top-right (src/episodes/ep02/ThumbStyle.tsx).
 - **D · "HOW MANY R'S?"** — skeptical Dot holds up a strawberry; a "2?" chat bubble.
