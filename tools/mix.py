@@ -160,7 +160,7 @@ def main() -> None:
         a = offsets[sid]
         nxt = scene_ids.index(sid) + 1
         b = offsets[scene_ids[nxt]] if nxt < len(scene_ids) else total
-        g[int(a * hz) : int(b * hz)] = GAP_DB + 3
+        g[int(a * hz) : int(b * hz)] = GAP_DB
         gags.append((a, b))
     for sid, w, delay, length in plan["dips"]:
         a = word_end(sid, w) + delay
@@ -176,7 +176,7 @@ def main() -> None:
     if gags:
         with tempfile.TemporaryDirectory() as d:
             sf.write(f"{d}/a.wav", bed, SR, subtype="FLOAT")
-            ffmpeg("-i", f"{d}/a.wav", "-af", "lowpass=f=450,lowpass=f=450,volume=6dB", "-c:a", "pcm_f32le", f"{d}/m.wav")
+            ffmpeg("-i", f"{d}/a.wav", "-af", "lowpass=f=450,lowpass=f=450,volume=2dB", "-c:a", "pcm_f32le", f"{d}/m.wav")
             muffled, _ = sf.read(f"{d}/m.wav", dtype="float32", always_2d=True)
         w = np.zeros(n, dtype=np.float32)
         fade = int(0.04 * SR)
