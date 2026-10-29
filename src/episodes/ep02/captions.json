@@ -18,11 +18,11 @@
   {
    "word": "question",
    "start": 0.5,
-   "end": 0.82
+   "end": 0.84
   },
   {
    "word": "into",
-   "start": 0.82,
+   "start": 0.84,
    "end": 1.1
   },
   {
@@ -32,7 +32,7 @@
   },
   {
    "word": "and",
-   "start": 2.84,
+   "start": 2.82,
    "end": 2.9
   },
   {
@@ -128,16 +128,16 @@
   {
    "word": "person",
    "start": 9.08,
-   "end": 9.46
+   "end": 9.48
   },
   {
    "word": "typing.",
-   "start": 9.46,
-   "end": 9.84
+   "start": 9.48,
+   "end": 9.86
   },
   {
    "word": "It",
-   "start": 10.6,
+   "start": 10.58,
    "end": 10.74
   },
   {
@@ -156,14 +156,9 @@
    "end": 11.58
   },
   {
-   "word": "web",
+   "word": "webpage.",
    "start": 11.58,
-   "end": 11.76
-  },
-  {
-   "word": "page.",
-   "start": 11.76,
-   "end": 12.06
+   "end": 11.86
   },
   {
    "word": "Most",
@@ -187,27 +182,27 @@
   },
   {
    "word": "it",
-   "start": 13.86,
+   "start": 13.84,
    "end": 14.12
   },
   {
    "word": "isn't",
    "start": 14.12,
-   "end": 14.38
+   "end": 14.36
   },
   {
    "word": "looking",
-   "start": 14.38,
+   "start": 14.36,
    "end": 14.6
   },
   {
    "word": "anything",
    "start": 14.6,
-   "end": 14.9
+   "end": 14.92
   },
   {
    "word": "up",
-   "start": 14.9,
+   "start": 14.92,
    "end": 15.18
   },
   {
@@ -222,7 +217,7 @@
   },
   {
    "word": "So",
-   "start": 16.48,
+   "start": 16.44,
    "end": 16.74
   },
   {
@@ -253,72 +248,87 @@
   {
    "word": "from?",
    "start": 17.78,
-   "end": 18.1
+   "end": 18.06
+  },
+  {
+   "word": "Let's",
+   "start": 19.1,
+   "end": 19.48
+  },
+  {
+   "word": "un-jargon",
+   "start": 19.48,
+   "end": 19.96
+  },
+  {
+   "word": "it.",
+   "start": 19.96,
+   "end": 20.52
   },
   {
    "word": "Quick",
-   "start": 19.18,
-   "end": 19.32
+   "start": 21.36,
+   "end": 21.5
   },
   {
-   "word": "test,",
-   "start": 19.32,
-   "end": 19.64
+   "word": "test.",
+   "start": 21.5,
+   "end": 21.8
   },
   {
-   "word": "finish",
-   "start": 20.46,
-   "end": 20.66
+   "word": "Finish",
+   "start": 22.66,
+   "end": 22.86
   },
   {
    "word": "this",
-   "start": 20.66,
-   "end": 20.98
+   "start": 22.86,
+   "end": 23.18
   },
   {
    "word": "sentence",
-   "start": 20.98,
-   "end": 21.46
+   "start": 23.18,
+   "end": 23.62
   },
   {
    "word": "Once",
-   "start": 21.46,
-   "end": 22.06
+   "start": 23.62,
+   "end": 24.24
   },
   {
    "word": "upon",
-   "start": 22.06,
-   "end": 22.36
+   "start": 24.24,
+   "end": 24.56
   },
   {
    "word": "a\u2026",
-   "start": 22.36,
-   "end": 22.68
+   "start": 24.56,
+   "end": 24.88
   },
   {
    "word": "You",
-   "start": 24.5,
-   "end": 25.06
+   "start": 26.7,
+   "end": 27.26
   },
   {
    "word": "said",
-   "start": 25.06,
-   "end": 25.28
+   "start": 27.26,
+   "end": 27.48
   },
   {
    "word": "time,",
-   "start": 25.28,
-   "end": 25.68
+   "start": 27.48,
+   "end": 27.88
   },
   {
    "word": "didn't",
-   "start": 25.86,
-   "end": 26.14
+   "start": 28.08,
+   "end": 28.32
   },
   {
    "word": "you?",
-   "start": 26.14,
-   "end": 26.34
+   "start": 28.32,
+   "end": 28.54
   }
  ],
  "S2": [
@@ -1981,11 +1991,11 @@
   {
    "word": "Question",
    "start": 0.0,
-   "end": 0.4
+   "end": 0.38
   },
   {
    "word": "three,",
-   "start": 0.4,
+   "start": 0.38,
    "end": 0.82
   },
   {
@@ -2006,11 +2016,11 @@
   {
    "word": "question",
    "start": 2.2,
-   "end": 2.64
+   "end": 2.66
   },
   {
    "word": "twice",
-   "start": 2.64,
+   "start": 2.66,
    "end": 3.06
   },
   {
@@ -2021,11 +2031,11 @@
   {
    "word": "you'll",
    "start": 3.68,
-   "end": 3.9
+   "end": 3.88
   },
   {
    "word": "often",
-   "start": 3.9,
+   "start": 3.88,
    "end": 4.16
   },
   {
@@ -2111,11 +2121,11 @@
   {
    "word": "your",
    "start": 11.0,
-   "end": 11.2
+   "end": 11.18
   },
   {
    "word": "favorite",
-   "start": 11.2,
+   "start": 11.18,
    "end": 11.54
   },
   {
@@ -2129,23 +2139,23 @@
    "end": 13.16
   },
   {
-   "word": "days",
+   "word": "days,",
    "start": 13.16,
    "end": 13.52
   },
   {
    "word": "you",
-   "start": 13.52,
+   "start": 13.76,
    "end": 13.96
   },
   {
    "word": "order",
    "start": 13.96,
-   "end": 14.14
+   "end": 14.16
   },
   {
    "word": "your",
-   "start": 14.14,
+   "start": 14.16,
    "end": 14.34
   },
   {
@@ -2159,18 +2169,18 @@
    "end": 15.58
   },
   {
-   "word": "days",
+   "word": "days,",
    "start": 15.58,
    "end": 15.86
   },
   {
    "word": "you",
-   "start": 15.86,
-   "end": 16.28
+   "start": 16.04,
+   "end": 16.3
   },
   {
    "word": "try",
-   "start": 16.28,
+   "start": 16.3,
    "end": 16.48
   },
   {
@@ -2181,16 +2191,16 @@
   {
    "word": "dish",
    "start": 16.62,
-   "end": 16.8
+   "end": 16.78
   },
   {
    "word": "you",
-   "start": 16.8,
-   "end": 16.98
+   "start": 16.78,
+   "end": 16.96
   },
   {
    "word": "almost",
-   "start": 16.98,
+   "start": 16.96,
    "end": 17.28
   },
   {
@@ -2199,299 +2209,349 @@
    "end": 17.72
   },
   {
-   "word": "The",
-   "start": 18.26,
-   "end": 18.5
+   "word": "There's",
+   "start": 18.32,
+   "end": 18.6
   },
   {
-   "word": "setting",
-   "start": 18.5,
-   "end": 18.78
+   "word": "a",
+   "start": 18.6,
+   "end": 18.72
   },
   {
-   "word": "that",
-   "start": 18.78,
+   "word": "dial",
+   "start": 18.72,
    "end": 18.98
   },
   {
-   "word": "controls",
+   "word": "inside",
    "start": 18.98,
-   "end": 19.38
+   "end": 19.4
   },
   {
-   "word": "this",
-   "start": 19.38,
-   "end": 19.8
+   "word": "that",
+   "start": 19.4,
+   "end": 19.78
   },
   {
-   "word": "is",
-   "start": 19.8,
-   "end": 20.18
+   "word": "controls",
+   "start": 19.78,
+   "end": 20.14
   },
   {
-   "word": "called",
-   "start": 20.18,
-   "end": 20.52
+   "word": "this.",
+   "start": 20.14,
+   "end": 20.56
+  },
+  {
+   "word": "Engineers",
+   "start": 21.48,
+   "end": 21.48
+  },
+  {
+   "word": "call",
+   "start": 21.48,
+   "end": 21.92
+  },
+  {
+   "word": "it",
+   "start": 21.92,
+   "end": 22.18
   },
   {
    "word": "temperature.",
-   "start": 20.52,
-   "end": 20.9
+   "start": 22.18,
+   "end": 22.5
   },
   {
-   "word": "Turn",
-   "start": 22.04,
-   "end": 22.3
+   "word": "Think",
+   "start": 23.42,
+   "end": 23.64
+  },
+  {
+   "word": "of",
+   "start": 23.64,
+   "end": 23.78
   },
   {
    "word": "it",
-   "start": 22.3,
-   "end": 22.44
+   "start": 23.78,
+   "end": 24.0
+  },
+  {
+   "word": "as",
+   "start": 24.0,
+   "end": 24.36
+  },
+  {
+   "word": "an",
+   "start": 24.36,
+   "end": 24.48
+  },
+  {
+   "word": "adventure",
+   "start": 24.48,
+   "end": 24.92
+  },
+  {
+   "word": "dial.",
+   "start": 24.92,
+   "end": 25.26
+  },
+  {
+   "word": "Turn",
+   "start": 25.98,
+   "end": 26.5
+  },
+  {
+   "word": "it",
+   "start": 26.5,
+   "end": 26.62
   },
   {
    "word": "down",
-   "start": 22.44,
-   "end": 22.76
+   "start": 26.62,
+   "end": 26.92
   },
   {
    "word": "and",
-   "start": 22.76,
-   "end": 23.26
+   "start": 26.92,
+   "end": 27.46
   },
   {
    "word": "it",
-   "start": 23.26,
-   "end": 23.38
+   "start": 27.46,
+   "end": 27.56
   },
   {
    "word": "orders",
-   "start": 23.38,
-   "end": 23.7
+   "start": 27.56,
+   "end": 27.88
   },
   {
    "word": "the",
-   "start": 23.7,
-   "end": 23.9
+   "start": 27.88,
+   "end": 28.1
   },
   {
    "word": "usual",
-   "start": 23.9,
-   "end": 24.24
+   "start": 28.1,
+   "end": 28.44
   },
   {
    "word": "every",
-   "start": 24.24,
-   "end": 24.64
+   "start": 28.44,
+   "end": 28.84
   },
   {
    "word": "single",
-   "start": 24.64,
-   "end": 24.98
+   "start": 28.84,
+   "end": 29.18
   },
   {
    "word": "time.",
-   "start": 24.98,
-   "end": 25.46
+   "start": 29.18,
+   "end": 29.64
   },
   {
    "word": "Safe",
-   "start": 25.88,
-   "end": 26.28
+   "start": 30.34,
+   "end": 30.46
   },
   {
    "word": "but",
-   "start": 26.28,
-   "end": 26.54
+   "start": 30.46,
+   "end": 30.74
   },
   {
    "word": "a",
-   "start": 26.54,
-   "end": 26.64
+   "start": 30.74,
+   "end": 30.82
   },
   {
    "word": "bit",
-   "start": 26.64,
-   "end": 26.78
-  },
-  {
-   "word": "boring.",
-   "start": 26.78,
-   "end": 27.2
-  },
-  {
-   "word": "Turn",
-   "start": 27.8,
-   "end": 28.06
-  },
-  {
-   "word": "it",
-   "start": 28.06,
-   "end": 28.26
-  },
-  {
-   "word": "up",
-   "start": 28.26,
-   "end": 28.48
-  },
-  {
-   "word": "and",
-   "start": 28.48,
-   "end": 28.78
-  },
-  {
-   "word": "it",
-   "start": 28.78,
-   "end": 28.88
-  },
-  {
-   "word": "gets",
-   "start": 28.88,
-   "end": 29.08
-  },
-  {
-   "word": "adventurous.",
-   "start": 29.08,
-   "end": 29.62
-  },
-  {
-   "word": "More",
-   "start": 30.36,
-   "end": 30.58
-  },
-  {
-   "word": "creative",
-   "start": 30.58,
+   "start": 30.82,
    "end": 30.98
   },
   {
-   "word": "and",
+   "word": "boring.",
    "start": 30.98,
-   "end": 31.4
+   "end": 31.36
+  },
+  {
+   "word": "Turn",
+   "start": 32.04,
+   "end": 32.28
+  },
+  {
+   "word": "it",
+   "start": 32.28,
+   "end": 32.46
+  },
+  {
+   "word": "up",
+   "start": 32.46,
+   "end": 32.7
+  },
+  {
+   "word": "and",
+   "start": 32.7,
+   "end": 32.98
+  },
+  {
+   "word": "it",
+   "start": 32.98,
+   "end": 33.08
+  },
+  {
+   "word": "gets",
+   "start": 33.08,
+   "end": 33.28
+  },
+  {
+   "word": "adventurous.",
+   "start": 33.28,
+   "end": 33.82
+  },
+  {
+   "word": "More",
+   "start": 34.58,
+   "end": 34.78
+  },
+  {
+   "word": "creative",
+   "start": 34.78,
+   "end": 35.24
+  },
+  {
+   "word": "and",
+   "start": 35.24,
+   "end": 35.6
   },
   {
    "word": "too",
-   "start": 31.4,
-   "end": 31.58
+   "start": 35.6,
+   "end": 35.78
   },
   {
    "word": "far",
-   "start": 31.58,
-   "end": 31.78
+   "start": 35.78,
+   "end": 35.98
   },
   {
-   "word": "up",
-   "start": 31.78,
-   "end": 32.04
+   "word": "up,",
+   "start": 35.98,
+   "end": 36.22
   },
   {
    "word": "it",
-   "start": 32.04,
-   "end": 32.42
+   "start": 36.48,
+   "end": 36.62
   },
   {
    "word": "starts",
-   "start": 32.42,
-   "end": 32.68
+   "start": 36.62,
+   "end": 36.9
   },
   {
    "word": "ordering",
-   "start": 32.68,
-   "end": 33.1
+   "start": 36.9,
+   "end": 37.28
   },
   {
    "word": "nonsense.",
-   "start": 33.1,
-   "end": 33.48
+   "start": 37.28,
+   "end": 37.66
   },
   {
    "word": "ChatGPT",
-   "start": 34.4,
-   "end": 35.04
+   "start": 38.6,
+   "end": 39.24
   },
   {
    "word": "keeps",
-   "start": 35.04,
-   "end": 35.5
+   "start": 39.24,
+   "end": 39.7
   },
   {
    "word": "it",
-   "start": 35.5,
-   "end": 35.72
+   "start": 39.7,
+   "end": 39.9
   },
   {
    "word": "turned",
-   "start": 35.72,
-   "end": 35.9
+   "start": 39.9,
+   "end": 40.1
   },
   {
    "word": "up",
-   "start": 35.9,
-   "end": 36.06
+   "start": 40.1,
+   "end": 40.26
   },
   {
    "word": "a",
-   "start": 36.06,
-   "end": 36.16
+   "start": 40.26,
+   "end": 40.36
   },
   {
    "word": "little.",
-   "start": 36.16,
-   "end": 36.3
+   "start": 40.36,
+   "end": 40.48
   },
   {
    "word": "And",
-   "start": 36.98,
-   "end": 37.08
+   "start": 41.16,
+   "end": 41.3
   },
   {
    "word": "once",
-   "start": 37.08,
-   "end": 37.34
+   "start": 41.3,
+   "end": 41.56
   },
   {
    "word": "one",
-   "start": 37.34,
-   "end": 37.6
+   "start": 41.56,
+   "end": 41.82
   },
   {
    "word": "word",
-   "start": 37.6,
-   "end": 37.82
+   "start": 41.82,
+   "end": 42.02
   },
   {
    "word": "changes,",
-   "start": 37.82,
-   "end": 38.4
+   "start": 42.02,
+   "end": 42.6
   },
   {
    "word": "every",
-   "start": 38.9,
-   "end": 39.16
+   "start": 43.1,
+   "end": 43.36
   },
   {
    "word": "guess",
-   "start": 39.16,
-   "end": 39.4
+   "start": 43.36,
+   "end": 43.6
   },
   {
    "word": "after",
-   "start": 39.4,
-   "end": 39.76
+   "start": 43.6,
+   "end": 43.94
   },
   {
    "word": "it",
-   "start": 39.76,
-   "end": 39.92
+   "start": 43.94,
+   "end": 44.12
   },
   {
    "word": "changes",
-   "start": 39.92,
-   "end": 40.22
+   "start": 44.12,
+   "end": 44.42
   },
   {
    "word": "too.",
-   "start": 40.22,
-   "end": 40.62
+   "start": 44.42,
+   "end": 44.82
   }
  ],
  "S6": [

@@ -4,6 +4,7 @@ import { colors } from "../../../shared/brand";
 import { ChatBubble, ChatWindow, StreamText } from "../../../shared/ChatWindow";
 import { Dot, MoodKey } from "../../../shared/Dot";
 import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
+import { LogoMark, Wordmark } from "../../../shared/Logo";
 import { SceneShell } from "../../../shared/SceneShell";
 import { scene } from "../timeline";
 
@@ -12,13 +13,15 @@ const S = scene("S1");
 // Times (s) from the S1 word timings in captions.json. Re-voice S1 → re-check these.
 const T = {
   question: 0.4, answer: 2.8, wordByWord: 5.7, where: 6.6, person: 8.5, personX: 9.5, page: 10.6, pageX: 11.6,
-  lookup: 12.7, lookupX: 15.0, soWhere: 16.5, test: 19.2, sentence: 20.4, blankFill: 25.0, didnt: 25.8,
+  lookup: 12.7, lookupX: 15.0, soWhere: 16.5, unjargon: 19.1, jargon: 19.66, test: 21.36, sentence: 22.66,
+  blankFill: 27.25, didnt: 28.08,
 };
 
 const TRACK: MoodKey[] = [
   { at: 0, mood: "neutral" },
   { at: sec(T.where), mood: "curious" },
   { at: sec(T.soWhere), mood: "intrigued" },
+  { at: sec(T.jargon), mood: "happy" },
   { at: sec(T.test), mood: "neutral" },
   { at: sec(T.didnt), mood: "smug" },
 ];
@@ -75,7 +78,11 @@ const S1Content: React.FC = () => {
   const chatScale = interpolate(slide, [0, 1], [1, 0.9]);
 
   const ideasO = during(frame, T.where + 0.3, T.soWhere, 0.4);
-  const qO = during(frame, T.soWhere + 0.2, T.test, 0.3);
+  // Ep 1's sting: a big "?" that turns into the logo on "Let's un-jargon it".
+  const qO = during(frame, T.soWhere + 0.2, T.jargon + 0.1, 0.25);
+  const logoP = pop(frame, T.jargon);
+  const logoO = during(frame, T.jargon, T.test - 0.1, 0.25);
+  const wordX = interpolate(ramp(frame, T.jargon + 0.25, 0.4), [0, 1], [-40, 0]);
   const blankO = ramp(frame, T.test, 0.4);
   const time = pop(frame, T.blankFill);
 
@@ -108,10 +115,25 @@ const S1Content: React.FC = () => {
         </div>
       </div>
 
-      {/* So where does it come from? */}
+      {/* So where does it come from? → Let's un-jargon it. */}
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: qO }}>
-        <div style={{ fontSize: 110, fontWeight: 800, textAlign: "center" }}>
-          So where does it <span style={{ color: colors.yellow }}>come from?</span>
+        <div
+          style={{
+            fontSize: 420, fontWeight: 800, color: colors.yellow, lineHeight: 1,
+            transform: `scale(${Math.min(1.05, pop(frame, T.soWhere + 0.2)) * (1 - 0.6 * ramp(frame, T.jargon - 0.15, 0.25))})`,
+          }}
+        >
+          ?
+        </div>
+      </AbsoluteFill>
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: logoO }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 36 }}>
+          <div style={{ transform: `scale(${Math.min(1.1, logoP)})` }}>
+            <LogoMark size={260} />
+          </div>
+          <div style={{ opacity: ramp(frame, T.jargon + 0.25, 0.3), transform: `translateX(${wordX}px)` }}>
+            <Wordmark fontSize={150} />
+          </div>
         </div>
       </AbsoluteFill>
 

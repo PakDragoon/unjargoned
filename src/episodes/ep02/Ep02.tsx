@@ -6,13 +6,14 @@ import { S1 } from "./scenes/S1";
 import { S2 } from "./scenes/S2";
 import { S3 } from "./scenes/S3";
 import { S4 } from "./scenes/S4";
+import { S4b } from "./scenes/S4b";
 import { S5 } from "./scenes/S5";
 import { S6 } from "./scenes/S6";
 import { S7 } from "./scenes/S7";
 import { G1Sheet, StyleFrame } from "./StyleFrame";
 import { DotSheet } from "../../shared/DotSheet";
 
-const components: Record<string, React.FC> = { S1, S2, S3, S4, S5, S6, S7 };
+const components: Record<string, React.FC> = { S1, S2, S3, S4, S4b, S5, S6, S7 };
 
 /** Full episode: every scene in order. Render this ONCE, at the end. */
 export const Ep02Full: React.FC = () => (

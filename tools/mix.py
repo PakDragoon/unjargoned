@@ -93,13 +93,17 @@ def main() -> None:
     t = 0.0
     for s in vo["scenes"]:
         offsets[s["id"]] = t
-        t += math.ceil((durations[s["id"]] + TAIL_SECONDS + s.get("endScreenSeconds", 0)) * FPS) / FPS
+        seconds = durations[s["id"]] if not s.get("silent") else s["estSeconds"]
+        t += math.ceil((seconds + TAIL_SECONDS + s.get("endScreenSeconds", 0)) * FPS) / FPS
     total = t
     n = int(round(total * SR))
 
     # Voice: every scene WAV at its offset.
     voice = np.zeros(n, dtype=np.float32)
+    silent = {s["id"] for s in vo["scenes"] if s.get("silent")}
     for sid, off in offsets.items():
+        if sid in silent:
+            continue
         v = decode(ROOT / "public" / "episodes" / ep / "audio" / f"{sid}.wav", 1)[:, 0]
         i = int(round(off * SR))
         voice[i : i + len(v)] += v[: n - i]
@@ -143,6 +147,13 @@ def main() -> None:
         a = word_end(sid, after)
         b = word_start_after(sid, before, a)
         g[int((a + 0.05) * hz) : int((b - 0.05) * hz)] = MUTE_DB
+    # Gag scenes: the music cuts out for the whole beat (the joke lands in silence).
+    scene_ids = [s["id"] for s in vo["scenes"]]
+    for sid in silent:
+        a = offsets[sid]
+        nxt = scene_ids.index(sid) + 1
+        b = offsets[scene_ids[nxt]] if nxt < len(scene_ids) else total
+        g[int(a * hz) : int(b * hz)] = MUTE_DB
     for sid, w, delay, length in plan["dips"]:
         a = word_end(sid, w) + delay
         g[int(a * hz) : int((a + length) * hz)] = -24.0

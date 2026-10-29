@@ -44,6 +44,7 @@ BEAT = 0.6             # seconds for [beat], before PAUSE_SCALE (→ ~0.78 s)
 # G0: "a" alone was read as the letter A (/eɪ/). Leave "r's" alone — it reads /ɑːɹz/; "Rs" breaks it.
 PRONOUNCE: dict[str, str] = {
     "Once upon a": "Once upon uh",
+    "un-jargon": "un jargon",  # Ep 1 says it as two stressed words
 }
 
 MARKER = re.compile(r"\[(beat|silence\s+[\d.]+)\]", re.IGNORECASE)
@@ -112,6 +113,8 @@ def run_episode(ep: str, only: list[str]) -> None:
     for scene in vo["scenes"]:
         if wanted and scene["id"] not in wanted:
             continue
+        if scene.get("silent"):
+            continue  # gag scenes have no voice; timeline.ts uses estSeconds
         audio, sr = voice_text(kokoro, scene["vo"])
         path = out_dir / f"{scene['id']}.wav"
         sf.write(path, audio, sr)

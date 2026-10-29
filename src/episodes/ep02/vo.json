@@ -8,7 +8,7 @@
       "id": "S1",
       "title": "Hook",
       "estSeconds": 29,
-      "vo": "You type a question into ChatGPT, and a second later an answer starts appearing, word by word. But where is it coming from? There's no person typing. It isn't copying a web page. Most of the time, it isn't looking anything up at all. [beat] So where does the answer come from? [beat] Quick test. Finish this sentence: \"Once upon a…\" [silence 1.5] You said \"time,\" didn't you?"
+      "vo": "You type a question into ChatGPT, and a second later an answer starts appearing, word by word. But where is it coming from? There's no person typing. It isn't copying a web page. Most of the time, it isn't looking anything up at all. [beat] So where does the answer come from? [beat] Let's un-jargon it. [beat] Quick test. Finish this sentence: \"Once upon a…\" [silence 1.5] You said \"time,\" didn't you?"
     },
     {
       "id": "S2",
@@ -29,10 +29,17 @@
       "vo": "Question two. How many r's are in \"strawberry\"? [beat] Three. But for a long time, ChatGPT would confidently say: two. [beat] Here's why. I've been saying it guesses the next word. That was a little white lie. It doesn't see words, or letters. It sees chunks, called tokens. Your message gets chopped into pieces, and each piece becomes a number. \"Strawberry\" might get chopped into three pieces, like this. [beat] Now imagine I text you a strawberry emoji and ask how many r's are in it. The picture doesn't show any letters. You'd have to remember the spelling. That's ChatGPT's problem. Newer versions usually work around it by spelling the word out first. But the chunks are still there, so letter puzzles can still trip it up."
     },
     {
+      "id": "S4b",
+      "title": "Gag: you haven't subscribed yet, huh?",
+      "estSeconds": 1.8,
+      "silent": true,
+      "vo": ""
+    },
+    {
       "id": "S5",
       "title": "Same question, different answers",
       "estSeconds": 46,
-      "vo": "Question three. Ask the same question twice, and you'll often get two different answers. Why? Because it doesn't always pick the single top guess. [beat] Think about your favorite restaurant. Most days, you order your usual. Some days, you try the dish you almost ordered. The setting that controls this is called temperature. [beat] Turn it down, and it orders the usual every single time. Safe, but a bit boring. Turn it up, and it gets adventurous. More creative, and too far up, it starts ordering nonsense. ChatGPT keeps it turned up a little. And once one word changes, every guess after it changes too."
+      "vo": "Question three. Ask the same question twice, and you'll often get two different answers. Why? Because it doesn't always pick the single top guess. [beat] Think about your favorite restaurant. Most days, you order your usual. Some days, you try the dish you almost ordered. There's a dial inside that controls this. Engineers call it \"temperature\". Think of it as an adventure dial. [beat] Turn it down, and it orders the usual every single time. Safe, but a bit boring. Turn it up, and it gets adventurous. More creative, and too far up, it starts ordering nonsense. ChatGPT keeps it turned up a little. And once one word changes, every guess after it changes too."
     },
     {
       "id": "S6",

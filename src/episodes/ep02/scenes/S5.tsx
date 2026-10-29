@@ -14,8 +14,9 @@ const S = scene("S5");
 // Times (s) from the S5 word timings in captions.json. Re-voice S5 → re-check these.
 const T = {
   ask: 1.5, twice: 2.6, answers: 4.4, why: 6.0, top: 8.6, notTop: 9.2, restaurant: 10.6, usual: 13.2, almost: 16.3,
-  setting: 18.3, temperature: 20.2, down: 22.4, every: 23.4, boring: 25.9, up: 28.3, adventurous: 29.1,
-  creative: 30.6, tooFar: 31.6, nonsense: 32.6, keeps: 34.4, word: 37.6, after: 38.9, end: 40.2,
+  setting: 18.3, dial: 18.72, temperature: 22.18, adventureDial: 24.48, down: 26.62, every: 28.44, boring: 30.98,
+  up: 32.46, adventurous: 33.28, creative: 34.78, tooFar: 35.78, nonsense: 36.9, keeps: 38.6, word: 41.82,
+  after: 43.1, end: 44.42,
 };
 
 const TRACK: MoodKey[] = [
@@ -115,7 +116,7 @@ const S5Content: React.FC = () => {
       </AbsoluteFill>
 
       {/* The restaurant menu */}
-      <div style={{ position: "absolute", left: 300, top: 200, opacity: menuO, transform: `translateY(${(1 - menuO) * 30}px)` }}>
+      <div style={{ position: "absolute", left: 200, top: 200, opacity: menuO, transform: `translateY(${(1 - menuO) * 30}px)` }}>
         <div style={{ width: 820, borderRadius: 28, backgroundColor: PAPER, color: colors.ink, padding: "44px 56px", boxSizing: "border-box", boxShadow: "0 30px 60px rgba(0,0,0,0.35)" }}>
           <div style={{ fontSize: 64, fontWeight: 800, letterSpacing: 8, textAlign: "center", marginBottom: 30 }}>MENU</div>
           {DISHES.map((d, i) => {
@@ -151,7 +152,7 @@ const S5Content: React.FC = () => {
       </div>
 
       {/* Temperature slider */}
-      <div style={{ position: "absolute", left: 1250, top: 210, display: "flex", flexDirection: "column", alignItems: "center", gap: 24, opacity: sliderO }}>
+      <div style={{ position: "absolute", left: 1090, width: 380, top: 210, display: "flex", flexDirection: "column", alignItems: "center", gap: 24, opacity: sliderO }}>
         <div style={{ position: "relative", width: 64, height: 520, borderRadius: 32, backgroundColor: colors.panel, border: `4px solid ${colors.line}` }}>
           <div
             style={{
@@ -168,7 +169,10 @@ const S5Content: React.FC = () => {
             ← ChatGPT
           </div>
         </div>
-        <div style={{ fontSize: 48, fontWeight: 700, opacity: ramp(frame, T.temperature, 0.3) }}>temperature</div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+          <div style={{ fontSize: 52, fontWeight: 800, color: colors.yellow, opacity: ramp(frame, T.adventureDial, 0.3) }}>adventure dial</div>
+          <div style={{ fontSize: 44, fontWeight: 600, color: colors.subtext, opacity: ramp(frame, T.temperature, 0.3) }}>(temperature)</div>
+        </div>
       </div>
 
       {/* One word changes, everything after it changes */}

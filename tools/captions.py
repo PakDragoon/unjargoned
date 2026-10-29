@@ -55,7 +55,7 @@ def srt_time(t: float) -> str:
 
 # Whisper hears some names as two words or misspells them. Fix them before building cues.
 # MERGE: (first word, second word starts with) -> the joined word keeps the second word's punctuation.
-MERGE = [("chat", "GPT")]
+MERGE = [("chat", "GPT"), ("un", "-jargon")]
 FIX = {"Chat GPT": "ChatGPT", "chatGPT": "ChatGPT", "Chatgpt": "ChatGPT"}
 # "Once upon a…" is voiced as "uh" (tts.py PRONOUNCE), which Whisper hears as "I." / "A.": restore the script's text.
 ONCE_UPON_TAIL = {"I.": "a…", "A.": "a…", "uh.": "a…", "Uh.": "a…", "I": "a…", "A": "a…"}
@@ -124,6 +124,9 @@ def main() -> None:
     per_scene: dict[str, list[dict]] = {}
     for scene in vo["scenes"]:
         sid = scene["id"]
+        if scene.get("silent"):
+            offset += math.ceil((scene["estSeconds"] + TAIL_SECONDS) * FPS) / FPS
+            continue
         if sid not in durations:
             sys.exit(f"{sid} has no voice yet: run tools/tts.py {ep} first")
         segments, _ = model.transcribe(load_16k(audio_dir / f"{sid}.wav"), word_timestamps=True, language="en")
