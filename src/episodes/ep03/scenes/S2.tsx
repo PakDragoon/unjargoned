@@ -8,6 +8,7 @@ import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
 import { SceneShell } from "../../../shared/SceneShell";
 import { QuestionStrip } from "../QuestionStrip";
 import { scene } from "../timeline";
+import { ExamBook, PAPER, PEN, Pencil, RED, Strike } from "../Props";
 
 const S = scene("S2");
 
@@ -21,10 +22,6 @@ const T = {
 
 // Phases (one hero each): words → closed-book exam → the word card → blank vs bluff → three questions.
 const P = { words: [0, 4.5], desk: [4.5, 7.9], card: [7.9, 17.35], score: [17.35, 27.1], qs: [27.1, 99] } as const;
-
-const PAPER = "#F3EBDD";
-const PEN = "#3B5BDB";
-const RED = "#E0533B";
 
 const TRACK: MoodKey[] = [
   { at: 0, mood: "curious" },
@@ -68,16 +65,6 @@ const LOOK = glances([
   { at: sec(T.q3), x: -0.6, y: 0.2 },
 ]);
 
-/** A hand-drawn strike-through that grows left→right. */
-const Strike: React.FC<{ p: number; color?: string; width?: number }> = ({ p, color = colors.coral, width = 12 }) => (
-  <span
-    style={{
-      position: "absolute", left: -10, top: "52%", height: width, borderRadius: width / 2, backgroundColor: color,
-      width: `calc(${p * 100}% + ${p * 20}px)`, transform: "rotate(-3deg)",
-    }}
-  />
-);
-
 /** A loose yellow marker ring drawn around a word. */
 const Ring: React.FC<{ p: number }> = ({ p }) => (
   <svg style={{ position: "absolute", left: -40, top: -26, width: "calc(100% + 80px)", height: "calc(100% + 52px)", overflow: "visible" }} viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden>
@@ -87,23 +74,6 @@ const Ring: React.FC<{ p: number }> = ({ p }) => (
       style={{ strokeWidth: 9 }} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - p}
     />
   </svg>
-);
-
-/** The closed book: periwinkle cover, a strap and a yellow padlock. */
-const ClosedBook: React.FC<{ s: number }> = ({ s }) => (
-  <div style={{ position: "relative", width: 340, height: 420, transform: `rotate(4deg) scale(${s})` }}>
-    <div style={{ position: "absolute", inset: 0, borderRadius: 20, backgroundColor: colors.periwinkle, boxShadow: "0 24px 50px rgba(0,0,0,0.35)" }} />
-    <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 34, borderRadius: "20px 0 0 20px", backgroundColor: "#6F86E0" }} />
-    <div style={{ position: "absolute", left: 70, right: 40, top: 70, height: 18, borderRadius: 9, backgroundColor: "rgba(20,22,28,0.25)" }} />
-    <div style={{ position: "absolute", left: 70, right: 100, top: 110, height: 18, borderRadius: 9, backgroundColor: "rgba(20,22,28,0.25)" }} />
-    <div style={{ position: "absolute", left: -10, right: -10, top: 200, height: 40, backgroundColor: colors.lineStrong }} />
-    <svg style={{ position: "absolute", left: 120, top: 150 }} width={110} height={130} viewBox="0 0 110 130" aria-hidden>
-      <path d="M 28 62 V 40 a 27 27 0 0 1 54 0 V 62" fill="none" stroke={colors.yellow} strokeWidth={14} />
-      <rect x={10} y={58} width={90} height={68} rx={14} fill={colors.yellow} />
-      <circle cx={55} cy={88} r={9} fill={colors.ink} />
-      <rect x={51} y={92} width={8} height={18} rx={4} fill={colors.ink} />
-    </svg>
-  </div>
 );
 
 /** The exam paper (used small at the desk and big in the scoring shot). */
@@ -160,20 +130,6 @@ const ExamSheet: React.FC<{ frame: number; big: boolean }> = ({ frame, big }) =>
     </div>
   );
 };
-
-/** Dot's pencil: held beside Dot, wiggling while it writes. */
-const Pencil: React.FC<{ x: number; y: number; o: number; wiggle: number }> = ({ x, y, o, wiggle }) => (
-  <svg
-    style={{ position: "absolute", left: x - 130 + wiggle, top: y - 50, opacity: o, transform: "rotate(35deg)", transformOrigin: "50% 100%" }}
-    width={40} height={170} viewBox="0 0 40 170" aria-hidden
-  >
-    <rect x={6} y={0} width={28} height={24} rx={6} fill={colors.coral} />
-    <rect x={6} y={22} width={28} height={10} fill={colors.lineStrong} />
-    <rect x={6} y={32} width={28} height={104} fill={colors.yellow} />
-    <path d="M 6 136 L 34 136 L 20 168 Z" fill={PAPER} />
-    <path d="M 15 156 L 25 156 L 20 168 Z" fill={colors.ink} />
-  </svg>
-);
 
 const QUESTIONS = ["Why does AI make things up?", "Why does it sound so sure?", "How do you protect yourself?"];
 
@@ -244,7 +200,7 @@ const S2Content: React.FC = () => {
           <ExamSheet frame={frame} big={false} />
         </div>
         <div style={{ position: "absolute", left: 1340, top: 380 }}>
-          <ClosedBook s={0.85 + 0.15 * Math.min(1, pop(frame, T.closedBook))} />
+          <ExamBook s={0.85 + 0.15 * Math.min(1, pop(frame, T.closedBook))} />
         </div>
       </AbsoluteFill>
 
