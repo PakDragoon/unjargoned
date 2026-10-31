@@ -43,7 +43,16 @@ MUSIC = {
         "silences": [("S1", "a…", "You")],  # S6 pause before "What sounds right" removed after G4 review
         # Short dips (scene, word, seconds after that word's end, length).
         "dips": [],  # (scene, word, seconds after that word ends, length); S7 "it's next" dip removed after G4 review
-    }
+    },
+    "ep03": {
+        "file": "fade.mp3",  # same bed as Ep 2 (series sound)
+        "start": "auto",
+        "loop_from": 23.0,
+        "period": 48.0,
+        "extra_loops": 3,
+        "silences": [],  # no planned pause: Ep 3's only quiet beat is the S3b gag (bed muffled automatically)
+        "dips": [],
+    },
 }
 
 MUSIC_LUFS = -13.0  # bed is normalised to this before gain changes (so 0 dB = end-screen level)

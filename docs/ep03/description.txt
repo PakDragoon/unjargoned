@@ -1,0 +1,27 @@
+Why does AI hallucinate? Why does ChatGPT make things up, and say it like it's 100% sure? It's not lying. It's bluffing, like a student guessing in an exam.
+
+In about 4 minutes: what an AI hallucination really is, what OpenAI's own researchers found about why it happens, two real cases (a lawyer's fake court cases and an airline chatbot), and three simple habits to fact-check AI answers.
+
+Chapters
+0:00 ChatGPT made up court cases
+0:30 What "hallucination" really means
+1:05 Why AI makes things up
+1:54 Why it sounds so sure
+2:36 How to protect yourself
+3:15 Putting it together
+3:41 Next: What Is an AI Agent?
+
+Sources
+Kalai, Nachum, Vempala, Zhang (2025), "Why Language Models Hallucinate": https://arxiv.org/abs/2509.04664
+Mata v. Avianca, S.D.N.Y., sanctions opinion, June 22, 2023
+Moffatt v. Air Canada, 2024 BCCRT 149
+
+Previous episode: How ChatGPT Actually Works (Explained Simply)
+Next episode: What Is an AI Agent?
+
+Music: Fade by Snoozy Beats https://soundcloud.com/snoozybeats
+License: Creative Commons — Attribution 3.0 Unported — CC BY 3.0
+Free Download / Stream: https://links.al/sUN
+Music promoted by Audio Library: https://links.al/youtube
+
+#Unjargoned #AI #ChatGPT
