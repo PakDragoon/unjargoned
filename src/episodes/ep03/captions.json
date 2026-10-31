@@ -1,0 +1,2916 @@
+{
+ "S1": [
+  {
+   "word": "In",
+   "start": 0.0,
+   "end": 0.16
+  },
+  {
+   "word": "2023,",
+   "start": 0.16,
+   "end": 1.08
+  },
+  {
+   "word": "a",
+   "start": 1.62,
+   "end": 1.7
+  },
+  {
+   "word": "New",
+   "start": 1.7,
+   "end": 1.82
+  },
+  {
+   "word": "York",
+   "start": 1.82,
+   "end": 2.08
+  },
+  {
+   "word": "lawyer",
+   "start": 2.08,
+   "end": 2.36
+  },
+  {
+   "word": "gave",
+   "start": 2.36,
+   "end": 2.7
+  },
+  {
+   "word": "a",
+   "start": 2.7,
+   "end": 2.88
+  },
+  {
+   "word": "judge",
+   "start": 2.88,
+   "end": 3.16
+  },
+  {
+   "word": "a",
+   "start": 3.16,
+   "end": 3.46
+  },
+  {
+   "word": "list",
+   "start": 3.46,
+   "end": 3.58
+  },
+  {
+   "word": "of",
+   "start": 3.58,
+   "end": 3.76
+  },
+  {
+   "word": "past",
+   "start": 3.76,
+   "end": 4.12
+  },
+  {
+   "word": "court",
+   "start": 4.12,
+   "end": 4.38
+  },
+  {
+   "word": "cases.",
+   "start": 4.38,
+   "end": 4.82
+  },
+  {
+   "word": "The",
+   "start": 5.46,
+   "end": 5.64
+  },
+  {
+   "word": "judge",
+   "start": 5.64,
+   "end": 5.98
+  },
+  {
+   "word": "looked",
+   "start": 5.98,
+   "end": 6.22
+  },
+  {
+   "word": "them",
+   "start": 6.22,
+   "end": 6.42
+  },
+  {
+   "word": "up.",
+   "start": 6.42,
+   "end": 6.66
+  },
+  {
+   "word": "They",
+   "start": 7.18,
+   "end": 7.38
+  },
+  {
+   "word": "didn't",
+   "start": 7.38,
+   "end": 7.66
+  },
+  {
+   "word": "exist.",
+   "start": 7.66,
+   "end": 8.1
+  },
+  {
+   "word": "ChatGPT",
+   "start": 9.1,
+   "end": 9.7
+  },
+  {
+   "word": "had",
+   "start": 9.7,
+   "end": 9.98
+  },
+  {
+   "word": "made",
+   "start": 9.98,
+   "end": 10.1
+  },
+  {
+   "word": "them",
+   "start": 10.1,
+   "end": 10.24
+  },
+  {
+   "word": "up.",
+   "start": 10.24,
+   "end": 10.56
+  },
+  {
+   "word": "And",
+   "start": 11.1,
+   "end": 11.24
+  },
+  {
+   "word": "when",
+   "start": 11.24,
+   "end": 11.34
+  },
+  {
+   "word": "the",
+   "start": 11.34,
+   "end": 11.46
+  },
+  {
+   "word": "lawyer",
+   "start": 11.46,
+   "end": 11.74
+  },
+  {
+   "word": "asked",
+   "start": 11.74,
+   "end": 12.04
+  },
+  {
+   "word": "it,",
+   "start": 12.04,
+   "end": 12.28
+  },
+  {
+   "word": "is",
+   "start": 12.5,
+   "end": 12.6
+  },
+  {
+   "word": "this",
+   "start": 12.6,
+   "end": 12.82
+  },
+  {
+   "word": "case",
+   "start": 12.82,
+   "end": 13.06
+  },
+  {
+   "word": "real,",
+   "start": 13.06,
+   "end": 13.38
+  },
+  {
+   "word": "it",
+   "start": 13.84,
+   "end": 14.1
+  },
+  {
+   "word": "said",
+   "start": 14.1,
+   "end": 14.34
+  },
+  {
+   "word": "yes.",
+   "start": 14.34,
+   "end": 14.6
+  },
+  {
+   "word": "Last",
+   "start": 15.78,
+   "end": 15.98
+  },
+  {
+   "word": "time,",
+   "start": 15.98,
+   "end": 16.34
+  },
+  {
+   "word": "we",
+   "start": 16.34,
+   "end": 16.56
+  },
+  {
+   "word": "saw",
+   "start": 16.56,
+   "end": 16.74
+  },
+  {
+   "word": "that",
+   "start": 16.74,
+   "end": 16.94
+  },
+  {
+   "word": "AI",
+   "start": 16.94,
+   "end": 17.34
+  },
+  {
+   "word": "guesses",
+   "start": 17.34,
+   "end": 17.7
+  },
+  {
+   "word": "what",
+   "start": 17.7,
+   "end": 18.02
+  },
+  {
+   "word": "sounds",
+   "start": 18.02,
+   "end": 18.38
+  },
+  {
+   "word": "right,",
+   "start": 18.38,
+   "end": 18.7
+  },
+  {
+   "word": "not",
+   "start": 19.14,
+   "end": 19.32
+  },
+  {
+   "word": "what",
+   "start": 19.32,
+   "end": 19.46
+  },
+  {
+   "word": "is",
+   "start": 19.46,
+   "end": 19.58
+  },
+  {
+   "word": "right.",
+   "start": 19.58,
+   "end": 19.88
+  },
+  {
+   "word": "Here,",
+   "start": 20.48,
+   "end": 20.74
+  },
+  {
+   "word": "those",
+   "start": 20.82,
+   "end": 21.04
+  },
+  {
+   "word": "two",
+   "start": 21.04,
+   "end": 21.26
+  },
+  {
+   "word": "split",
+   "start": 21.26,
+   "end": 21.54
+  },
+  {
+   "word": "apart.",
+   "start": 21.54,
+   "end": 21.86
+  },
+  {
+   "word": "Why",
+   "start": 22.92,
+   "end": 23.26
+  },
+  {
+   "word": "would",
+   "start": 23.26,
+   "end": 23.42
+  },
+  {
+   "word": "it",
+   "start": 23.42,
+   "end": 23.54
+  },
+  {
+   "word": "do",
+   "start": 23.54,
+   "end": 23.66
+  },
+  {
+   "word": "that?",
+   "start": 23.66,
+   "end": 23.94
+  },
+  {
+   "word": "Let's",
+   "start": 25.0,
+   "end": 25.4
+  },
+  {
+   "word": "un-jargon",
+   "start": 25.4,
+   "end": 25.86
+  },
+  {
+   "word": "it.",
+   "start": 25.86,
+   "end": 26.18
+  }
+ ],
+ "S2": [
+  {
+   "word": "It",
+   "start": 0.0,
+   "end": 0.12
+  },
+  {
+   "word": "wasn't",
+   "start": 0.12,
+   "end": 0.42
+  },
+  {
+   "word": "lying.",
+   "start": 0.42,
+   "end": 0.78
+  },
+  {
+   "word": "Lying",
+   "start": 1.7,
+   "end": 1.82
+  },
+  {
+   "word": "means",
+   "start": 1.82,
+   "end": 2.12
+  },
+  {
+   "word": "you",
+   "start": 2.12,
+   "end": 2.36
+  },
+  {
+   "word": "know",
+   "start": 2.36,
+   "end": 2.5
+  },
+  {
+   "word": "the",
+   "start": 2.5,
+   "end": 2.68
+  },
+  {
+   "word": "truth.",
+   "start": 2.68,
+   "end": 2.96
+  },
+  {
+   "word": "It",
+   "start": 3.66,
+   "end": 3.66
+  },
+  {
+   "word": "was",
+   "start": 3.66,
+   "end": 3.8
+  },
+  {
+   "word": "guessing,",
+   "start": 3.8,
+   "end": 4.2
+  },
+  {
+   "word": "like",
+   "start": 4.6,
+   "end": 4.84
+  },
+  {
+   "word": "a",
+   "start": 4.84,
+   "end": 4.98
+  },
+  {
+   "word": "student",
+   "start": 4.98,
+   "end": 5.28
+  },
+  {
+   "word": "bluffing",
+   "start": 5.28,
+   "end": 5.78
+  },
+  {
+   "word": "in",
+   "start": 5.78,
+   "end": 5.9
+  },
+  {
+   "word": "a",
+   "start": 5.9,
+   "end": 6.06
+  },
+  {
+   "word": "closed",
+   "start": 6.06,
+   "end": 6.28
+  },
+  {
+   "word": "book",
+   "start": 6.28,
+   "end": 6.52
+  },
+  {
+   "word": "exam.",
+   "start": 6.52,
+   "end": 6.94
+  },
+  {
+   "word": "When",
+   "start": 8.08,
+   "end": 8.14
+  },
+  {
+   "word": "an",
+   "start": 8.14,
+   "end": 8.28
+  },
+  {
+   "word": "AI",
+   "start": 8.28,
+   "end": 8.68
+  },
+  {
+   "word": "makes",
+   "start": 8.68,
+   "end": 9.0
+  },
+  {
+   "word": "something",
+   "start": 9.0,
+   "end": 9.26
+  },
+  {
+   "word": "up",
+   "start": 9.26,
+   "end": 9.56
+  },
+  {
+   "word": "and",
+   "start": 9.56,
+   "end": 9.76
+  },
+  {
+   "word": "says",
+   "start": 9.76,
+   "end": 9.96
+  },
+  {
+   "word": "it",
+   "start": 9.96,
+   "end": 10.1
+  },
+  {
+   "word": "like",
+   "start": 10.1,
+   "end": 10.22
+  },
+  {
+   "word": "a",
+   "start": 10.22,
+   "end": 10.34
+  },
+  {
+   "word": "fact,",
+   "start": 10.34,
+   "end": 10.68
+  },
+  {
+   "word": "that's",
+   "start": 11.12,
+   "end": 11.42
+  },
+  {
+   "word": "called",
+   "start": 11.42,
+   "end": 11.66
+  },
+  {
+   "word": "a",
+   "start": 11.66,
+   "end": 11.78
+  },
+  {
+   "word": "hallucination.",
+   "start": 11.78,
+   "end": 12.56
+  },
+  {
+   "word": "Odd",
+   "start": 13.26,
+   "end": 13.44
+  },
+  {
+   "word": "word,",
+   "start": 13.44,
+   "end": 13.76
+  },
+  {
+   "word": "because",
+   "start": 14.02,
+   "end": 14.2
+  },
+  {
+   "word": "it",
+   "start": 14.2,
+   "end": 14.32
+  },
+  {
+   "word": "isn't",
+   "start": 14.32,
+   "end": 14.56
+  },
+  {
+   "word": "seeing",
+   "start": 14.56,
+   "end": 14.76
+  },
+  {
+   "word": "things.",
+   "start": 14.76,
+   "end": 15.2
+  },
+  {
+   "word": "It's",
+   "start": 15.78,
+   "end": 15.98
+  },
+  {
+   "word": "bluffing.",
+   "start": 15.98,
+   "end": 16.54
+  },
+  {
+   "word": "Picture",
+   "start": 17.62,
+   "end": 17.82
+  },
+  {
+   "word": "that",
+   "start": 17.82,
+   "end": 18.1
+  },
+  {
+   "word": "student",
+   "start": 18.1,
+   "end": 18.52
+  },
+  {
+   "word": "stuck",
+   "start": 18.52,
+   "end": 19.02
+  },
+  {
+   "word": "on",
+   "start": 19.02,
+   "end": 19.2
+  },
+  {
+   "word": "a",
+   "start": 19.2,
+   "end": 19.32
+  },
+  {
+   "word": "question.",
+   "start": 19.32,
+   "end": 19.68
+  },
+  {
+   "word": "Leave",
+   "start": 20.48,
+   "end": 20.58
+  },
+  {
+   "word": "it",
+   "start": 20.58,
+   "end": 20.72
+  },
+  {
+   "word": "blank",
+   "start": 20.72,
+   "end": 20.98
+  },
+  {
+   "word": "and",
+   "start": 20.98,
+   "end": 21.34
+  },
+  {
+   "word": "that's",
+   "start": 21.34,
+   "end": 21.64
+  },
+  {
+   "word": "zero",
+   "start": 21.64,
+   "end": 21.86
+  },
+  {
+   "word": "points.",
+   "start": 21.86,
+   "end": 22.32
+  },
+  {
+   "word": "Write",
+   "start": 22.92,
+   "end": 23.14
+  },
+  {
+   "word": "something",
+   "start": 23.14,
+   "end": 23.48
+  },
+  {
+   "word": "that",
+   "start": 23.48,
+   "end": 23.76
+  },
+  {
+   "word": "sounds",
+   "start": 23.76,
+   "end": 24.08
+  },
+  {
+   "word": "right",
+   "start": 24.08,
+   "end": 24.42
+  },
+  {
+   "word": "and",
+   "start": 24.42,
+   "end": 24.92
+  },
+  {
+   "word": "maybe",
+   "start": 24.92,
+   "end": 25.14
+  },
+  {
+   "word": "it",
+   "start": 25.14,
+   "end": 25.34
+  },
+  {
+   "word": "gets",
+   "start": 25.34,
+   "end": 25.54
+  },
+  {
+   "word": "marked",
+   "start": 25.54,
+   "end": 25.88
+  },
+  {
+   "word": "correct.",
+   "start": 25.88,
+   "end": 26.26
+  },
+  {
+   "word": "So",
+   "start": 27.32,
+   "end": 27.62
+  },
+  {
+   "word": "three",
+   "start": 27.62,
+   "end": 27.9
+  },
+  {
+   "word": "questions.",
+   "start": 27.9,
+   "end": 28.36
+  },
+  {
+   "word": "Why",
+   "start": 28.9,
+   "end": 29.34
+  },
+  {
+   "word": "does",
+   "start": 29.34,
+   "end": 29.54
+  },
+  {
+   "word": "AI",
+   "start": 29.54,
+   "end": 29.8
+  },
+  {
+   "word": "make",
+   "start": 29.8,
+   "end": 30.16
+  },
+  {
+   "word": "things",
+   "start": 30.16,
+   "end": 30.4
+  },
+  {
+   "word": "up",
+   "start": 30.4,
+   "end": 30.56
+  },
+  {
+   "word": "at",
+   "start": 30.56,
+   "end": 30.68
+  },
+  {
+   "word": "all?",
+   "start": 30.68,
+   "end": 30.92
+  },
+  {
+   "word": "Why",
+   "start": 31.58,
+   "end": 31.74
+  },
+  {
+   "word": "does",
+   "start": 31.74,
+   "end": 31.9
+  },
+  {
+   "word": "it",
+   "start": 31.9,
+   "end": 32.0
+  },
+  {
+   "word": "sound",
+   "start": 32.0,
+   "end": 32.2
+  },
+  {
+   "word": "so",
+   "start": 32.2,
+   "end": 32.42
+  },
+  {
+   "word": "sure?",
+   "start": 32.42,
+   "end": 32.74
+  },
+  {
+   "word": "And",
+   "start": 33.52,
+   "end": 33.62
+  },
+  {
+   "word": "how",
+   "start": 33.62,
+   "end": 33.82
+  },
+  {
+   "word": "do",
+   "start": 33.82,
+   "end": 33.96
+  },
+  {
+   "word": "you",
+   "start": 33.96,
+   "end": 34.06
+  },
+  {
+   "word": "protect",
+   "start": 34.06,
+   "end": 34.4
+  },
+  {
+   "word": "yourself?",
+   "start": 34.4,
+   "end": 34.76
+  }
+ ],
+ "S3": [
+  {
+   "word": "Question",
+   "start": 0.0,
+   "end": 0.38
+  },
+  {
+   "word": "one,",
+   "start": 0.38,
+   "end": 0.72
+  },
+  {
+   "word": "why",
+   "start": 1.52,
+   "end": 1.66
+  },
+  {
+   "word": "make",
+   "start": 1.66,
+   "end": 1.88
+  },
+  {
+   "word": "things",
+   "start": 1.88,
+   "end": 2.12
+  },
+  {
+   "word": "up",
+   "start": 2.12,
+   "end": 2.3
+  },
+  {
+   "word": "at",
+   "start": 2.3,
+   "end": 2.46
+  },
+  {
+   "word": "all?",
+   "start": 2.46,
+   "end": 2.74
+  },
+  {
+   "word": "Because",
+   "start": 3.74,
+   "end": 4.02
+  },
+  {
+   "word": "of",
+   "start": 4.02,
+   "end": 4.16
+  },
+  {
+   "word": "how",
+   "start": 4.16,
+   "end": 4.32
+  },
+  {
+   "word": "it",
+   "start": 4.32,
+   "end": 4.46
+  },
+  {
+   "word": "gets",
+   "start": 4.46,
+   "end": 4.68
+  },
+  {
+   "word": "marked,",
+   "start": 4.68,
+   "end": 5.08
+  },
+  {
+   "word": "in",
+   "start": 5.74,
+   "end": 5.86
+  },
+  {
+   "word": "2025,",
+   "start": 5.86,
+   "end": 6.76
+  },
+  {
+   "word": "researchers",
+   "start": 7.3,
+   "end": 7.84
+  },
+  {
+   "word": "at",
+   "start": 7.84,
+   "end": 8.2
+  },
+  {
+   "word": "OpenAI,",
+   "start": 8.2,
+   "end": 9.04
+  },
+  {
+   "word": "the",
+   "start": 9.6,
+   "end": 9.72
+  },
+  {
+   "word": "company",
+   "start": 9.72,
+   "end": 10.06
+  },
+  {
+   "word": "behind",
+   "start": 10.06,
+   "end": 10.62
+  },
+  {
+   "word": "ChatGPT,",
+   "start": 10.62,
+   "end": 11.64
+  },
+  {
+   "word": "published",
+   "start": 12.1,
+   "end": 12.44
+  },
+  {
+   "word": "a",
+   "start": 12.44,
+   "end": 12.64
+  },
+  {
+   "word": "paper",
+   "start": 12.64,
+   "end": 12.96
+  },
+  {
+   "word": "called",
+   "start": 12.96,
+   "end": 13.36
+  },
+  {
+   "word": "Why",
+   "start": 13.36,
+   "end": 13.86
+  },
+  {
+   "word": "Language",
+   "start": 13.86,
+   "end": 14.24
+  },
+  {
+   "word": "Models",
+   "start": 14.24,
+   "end": 14.7
+  },
+  {
+   "word": "Hallucinate.",
+   "start": 14.7,
+   "end": 15.32
+  },
+  {
+   "word": "Their",
+   "start": 15.96,
+   "end": 16.1
+  },
+  {
+   "word": "answer",
+   "start": 16.1,
+   "end": 16.48
+  },
+  {
+   "word": "is",
+   "start": 16.48,
+   "end": 16.72
+  },
+  {
+   "word": "that",
+   "start": 16.72,
+   "end": 16.9
+  },
+  {
+   "word": "exam.",
+   "start": 16.9,
+   "end": 17.36
+  },
+  {
+   "word": "When",
+   "start": 18.34,
+   "end": 18.48
+  },
+  {
+   "word": "AIs",
+   "start": 18.48,
+   "end": 18.94
+  },
+  {
+   "word": "are",
+   "start": 18.94,
+   "end": 19.2
+  },
+  {
+   "word": "trained",
+   "start": 19.2,
+   "end": 19.56
+  },
+  {
+   "word": "and",
+   "start": 19.56,
+   "end": 19.74
+  },
+  {
+   "word": "tested,",
+   "start": 19.74,
+   "end": 20.16
+  },
+  {
+   "word": "most",
+   "start": 20.66,
+   "end": 20.86
+  },
+  {
+   "word": "of",
+   "start": 20.86,
+   "end": 21.02
+  },
+  {
+   "word": "the",
+   "start": 21.02,
+   "end": 21.1
+  },
+  {
+   "word": "scoring",
+   "start": 21.1,
+   "end": 21.46
+  },
+  {
+   "word": "works",
+   "start": 21.46,
+   "end": 21.78
+  },
+  {
+   "word": "the",
+   "start": 21.78,
+   "end": 22.0
+  },
+  {
+   "word": "same",
+   "start": 22.0,
+   "end": 22.24
+  },
+  {
+   "word": "way.",
+   "start": 22.24,
+   "end": 22.54
+  },
+  {
+   "word": "A",
+   "start": 22.98,
+   "end": 23.18
+  },
+  {
+   "word": "right",
+   "start": 23.18,
+   "end": 23.44
+  },
+  {
+   "word": "answer",
+   "start": 23.44,
+   "end": 23.86
+  },
+  {
+   "word": "gets",
+   "start": 23.86,
+   "end": 24.1
+  },
+  {
+   "word": "a",
+   "start": 24.1,
+   "end": 24.28
+  },
+  {
+   "word": "point,",
+   "start": 24.28,
+   "end": 24.54
+  },
+  {
+   "word": "a",
+   "start": 25.18,
+   "end": 25.32
+  },
+  {
+   "word": "wrong",
+   "start": 25.32,
+   "end": 25.58
+  },
+  {
+   "word": "answer",
+   "start": 25.58,
+   "end": 25.94
+  },
+  {
+   "word": "gets",
+   "start": 25.94,
+   "end": 26.18
+  },
+  {
+   "word": "zero,",
+   "start": 26.18,
+   "end": 26.58
+  },
+  {
+   "word": "and",
+   "start": 27.16,
+   "end": 27.4
+  },
+  {
+   "word": "I",
+   "start": 27.4,
+   "end": 27.52
+  },
+  {
+   "word": "don't",
+   "start": 27.52,
+   "end": 27.7
+  },
+  {
+   "word": "know,",
+   "start": 27.7,
+   "end": 27.92
+  },
+  {
+   "word": "also",
+   "start": 28.12,
+   "end": 28.34
+  },
+  {
+   "word": "gets",
+   "start": 28.34,
+   "end": 28.6
+  },
+  {
+   "word": "zero.",
+   "start": 28.6,
+   "end": 29.02
+  },
+  {
+   "word": "So",
+   "start": 29.56,
+   "end": 29.88
+  },
+  {
+   "word": "bluffing",
+   "start": 29.88,
+   "end": 30.4
+  },
+  {
+   "word": "always",
+   "start": 30.4,
+   "end": 30.7
+  },
+  {
+   "word": "wins.",
+   "start": 30.7,
+   "end": 31.14
+  },
+  {
+   "word": "And",
+   "start": 32.22,
+   "end": 32.3
+  },
+  {
+   "word": "some",
+   "start": 32.3,
+   "end": 32.46
+  },
+  {
+   "word": "facts",
+   "start": 32.46,
+   "end": 32.76
+  },
+  {
+   "word": "it",
+   "start": 32.76,
+   "end": 32.94
+  },
+  {
+   "word": "has",
+   "start": 32.94,
+   "end": 33.08
+  },
+  {
+   "word": "barely",
+   "start": 33.08,
+   "end": 33.34
+  },
+  {
+   "word": "seen.",
+   "start": 33.34,
+   "end": 33.8
+  },
+  {
+   "word": "The",
+   "start": 34.38,
+   "end": 34.5
+  },
+  {
+   "word": "researchers",
+   "start": 34.5,
+   "end": 34.88
+  },
+  {
+   "word": "asked",
+   "start": 34.88,
+   "end": 35.6
+  },
+  {
+   "word": "one",
+   "start": 35.6,
+   "end": 35.92
+  },
+  {
+   "word": "AI",
+   "start": 35.92,
+   "end": 36.3
+  },
+  {
+   "word": "for",
+   "start": 36.3,
+   "end": 36.64
+  },
+  {
+   "word": "one",
+   "start": 36.64,
+   "end": 36.78
+  },
+  {
+   "word": "of",
+   "start": 36.78,
+   "end": 36.88
+  },
+  {
+   "word": "their",
+   "start": 36.88,
+   "end": 36.98
+  },
+  {
+   "word": "birthdays",
+   "start": 36.98,
+   "end": 37.48
+  },
+  {
+   "word": "and",
+   "start": 37.82,
+   "end": 38.14
+  },
+  {
+   "word": "told",
+   "start": 38.14,
+   "end": 38.34
+  },
+  {
+   "word": "it",
+   "start": 38.34,
+   "end": 38.5
+  },
+  {
+   "word": "to",
+   "start": 38.5,
+   "end": 38.62
+  },
+  {
+   "word": "answer",
+   "start": 38.62,
+   "end": 38.96
+  },
+  {
+   "word": "only",
+   "start": 38.96,
+   "end": 39.36
+  },
+  {
+   "word": "if",
+   "start": 39.36,
+   "end": 39.62
+  },
+  {
+   "word": "it",
+   "start": 39.62,
+   "end": 39.72
+  },
+  {
+   "word": "knew.",
+   "start": 39.72,
+   "end": 39.98
+  },
+  {
+   "word": "Three",
+   "start": 40.54,
+   "end": 40.76
+  },
+  {
+   "word": "tries,",
+   "start": 40.76,
+   "end": 41.16
+  },
+  {
+   "word": "three",
+   "start": 41.94,
+   "end": 42.28
+  },
+  {
+   "word": "different",
+   "start": 42.28,
+   "end": 42.6
+  },
+  {
+   "word": "dates,",
+   "start": 42.6,
+   "end": 43.04
+  },
+  {
+   "word": "all",
+   "start": 43.64,
+   "end": 43.86
+  },
+  {
+   "word": "wrong.",
+   "start": 43.86,
+   "end": 44.32
+  }
+ ],
+ "S4": [
+  {
+   "word": "Question",
+   "start": 0.0,
+   "end": 0.34
+  },
+  {
+   "word": "two,",
+   "start": 0.34,
+   "end": 0.8
+  },
+  {
+   "word": "why",
+   "start": 1.5,
+   "end": 1.68
+  },
+  {
+   "word": "does",
+   "start": 1.68,
+   "end": 1.82
+  },
+  {
+   "word": "it",
+   "start": 1.82,
+   "end": 1.96
+  },
+  {
+   "word": "sound",
+   "start": 1.96,
+   "end": 2.14
+  },
+  {
+   "word": "so",
+   "start": 2.14,
+   "end": 2.34
+  },
+  {
+   "word": "sure?",
+   "start": 2.34,
+   "end": 2.68
+  },
+  {
+   "word": "Remember,",
+   "start": 3.78,
+   "end": 4.2
+  },
+  {
+   "word": "it's",
+   "start": 4.44,
+   "end": 4.68
+  },
+  {
+   "word": "always",
+   "start": 4.68,
+   "end": 4.94
+  },
+  {
+   "word": "guessing",
+   "start": 4.94,
+   "end": 5.28
+  },
+  {
+   "word": "what",
+   "start": 5.28,
+   "end": 5.54
+  },
+  {
+   "word": "sounds",
+   "start": 5.54,
+   "end": 5.9
+  },
+  {
+   "word": "right.",
+   "start": 5.9,
+   "end": 6.26
+  },
+  {
+   "word": "A",
+   "start": 6.7,
+   "end": 6.9
+  },
+  {
+   "word": "real",
+   "start": 6.9,
+   "end": 7.14
+  },
+  {
+   "word": "fact",
+   "start": 7.14,
+   "end": 7.5
+  },
+  {
+   "word": "and",
+   "start": 7.5,
+   "end": 7.76
+  },
+  {
+   "word": "a",
+   "start": 7.76,
+   "end": 7.84
+  },
+  {
+   "word": "made",
+   "start": 7.84,
+   "end": 8.04
+  },
+  {
+   "word": "up",
+   "start": 8.04,
+   "end": 8.18
+  },
+  {
+   "word": "one",
+   "start": 8.18,
+   "end": 8.44
+  },
+  {
+   "word": "come",
+   "start": 8.44,
+   "end": 8.66
+  },
+  {
+   "word": "out",
+   "start": 8.66,
+   "end": 8.82
+  },
+  {
+   "word": "of",
+   "start": 8.82,
+   "end": 8.92
+  },
+  {
+   "word": "the",
+   "start": 8.92,
+   "end": 9.0
+  },
+  {
+   "word": "same",
+   "start": 9.0,
+   "end": 9.24
+  },
+  {
+   "word": "machine,",
+   "start": 9.24,
+   "end": 9.64
+  },
+  {
+   "word": "in",
+   "start": 10.16,
+   "end": 10.3
+  },
+  {
+   "word": "the",
+   "start": 10.3,
+   "end": 10.44
+  },
+  {
+   "word": "same",
+   "start": 10.44,
+   "end": 10.72
+  },
+  {
+   "word": "smooth,",
+   "start": 10.72,
+   "end": 11.3
+  },
+  {
+   "word": "friendly",
+   "start": 11.52,
+   "end": 11.88
+  },
+  {
+   "word": "voice.",
+   "start": 11.88,
+   "end": 12.32
+  },
+  {
+   "word": "There's",
+   "start": 12.88,
+   "end": 13.16
+  },
+  {
+   "word": "no",
+   "start": 13.16,
+   "end": 13.4
+  },
+  {
+   "word": "wobble",
+   "start": 13.4,
+   "end": 13.86
+  },
+  {
+   "word": "when",
+   "start": 13.86,
+   "end": 14.0
+  },
+  {
+   "word": "it's",
+   "start": 14.0,
+   "end": 14.16
+  },
+  {
+   "word": "wrong.",
+   "start": 14.16,
+   "end": 14.46
+  },
+  {
+   "word": "And",
+   "start": 15.34,
+   "end": 15.56
+  },
+  {
+   "word": "its",
+   "start": 15.56,
+   "end": 15.74
+  },
+  {
+   "word": "training",
+   "start": 15.74,
+   "end": 16.02
+  },
+  {
+   "word": "to",
+   "start": 16.02,
+   "end": 16.26
+  },
+  {
+   "word": "be",
+   "start": 16.26,
+   "end": 16.38
+  },
+  {
+   "word": "a",
+   "start": 16.38,
+   "end": 16.54
+  },
+  {
+   "word": "helpful",
+   "start": 16.54,
+   "end": 16.9
+  },
+  {
+   "word": "assistant",
+   "start": 16.9,
+   "end": 17.42
+  },
+  {
+   "word": "was",
+   "start": 17.42,
+   "end": 17.72
+  },
+  {
+   "word": "marked",
+   "start": 17.72,
+   "end": 18.0
+  },
+  {
+   "word": "the",
+   "start": 18.0,
+   "end": 18.18
+  },
+  {
+   "word": "same",
+   "start": 18.18,
+   "end": 18.4
+  },
+  {
+   "word": "way.",
+   "start": 18.4,
+   "end": 18.74
+  },
+  {
+   "word": "A",
+   "start": 19.18,
+   "end": 19.4
+  },
+  {
+   "word": "sure",
+   "start": 19.4,
+   "end": 19.6
+  },
+  {
+   "word": "answer",
+   "start": 19.6,
+   "end": 19.98
+  },
+  {
+   "word": "beats,",
+   "start": 19.98,
+   "end": 20.32
+  },
+  {
+   "word": "I'm",
+   "start": 20.62,
+   "end": 20.82
+  },
+  {
+   "word": "not",
+   "start": 20.82,
+   "end": 21.0
+  },
+  {
+   "word": "sure.",
+   "start": 21.0,
+   "end": 21.32
+  },
+  {
+   "word": "That's",
+   "start": 22.26,
+   "end": 22.66
+  },
+  {
+   "word": "how",
+   "start": 22.66,
+   "end": 22.78
+  },
+  {
+   "word": "an",
+   "start": 22.78,
+   "end": 22.92
+  },
+  {
+   "word": "airline's",
+   "start": 22.92,
+   "end": 23.58
+  },
+  {
+   "word": "chatbot",
+   "start": 23.58,
+   "end": 24.02
+  },
+  {
+   "word": "in",
+   "start": 24.02,
+   "end": 24.24
+  },
+  {
+   "word": "Canada",
+   "start": 24.24,
+   "end": 24.7
+  },
+  {
+   "word": "told",
+   "start": 24.7,
+   "end": 25.26
+  },
+  {
+   "word": "a",
+   "start": 25.26,
+   "end": 25.44
+  },
+  {
+   "word": "man",
+   "start": 25.44,
+   "end": 25.76
+  },
+  {
+   "word": "whose",
+   "start": 25.76,
+   "end": 26.06
+  },
+  {
+   "word": "grandmother",
+   "start": 26.06,
+   "end": 26.54
+  },
+  {
+   "word": "had",
+   "start": 26.54,
+   "end": 26.86
+  },
+  {
+   "word": "just",
+   "start": 26.86,
+   "end": 27.08
+  },
+  {
+   "word": "died",
+   "start": 27.08,
+   "end": 27.6
+  },
+  {
+   "word": "that",
+   "start": 27.6,
+   "end": 28.1
+  },
+  {
+   "word": "he",
+   "start": 28.1,
+   "end": 28.26
+  },
+  {
+   "word": "could",
+   "start": 28.26,
+   "end": 28.42
+  },
+  {
+   "word": "buy",
+   "start": 28.42,
+   "end": 28.64
+  },
+  {
+   "word": "a",
+   "start": 28.64,
+   "end": 28.82
+  },
+  {
+   "word": "full",
+   "start": 28.82,
+   "end": 29.04
+  },
+  {
+   "word": "price",
+   "start": 29.04,
+   "end": 29.3
+  },
+  {
+   "word": "ticket",
+   "start": 29.3,
+   "end": 29.72
+  },
+  {
+   "word": "and",
+   "start": 29.72,
+   "end": 30.36
+  },
+  {
+   "word": "claim",
+   "start": 30.36,
+   "end": 30.58
+  },
+  {
+   "word": "a",
+   "start": 30.58,
+   "end": 30.78
+  },
+  {
+   "word": "family",
+   "start": 30.78,
+   "end": 31.16
+  },
+  {
+   "word": "funeral",
+   "start": 31.16,
+   "end": 31.64
+  },
+  {
+   "word": "discount",
+   "start": 31.64,
+   "end": 32.14
+  },
+  {
+   "word": "later.",
+   "start": 32.14,
+   "end": 32.56
+  },
+  {
+   "word": "The",
+   "start": 33.18,
+   "end": 33.26
+  },
+  {
+   "word": "airline's",
+   "start": 33.26,
+   "end": 33.8
+  },
+  {
+   "word": "own",
+   "start": 33.8,
+   "end": 34.0
+  },
+  {
+   "word": "website",
+   "start": 34.0,
+   "end": 34.44
+  },
+  {
+   "word": "said",
+   "start": 34.44,
+   "end": 34.72
+  },
+  {
+   "word": "the",
+   "start": 34.72,
+   "end": 34.84
+  },
+  {
+   "word": "opposite.",
+   "start": 34.84,
+   "end": 35.2
+  },
+  {
+   "word": "In",
+   "start": 36.32,
+   "end": 36.42
+  },
+  {
+   "word": "2024,",
+   "start": 36.42,
+   "end": 37.12
+  },
+  {
+   "word": "a",
+   "start": 37.78,
+   "end": 37.84
+  },
+  {
+   "word": "tribunal",
+   "start": 37.84,
+   "end": 38.24
+  },
+  {
+   "word": "made",
+   "start": 38.24,
+   "end": 38.58
+  },
+  {
+   "word": "the",
+   "start": 38.58,
+   "end": 38.76
+  },
+  {
+   "word": "airline",
+   "start": 38.76,
+   "end": 39.18
+  },
+  {
+   "word": "pay.",
+   "start": 39.18,
+   "end": 39.52
+  },
+  {
+   "word": "Its",
+   "start": 40.06,
+   "end": 40.34
+  },
+  {
+   "word": "chatbot,",
+   "start": 40.34,
+   "end": 40.76
+  },
+  {
+   "word": "its",
+   "start": 40.98,
+   "end": 41.12
+  },
+  {
+   "word": "mistake.",
+   "start": 41.12,
+   "end": 41.38
+  }
+ ],
+ "S5": [
+  {
+   "word": "Question",
+   "start": 0.0,
+   "end": 0.4
+  },
+  {
+   "word": "three,",
+   "start": 0.4,
+   "end": 0.82
+  },
+  {
+   "word": "how",
+   "start": 1.58,
+   "end": 1.68
+  },
+  {
+   "word": "do",
+   "start": 1.68,
+   "end": 1.82
+  },
+  {
+   "word": "you",
+   "start": 1.82,
+   "end": 1.94
+  },
+  {
+   "word": "protect",
+   "start": 1.94,
+   "end": 2.26
+  },
+  {
+   "word": "yourself?",
+   "start": 2.26,
+   "end": 2.74
+  },
+  {
+   "word": "Three",
+   "start": 3.38,
+   "end": 3.64
+  },
+  {
+   "word": "habits.",
+   "start": 3.64,
+   "end": 4.02
+  },
+  {
+   "word": "One,",
+   "start": 5.12,
+   "end": 5.52
+  },
+  {
+   "word": "ask",
+   "start": 5.72,
+   "end": 5.86
+  },
+  {
+   "word": "for",
+   "start": 5.86,
+   "end": 6.08
+  },
+  {
+   "word": "sources",
+   "start": 6.08,
+   "end": 6.48
+  },
+  {
+   "word": "and",
+   "start": 6.48,
+   "end": 7.06
+  },
+  {
+   "word": "then",
+   "start": 7.06,
+   "end": 7.2
+  },
+  {
+   "word": "actually",
+   "start": 7.2,
+   "end": 7.68
+  },
+  {
+   "word": "open",
+   "start": 7.68,
+   "end": 8.0
+  },
+  {
+   "word": "them.",
+   "start": 8.0,
+   "end": 8.28
+  },
+  {
+   "word": "Remember",
+   "start": 8.78,
+   "end": 9.1
+  },
+  {
+   "word": "the",
+   "start": 9.1,
+   "end": 9.34
+  },
+  {
+   "word": "lawyer?",
+   "start": 9.34,
+   "end": 9.6
+  },
+  {
+   "word": "He",
+   "start": 10.24,
+   "end": 10.46
+  },
+  {
+   "word": "asked",
+   "start": 10.46,
+   "end": 10.7
+  },
+  {
+   "word": "for",
+   "start": 10.7,
+   "end": 10.9
+  },
+  {
+   "word": "cases",
+   "start": 10.9,
+   "end": 11.28
+  },
+  {
+   "word": "and",
+   "start": 11.28,
+   "end": 11.76
+  },
+  {
+   "word": "got",
+   "start": 11.76,
+   "end": 11.94
+  },
+  {
+   "word": "cases.",
+   "start": 11.94,
+   "end": 12.4
+  },
+  {
+   "word": "They",
+   "start": 13.02,
+   "end": 13.26
+  },
+  {
+   "word": "just",
+   "start": 13.26,
+   "end": 13.54
+  },
+  {
+   "word": "weren't",
+   "start": 13.54,
+   "end": 13.86
+  },
+  {
+   "word": "real.",
+   "start": 13.86,
+   "end": 14.2
+  },
+  {
+   "word": "A",
+   "start": 14.84,
+   "end": 15.02
+  },
+  {
+   "word": "link",
+   "start": 15.02,
+   "end": 15.16
+  },
+  {
+   "word": "you",
+   "start": 15.16,
+   "end": 15.34
+  },
+  {
+   "word": "haven't",
+   "start": 15.34,
+   "end": 15.66
+  },
+  {
+   "word": "clicked",
+   "start": 15.66,
+   "end": 15.86
+  },
+  {
+   "word": "proves",
+   "start": 15.86,
+   "end": 16.2
+  },
+  {
+   "word": "nothing.",
+   "start": 16.2,
+   "end": 16.66
+  },
+  {
+   "word": "Two,",
+   "start": 17.54,
+   "end": 17.96
+  },
+  {
+   "word": "make",
+   "start": 18.24,
+   "end": 18.38
+  },
+  {
+   "word": "it",
+   "start": 18.38,
+   "end": 18.48
+  },
+  {
+   "word": "an",
+   "start": 18.48,
+   "end": 18.62
+  },
+  {
+   "word": "open",
+   "start": 18.62,
+   "end": 18.86
+  },
+  {
+   "word": "book",
+   "start": 18.86,
+   "end": 19.06
+  },
+  {
+   "word": "exam.",
+   "start": 19.06,
+   "end": 19.46
+  },
+  {
+   "word": "Paste",
+   "start": 20.44,
+   "end": 20.44
+  },
+  {
+   "word": "in",
+   "start": 20.44,
+   "end": 20.68
+  },
+  {
+   "word": "the",
+   "start": 20.68,
+   "end": 20.8
+  },
+  {
+   "word": "real",
+   "start": 20.8,
+   "end": 21.06
+  },
+  {
+   "word": "thing,",
+   "start": 21.06,
+   "end": 21.38
+  },
+  {
+   "word": "the",
+   "start": 21.68,
+   "end": 21.8
+  },
+  {
+   "word": "letter,",
+   "start": 21.8,
+   "end": 22.06
+  },
+  {
+   "word": "the",
+   "start": 22.32,
+   "end": 22.42
+  },
+  {
+   "word": "webpage,",
+   "start": 22.42,
+   "end": 22.7
+  },
+  {
+   "word": "the",
+   "start": 23.08,
+   "end": 23.16
+  },
+  {
+   "word": "rules,",
+   "start": 23.16,
+   "end": 23.56
+  },
+  {
+   "word": "and",
+   "start": 23.92,
+   "end": 24.16
+  },
+  {
+   "word": "ask",
+   "start": 24.16,
+   "end": 24.38
+  },
+  {
+   "word": "it",
+   "start": 24.38,
+   "end": 24.52
+  },
+  {
+   "word": "to",
+   "start": 24.52,
+   "end": 24.66
+  },
+  {
+   "word": "answer",
+   "start": 24.66,
+   "end": 24.94
+  },
+  {
+   "word": "only",
+   "start": 24.94,
+   "end": 25.28
+  },
+  {
+   "word": "from",
+   "start": 25.28,
+   "end": 25.56
+  },
+  {
+   "word": "that.",
+   "start": 25.56,
+   "end": 25.84
+  },
+  {
+   "word": "It",
+   "start": 26.32,
+   "end": 26.46
+  },
+  {
+   "word": "guesses",
+   "start": 26.46,
+   "end": 26.72
+  },
+  {
+   "word": "far",
+   "start": 26.72,
+   "end": 27.16
+  },
+  {
+   "word": "less",
+   "start": 27.16,
+   "end": 27.52
+  },
+  {
+   "word": "when",
+   "start": 27.52,
+   "end": 27.9
+  },
+  {
+   "word": "the",
+   "start": 27.9,
+   "end": 28.02
+  },
+  {
+   "word": "answer",
+   "start": 28.02,
+   "end": 28.36
+  },
+  {
+   "word": "is",
+   "start": 28.36,
+   "end": 28.58
+  },
+  {
+   "word": "right",
+   "start": 28.58,
+   "end": 28.86
+  },
+  {
+   "word": "in",
+   "start": 28.86,
+   "end": 29.02
+  },
+  {
+   "word": "front",
+   "start": 29.02,
+   "end": 29.16
+  },
+  {
+   "word": "of",
+   "start": 29.16,
+   "end": 29.28
+  },
+  {
+   "word": "it.",
+   "start": 29.28,
+   "end": 29.52
+  },
+  {
+   "word": "Far",
+   "start": 29.52,
+   "end": 30.18
+  },
+  {
+   "word": "less,",
+   "start": 30.18,
+   "end": 30.56
+  },
+  {
+   "word": "not",
+   "start": 31.3,
+   "end": 31.54
+  },
+  {
+   "word": "never.",
+   "start": 31.54,
+   "end": 31.98
+  },
+  {
+   "word": "Three,",
+   "start": 33.16,
+   "end": 33.36
+  },
+  {
+   "word": "double",
+   "start": 33.78,
+   "end": 33.96
+  },
+  {
+   "word": "check",
+   "start": 33.96,
+   "end": 34.2
+  },
+  {
+   "word": "the",
+   "start": 34.2,
+   "end": 34.4
+  },
+  {
+   "word": "details",
+   "start": 34.4,
+   "end": 34.8
+  },
+  {
+   "word": "that",
+   "start": 34.8,
+   "end": 35.04
+  },
+  {
+   "word": "are",
+   "start": 35.04,
+   "end": 35.16
+  },
+  {
+   "word": "easiest",
+   "start": 35.16,
+   "end": 35.58
+  },
+  {
+   "word": "to",
+   "start": 35.58,
+   "end": 35.84
+  },
+  {
+   "word": "bluff.",
+   "start": 35.84,
+   "end": 36.06
+  },
+  {
+   "word": "Names,",
+   "start": 37.14,
+   "end": 37.14
+  },
+  {
+   "word": "numbers,",
+   "start": 37.46,
+   "end": 37.62
+  },
+  {
+   "word": "dates,",
+   "start": 37.88,
+   "end": 38.02
+  },
+  {
+   "word": "and",
+   "start": 38.24,
+   "end": 38.28
+  },
+  {
+   "word": "quotes.",
+   "start": 38.28,
+   "end": 38.5
+  }
+ ],
+ "S6": [
+  {
+   "word": "So",
+   "start": 0.0,
+   "end": 0.28
+  },
+  {
+   "word": "why",
+   "start": 0.28,
+   "end": 0.54
+  },
+  {
+   "word": "does",
+   "start": 0.54,
+   "end": 0.72
+  },
+  {
+   "word": "AI",
+   "start": 0.72,
+   "end": 1.08
+  },
+  {
+   "word": "hallucinate?",
+   "start": 1.08,
+   "end": 1.82
+  },
+  {
+   "word": "It's",
+   "start": 2.74,
+   "end": 3.0
+  },
+  {
+   "word": "a",
+   "start": 3.0,
+   "end": 3.1
+  },
+  {
+   "word": "guesser,",
+   "start": 3.1,
+   "end": 3.54
+  },
+  {
+   "word": "marked",
+   "start": 3.8,
+   "end": 4.06
+  },
+  {
+   "word": "like",
+   "start": 4.06,
+   "end": 4.26
+  },
+  {
+   "word": "a",
+   "start": 4.26,
+   "end": 4.36
+  },
+  {
+   "word": "student",
+   "start": 4.36,
+   "end": 4.72
+  },
+  {
+   "word": "in",
+   "start": 4.72,
+   "end": 5.08
+  },
+  {
+   "word": "an",
+   "start": 5.08,
+   "end": 5.18
+  },
+  {
+   "word": "exam",
+   "start": 5.18,
+   "end": 5.54
+  },
+  {
+   "word": "where",
+   "start": 5.54,
+   "end": 5.8
+  },
+  {
+   "word": "a",
+   "start": 5.8,
+   "end": 5.92
+  },
+  {
+   "word": "blank",
+   "start": 5.92,
+   "end": 6.08
+  },
+  {
+   "word": "scores",
+   "start": 6.08,
+   "end": 6.44
+  },
+  {
+   "word": "zero.",
+   "start": 6.44,
+   "end": 6.88
+  },
+  {
+   "word": "So",
+   "start": 7.46,
+   "end": 7.66
+  },
+  {
+   "word": "it",
+   "start": 7.66,
+   "end": 7.8
+  },
+  {
+   "word": "bluffs.",
+   "start": 7.8,
+   "end": 8.12
+  },
+  {
+   "word": "And",
+   "start": 8.8,
+   "end": 9.0
+  },
+  {
+   "word": "right",
+   "start": 9.0,
+   "end": 9.24
+  },
+  {
+   "word": "answers",
+   "start": 9.24,
+   "end": 9.72
+  },
+  {
+   "word": "and",
+   "start": 9.72,
+   "end": 10.1
+  },
+  {
+   "word": "wrong",
+   "start": 10.1,
+   "end": 10.36
+  },
+  {
+   "word": "ones",
+   "start": 10.36,
+   "end": 10.72
+  },
+  {
+   "word": "come",
+   "start": 10.72,
+   "end": 10.94
+  },
+  {
+   "word": "out",
+   "start": 10.94,
+   "end": 11.16
+  },
+  {
+   "word": "in",
+   "start": 11.16,
+   "end": 11.32
+  },
+  {
+   "word": "the",
+   "start": 11.32,
+   "end": 11.46
+  },
+  {
+   "word": "same",
+   "start": 11.46,
+   "end": 11.72
+  },
+  {
+   "word": "confident",
+   "start": 11.72,
+   "end": 12.24
+  },
+  {
+   "word": "voice.",
+   "start": 12.24,
+   "end": 12.72
+  },
+  {
+   "word": "So",
+   "start": 13.22,
+   "end": 13.4
+  },
+  {
+   "word": "you",
+   "start": 13.4,
+   "end": 13.54
+  },
+  {
+   "word": "can't",
+   "start": 13.54,
+   "end": 13.88
+  },
+  {
+   "word": "hear",
+   "start": 13.88,
+   "end": 14.02
+  },
+  {
+   "word": "the",
+   "start": 14.02,
+   "end": 14.2
+  },
+  {
+   "word": "difference.",
+   "start": 14.2,
+   "end": 14.6
+  },
+  {
+   "word": "Sounding",
+   "start": 15.7,
+   "end": 16.06
+  },
+  {
+   "word": "sure",
+   "start": 16.06,
+   "end": 16.26
+  },
+  {
+   "word": "is",
+   "start": 16.26,
+   "end": 16.66
+  },
+  {
+   "word": "not",
+   "start": 16.66,
+   "end": 16.86
+  },
+  {
+   "word": "the",
+   "start": 16.86,
+   "end": 17.0
+  },
+  {
+   "word": "same",
+   "start": 17.0,
+   "end": 17.18
+  },
+  {
+   "word": "as",
+   "start": 17.18,
+   "end": 17.36
+  },
+  {
+   "word": "being",
+   "start": 17.36,
+   "end": 17.54
+  },
+  {
+   "word": "right.",
+   "start": 17.54,
+   "end": 17.88
+  },
+  {
+   "word": "So",
+   "start": 18.82,
+   "end": 19.1
+  },
+  {
+   "word": "treat",
+   "start": 19.1,
+   "end": 19.4
+  },
+  {
+   "word": "it",
+   "start": 19.4,
+   "end": 19.54
+  },
+  {
+   "word": "like",
+   "start": 19.54,
+   "end": 19.68
+  },
+  {
+   "word": "a",
+   "start": 19.68,
+   "end": 19.82
+  },
+  {
+   "word": "very",
+   "start": 19.82,
+   "end": 20.04
+  },
+  {
+   "word": "fast",
+   "start": 20.04,
+   "end": 20.4
+  },
+  {
+   "word": "student,",
+   "start": 20.4,
+   "end": 20.84
+  },
+  {
+   "word": "not",
+   "start": 21.24,
+   "end": 21.42
+  },
+  {
+   "word": "an",
+   "start": 21.42,
+   "end": 21.54
+  },
+  {
+   "word": "expert.",
+   "start": 21.54,
+   "end": 21.96
+  },
+  {
+   "word": "Give",
+   "start": 22.56,
+   "end": 22.76
+  },
+  {
+   "word": "it",
+   "start": 22.76,
+   "end": 22.86
+  },
+  {
+   "word": "the",
+   "start": 22.86,
+   "end": 22.98
+  },
+  {
+   "word": "book",
+   "start": 22.98,
+   "end": 23.26
+  },
+  {
+   "word": "and",
+   "start": 23.26,
+   "end": 24.12
+  },
+  {
+   "word": "check",
+   "start": 24.12,
+   "end": 24.36
+  },
+  {
+   "word": "its",
+   "start": 24.36,
+   "end": 24.58
+  },
+  {
+   "word": "work.",
+   "start": 24.58,
+   "end": 24.86
+  }
+ ],
+ "S7": [
+  {
+   "word": "But",
+   "start": 0.0,
+   "end": 0.18
+  },
+  {
+   "word": "so",
+   "start": 0.18,
+   "end": 0.38
+  },
+  {
+   "word": "far,",
+   "start": 0.38,
+   "end": 0.74
+  },
+  {
+   "word": "AI",
+   "start": 1.14,
+   "end": 1.22
+  },
+  {
+   "word": "only",
+   "start": 1.22,
+   "end": 1.56
+  },
+  {
+   "word": "talks.",
+   "start": 1.56,
+   "end": 1.98
+  },
+  {
+   "word": "What",
+   "start": 2.62,
+   "end": 2.76
+  },
+  {
+   "word": "happens",
+   "start": 2.76,
+   "end": 3.08
+  },
+  {
+   "word": "when",
+   "start": 3.08,
+   "end": 3.26
+  },
+  {
+   "word": "it",
+   "start": 3.26,
+   "end": 3.34
+  },
+  {
+   "word": "can",
+   "start": 3.34,
+   "end": 3.46
+  },
+  {
+   "word": "act",
+   "start": 3.46,
+   "end": 3.8
+  },
+  {
+   "word": "and",
+   "start": 3.8,
+   "end": 4.24
+  },
+  {
+   "word": "book",
+   "start": 4.24,
+   "end": 4.4
+  },
+  {
+   "word": "the",
+   "start": 4.4,
+   "end": 4.58
+  },
+  {
+   "word": "flight,",
+   "start": 4.58,
+   "end": 4.86
+  },
+  {
+   "word": "send",
+   "start": 5.32,
+   "end": 5.44
+  },
+  {
+   "word": "the",
+   "start": 5.44,
+   "end": 5.6
+  },
+  {
+   "word": "email,",
+   "start": 5.6,
+   "end": 5.92
+  },
+  {
+   "word": "spend",
+   "start": 6.16,
+   "end": 6.34
+  },
+  {
+   "word": "the",
+   "start": 6.34,
+   "end": 6.5
+  },
+  {
+   "word": "money?",
+   "start": 6.5,
+   "end": 6.76
+  },
+  {
+   "word": "That's",
+   "start": 7.34,
+   "end": 7.68
+  },
+  {
+   "word": "called",
+   "start": 7.68,
+   "end": 7.82
+  },
+  {
+   "word": "an",
+   "start": 7.82,
+   "end": 7.98
+  },
+  {
+   "word": "AI",
+   "start": 7.98,
+   "end": 8.34
+  },
+  {
+   "word": "agent,",
+   "start": 8.34,
+   "end": 8.74
+  },
+  {
+   "word": "and",
+   "start": 9.06,
+   "end": 9.14
+  },
+  {
+   "word": "it's",
+   "start": 9.14,
+   "end": 9.32
+  },
+  {
+   "word": "next.",
+   "start": 9.32,
+   "end": 9.62
+  },
+  {
+   "word": "Subscribe",
+   "start": 11.1,
+   "end": 11.22
+  },
+  {
+   "word": "so",
+   "start": 11.22,
+   "end": 11.56
+  },
+  {
+   "word": "you",
+   "start": 11.56,
+   "end": 11.68
+  },
+  {
+   "word": "don't",
+   "start": 11.68,
+   "end": 11.88
+  },
+  {
+   "word": "miss",
+   "start": 11.88,
+   "end": 11.98
+  },
+  {
+   "word": "it.",
+   "start": 11.98,
+   "end": 12.22
+  }
+ ]
+}

@@ -13,8 +13,10 @@ lines up with the rendered Full composition. Keep FPS / TAIL_SECONDS in sync wit
 """
 from __future__ import annotations
 
+import difflib
 import json
 import math
+import re
 import sys
 from pathlib import Path
 
@@ -84,6 +86,27 @@ def clean_words(words: list[dict]) -> list[dict]:
     return out
 
 
+SCRIPT_MARKUP = re.compile(r"\[[^\]]*\]")
+
+
+def _norm(word: str) -> str:
+    return re.sub(r"[^a-z0-9']", "", word.lower().replace("’", "'"))
+
+
+def match_script(words: list[dict], vo_text: str) -> list[dict]:
+    """Whisper mishears words in context ("all rung", "the liar", "it's" for "its"). The script is the truth:
+    where Whisper and vo.json differ one word for one word, take the script's word (Whisper's timing and
+    end punctuation stay). Longer differences (e.g. "2023" for "twenty twenty-three") keep Whisper's text."""
+    script = [w.strip('"“”') for w in SCRIPT_MARKUP.sub(" ", vo_text).split()]
+    a, b = [_norm(w["word"]) for w in words], [_norm(w) for w in script]
+    for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
+        if op == "replace" and i2 - i1 == j2 - j1:
+            for i, j in zip(range(i1, i2), range(j1, j2)):
+                tail = re.search(r"[.,!?…:;]*$", words[i]["word"]).group(0)
+                words[i]["word"] = re.sub(r"[.,!?…:;]+$", "", script[j]) + tail
+    return words
+
+
 def group_words(words: list[dict]) -> list[dict]:
     cues: list[dict] = []
     cur: list[dict] = []
@@ -134,7 +157,7 @@ def main() -> None:
             {"word": w.word.strip(), "start": round(w.start, 3), "end": round(w.end, 3)}
             for seg in segments for w in (seg.words or []) if w.word.strip()
         ]
-        words = clean_words(words)
+        words = match_script(clean_words(words), scene["vo"])
         per_scene[sid] = words
         for cue in group_words(words):
             all_cues.append({"start": cue["start"] + offset, "end": cue["end"] + offset, "text": cue["text"]})

@@ -1,0 +1,58 @@
+{
+  "episode": "ep03",
+  "title": "Why AI Hallucinates (and Sounds So Sure)",
+  "scriptDoc": "https://claude.ai/artifact/LXuH9FinV8xdqo5NbfBPZW",
+  "markup": "[beat] = short pause; [silence N] = N-second pause with music dipped. Everything else is read word for word.",
+  "scenes": [
+    {
+      "id": "S1",
+      "title": "Hook",
+      "estSeconds": 33,
+      "vo": "In twenty twenty-three, a New York lawyer gave a judge a list of past court cases. The judge looked them up. They didn't exist. ChatGPT had made them up. And when the lawyer asked it, \"Is this case real?\", it said yes. [beat] Last time, we saw that AI guesses what sounds right, not what is right. Here, those two split apart. [beat] Why would it do that? [beat] Let's un-jargon it. [beat] [beat]"
+    },
+    {
+      "id": "S2",
+      "title": "It's guessing",
+      "estSeconds": 44,
+      "vo": "It wasn't lying. Lying means you know the truth. It was guessing, like a student bluffing in a closed-book exam. [beat] When an AI makes something up and says it like a fact, that's called a hallucination. Odd word, because it isn't seeing things. It's bluffing. [beat] Picture that student, stuck on a question. Leave it blank, and that's zero points. Write something that sounds right, and maybe it gets marked correct. [beat] So, three questions. Why does AI make things up at all? Why does it sound so sure? And how do you protect yourself?"
+    },
+    {
+      "id": "S3",
+      "title": "Why make things up at all?",
+      "estSeconds": 51,
+      "vo": "Question one. Why make things up at all? [beat] Because of how it gets marked. In twenty twenty-five, researchers at OpenAI, the company behind ChatGPT, published a paper called \"Why Language Models Hallucinate.\" Their answer is that exam. [beat] When AIs are trained and tested, most of the scoring works the same way. A right answer gets a point. A wrong answer gets zero. And \"I don't know\" also gets zero. So bluffing always wins. [beat] And some facts it has barely seen. The researchers asked one AI for one of their birthdays, and told it to answer only if it knew. Three tries. Three different dates. All wrong."
+    },
+    {
+      "id": "S3b",
+      "title": "Gag: Dot bluffs its own exam",
+      "estSeconds": 3,
+      "silent": true,
+      "vo": ""
+    },
+    {
+      "id": "S4",
+      "title": "Why does it sound so sure?",
+      "estSeconds": 52,
+      "vo": "Question two. Why does it sound so sure? [beat] Remember, it's always guessing what sounds right. A real fact and a made-up one come out of the same machine, in the same smooth, friendly voice. There's no wobble when it's wrong. [beat] And its training to be a helpful assistant was marked the same way: a sure answer beats \"I'm not sure.\" [beat] That's how an airline's chatbot in Canada told a man whose grandmother had just died that he could buy a full-price ticket and claim a family-funeral discount later. The airline's own website said the opposite. [beat] In twenty twenty-four, a tribunal made the airline pay. Its chatbot, its mistake."
+    },
+    {
+      "id": "S5",
+      "title": "How do you protect yourself?",
+      "estSeconds": 46,
+      "vo": "Question three. How do you protect yourself? Three habits. [beat] One: ask for sources, and then actually open them. Remember the lawyer? He asked for cases, and got cases. They just weren't real. A link you haven't clicked proves nothing. [beat] Two: make it an open-book exam. Paste in the real thing, the letter, the web page, the rules, and ask it to answer only from that. It guesses far less when the answer is right in front of it. Far less. Not never. [beat] Three: double-check the details that are easiest to bluff. Names, numbers, dates, and quotes."
+    },
+    {
+      "id": "S6",
+      "title": "Putting it together",
+      "estSeconds": 34,
+      "vo": "So, why does AI hallucinate? [beat] It's a guesser, marked like a student in an exam where a blank scores zero. So it bluffs. And right answers and wrong ones come out in the same confident voice, so you can't hear the difference. [beat] Sounding sure is not the same as being right. [beat] So treat it like a very fast student, not an expert. Give it the book. And check its work."
+    },
+    {
+      "id": "S7",
+      "title": "Next: What Is an AI Agent?",
+      "estSeconds": 17,
+      "vo": "But so far, AI only talks. What happens when it can act, and book the flight, send the email, spend the money? That's called an AI agent, and it's next. [beat] Subscribe so you don't miss it.",
+      "endScreenSeconds": 8
+    }
+  ]
+}

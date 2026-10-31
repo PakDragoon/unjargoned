@@ -1,6 +1,7 @@
 import React from "react";
 import { Composition, Folder } from "remotion";
 import { Ep02Compositions } from "./episodes/ep02/Ep02";
+import { Ep03Compositions } from "./episodes/ep03/Ep03";
 import { DotSheet } from "./shared/DotSheet";
 import { VIDEO } from "./shared/brand";
 
@@ -12,6 +13,9 @@ export const RemotionRoot: React.FC = () => (
     </Folder>
     <Folder name="ep02">
       <Ep02Compositions />
+    </Folder>
+    <Folder name="ep03">
+      <Ep03Compositions />
     </Folder>
   </>
 );
