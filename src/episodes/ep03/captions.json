@@ -1,344 +1,349 @@
 {
  "S1": [
   {
-   "word": "In",
-   "start": 0.0,
-   "end": 0.16
-  },
-  {
-   "word": "2023,",
-   "start": 0.16,
-   "end": 1.08
-  },
-  {
-   "word": "a",
-   "start": 1.62,
-   "end": 1.7
-  },
-  {
-   "word": "New",
-   "start": 1.7,
-   "end": 1.82
-  },
-  {
-   "word": "York",
-   "start": 1.82,
-   "end": 2.08
-  },
-  {
-   "word": "lawyer",
-   "start": 2.08,
-   "end": 2.36
-  },
-  {
-   "word": "gave",
-   "start": 2.36,
-   "end": 2.7
-  },
-  {
-   "word": "a",
-   "start": 2.7,
-   "end": 2.88
-  },
-  {
-   "word": "judge",
-   "start": 2.88,
-   "end": 3.16
-  },
-  {
-   "word": "a",
-   "start": 3.16,
-   "end": 3.46
-  },
-  {
-   "word": "list",
-   "start": 3.46,
-   "end": 3.58
-  },
-  {
-   "word": "of",
-   "start": 3.58,
-   "end": 3.76
-  },
-  {
-   "word": "past",
-   "start": 3.76,
-   "end": 4.12
-  },
-  {
-   "word": "court",
-   "start": 4.12,
-   "end": 4.38
-  },
-  {
-   "word": "cases.",
-   "start": 4.38,
-   "end": 4.82
-  },
-  {
-   "word": "The",
-   "start": 5.46,
-   "end": 5.64
-  },
-  {
-   "word": "judge",
-   "start": 5.64,
-   "end": 5.98
-  },
-  {
-   "word": "looked",
-   "start": 5.98,
-   "end": 6.22
-  },
-  {
-   "word": "them",
-   "start": 6.22,
-   "end": 6.42
-  },
-  {
-   "word": "up.",
-   "start": 6.42,
-   "end": 6.66
-  },
-  {
-   "word": "They",
-   "start": 7.18,
-   "end": 7.38
-  },
-  {
-   "word": "didn't",
-   "start": 7.38,
-   "end": 7.66
-  },
-  {
-   "word": "exist.",
-   "start": 7.66,
-   "end": 8.1
-  },
-  {
    "word": "ChatGPT",
-   "start": 9.1,
-   "end": 9.7
+   "start": 0.0,
+   "end": 0.96
   },
   {
-   "word": "had",
-   "start": 9.7,
-   "end": 9.98
+   "word": "once",
+   "start": 0.96,
+   "end": 1.52
   },
   {
    "word": "made",
-   "start": 9.98,
-   "end": 10.1
+   "start": 1.52,
+   "end": 1.74
   },
   {
-   "word": "them",
-   "start": 10.1,
-   "end": 10.24
+   "word": "up",
+   "start": 1.74,
+   "end": 1.92
   },
   {
-   "word": "up.",
-   "start": 10.24,
-   "end": 10.56
+   "word": "court",
+   "start": 1.92,
+   "end": 2.12
+  },
+  {
+   "word": "cases.",
+   "start": 2.12,
+   "end": 2.56
+  },
+  {
+   "word": "Not",
+   "start": 3.4,
+   "end": 3.44
+  },
+  {
+   "word": "one.",
+   "start": 3.44,
+   "end": 3.72
+  },
+  {
+   "word": "A",
+   "start": 4.34,
+   "end": 4.56
+  },
+  {
+   "word": "whole",
+   "start": 4.56,
+   "end": 4.82
+  },
+  {
+   "word": "list.",
+   "start": 4.82,
+   "end": 5.18
   },
   {
    "word": "And",
-   "start": 11.1,
-   "end": 11.24
+   "start": 5.84,
+   "end": 6.06
   },
   {
-   "word": "when",
-   "start": 11.24,
-   "end": 11.34
+   "word": "a",
+   "start": 6.06,
+   "end": 6.18
   },
   {
-   "word": "the",
-   "start": 11.34,
-   "end": 11.46
+   "word": "real",
+   "start": 6.18,
+   "end": 6.46
   },
   {
    "word": "lawyer",
-   "start": 11.46,
-   "end": 11.74
+   "start": 6.46,
+   "end": 6.78
+  },
+  {
+   "word": "handed",
+   "start": 6.78,
+   "end": 7.14
+  },
+  {
+   "word": "them",
+   "start": 7.14,
+   "end": 7.42
+  },
+  {
+   "word": "to",
+   "start": 7.42,
+   "end": 7.7
+  },
+  {
+   "word": "a",
+   "start": 7.7,
+   "end": 7.84
+  },
+  {
+   "word": "real",
+   "start": 7.84,
+   "end": 8.08
+  },
+  {
+   "word": "judge.",
+   "start": 8.08,
+   "end": 8.38
+  },
+  {
+   "word": "The",
+   "start": 9.4,
+   "end": 9.64
+  },
+  {
+   "word": "judge",
+   "start": 9.64,
+   "end": 9.98
+  },
+  {
+   "word": "looked",
+   "start": 9.98,
+   "end": 10.22
+  },
+  {
+   "word": "them",
+   "start": 10.22,
+   "end": 10.42
+  },
+  {
+   "word": "up.",
+   "start": 10.42,
+   "end": 10.66
+  },
+  {
+   "word": "They",
+   "start": 11.2,
+   "end": 11.38
+  },
+  {
+   "word": "didn't",
+   "start": 11.38,
+   "end": 11.64
+  },
+  {
+   "word": "exist.",
+   "start": 11.64,
+   "end": 12.08
+  },
+  {
+   "word": "And",
+   "start": 12.8,
+   "end": 12.98
+  },
+  {
+   "word": "when",
+   "start": 12.98,
+   "end": 13.08
+  },
+  {
+   "word": "the",
+   "start": 13.08,
+   "end": 13.22
+  },
+  {
+   "word": "lawyer",
+   "start": 13.22,
+   "end": 13.48
   },
   {
    "word": "asked",
-   "start": 11.74,
-   "end": 12.04
+   "start": 13.48,
+   "end": 13.8
   },
   {
    "word": "it,",
-   "start": 12.04,
-   "end": 12.28
+   "start": 13.8,
+   "end": 14.04
   },
   {
    "word": "is",
-   "start": 12.5,
-   "end": 12.6
+   "start": 14.26,
+   "end": 14.36
   },
   {
    "word": "this",
-   "start": 12.6,
-   "end": 12.82
+   "start": 14.36,
+   "end": 14.58
   },
   {
    "word": "case",
-   "start": 12.82,
-   "end": 13.06
+   "start": 14.58,
+   "end": 14.8
   },
   {
    "word": "real,",
-   "start": 13.06,
-   "end": 13.38
+   "start": 14.8,
+   "end": 15.14
   },
   {
    "word": "it",
-   "start": 13.84,
-   "end": 14.1
+   "start": 15.44,
+   "end": 15.84
   },
   {
    "word": "said",
-   "start": 14.1,
-   "end": 14.34
+   "start": 15.84,
+   "end": 16.08
   },
   {
    "word": "yes.",
-   "start": 14.34,
-   "end": 14.6
-  },
-  {
-   "word": "Last",
-   "start": 15.78,
-   "end": 15.98
-  },
-  {
-   "word": "time,",
-   "start": 15.98,
+   "start": 16.08,
    "end": 16.34
   },
   {
-   "word": "we",
-   "start": 16.34,
-   "end": 16.56
-  },
-  {
-   "word": "saw",
-   "start": 16.56,
-   "end": 16.74
-  },
-  {
-   "word": "that",
-   "start": 16.74,
-   "end": 16.94
-  },
-  {
-   "word": "AI",
-   "start": 16.94,
-   "end": 17.34
-  },
-  {
-   "word": "guesses",
-   "start": 17.34,
+   "word": "Last",
+   "start": 17.48,
    "end": 17.7
   },
   {
-   "word": "what",
+   "word": "time,",
    "start": 17.7,
-   "end": 18.02
+   "end": 18.1
+  },
+  {
+   "word": "we",
+   "start": 18.1,
+   "end": 18.3
+  },
+  {
+   "word": "saw",
+   "start": 18.3,
+   "end": 18.5
+  },
+  {
+   "word": "that",
+   "start": 18.5,
+   "end": 18.68
+  },
+  {
+   "word": "AI",
+   "start": 18.68,
+   "end": 19.08
+  },
+  {
+   "word": "guesses",
+   "start": 19.08,
+   "end": 19.44
+  },
+  {
+   "word": "what",
+   "start": 19.44,
+   "end": 19.76
   },
   {
    "word": "sounds",
-   "start": 18.02,
-   "end": 18.38
+   "start": 19.76,
+   "end": 20.12
   },
   {
    "word": "right,",
-   "start": 18.38,
-   "end": 18.7
+   "start": 20.12,
+   "end": 20.46
   },
   {
    "word": "not",
-   "start": 19.14,
-   "end": 19.32
+   "start": 20.84,
+   "end": 21.08
   },
   {
    "word": "what",
-   "start": 19.32,
-   "end": 19.46
+   "start": 21.08,
+   "end": 21.2
   },
   {
    "word": "is",
-   "start": 19.46,
-   "end": 19.58
+   "start": 21.2,
+   "end": 21.34
   },
   {
    "word": "right.",
-   "start": 19.58,
-   "end": 19.88
+   "start": 21.34,
+   "end": 21.62
   },
   {
    "word": "Here,",
-   "start": 20.48,
-   "end": 20.74
+   "start": 22.22,
+   "end": 22.48
   },
   {
    "word": "those",
-   "start": 20.82,
-   "end": 21.04
+   "start": 22.58,
+   "end": 22.78
   },
   {
    "word": "two",
-   "start": 21.04,
-   "end": 21.26
+   "start": 22.78,
+   "end": 23.0
   },
   {
    "word": "split",
-   "start": 21.26,
-   "end": 21.54
+   "start": 23.0,
+   "end": 23.3
   },
   {
    "word": "apart.",
-   "start": 21.54,
-   "end": 21.86
+   "start": 23.3,
+   "end": 23.6
   },
   {
    "word": "Why",
-   "start": 22.92,
-   "end": 23.26
+   "start": 24.72,
+   "end": 25.02
   },
   {
    "word": "would",
-   "start": 23.26,
-   "end": 23.42
+   "start": 25.02,
+   "end": 25.18
   },
   {
    "word": "it",
-   "start": 23.42,
-   "end": 23.54
+   "start": 25.18,
+   "end": 25.28
   },
   {
    "word": "do",
-   "start": 23.54,
-   "end": 23.66
-  },
-  {
-   "word": "that?",
-   "start": 23.66,
-   "end": 23.94
-  },
-  {
-   "word": "Let's",
-   "start": 25.0,
+   "start": 25.28,
    "end": 25.4
   },
   {
-   "word": "un-jargon",
+   "word": "that?",
    "start": 25.4,
-   "end": 25.86
+   "end": 25.68
+  },
+  {
+   "word": "Let's",
+   "start": 26.74,
+   "end": 27.16
+  },
+  {
+   "word": "un-jargon",
+   "start": 27.16,
+   "end": 27.6
   },
   {
    "word": "it.",
-   "start": 25.86,
-   "end": 26.18
+   "start": 27.6,
+   "end": 27.94
   }
  ],
  "S2": [

@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { colors } from "../../../shared/brand";
+import { ChatBubble, ChatWindow, StreamText } from "../../../shared/ChatWindow";
 import { Dot, MoodKey, glances, hops } from "../../../shared/Dot";
 import { FadeIn } from "../../../shared/FadeIn";
 import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
@@ -195,18 +196,40 @@ const S2Content: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ transform: `scale(${pushIn(frame, durationInFrames)})` }}>
-      {/* 1 · "It wasn't lying… It was guessing." */}
+      {/* 1 · The chat's "yes" from S1: not a lie (stamp struck), a guess (Ep 2's guess slot on "real") */}
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: f(P.words) }}>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 30, marginRight: 240 }}>
-          <div style={{ position: "relative", fontSize: 150, fontWeight: 800, color: colors.subtext, transform: `scale(${0.9 + 0.1 * Math.min(1, pop(frame, 0.1))})` }}>
-            lying
-            <Strike p={ramp(frame, T.lying + 0.1, 0.35)} width={16} />
-          </div>
-          <div style={{ fontSize: 60, fontWeight: 600, color: colors.subtext, opacity: ramp(frame, T.means, 0.3) * (1 - ramp(frame, T.guessing - 0.2, 0.3)), height: 70 }}>
-            = you know the truth
-          </div>
-          <div style={{ position: "relative", fontSize: 170, fontWeight: 800, color: colors.yellow, opacity: Math.min(1, pop(frame, T.guessing)), transform: `scale(${Math.min(1.08, pop(frame, T.guessing))})` }}>
-            guessing
+        <div style={{ position: "relative", marginRight: 300, marginTop: 120 }}>
+          <ChatWindow width={980} height={420}>
+            <ChatBubble from="me">Is this case real?</ChatBubble>
+            <ChatBubble from="ai" fontSize={60}>
+              Yes, it's a{" "}
+              <span style={{ position: "relative", display: "inline-block", padding: "0 14px", borderRadius: 16, border: `5px dashed ${frame >= sec(T.guessing) ? colors.yellow : "transparent"}`, color: frame >= sec(T.guessing) ? colors.yellow : colors.white }}>
+                real
+              </span>{" "}
+              case.
+            </ChatBubble>
+          </ChatWindow>
+          {/* the options it picked from */}
+                <div style={{ position: "absolute", left: 300, bottom: "100%", marginBottom: 24, display: "flex", flexDirection: "column", gap: 10, padding: "16px 24px", borderRadius: 24, backgroundColor: colors.panel, border: `4px solid ${colors.line}`, opacity: during(frame, T.guessing, P.words[1], 0.25), transform: `scale(${0.85 + 0.15 * ramp(frame, T.guessing, 0.25)})`, transformOrigin: "bottom center" }}>
+                  {([["real", 0.58], ["fake", 0.22], ["unsure", 0.09]] as const).map(([w, pr], i) => (
+                    <div key={w} style={{ display: "flex", alignItems: "center", gap: 18 }}>
+                      <div style={{ width: 150, fontSize: 46, fontWeight: 700, color: i === 0 ? colors.yellow : colors.subtext }}>{w}</div>
+                      <div style={{ width: 240 * pr * ramp(frame, T.guessing + 0.1 + i * 0.08, 0.3), height: 24, borderRadius: 12, backgroundColor: i === 0 ? colors.yellow : colors.lineStrong }} />
+                    </div>
+                  ))}
+                </div>
+          {/* "LYING?" stamp, struck through on "Lying means you know the truth" */}
+          <div
+            style={{
+              position: "absolute", right: -60, top: -70, padding: "10px 30px", border: `8px solid ${colors.coral}`, borderRadius: 16, color: colors.coral,
+              fontSize: 80, fontWeight: 800, letterSpacing: 3, transform: `rotate(10deg) scale(${1.5 - 0.5 * Math.min(1, pop(frame, T.lying - 0.2))})`,
+              opacity: Math.min(1, pop(frame, T.lying - 0.2)) * (1 - ramp(frame, T.guessing - 0.3, 0.3)),
+            }}
+          >
+            <span style={{ position: "relative" }}>
+              LYING?
+              <Strike p={ramp(frame, T.means + 0.6, 0.35)} width={14} color={colors.white} />
+            </span>
           </div>
         </div>
       </AbsoluteFill>
@@ -227,10 +250,14 @@ const S2Content: React.FC = () => {
 
       {/* 3 · The word card: HALLUCINATION, and what it isn't */}
       <AbsoluteFill style={{ opacity: f(P.card) }}>
-        <div style={{ position: "absolute", top: 170, left: 0, right: 240, display: "flex", justifyContent: "center", gap: 40, fontSize: 60, fontWeight: 700 }}>
-          <span style={{ opacity: ramp(frame, T.makes, 0.3) }}>made up</span>
-          <span style={{ color: colors.subtext, opacity: ramp(frame, T.fact - 0.4, 0.3) }}>+</span>
-          <span style={{ opacity: ramp(frame, T.fact - 0.4, 0.3) }}>said like a fact</span>
+        {/* made up + said like a fact: a confident answer with a fake "FACT" seal */}
+        <div style={{ position: "absolute", top: 120, left: 0, right: 240, display: "flex", justifyContent: "center", alignItems: "center", gap: 36, opacity: ramp(frame, T.makes - 0.3, 0.3) }}>
+          <ChatBubble from="ai" fontSize={56}>
+            <StreamText text="The castle was built in 1350." frame={frame} from={sec(T.makes - 0.2)} to={sec(T.fact - 0.6)} />
+          </ChatBubble>
+          <div style={{ padding: "10px 26px", borderRadius: 999, backgroundColor: colors.mint, color: colors.ink, fontSize: 48, fontWeight: 800, transform: `rotate(-8deg) scale(${Math.min(1.1, pop(frame, T.fact))})`, opacity: Math.min(1, pop(frame, T.fact)) }}>
+            ✔ FACT
+          </div>
         </div>
         <div style={{ position: "absolute", top: 330, left: 0, right: 240, textAlign: "center", fontSize: 150, fontWeight: 800, letterSpacing: 4, color: colors.yellow, minHeight: 180 }}>
           {typed}
