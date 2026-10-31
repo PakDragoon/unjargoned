@@ -45,6 +45,7 @@ BEAT = 0.6             # seconds for [beat], before PAUSE_SCALE (→ ~0.78 s)
 PRONOUNCE: dict[str, str] = {
     "Once upon a": "Once upon uh",
     "un-jargon": "un jargon",  # Ep 1 says it as two stressed words
+    "lawyer": "law-yer",  # Ep 3: plain "lawyer" (lˈɔɪɚ) sounded like "liar"; this gives LAW-yer
 }
 
 MARKER = re.compile(r"\[(beat|silence\s+[\d.]+)\]", re.IGNORECASE)

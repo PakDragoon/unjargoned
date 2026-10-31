@@ -151,9 +151,9 @@ const S1Content: React.FC = () => {
   const toBench = ramp(frame, T.real - 0.1, 0.7) * (1 - ramp(frame, T.looked - 0.5, 0.5));
   // Opens zoomed in on the line being typed, pulls back to reveal the whole list on "Not one. A whole list."
   const reveal = ramp(frame, T.notOne - 0.1, 0.9);
-  const docX = interpolate(toBench, [0, 1], [interpolate(reveal, [0, 1], [-80, 130]), 680]);
-  const docY = interpolate(toBench, [0, 1], [interpolate(reveal, [0, 1], [-40, 190]), 300]);
-  const docS = interpolate(toBench, [0, 1], [interpolate(reveal, [0, 1], [1.6, 1]), 0.55]);
+  const docX = interpolate(toBench, [0, 1], [interpolate(reveal, [0, 1], [110, 130]), 680]);
+  const docY = interpolate(toBench, [0, 1], [interpolate(reveal, [0, 1], [30, 190]), 300]);
+  const docS = interpolate(toBench, [0, 1], [interpolate(reveal, [0, 1], [1.42, 1]), 0.55]);
   const benchO = during(frame, T.real - 0.2, T.looked - 0.3, 0.35);
 
   // The magnifier sweeps down the list of cases while "the judge looked them up".
@@ -197,10 +197,10 @@ const S1Content: React.FC = () => {
           <circle cx={900 - gap / 2} cy={500} r={250} fill={colors.periwinkle} fillOpacity={0.14} stroke={colors.periwinkle} strokeWidth={10} opacity={ramp(frame, T.sounds - 0.6, 0.3)} />
           <circle cx={900 + gap / 2} cy={500} r={250} fill={colors.mint} fillOpacity={0.14} stroke={colors.mint} strokeWidth={10} opacity={ramp(frame, T.isRight - 0.2, 0.3)} />
         </svg>
-        <div style={{ position: "absolute", left: 900 - gap / 2 - 250, top: 140, width: 500, textAlign: "center", fontSize: 64, fontWeight: 800, color: colors.periwinkle, opacity: ramp(frame, T.sounds - 0.6, 0.3) }}>
+        <div style={{ position: "absolute", right: 1920 - (900 - gap / 2 + 30), top: 150, textAlign: "right", whiteSpace: "nowrap", fontSize: 64, fontWeight: 800, color: colors.periwinkle, opacity: ramp(frame, T.sounds - 0.6, 0.3) }}>
           sounds right
         </div>
-        <div style={{ position: "absolute", left: 900 + gap / 2 - 250, top: 140, width: 500, textAlign: "center", fontSize: 64, fontWeight: 800, color: colors.mint, opacity: ramp(frame, T.isRight - 0.2, 0.3) }}>
+        <div style={{ position: "absolute", left: 900 + gap / 2 - 30, top: 150, whiteSpace: "nowrap", fontSize: 64, fontWeight: 800, color: colors.mint, opacity: ramp(frame, T.isRight - 0.2, 0.3) }}>
           is right
         </div>
         {/* The fake case sits in "sounds right" only */}
