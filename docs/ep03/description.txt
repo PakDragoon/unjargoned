@@ -5,11 +5,11 @@ In about 4 minutes: what an AI hallucination really is, what OpenAI's own resear
 Chapters
 0:00 ChatGPT made up court cases
 0:28 What "hallucination" really means
-1:02 Why AI makes things up
-1:48 Why it sounds so sure
-2:28 How to protect yourself
-3:06 Putting it together
-3:30 Next: What Is an AI Agent?
+0:53 Why AI makes things up
+1:56 Why it sounds so sure
+2:41 How to protect yourself
+3:30 Putting it together
+3:54 Next: What Is an AI Agent?
 
 Sources
 Kalai, Nachum, Vempala, Zhang (2025), "Why Language Models Hallucinate": https://arxiv.org/abs/2509.04664
