@@ -100,8 +100,11 @@ def match_script(words: list[dict], vo_text: str) -> list[dict]:
     script = [w.strip('"“”') for w in SCRIPT_MARKUP.sub(" ", vo_text).split()]
     a, b = [_norm(w["word"]) for w in words], [_norm(w) for w in script]
     for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
-        if op == "replace" and i2 - i1 == j2 - j1:
+        if op in ("replace", "equal") and i2 - i1 == j2 - j1:  # equal: same words, take the script's punctuation
             for i, j in zip(range(i1, i2), range(j1, j2)):
+                if op == "equal":
+                    words[i]["word"] = script[j]
+                    continue
                 tail = re.search(r"[.,!?…:;]*$", words[i]["word"]).group(0)
                 words[i]["word"] = re.sub(r"[.,!?…:;]+$", "", script[j]) + tail
     return words

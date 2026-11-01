@@ -12,13 +12,13 @@ const S = scene("S6");
 
 // Times (s) from the S6 word timings in captions.json. Re-voice S6 → re-check these.
 const T = {
-  why: 0.24, guesser: 2.88, marked: 3.56, exam: 4.9, blank: 5.62, zero: 6.16, bluffs: 7.5,
-  right: 8.66, wrong: 9.72, voice: 11.06, cantHear: 13.08, difference: 13.68,
-  sounding: 15.02, beingRight: 16.66, treat: 18.18, fast: 19.08, student: 19.42, expert: 20.46, book: 21.46, check: 22.96,
+  why: 0.24, guesser: 2.88, marked: 3.56, exam: 4.92, blank: 5.68, zero: 6.2, bluffs: 7.54,
+  right: 8.7, wrong: 9.78, voice: 11.12, cantHear: 13.18, difference: 13.8,
+  sounding: 15.12, beingRight: 16.78, treat: 18.36, fast: 19.28, student: 19.62, expert: 20.7, book: 21.7, check: 23.2,
 };
 
 // Recap on one canvas: blank = 0 → two identical answers → the headline → "fast student, not an expert": book + check.
-const P = { exam: [0.0, 8.25], twins: [8.25, 14.67], head: [14.67, 17.86], advice: [17.86, 99] } as const;
+const P = { exam: [0.0, 8.22], twins: [8.22, 14.78], head: [14.78, 18.04], advice: [18.04, 99] } as const;
 
 const TRACK: MoodKey[] = [
   { at: 0, mood: "curious" },

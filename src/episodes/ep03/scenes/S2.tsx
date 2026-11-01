@@ -8,20 +8,19 @@ import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
 import { SceneShell } from "../../../shared/SceneShell";
 import { QuestionStrip } from "../QuestionStrip";
 import { scene } from "../timeline";
-import { ExamBook, PAPER, PEN, Pencil, RED, Strike } from "../Props";
+import { ExamBook, ExamSheet, Pencil, Strike } from "../Props";
 
 const S = scene("S2");
 
 // Times (s) from the S2 word timings in captions.json. Re-voice S2 → re-check these.
 const T = {
-  lying: 0.44, means: 1.66, guessing: 3.76, student: 4.88, bluffing: 5.2, closedBook: 5.96, exam: 6.4,
-  makes: 8.32, fact: 9.98, hallucination: 11.32, odd: 12.74, seeing: 14.02, things: 14.22, itsBluffing: 15.46,
-  picture: 16.88, blank: 19.82, zero: 20.72, write: 22.02, sounds: 22.8, maybe: 23.9, correct: 24.82,
-  three: 26.14, q1: 27.6, q2: 30.26, q3: 32.16, strip: 33.46,
+  lying: 0.42, means: 1.66, guessing: 3.76, student: 4.92, bluffing: 5.24, closedBook: 5.98, exam: 6.48,
+  makes: 8.44, fact: 10.08, hallucination: 11.48, odd: 12.92, seeing: 14.2, things: 14.4, itsBluffing: 15.62,
+  three: 17.0, q1: 18.82, q2: 21.1, q3: 23.06, strip: 24.55,
 };
 
-// Phases (one hero each): words → closed-book exam → the word card → blank vs bluff → three questions.
-const P = { words: [0.0, 4.41], desk: [4.41, 7.54], card: [7.54, 16.66], score: [16.66, 25.95], qs: [25.95, 99] } as const;
+// Phases (one hero each): the chat's "yes" → closed-book exam → the word card → three questions.
+const P = { words: [0.0, 4.4], desk: [4.4, 7.55], card: [7.55, 16.75], qs: [16.75, 99] } as const;
 
 const TRACK: MoodKey[] = [
   { at: 0, mood: "curious" },
@@ -32,34 +31,22 @@ const TRACK: MoodKey[] = [
   { at: sec(T.hallucination + 0.2), mood: "surprised" },
   { at: sec(T.odd), mood: "confused" },
   { at: sec(T.itsBluffing), mood: "smug" },
-  { at: sec(T.picture), mood: "neutral" },
-  { at: sec(T.blank), mood: "worried" },
-  { at: sec(T.zero + 0.2), mood: "sad" },
-  { at: sec(T.write), mood: "intrigued" },
-  { at: sec(T.maybe), mood: "smug" },
-  { at: sec(T.correct), mood: "happy" },
   { at: sec(T.three), mood: "curious" },
 ];
 
-// Dot's route: beside the words, sits at the exam desk, beside the word card, at the answer sheet with a pencil,
-// then watches the three questions.
+// Dot's route: beside the words, sits at the exam desk with a pencil, beside the word card, then watches the three questions.
 const ROUTE = hops([
   { at: 0, x: 1540, y: 860 },
   { at: sec(T.student), x: 1100, y: 700 }, // at the desk, between paper and book
-  { at: sec(7.88), x: 1580, y: 860 },
+  { at: sec(7.95), x: 1580, y: 860 },
   { at: sec(T.odd + 0.2), x: 1580, y: 720 }, // hops up to inspect the chips
-  { at: sec(T.picture + 0.3), x: 1500, y: 470 }, // by the exam sheet, row A
-  { at: sec(T.write - 0.1), x: 1150, y: 690 }, // onto the sheet beside answer B, writes it
-  { at: sec(T.maybe - 0.15), x: 1420, y: 690 }, // hops clear before the score lands
   { at: sec(T.three + 0.3), x: 1580, y: 880 },
 ]);
 const LOOK = glances([
   { at: 0, x: -0.6, y: -0.3 },
   { at: sec(T.student), x: -0.7, y: 0.4 },
-  { at: sec(7.88), x: -0.6, y: -0.5 },
+  { at: sec(7.95), x: -0.6, y: -0.5 },
   { at: sec(T.odd + 0.2), x: -0.7, y: 0.1 },
-  { at: sec(T.picture + 0.3), x: -0.7, y: 0.2 },
-  { at: sec(T.write - 0.1), x: -0.8, y: 0.3 },
   { at: sec(T.three + 0.3), x: -0.6, y: -0.4 },
   { at: sec(T.q2), x: -0.6, y: -0.1 },
   { at: sec(T.q3), x: -0.6, y: 0.2 },
@@ -76,61 +63,6 @@ const Ring: React.FC<{ p: number }> = ({ p }) => (
   </svg>
 );
 
-/** The exam paper (used small at the desk and big in the scoring shot). */
-const ExamSheet: React.FC<{ frame: number; big: boolean }> = ({ frame, big }) => {
-  const scribble = "Around 1350";
-  const shown = Math.floor(interpolate(frame, [sec(T.write + 0.15), sec(T.sounds + 0.5)], [0, scribble.length], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }));
-  const zero = pop(frame, T.zero);
-  const maybe = pop(frame, T.maybe);
-  const tick = ramp(frame, T.correct, 0.35);
-  const rowB = ramp(frame, T.write - 0.3, 0.3);
-  return (
-    <div
-      style={{
-        width: big ? 1060 : 620, height: big ? 700 : 420, borderRadius: 24, backgroundColor: PAPER, color: colors.ink,
-        padding: big ? "52px 64px" : "36px 44px", boxSizing: "border-box", transform: `rotate(${big ? -1.2 : -4}deg)`,
-        boxShadow: "0 30px 60px rgba(0,0,0,0.35)", display: "flex", flexDirection: "column", gap: big ? 40 : 26,
-      }}
-    >
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-        <div style={{ fontSize: big ? 56 : 48, fontWeight: 800, letterSpacing: 2 }}>EXAM</div>
-        <div style={{ fontSize: big ? 44 : 0, fontWeight: 600, opacity: 0.55 }}>Name: Dot</div>
-      </div>
-      {big ? (
-        <>
-          <div style={{ fontSize: 60, fontWeight: 700 }}>Q7. When was the castle built?</div>
-          {[0, 1].map((row) => (
-            <div key={row} style={{ display: "flex", alignItems: "center", gap: 32, opacity: row === 0 ? 1 : rowB }}>
-              <div style={{ fontSize: 56, fontWeight: 800, width: 60, opacity: 0.6 }}>{row === 0 ? "A" : "B"}</div>
-              <div
-                style={{
-                  width: 520, height: 110, borderRadius: 16, border: `5px solid ${colors.ink}`, boxSizing: "border-box",
-                  display: "flex", alignItems: "center", paddingLeft: 26, fontSize: 60, fontWeight: 700, color: PEN,
-                  fontStyle: "italic", whiteSpace: "nowrap", overflow: "hidden",
-                }}
-              >
-                {row === 1 ? scribble.slice(0, shown) : ""}
-              </div>
-              {row === 0 ? (
-                <div style={{ fontSize: 96, fontWeight: 800, color: RED, transform: `rotate(-10deg) scale(${Math.min(1.15, zero * 1.0)})`, opacity: Math.min(1, zero) }}>0</div>
-              ) : (
-                <div style={{ display: "flex", alignItems: "center", gap: 14, opacity: Math.min(1, maybe), transform: `scale(${Math.min(1.1, maybe)})` }}>
-                  <div style={{ fontSize: 96, fontWeight: 800, color: tick > 0.5 ? "#1F9D74" : "#C98A00" }}>{tick > 0.5 ? "1" : "1?"}</div>
-                  <svg width={84} height={84} viewBox="0 0 84 84" aria-hidden style={{ opacity: tick }}>
-                    <path d="M 12 44 L 34 66 L 74 18" fill="none" stroke="#1F9D74" strokeWidth={14} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - tick} />
-                  </svg>
-                </div>
-              )}
-            </div>
-          ))}
-        </>
-      ) : (
-        [0, 1, 2, 3].map((i) => <div key={i} style={{ height: 22, borderRadius: 11, width: `${[92, 70, 84, 55][i]}%`, backgroundColor: "rgba(20,22,28,0.18)" }} />)
-      )}
-    </div>
-  );
-};
-
 const QUESTIONS = ["Why does AI make things up?", "Why does it sound so sure?", "How do you protect yourself?"];
 
 const S2Content: React.FC = () => {
@@ -139,8 +71,7 @@ const S2Content: React.FC = () => {
   const f = (r: readonly [number, number]) => during(frame, r[0], r[1], 0.35);
 
   const dotPos = ROUTE.path(frame);
-  const writing = frame >= sec(T.write + 0.15) && frame < sec(T.sounds + 0.5);
-  const pencilO = Math.max(during(frame, T.student, P.desk[1], 0.25), during(frame, T.write - 0.4, P.score[1], 0.25));
+  const pencilO = during(frame, T.student, P.desk[1], 0.25);
 
   // Card chips: lying (already struck), seeing things (struck on "things"), bluffing (ringed in yellow).
   const chips = [
@@ -242,14 +173,7 @@ const S2Content: React.FC = () => {
         </div>
       </AbsoluteFill>
 
-      {/* 4 · Blank = 0, a confident bluff = maybe 1 */}
-      <AbsoluteFill style={{ opacity: f(P.score) }}>
-        <div style={{ position: "absolute", left: 170, top: 190, transform: `translateY(${(1 - ramp(frame, P.score[0], 0.4)) * 60}px)` }}>
-          <ExamSheet frame={frame} big />
-        </div>
-      </AbsoluteFill>
-
-      {/* 5 · Three questions, then they become the progress strip */}
+      {/* 4 · Three questions, then they become the progress strip */}
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: during(frame, P.qs[0], T.strip, 0.4) }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 28, marginBottom: 60, marginRight: 200 }}>
           {QUESTIONS.map((q, i) => {
@@ -276,7 +200,7 @@ const S2Content: React.FC = () => {
         <QuestionStrip active={-1} />
       </div>
 
-      <Pencil x={dotPos.x} y={dotPos.y} o={pencilO} wiggle={writing ? Math.sin(frame * 1.7) * 14 : 0} />
+      <Pencil x={dotPos.x} y={dotPos.y} o={pencilO} wiggle={0} />
       <Dot path={ROUTE.path} squash={ROUTE.squash} track={TRACK} seed="e3s2" look={LOOK} />
     </AbsoluteFill>
   );

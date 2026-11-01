@@ -12,13 +12,13 @@ const S = scene("S1");
 
 // Times (s) from the S1 word timings in captions.json. Re-voice S1 → re-check these.
 const T = {
-  made: 1.44, cases: 2.02, notOne: 3.16, list: 4.14, real: 5.84, judge: 7.76, looked: 9.42, exist: 10.82,
-  asked: 12.84, isThis: 13.58, said: 14.86, yes: 15.12, last: 16.56, sounds: 18.68, isRight: 20.06, split: 21.76,
-  why: 23.28, lets: 25.1, jargon: 25.5,
+  made: 1.44, cases: 2.04, notOne: 3.3, list: 4.22, real: 5.98, judge: 7.92, looked: 9.6, exist: 11.06,
+  asked: 13.08, isThis: 13.82, said: 15.2, yes: 15.42, last: 16.88, sounds: 19.06, isRight: 20.46, split: 22.2,
+  why: 23.66, lets: 25.54, jargon: 25.94,
 };
 
 // Shots: the fake filing → handed to the judge → looked up, not found → "is it real?" → sounds vs is → ? → logo.
-const P = { doc: [0.0, 12.02], chat: [12.02, 16.37], venn: [16.37, 23.1] } as const;
+const P = { doc: [0.0, 12.25], chat: [12.25, 16.69], venn: [16.69, 23.49] } as const;
 
 const PAPER = "#F3EBDD";
 const RED = "#E0533B";
@@ -34,7 +34,7 @@ const CASES = [
 ];
 // Frame 0 already shows two cases with a third being typed; the rest pop in on "Not one. A whole list."
 const TYPING = 2;
-const LINE_AT = [0, 0, 0, 3.32, 3.81, 4.31];
+const LINE_AT = [0, 0, 0, 3.38, 3.89, 4.39];
 const LINE_GONE = (i: number) => T.exist + i * 0.12;
 
 const TRACK: MoodKey[] = [

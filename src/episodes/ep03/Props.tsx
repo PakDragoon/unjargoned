@@ -1,5 +1,7 @@
 import React from "react";
+import { interpolate } from "remotion";
 import { colors } from "../../shared/brand";
+import { pop, ramp, sec } from "../../shared/motion";
 
 // Ep 3's recurring props (the exam analogy runs through S2, S3b, S5 and S6). Scene-specific drawings stay in the scene.
 export const PAPER = "#F3EBDD";
@@ -105,3 +107,60 @@ export const Wave: React.FC<{ w: number; p: number; color?: string; seed?: numbe
     </div>
   );
 };
+
+/** The exam paper: small at the S2 desk; big in the S3 viewer test (blank = 0, a confident guess = maybe 1). */
+export type SheetTimes = { write: number; sounds: number; zero: number; maybe: number; correct: number };
+export const ExamSheet: React.FC<{ frame: number; big: boolean; t?: SheetTimes }> = ({ frame, big, t = { write: 99, sounds: 99, zero: 99, maybe: 99, correct: 99 } }) => {
+  const scribble = "Around 1350";
+  const shown = Math.floor(interpolate(frame, [sec(t.write + 0.15), sec(t.sounds + 0.5)], [0, scribble.length], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }));
+  const zero = pop(frame, t.zero);
+  const maybe = pop(frame, t.maybe);
+  const tick = ramp(frame, t.correct, 0.35);
+  const rowB = ramp(frame, t.write - 0.3, 0.3);
+  return (
+    <div
+      style={{
+        width: big ? 1060 : 620, height: big ? 700 : 420, borderRadius: 24, backgroundColor: PAPER, color: colors.ink,
+        padding: big ? "52px 64px" : "36px 44px", boxSizing: "border-box", transform: `rotate(${big ? -1.2 : -4}deg)`,
+        boxShadow: "0 30px 60px rgba(0,0,0,0.35)", display: "flex", flexDirection: "column", gap: big ? 40 : 26,
+      }}
+    >
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+        <div style={{ fontSize: big ? 56 : 48, fontWeight: 800, letterSpacing: 2 }}>EXAM</div>
+        <div style={{ fontSize: big ? 44 : 0, fontWeight: 600, opacity: 0.55 }}>Name: Dot</div>
+      </div>
+      {big ? (
+        <>
+          <div style={{ fontSize: 60, fontWeight: 700 }}>Q7. When was the castle built?</div>
+          {[0, 1].map((row) => (
+            <div key={row} style={{ display: "flex", alignItems: "center", gap: 32, opacity: row === 0 ? 1 : rowB }}>
+              <div style={{ fontSize: 56, fontWeight: 800, width: 60, opacity: 0.6 }}>{row === 0 ? "A" : "B"}</div>
+              <div
+                style={{
+                  width: 520, height: 110, borderRadius: 16, border: `5px solid ${colors.ink}`, boxSizing: "border-box",
+                  display: "flex", alignItems: "center", paddingLeft: 26, fontSize: 60, fontWeight: 700, color: PEN,
+                  fontStyle: "italic", whiteSpace: "nowrap", overflow: "hidden",
+                }}
+              >
+                {row === 1 ? scribble.slice(0, shown) : ""}
+              </div>
+              {row === 0 ? (
+                <div style={{ fontSize: 96, fontWeight: 800, color: RED, transform: `rotate(-10deg) scale(${Math.min(1.15, zero * 1.0)})`, opacity: Math.min(1, zero) }}>0</div>
+              ) : (
+                <div style={{ display: "flex", alignItems: "center", gap: 14, opacity: Math.min(1, maybe), transform: `scale(${Math.min(1.1, maybe)})` }}>
+                  <div style={{ fontSize: 96, fontWeight: 800, color: tick > 0.5 ? "#1F9D74" : "#C98A00" }}>{tick > 0.5 ? "1" : "1?"}</div>
+                  <svg width={84} height={84} viewBox="0 0 84 84" aria-hidden style={{ opacity: tick }}>
+                    <path d="M 12 44 L 34 66 L 74 18" fill="none" stroke="#1F9D74" strokeWidth={14} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - tick} />
+                  </svg>
+                </div>
+              )}
+            </div>
+          ))}
+        </>
+      ) : (
+        [0, 1, 2, 3].map((i) => <div key={i} style={{ height: 22, borderRadius: 11, width: `${[92, 70, 84, 55][i]}%`, backgroundColor: "rgba(20,22,28,0.18)" }} />)
+      )}
+    </div>
+  );
+};
+

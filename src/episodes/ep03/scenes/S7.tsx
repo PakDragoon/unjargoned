@@ -13,7 +13,7 @@ import { scene } from "../timeline";
 const S = scene("S7");
 
 // Times (s) from the S7 word timings in captions.json. Re-voice S7 → re-check these.
-const T = { soFar: 0.16, talks: 1.46, act: 3.3, flight: 4.04, email: 5.02, money: 5.82, agent: 7.58, next: 8.86, subscribe: 10.5, endScreen: 12.09 };
+const T = { soFar: 0.18, talks: 1.48, act: 3.34, flight: 4.08, email: 5.1, money: 5.94, agent: 7.68, next: 8.98, subscribe: 10.64, endScreen: 12.26 };
 
 const TRACK: MoodKey[] = [
   { at: 0, mood: "neutral" },

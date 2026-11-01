@@ -6,205 +6,198 @@ import { Dot, MoodKey, glances, hops } from "../../../shared/Dot";
 import { LineWipeIn } from "../../../shared/LineWipe";
 import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
 import { SceneShell } from "../../../shared/SceneShell";
-import { Mark, PAPER, PEN, RED, Stamp } from "../Props";
-import { QuestionStrip } from "../QuestionStrip";
+import { ExamSheet, Mark, Pencil, Stamp } from "../Props";
+import { AnswerCard, QuestionStrip } from "../QuestionStrip";
 import { scene } from "../timeline";
 
 const S = scene("S3");
 
 // Times (s) from the S3 word timings in captions.json. Re-voice S3 → re-check these.
 const T = {
-  why: 1.42, because: 3.36, marked: 4.38, y2025: 5.54, researchers: 6.98, openai: 7.8, company: 9.14, published: 11.48,
-  title: 12.8, titleEnd: 14.02, answer: 15.22, exam: 16.2, when: 17.34, tested: 18.76, scoring: 20.1,
-  right: 22.12, point: 23.2, wrong: 24.2, zero: 25.04, idk: 26.22, zero2: 27.38, bluffing: 28.6, wins: 29.1,
-  facts: 30.96, barely: 31.54, asked: 33.26, birthdays: 35.26, told: 36.38, knew: 37.92,
-  three: 38.72, tries: 38.92, three2: 40.14, dates: 40.72, allWrong: 41.62,
+  why: 1.46, quick: 3.78, exam: 5.48, noClue: 7.64, leave: 9.08, zero: 10.46, make: 11.78, guess: 12.22, lucky: 13.1,
+  youd: 14.9, everyone: 16.46, learns: 18.22, millions: 20.68, marked: 23.34, right: 24.42, wrong: 25.74, idk: 27.4,
+  overTime: 29.46, pushed: 30.76, guessing: 33.16, idkNever: 34.52, habit: 36.54, always: 38.08,
+  researchers: 40.24, openai: 40.56, y2025: 44.94, asked: 46.36, only: 49.56, three: 51.32, three2: 52.74, dates: 53.36,
+  allWrong: 54.38, answer: 55.56, trained: 57.44,
 };
 
-// Shots: the marker's red pen → the paper → the scoreboard (honest vs bluffer) → the birthday test.
-const P = { pen: [0.0, 5.26], paper: [5.26, 16.77], board: [16.77, 30.54], bday: [30.54, 99] } as const;
+// Shots: the viewer's own exam (blank or guess?) → millions of marked questions → the needle swings to "guess"
+// → the habit → the OpenAI paper + birthday test → ANSWER 1.
+const P = { quiz: [0, 17.9], train: [17.9, 36.3], habit: [36.3, 40.0], paper: [40.0, 46.1], bday: [46.1, 55.3], answer: [55.3, 99] } as const;
 
 const TRACK: MoodKey[] = [
   { at: 0, mood: "curious" },
-  { at: sec(T.marked), mood: "surprised" },
-  { at: sec(T.researchers), mood: "intrigued" },
-  { at: sec(T.exam), mood: "aha" },
-  { at: sec(T.scoring), mood: "neutral" },
+  { at: sec(T.noClue), mood: "worried" },
+  { at: sec(T.zero), mood: "sad" },
+  { at: sec(T.make), mood: "intrigued" },
+  { at: sec(T.youd), mood: "smug" },
+  { at: sec(T.learns), mood: "curious" },
   { at: sec(T.idk + 0.3), mood: "confused" },
-  { at: sec(T.bluffing), mood: "smug" },
-  { at: sec(T.facts), mood: "curious" },
+  { at: sec(T.pushed), mood: "intrigued" },
+  { at: sec(T.habit), mood: "aha" },
+  { at: sec(T.researchers), mood: "curious" },
   { at: sec(T.three), mood: "worried" },
   { at: sec(T.allWrong), mood: "panic" },
+  { at: sec(T.answer), mood: "happy" },
 ];
 
-// Dot: beside the sheet, up by the paper's title, between the two score columns, by the chat.
+// Dot: writes the guess on the sheet, joins the crowd at "Guess", watches the marking, rides the needle, stands by the answer.
 const ROUTE = hops([
-  { at: 0, x: 1560, y: 860 },
-  { at: sec(T.researchers + 0.2), x: 1500, y: 420 },
-  { at: sec(T.when + 0.2), x: 960, y: 900 }, // between honest and bluffer
-  { at: sec(T.bluffing + 0.3), x: 1250, y: 880 }, // hops toward the bluffer's trophy
-  { at: sec(T.facts + 0.3), x: 1600, y: 860 },
+  { at: 0, x: 1580, y: 860 },
+  { at: sec(T.make - 0.1), x: 1150, y: 690 }, // onto the sheet beside answer B, writes the guess
+  { at: sec(T.youd + 0.2), x: 1580, y: 900 }, // under the "Guess" crowd
+  { at: sec(T.learns + 0.3), x: 1620, y: 880 },
+  { at: sec(T.pushed - 0.2), x: 330, y: 620 }, // up-left of the needle, watching it swing
+  { at: sec(T.habit), x: 1600, y: 860 },
+  { at: sec(T.answer + 0.2), x: 1640, y: 880 },
 ]);
 const LOOK = glances([
-  { at: 0, x: -0.8, y: 0 },
-  { at: sec(T.researchers + 0.2), x: -0.8, y: 0.2 },
-  { at: sec(T.when + 0.2), x: -0.9, y: -0.6 },
-  { at: sec(T.wrong), x: 0, y: -0.9 },
-  { at: sec(T.idk), x: -0.9, y: -0.6 },
-  { at: sec(T.bluffing + 0.3), x: 0.7, y: -0.6 },
-  { at: sec(T.facts + 0.3), x: -0.8, y: -0.3 },
+  { at: 0, x: -0.8, y: -0.2 },
+  { at: sec(T.make - 0.1), x: -0.8, y: 0.3 },
+  { at: sec(T.youd + 0.2), x: -0.8, y: -0.4 },
+  { at: sec(T.learns + 0.3), x: -0.8, y: -0.3 },
+  { at: sec(T.pushed - 0.2), x: 0.9, y: -0.4 },
+  { at: sec(T.habit), x: -0.8, y: -0.2 },
   { at: sec(T.three), x: -0.8, y: 0.3 },
+  { at: sec(T.answer + 0.2), x: -0.8, y: -0.2 },
 ]);
 
-/** The marker's red pen. */
-const RedPen: React.FC = () => (
-  <svg width={60} height={260} viewBox="0 0 60 260" aria-hidden>
-    <rect x={10} y={0} width={40} height={40} rx={10} fill={colors.lineStrong} />
-    <rect x={10} y={36} width={40} height={170} rx={8} fill={RED} />
-    <path d="M 10 206 L 50 206 L 30 256 Z" fill={PAPER} />
-    <path d="M 22 236 L 38 236 L 30 256 Z" fill={RED} />
-  </svg>
-);
-
-/** One student's column on the scoreboard: three questions, then a total. */
-const Column: React.FC<{ frame: number; name: string; answers: { text: string; at: number; score: 0 | 1; mark: "tick" | "cross" | "none" }[]; totalAt: number; win?: boolean }> = ({ frame, name, answers, totalAt, win }) => {
-  const total = answers.filter((a) => frame >= sec(a.at + 0.5)).reduce((t, a) => t + a.score, 0);
-  const trophy = pop(frame, T.bluffing);
-  return (
-    <div style={{ width: 640, borderRadius: 32, backgroundColor: PAPER, color: colors.ink, padding: "36px 44px", boxSizing: "border-box", boxShadow: "0 30px 60px rgba(0,0,0,0.35)", position: "relative" }}>
-      <div style={{ fontSize: 52, fontWeight: 800, marginBottom: 20 }}>{name}</div>
-      {answers.map((a, i) => {
-        const o = ramp(frame, a.at, 0.25);
-        return (
-          <div key={i} style={{ display: "flex", alignItems: "center", gap: 18, height: 96, opacity: o }}>
-            <div style={{ fontSize: 44, fontWeight: 700, opacity: 0.5, width: 64 }}>Q{i + 1}</div>
-            <div style={{ flex: 1, fontSize: 50, fontWeight: 700, color: PEN, fontStyle: "italic", whiteSpace: "nowrap" }}>{a.text}</div>
-            <div style={{ width: 70 }}>{a.mark !== "none" ? <Mark kind={a.mark} p={ramp(frame, a.at + 0.35, 0.3)} size={64} /> : null}</div>
-            <div style={{ width: 50, fontSize: 56, fontWeight: 800, color: a.score ? "#1F9D74" : RED, opacity: ramp(frame, a.at + 0.5, 0.2) }}>{a.score}</div>
-          </div>
-        );
-      })}
-      <div style={{ height: 6, backgroundColor: colors.ink, opacity: 0.6, margin: "14px 0" }} />
-      <div style={{ display: "flex", justifyContent: "space-between", fontSize: 60, fontWeight: 800, opacity: ramp(frame, totalAt, 0.3) }}>
-        <span>Total</span>
-        <span style={{ color: win ? "#1F9D74" : RED }}>{total}</span>
-      </div>
-      {win ? (
-        <div style={{ position: "absolute", right: -50, top: -70, transform: `rotate(10deg) scale(${Math.min(1.1, trophy)})`, opacity: Math.min(1, trophy) }}>
-          <svg width={150} height={150} viewBox="0 0 150 150" aria-hidden>
-            <path d="M 40 20 H 110 V 60 a 35 35 0 0 1 -70 0 Z" fill={colors.yellow} />
-            <path d="M 40 30 H 18 a 22 22 0 0 0 26 38 M 110 30 H 132 a 22 22 0 0 1 -26 38" fill="none" stroke={colors.yellow} strokeWidth={10} />
-            <rect x={66} y={92} width={18} height={26} fill={colors.yellow} />
-            <rect x={44} y={116} width={62} height={18} rx={6} fill={colors.yellow} />
-          </svg>
-        </div>
-      ) : null}
+/** One marked practice question card. */
+const QCard: React.FC<{ mark: "tick" | "cross" | "idk"; p: number }> = ({ mark, p }) => (
+  <div style={{ width: 230, height: 150, borderRadius: 20, backgroundColor: "#F3EBDD", padding: "18px 22px", boxSizing: "border-box", position: "relative", boxShadow: "0 14px 30px rgba(0,0,0,0.35)" }}>
+    {[80, 60, 70].map((w, i) => (
+      <div key={i} style={{ height: 12, borderRadius: 6, width: `${w}%`, backgroundColor: "rgba(20,22,28,0.2)", marginBottom: 12 }} />
+    ))}
+    <div style={{ position: "absolute", right: 10, bottom: 6 }}>
+      {mark === "idk" ? (
+        <div style={{ fontSize: 40, fontWeight: 800, color: "#E0533B", opacity: p }}>0</div>
+      ) : (
+        <Mark kind={mark} p={p} size={60} />
+      )}
     </div>
-  );
-};
+  </div>
+);
 
 const S3Content: React.FC = () => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   const f = (r: readonly [number, number]) => during(frame, r[0], r[1], 0.35);
+  const dot = ROUTE.path(frame);
+  const writing = frame >= sec(T.make + 0.1) && frame < sec(T.lucky - 0.1);
 
-  // The red pen dashes across the sheet on "marked": cross, tick.
-  const penX = interpolate(frame, [sec(T.because), sec(T.marked), sec(T.marked + 0.5), sec(T.marked + 0.9)], [1250, 1010, 1010, 1010], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const penY = interpolate(frame, [sec(T.marked), sec(T.marked + 0.45), sec(T.marked + 0.5), sec(T.marked + 0.9)], [330, 330, 520, 520], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  // The marking conveyor: cards slide left across the screen, each gets marked as it passes the pen.
+  const conveyor = (frame - sec(T.millions - 0.4)) / 30; // seconds since it started
+  const marks: ("tick" | "cross" | "idk")[] = ["tick", "cross", "idk", "tick", "cross", "tick", "idk", "cross"];
 
-  const titleWords = ["Why", "Language", "Models", "Hallucinate"];
+  // The needle: from the middle, pushed toward "Guess".
+  const needle = interpolate(frame, [sec(T.pushed), sec(T.guessing + 0.4)], [0, 55], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   return (
     <AbsoluteFill style={{ transform: `scale(${pushIn(frame, durationInFrames)})` }}>
-      <QuestionStrip active={0} />
+      <QuestionStrip active={0} answered={frame >= sec(T.answer + 0.4) ? 1 : 0} />
 
-      {/* 1 · How it gets marked: the red pen */}
-      <AbsoluteFill style={{ opacity: f(P.pen) }}>
-        <div style={{ position: "absolute", left: 360, top: 220, width: 820, height: 620, borderRadius: 24, backgroundColor: PAPER, color: colors.ink, padding: "48px 60px", boxSizing: "border-box", transform: "rotate(-2deg)", boxShadow: "0 30px 60px rgba(0,0,0,0.35)" }}>
-          <div style={{ fontSize: 56, fontWeight: 800, letterSpacing: 2, marginBottom: 40 }}>EXAM</div>
-          {[["Q1", "Around 1350", "cross"], ["Q2", "Paris", "tick"]].map(([q, a, m], i) => (
-            <div key={q} style={{ display: "flex", alignItems: "center", gap: 30, height: 150 }}>
-              <div style={{ fontSize: 52, fontWeight: 700, opacity: 0.5 }}>{q}</div>
-              <div style={{ fontSize: 60, fontWeight: 700, color: PEN, fontStyle: "italic", flex: 1 }}>{a}</div>
-              <Mark kind={m as "tick" | "cross"} p={ramp(frame, T.marked + (i === 0 ? 0.05 : 0.55), 0.3)} size={100} />
-            </div>
-          ))}
+      {/* 1 · Quick test: blank or guess? */}
+      <AbsoluteFill style={{ opacity: f(P.quiz) }}>
+        <div style={{ position: "absolute", left: 120, top: 200, transform: `translateY(${(1 - ramp(frame, T.quick - 0.2, 0.4)) * 60}px)` }}>
+          <ExamSheet frame={frame} big t={{ write: T.make, sounds: T.guess, zero: T.zero, maybe: T.lucky, correct: 999 }} />
         </div>
-        <div style={{ position: "absolute", left: penX, top: penY - 230, transform: "rotate(25deg)", transformOrigin: "50% 100%", opacity: ramp(frame, T.because - 0.2, 0.3) }}>
-          <RedPen />
+        {/* What would you do? */}
+        <div style={{ position: "absolute", left: 1260, top: 300, display: "flex", flexDirection: "column", gap: 40, opacity: ramp(frame, T.youd - 0.3, 0.3) }}>
+          {[
+            { label: "Leave it blank", pick: false },
+            { label: "Guess", pick: true },
+          ].map((b) => {
+            const picked = b.pick && frame >= sec(T.youd + 0.6);
+            return (
+              <div key={b.label} style={{ width: 460, padding: "28px 0", textAlign: "center", borderRadius: 999, fontSize: 60, fontWeight: 800, backgroundColor: picked ? colors.yellow : colors.panel, color: picked ? colors.ink : colors.subtext, border: `5px solid ${picked ? colors.yellow : colors.line}` }}>
+                {b.label}
+              </div>
+            );
+          })}
+          {/* "Everyone does": a crowd of little dots piles onto Guess */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, width: 460, justifyContent: "center" }}>
+            {Array.from({ length: 14 }, (_, i) => (
+              <div key={i} style={{ width: 34, height: 34, borderRadius: 17, backgroundColor: colors.white, opacity: Math.min(1, pop(frame, T.everyone + i * 0.05)), transform: `scale(${Math.min(1, pop(frame, T.everyone + i * 0.05))})` }} />
+            ))}
+          </div>
         </div>
       </AbsoluteFill>
 
-      {/* 2 · The paper */}
+      {/* 2 · Millions of practice questions, each marked: right 1, wrong 0, "I don't know" 0 */}
+      <AbsoluteFill style={{ opacity: f(P.train) }}>
+        <div style={{ position: "absolute", left: 0, right: 0, top: 200, height: 200, overflow: "hidden", opacity: ramp(frame, T.millions - 0.4, 0.3) }}>
+          {marks.map((m, i) => {
+            const x = 1920 - ((conveyor * 520 + i * 300) % 2400);
+            const markP = x < 900 ? 1 : 0;
+            return (
+              <div key={i} style={{ position: "absolute", left: x, top: 20 }}>
+                <QCard mark={m} p={markP} />
+              </div>
+            );
+          })}
+          <div style={{ position: "absolute", left: 900, top: 0, width: 8, height: 200, backgroundColor: colors.yellow, borderRadius: 4 }} />
+        </div>
+        <div style={{ position: "absolute", left: 160, top: 470, display: "flex", gap: 40 }}>
+          {[
+            { label: "Right", score: "1", at: T.right, good: true },
+            { label: "Wrong", score: "0", at: T.wrong, good: false },
+            { label: "“I don't know”", score: "0", at: T.idk, good: false },
+          ].map((r) => {
+            const p = pop(frame, r.at - 0.1);
+            return (
+              <div key={r.label} style={{ width: 440, padding: "30px 0", borderRadius: 32, backgroundColor: colors.panel, border: `5px solid ${r.good ? colors.mint : colors.line}`, textAlign: "center", opacity: Math.min(1, p) * (1 - ramp(frame, T.overTime - 0.3, 0.3)), transform: `scale(${0.8 + 0.2 * Math.min(1, p)})` }}>
+                <div style={{ fontSize: 56, fontWeight: 800 }}>{r.label}</div>
+                <div style={{ fontSize: 130, fontWeight: 800, color: r.good ? colors.mint : colors.coral, lineHeight: 1.1 }}>{r.score}</div>
+              </div>
+            );
+          })}
+        </div>
+        {/* the needle, pushed toward "Guess" */}
+        <div style={{ position: "absolute", left: 560, top: 430, width: 800, height: 420, opacity: ramp(frame, T.overTime, 0.35), transform: `translateY(${(1 - ramp(frame, T.overTime, 0.4)) * 40}px)` }}>
+          <svg width={800} height={420} viewBox="0 0 800 420" aria-hidden>
+            <path d="M 80 380 A 320 320 0 0 1 720 380" fill="none" stroke={colors.line} strokeWidth={26} strokeLinecap="round" />
+            <path d="M 400 60 A 320 320 0 0 1 720 380" fill="none" stroke={colors.yellow} strokeWidth={26} strokeLinecap="round" opacity={ramp(frame, T.guessing, 0.3)} />
+            <g transform={`rotate(${needle} 400 380)`}>
+              <line x1={400} y1={380} x2={400} y2={110} stroke={colors.white} strokeWidth={14} strokeLinecap="round" />
+            </g>
+            <circle cx={400} cy={380} r={26} fill={colors.white} />
+          </svg>
+          <div style={{ position: "absolute", left: -60, top: 400, width: 380, textAlign: "center", fontSize: 54, fontWeight: 800, color: colors.subtext, opacity: 1 - 0.6 * ramp(frame, T.idkNever, 0.3) }}>"I don't know"</div>
+          <div style={{ position: "absolute", right: -40, top: 400, width: 300, textAlign: "center", fontSize: 54, fontWeight: 800, color: frame >= sec(T.guessing) ? colors.yellow : colors.subtext }}>Guess</div>
+        </div>
+      </AbsoluteFill>
+
+      {/* 3 · The habit */}
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: f(P.habit) }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 30, marginRight: 240 }}>
+          <div style={{ fontSize: 64, fontWeight: 700, color: colors.subtext, opacity: ramp(frame, T.habit - 0.1, 0.3) }}>it learns one habit:</div>
+          <Stamp p={pop(frame, T.always - 0.05)} color={colors.yellow} size={130} rotate={-4}>
+            ALWAYS ANSWER
+          </Stamp>
+        </div>
+      </AbsoluteFill>
+
+      {/* 4 · The paper (proof) */}
       <AbsoluteFill style={{ opacity: f(P.paper) }}>
-        <div
-          style={{
-            position: "absolute", left: 300, top: 200, width: 980, height: 760, borderRadius: 18, backgroundColor: colors.white, color: colors.ink,
-            padding: "60px 72px", boxSizing: "border-box", boxShadow: "0 30px 60px rgba(0,0,0,0.4)",
-            transform: `translateY(${(1 - ramp(frame, P.paper[0], 0.5)) * 80}px) rotate(1deg)`,
-          }}
-        >
+        <div style={{ position: "absolute", left: 300, top: 220, width: 980, borderRadius: 18, backgroundColor: colors.white, color: colors.ink, padding: "56px 72px", boxSizing: "border-box", boxShadow: "0 30px 60px rgba(0,0,0,0.4)", transform: `translateY(${(1 - ramp(frame, P.paper[0], 0.5)) * 80}px) rotate(1deg)` }}>
           <div style={{ display: "flex", justifyContent: "space-between", fontSize: 44, fontWeight: 700, opacity: 0.6 }}>
-            <span style={{ opacity: ramp(frame, T.openai - 0.2, 0.3) }}>OpenAI researchers</span>
+            <span>OpenAI researchers</span>
             <span style={{ opacity: ramp(frame, T.y2025 - 0.2, 0.3) }}>2025</span>
           </div>
-          <div style={{ fontSize: 84, fontWeight: 800, lineHeight: 1.1, margin: "50px 0 50px", display: "flex", flexWrap: "wrap", gap: "0 24px" }}>
-            {titleWords.map((w, i) => {
-              const lit = ramp(frame, T.title + i * ((T.titleEnd - T.title) / 4), 0.2);
-              return (
-                <span key={w} style={{ position: "relative" }}>
-                  {w}
-                  <span style={{ position: "absolute", left: 0, bottom: 4, height: 18, width: `${lit * 100}%`, backgroundColor: colors.yellow, opacity: 0.6, zIndex: -1 }} />
-                </span>
-              );
-            })}
-          </div>
-          {[94, 88, 97, 72, 90, 60].map((w, i) => (
+          <div style={{ fontSize: 84, fontWeight: 800, lineHeight: 1.1, margin: "44px 0" }}>Why Language Models Hallucinate</div>
+          {[94, 88, 97, 72].map((w, i) => (
             <div key={i} style={{ height: 18, borderRadius: 9, width: `${w}%`, backgroundColor: "rgba(20,22,28,0.14)", marginBottom: 22 }} />
           ))}
-          {/* "Their answer is that exam" */}
-          <div style={{ position: "absolute", right: 60, bottom: 50 }}>
-            <Stamp p={pop(frame, T.exam - 0.15)} color={colors.ink} size={60} rotate={-8}>
-              = THE EXAM
-            </Stamp>
-          </div>
         </div>
       </AbsoluteFill>
 
-      {/* 3 · Scoring: the honest student vs the bluffer */}
-      <AbsoluteFill style={{ opacity: f(P.board) }}>
-        <div style={{ position: "absolute", left: 140, top: 190, display: "flex", gap: 160 }}>
-          <Column
-            frame={frame}
-            name="Honest"
-            totalAt={T.zero2 + 0.4}
-            answers={[
-              { text: "Paris", at: T.right - 0.1, score: 1, mark: "tick" },
-              { text: "I don't know", at: T.idk - 0.1, score: 0, mark: "none" },
-              { text: "I don't know", at: T.idk + 0.4, score: 0, mark: "none" },
-            ]}
-          />
-          <Column
-            frame={frame}
-            name="Bluffer"
-            totalAt={T.zero2 + 0.4}
-            win
-            answers={[
-              { text: "Paris", at: T.right - 0.1, score: 1, mark: "tick" },
-              { text: "Around 1350", at: T.wrong - 0.1, score: 0, mark: "cross" },
-              { text: "Blue whale", at: T.idk + 0.4, score: 1, mark: "tick" },
-            ]}
-          />
-        </div>
-      </AbsoluteFill>
-
-      {/* 4 · The birthday test */}
+      {/* 5 · The birthday test */}
       <AbsoluteFill style={{ opacity: f(P.bday) }}>
-        <div style={{ position: "absolute", left: 180, top: 200, transform: `translateY(${(1 - ramp(frame, P.bday[0], 0.4)) * 40}px)` }}>
+        <div style={{ position: "absolute", left: 180, top: 200 }}>
           <ChatWindow width={1180} height={800}>
             <ChatBubble from="me" o={pop(frame, T.asked - 0.2)} fontSize={50}>
               When is the researcher's birthday?{" "}
-              <span style={{ color: colors.yellow, opacity: ramp(frame, T.told - 0.1, 0.3) }}>Only answer if you know.</span>
+              <span style={{ color: colors.yellow, opacity: ramp(frame, T.only - 0.3, 0.3) }}>Only answer if you know.</span>
             </ChatBubble>
             {[["3 July", T.three], ["15 June", T.three2], ["1 January", T.dates]].map(([d, at], i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 24 }}>
@@ -215,17 +208,17 @@ const S3Content: React.FC = () => {
               </div>
             ))}
           </ChatWindow>
-          {/* a cake icon: "a stranger's birthday" */}
-          <svg style={{ position: "absolute", right: -40, top: -60, opacity: Math.min(1, pop(frame, T.facts)) }} width={170} height={170} viewBox="0 0 170 170" aria-hidden>
-            <rect x={25} y={80} width={120} height={70} rx={14} fill={colors.periwinkle} />
-            <rect x={25} y={100} width={120} height={14} fill={colors.white} opacity={0.6} />
-            <rect x={80} y={40} width={10} height={40} rx={4} fill={colors.white} />
-            <path d="M 85 14 C 95 28, 92 38, 85 40 C 78 38, 75 28, 85 14 Z" fill={colors.yellow} />
-            <text x={85} y={140} textAnchor="middle" fontSize={34} fontWeight={800} fill={colors.ink}>?</text>
-          </svg>
         </div>
       </AbsoluteFill>
 
+      {/* 6 · Answer 1 */}
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: f(P.answer) }}>
+        <div style={{ marginRight: 200 }}>
+          <AnswerCard n={1} p={pop(frame, T.answer)} text={<>It's trained to <span style={{ color: colors.yellow }}>always answer</span>.</>} />
+        </div>
+      </AbsoluteFill>
+
+      <Pencil x={dot.x} y={dot.y} o={during(frame, T.make - 0.4, P.quiz[1] - 3.5, 0.2)} wiggle={writing ? Math.sin(frame * 1.7) * 14 : 0} />
       <Dot path={ROUTE.path} squash={ROUTE.squash} track={TRACK} seed="e3s3" look={LOOK} />
     </AbsoluteFill>
   );

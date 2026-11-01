@@ -7,21 +7,21 @@ import { LineWipeIn } from "../../../shared/LineWipe";
 import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
 import { SceneShell } from "../../../shared/SceneShell";
 import { ExamBook, Magnifier, PAPER, RED, Stamp } from "../Props";
-import { QuestionStrip } from "../QuestionStrip";
+import { AnswerCard, QuestionStrip } from "../QuestionStrip";
 import { scene } from "../timeline";
 
 const S = scene("S5");
 
 // Times (s) from the S5 word timings in captions.json. Re-voice S5 → re-check these.
 const T = {
-  protect: 1.84, habits: 3.28, one: 4.82, sources: 5.72, open: 7.3, lawyer: 8.9, asked: 10.06, gotCases: 11.46, notReal: 13.0,
-  link: 14.42, nothing: 15.58, two: 16.7, openBook: 17.76, paste: 19.46, letter: 20.8, webpage: 21.36, rules: 22.1, only: 23.82,
-  guesses: 25.32, farLess: 28.4, never: 30.26, three: 31.64, check: 32.22, bluff: 34.22,
-  names: 35.46, numbers: 35.76, dates: 36.2, quotes: 36.56,
+  protect: 1.92, habits: 3.36, one: 4.9, sources: 5.78, open: 7.36, lawyer: 8.98, asked: 10.16, gotCases: 11.64, notReal: 13.2,
+  link: 14.62, nothing: 15.78, two: 16.94, openBook: 17.98, paste: 19.74, letter: 21.06, webpage: 21.62, rules: 22.36, only: 24.12,
+  guesses: 25.62, farLess: 28.66, never: 30.58, three: 32.0, check: 32.5, names: 32.92, numbers: 33.66, dates: 34.06, quotes: 34.48,
+  bluffs: 35.72, oneRight: 37.32, lots: 38.8, good: 40.84, birthday: 41.7, answer: 43.52, openSrc: 44.98, book: 46.08, checkIt: 46.84,
 };
 
 // Left: the checklist builds. Right: one stage per habit.
-const P = { h1: [4.72, 16.5], h2: [16.5, 31.43], h3: [31.43, 99] } as const;
+const P = { h1: [4.8, 16.7], h2: [16.7, 31.75], h3: [31.75, 35.5], hide: [35.5, 43.35], answer: [43.35, 99] } as const;
 const STAGE_X = 700;
 
 const TRACK: MoodKey[] = [
@@ -36,6 +36,9 @@ const TRACK: MoodKey[] = [
   { at: sec(T.never), mood: "intrigued" },
   { at: sec(T.three), mood: "curious" },
   { at: sec(T.names), mood: "aha" },
+  { at: sec(T.oneRight), mood: "intrigued" },
+  { at: sec(T.birthday), mood: "smug" },
+  { at: sec(T.answer), mood: "happy" },
 ];
 
 // Dot: clicks the source link itself, sits by the open book, points at the sliver, carries the magnifier.
@@ -45,8 +48,9 @@ const ROUTE = hops([
   { at: sec(T.lawyer), x: 1660, y: 880 },
   { at: sec(T.openBook - 0.3), x: 1000, y: 880 }, // under the book
   { at: sec(T.guesses), x: 1660, y: 880 },
-  { at: sec(T.never - 0.3), x: 1120, y: 975 }, // under the meter, eyeing the sliver that's left
+  { at: sec(T.never - 0.3), x: 990, y: 960 }, // left of the meter text, eyeing the sliver that's left
   { at: sec(T.check), x: 1660, y: 880 },
+  { at: sec(T.answer + 0.2), x: 1640, y: 880 },
 ]);
 const LOOK = glances([
   { at: 0, x: -0.8, y: -0.3 },
@@ -90,7 +94,7 @@ const S5Content: React.FC = () => {
   const guessLevel = interpolate(frame, [sec(T.guesses), sec(T.farLess)], [1, 0.14], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   // Habit 3: magnifier sweeps the answer, then each risky detail lights up.
-  const magT = ramp(frame, T.check, 3.2);
+  const magT = ramp(frame, T.check, 2.6);
   const magX = STAGE_X + 60 + magT * 820;
   const magY = 440 + Math.sin(magT * Math.PI * 2) * 60;
   const hl = (at: number) => ({
@@ -100,10 +104,10 @@ const S5Content: React.FC = () => {
 
   return (
     <AbsoluteFill style={{ transform: `scale(${pushIn(frame, durationInFrames)})` }}>
-      <QuestionStrip active={2} />
+      <QuestionStrip active={2} answered={frame >= sec(T.answer + 0.4) ? 3 : 2} />
 
-      {/* The checklist */}
-      <div style={{ position: "absolute", left: 120, top: 230, display: "flex", flexDirection: "column", gap: 36 }}>
+      {/* The checklist (gives way to the answer card) */}
+      <div style={{ position: "absolute", left: 120, top: 230, display: "flex", flexDirection: "column", gap: 36, opacity: 1 - ramp(frame, P.answer[0], 0.35) }}>
         {ITEMS.map((it, i) => {
           const p = pop(frame, it.at - 0.1);
           const done = frame >= sec((ITEMS[i + 1]?.at ?? 99) - 0.2);
@@ -200,8 +204,62 @@ const S5Content: React.FC = () => {
             ))}
           </div>
         </div>
-        <div style={{ position: "absolute", left: magX - 110, top: magY - 110, opacity: during(frame, T.check - 0.1, 99, 0.3) }}>
+        <div style={{ position: "absolute", left: magX - 110, top: magY - 110, opacity: during(frame, T.check - 0.1, P.h3[1] - 0.3, 0.3) }}>
           <Magnifier size={220} />
+        </div>
+      </AbsoluteFill>
+
+
+      {/* Habit 3, why · one right answer, lots of wrong ones that sound just as good (like the birthday) */}
+      <AbsoluteFill style={{ opacity: f(P.hide) }}>
+        <div style={{ position: "absolute", left: STAGE_X + 40, top: 230, fontSize: 56, fontWeight: 800, color: colors.subtext, opacity: ramp(frame, T.bluffs - 0.3, 0.3) }}>
+          When was it built?
+        </div>
+        <div style={{ position: "absolute", left: STAGE_X + 40, top: 330, display: "flex", flexWrap: "wrap", gap: 22, width: 1020 }}>
+          {[
+            { d: "1352", right: true },
+            { d: "1350", right: false }, { d: "1349", right: false }, { d: "1360", right: false },
+            { d: "1335", right: false }, { d: "1347", right: false }, { d: "1371", right: false },
+          ].map((c, i) => {
+            const at = c.right ? T.oneRight - 0.2 : T.lots - 0.2 + i * 0.12;
+            const p = pop(frame, at);
+            return (
+              <div key={c.d} style={{ padding: "22px 40px", borderRadius: 24, fontSize: 64, fontWeight: 800, backgroundColor: colors.panel, border: `5px solid ${c.right ? colors.mint : colors.line}`, color: c.right ? colors.mint : colors.white, opacity: Math.min(1, p), transform: `scale(${Math.min(1.06, p)})` }}>
+                {c.d}
+                {c.right ? <span style={{ fontSize: 44, marginLeft: 14 }}>✓</span> : null}
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ position: "absolute", left: STAGE_X + 40, top: 640, fontSize: 52, fontWeight: 700, color: colors.subtext, opacity: ramp(frame, T.good - 0.4, 0.3) }}>
+          all sound <span style={{ color: colors.white }}>just as good</span>
+        </div>
+        {/* like that birthday */}
+        <div style={{ position: "absolute", left: STAGE_X + 40, top: 760, display: "flex", gap: 18, opacity: ramp(frame, T.birthday - 0.2, 0.3) }}>
+          {["3 July?", "15 June?", "1 January?"].map((d, i) => (
+            <div key={d} style={{ padding: "14px 28px", borderRadius: 999, fontSize: 46, fontWeight: 800, backgroundColor: colors.panel, border: `4px solid ${colors.coral}`, color: colors.coral, opacity: Math.min(1, pop(frame, T.birthday - 0.2 + i * 0.1)) }}>
+              {d}
+            </div>
+          ))}
+        </div>
+      </AbsoluteFill>
+
+      {/* Answer 3 */}
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: f(P.answer) }}>
+        <div style={{ marginRight: 200 }}>
+          <AnswerCard
+            n={3}
+            p={pop(frame, T.answer)}
+            text={
+              <>
+                <span style={{ opacity: 0.35 + 0.65 * ramp(frame, T.openSrc - 0.1, 0.2) }}>Open the sources.</span>
+                <br />
+                <span style={{ opacity: 0.35 + 0.65 * ramp(frame, T.book - 0.1, 0.2) }}>Give it the <span style={{ color: colors.yellow }}>book</span>.</span>
+                <br />
+                <span style={{ opacity: 0.35 + 0.65 * ramp(frame, T.checkIt - 0.1, 0.2) }}>Check the details.</span>
+              </>
+            }
+          />
         </div>
       </AbsoluteFill>
 
