@@ -14,14 +14,14 @@ const S = scene("S5");
 
 // Times (s) from the S5 word timings in captions.json. Re-voice S5 → re-check these.
 const T = {
-  protect: 1.94, habits: 3.38, one: 5.12, sources: 6.08, open: 7.68, lawyer: 9.34, asked: 10.46, gotCases: 11.94, notReal: 13.54,
-  link: 15.02, nothing: 16.2, two: 17.54, openBook: 18.62, paste: 20.44, letter: 21.8, webpage: 22.42, rules: 23.16, only: 24.94,
-  guesses: 26.46, farLess: 29.52, never: 31.54, three: 33.16, check: 33.78, bluff: 35.84,
-  names: 37.14, numbers: 37.46, dates: 37.88, quotes: 38.28,
+  protect: 1.84, habits: 3.28, one: 4.82, sources: 5.72, open: 7.3, lawyer: 8.9, asked: 10.06, gotCases: 11.46, notReal: 13.0,
+  link: 14.42, nothing: 15.58, two: 16.7, openBook: 17.76, paste: 19.46, letter: 20.8, webpage: 21.36, rules: 22.1, only: 23.82,
+  guesses: 25.32, farLess: 28.4, never: 30.26, three: 31.64, check: 32.22, bluff: 34.22,
+  names: 35.46, numbers: 35.76, dates: 36.2, quotes: 36.56,
 };
 
 // Left: the checklist builds. Right: one stage per habit.
-const P = { h1: [5.0, 17.3], h2: [17.3, 32.9], h3: [32.9, 99] } as const;
+const P = { h1: [4.72, 16.5], h2: [16.5, 31.43], h3: [31.43, 99] } as const;
 const STAGE_X = 700;
 
 const TRACK: MoodKey[] = [

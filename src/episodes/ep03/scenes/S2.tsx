@@ -14,14 +14,14 @@ const S = scene("S2");
 
 // Times (s) from the S2 word timings in captions.json. Re-voice S2 → re-check these.
 const T = {
-  lying: 0.42, means: 1.7, guessing: 3.8, student: 4.98, bluffing: 5.28, closedBook: 6.06, exam: 6.52,
-  makes: 8.68, fact: 10.34, hallucination: 11.78, odd: 13.26, seeing: 14.56, things: 14.76, itsBluffing: 15.98,
-  picture: 17.62, blank: 20.72, zero: 21.64, write: 22.92, sounds: 23.76, maybe: 24.92, correct: 25.88,
-  three: 27.32, q1: 28.9, q2: 31.58, q3: 33.52, strip: 34.9,
+  lying: 0.44, means: 1.66, guessing: 3.76, student: 4.88, bluffing: 5.2, closedBook: 5.96, exam: 6.4,
+  makes: 8.32, fact: 9.98, hallucination: 11.32, odd: 12.74, seeing: 14.02, things: 14.22, itsBluffing: 15.46,
+  picture: 16.88, blank: 19.82, zero: 20.72, write: 22.02, sounds: 22.8, maybe: 23.9, correct: 24.82,
+  three: 26.14, q1: 27.6, q2: 30.26, q3: 32.16, strip: 33.46,
 };
 
 // Phases (one hero each): words → closed-book exam → the word card → blank vs bluff → three questions.
-const P = { words: [0, 4.5], desk: [4.5, 7.9], card: [7.9, 17.35], score: [17.35, 27.1], qs: [27.1, 99] } as const;
+const P = { words: [0.0, 4.41], desk: [4.41, 7.54], card: [7.54, 16.66], score: [16.66, 25.95], qs: [25.95, 99] } as const;
 
 const TRACK: MoodKey[] = [
   { at: 0, mood: "curious" },
@@ -46,7 +46,7 @@ const TRACK: MoodKey[] = [
 const ROUTE = hops([
   { at: 0, x: 1540, y: 860 },
   { at: sec(T.student), x: 1100, y: 700 }, // at the desk, between paper and book
-  { at: sec(8.2), x: 1580, y: 860 },
+  { at: sec(7.88), x: 1580, y: 860 },
   { at: sec(T.odd + 0.2), x: 1580, y: 720 }, // hops up to inspect the chips
   { at: sec(T.picture + 0.3), x: 1500, y: 470 }, // by the exam sheet, row A
   { at: sec(T.write - 0.1), x: 1150, y: 690 }, // onto the sheet beside answer B, writes it
@@ -56,7 +56,7 @@ const ROUTE = hops([
 const LOOK = glances([
   { at: 0, x: -0.6, y: -0.3 },
   { at: sec(T.student), x: -0.7, y: 0.4 },
-  { at: sec(8.2), x: -0.6, y: -0.5 },
+  { at: sec(7.88), x: -0.6, y: -0.5 },
   { at: sec(T.odd + 0.2), x: -0.7, y: 0.1 },
   { at: sec(T.picture + 0.3), x: -0.7, y: 0.2 },
   { at: sec(T.write - 0.1), x: -0.8, y: 0.3 },

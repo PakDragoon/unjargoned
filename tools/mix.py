@@ -51,6 +51,7 @@ MUSIC = {
         "period": 48.0,
         "extra_loops": 3,
         "silences": [],  # no planned pause: Ep 3's only quiet beat is the S3b gag (bed muffled automatically)
+        "fade_in": 0.12,  # G4 note: the opening felt flat; music is up from the first frame, with a hit (sfx S1 0.0)
         "dips": [],
     },
 }
@@ -198,9 +199,9 @@ def main() -> None:
     gain = 10 ** (np.interp(np.arange(n) / SR, np.arange(len(out)) / hz, out) / 20)
     bed *= gain[:, None]
 
-    # Fade the very start and end.
-    f = int(1.0 * SR)
-    bed[:f] *= np.linspace(0, 1, f)[:, None]
+    # Fade the very start and end (an episode can open hot: "fade_in" seconds, default 1.0).
+    fi, f = max(1, int(plan.get("fade_in", 1.0) * SR)), int(1.0 * SR)
+    bed[:fi] *= np.linspace(0, 1, fi)[:, None]
     bed[-f:] *= np.linspace(1, 0, f)[:, None]
 
     # Voice to about −16 LUFS before mixing, then the whole mix to the house loudness.

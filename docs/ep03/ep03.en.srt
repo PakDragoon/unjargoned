@@ -1,527 +1,531 @@
 1
-00:00:00,000 --> 00:00:02,119
+00:00:00,000 --> 00:00:02,019
 ChatGPT once made up court
 
 2
-00:00:02,120 --> 00:00:02,560
+00:00:02,020 --> 00:00:02,420
 cases.
 
 3
-00:00:03,400 --> 00:00:03,720
+00:00:03,160 --> 00:00:03,540
 Not one.
 
 4
-00:00:04,340 --> 00:00:05,180
+00:00:04,140 --> 00:00:04,920
 A whole list.
 
 5
-00:00:05,840 --> 00:00:07,699
+00:00:05,560 --> 00:00:07,359
 And a real lawyer handed them to
 
 6
-00:00:07,700 --> 00:00:08,380
+00:00:07,360 --> 00:00:08,040
 a real judge.
 
 7
-00:00:09,400 --> 00:00:10,660
+00:00:08,880 --> 00:00:10,100
 The judge looked them up.
 
 8
-00:00:11,200 --> 00:00:12,080
+00:00:10,640 --> 00:00:11,500
 They didn't exist.
 
 9
-00:00:12,800 --> 00:00:14,359
+00:00:12,220 --> 00:00:13,659
 And when the lawyer asked it, is
 
 10
-00:00:14,360 --> 00:00:16,340
+00:00:13,660 --> 00:00:15,600
 this case real, it said yes.
 
 11
-00:00:17,480 --> 00:00:19,079
+00:00:16,560 --> 00:00:18,019
 Last time, we saw that AI
 
 12
-00:00:19,080 --> 00:00:21,079
+00:00:18,020 --> 00:00:19,939
 guesses what sounds right, not
 
 13
-00:00:21,080 --> 00:00:21,620
+00:00:19,940 --> 00:00:20,460
 what is right.
 
 14
-00:00:22,220 --> 00:00:23,600
+00:00:21,020 --> 00:00:22,360
 Here, those two split apart.
 
 15
-00:00:24,720 --> 00:00:25,680
+00:00:23,280 --> 00:00:24,240
 Why would it do that?
 
 16
-00:00:26,740 --> 00:00:27,940
+00:00:25,100 --> 00:00:26,240
 Let's un-jargon it.
 
 17
-00:00:30,100 --> 00:00:30,880
+00:00:28,033 --> 00:00:28,833
 It wasn't lying.
 
 18
-00:00:31,800 --> 00:00:33,060
+00:00:29,693 --> 00:00:30,973
 Lying means you know the truth.
 
 19
-00:00:33,760 --> 00:00:35,379
+00:00:31,553 --> 00:00:33,232
 It was guessing, like a student
 
 20
-00:00:35,380 --> 00:00:37,040
+00:00:33,233 --> 00:00:34,853
 bluffing in a closed book exam.
 
 21
-00:00:38,180 --> 00:00:39,659
+00:00:35,713 --> 00:00:37,212
 When an AI makes something up
 
 22
-00:00:39,660 --> 00:00:41,519
+00:00:37,213 --> 00:00:39,032
 and says it like a fact, that's
 
 23
-00:00:41,520 --> 00:00:42,660
+00:00:39,033 --> 00:00:40,093
 called a hallucination.
 
 24
-00:00:43,360 --> 00:00:44,659
+00:00:40,773 --> 00:00:42,052
 Odd word, because it isn't
 
 25
-00:00:44,660 --> 00:00:45,300
+00:00:42,053 --> 00:00:42,693
 seeing things.
 
 26
-00:00:45,880 --> 00:00:46,640
+00:00:43,273 --> 00:00:44,013
 It's bluffing.
 
 27
-00:00:47,720 --> 00:00:49,419
+00:00:44,913 --> 00:00:46,552
 Picture that student stuck on a
 
 28
-00:00:49,420 --> 00:00:49,780
+00:00:46,553 --> 00:00:46,913
 question.
 
 29
-00:00:50,580 --> 00:00:51,959
+00:00:47,553 --> 00:00:48,992
 Leave it blank and that's zero
 
 30
-00:00:51,960 --> 00:00:52,420
+00:00:48,993 --> 00:00:49,453
 points.
 
 31
-00:00:53,020 --> 00:00:54,179
+00:00:50,053 --> 00:00:51,112
 Write something that sounds
 
 32
-00:00:54,180 --> 00:00:55,979
+00:00:51,113 --> 00:00:52,852
 right and maybe it gets marked
 
 33
-00:00:55,980 --> 00:00:56,360
+00:00:52,853 --> 00:00:53,253
 correct.
 
 34
-00:00:57,420 --> 00:00:58,460
+00:00:54,173 --> 00:00:55,133
 So three questions.
 
 35
-00:00:59,000 --> 00:01:00,779
+00:00:55,633 --> 00:00:57,372
 Why does AI make things up at
 
 36
-00:01:00,780 --> 00:01:01,020
+00:00:57,373 --> 00:00:57,613
 all?
 
 37
-00:01:01,680 --> 00:01:02,840
+00:00:58,293 --> 00:00:59,413
 Why does it sound so sure?
 
 38
-00:01:03,620 --> 00:01:04,860
+00:01:00,193 --> 00:01:01,353
 And how do you protect yourself?
 
 39
-00:01:05,667 --> 00:01:07,966
+00:01:02,167 --> 00:01:04,426
 Question one, why make things up
 
 40
-00:01:07,967 --> 00:01:08,407
+00:01:04,427 --> 00:01:04,867
 at all?
 
 41
-00:01:09,407 --> 00:01:10,747
-Because of how it gets marked,
+00:01:05,527 --> 00:01:06,967
+Because of how it gets marked.
 
 42
-00:01:11,407 --> 00:01:13,866
-in 2025, researchers at
+00:01:07,547 --> 00:01:09,966
+In 2025, researchers at
 
 43
-00:01:13,867 --> 00:01:16,286
+00:01:09,967 --> 00:01:12,326
 OpenAI, the company behind
 
 44
-00:01:16,287 --> 00:01:18,626
+00:01:12,327 --> 00:01:14,586
 ChatGPT, published a paper
 
 45
-00:01:18,627 --> 00:01:20,366
+00:01:14,587 --> 00:01:16,186
 called Why Language Models
 
 46
-00:01:20,367 --> 00:01:20,987
+00:01:16,187 --> 00:01:16,787
 Hallucinate.
 
 47
-00:01:21,627 --> 00:01:23,027
+00:01:17,387 --> 00:01:18,747
 Their answer is that exam.
 
 48
-00:01:24,007 --> 00:01:25,827
+00:01:19,507 --> 00:01:21,327
 When AIs are trained and tested,
 
 49
-00:01:26,327 --> 00:01:27,666
+00:01:21,787 --> 00:01:23,166
 most of the scoring works the
 
 50
-00:01:27,667 --> 00:01:28,207
+00:01:23,167 --> 00:01:23,687
 same way.
 
 51
-00:01:28,647 --> 00:01:30,986
-A right answer gets a point, a
+00:01:24,107 --> 00:01:25,627
+A right answer gets a point.
 
 52
-00:01:30,987 --> 00:01:33,186
-wrong answer gets zero, and I
+00:01:26,247 --> 00:01:27,587
+A wrong answer gets zero.
 
 53
-00:01:33,187 --> 00:01:34,687
-don't know, also gets zero.
+00:01:28,167 --> 00:01:29,546
+And I don't know, also gets
 
 54
-00:01:35,227 --> 00:01:36,807
-So bluffing always wins.
+00:01:29,547 --> 00:01:29,947
+zero.
 
 55
-00:01:37,887 --> 00:01:39,006
-And some facts it has barely
+00:01:30,447 --> 00:01:31,987
+So bluffing always wins.
 
 56
-00:01:39,007 --> 00:01:39,467
-seen.
+00:01:32,887 --> 00:01:33,966
+And some facts it has barely
 
 57
-00:01:40,047 --> 00:01:42,306
-The researchers asked one AI for
+00:01:33,967 --> 00:01:34,387
+seen.
 
 58
-00:01:42,307 --> 00:01:44,006
-one of their birthdays and told
+00:01:34,947 --> 00:01:37,066
+The researchers asked one AI for
 
 59
-00:01:44,007 --> 00:01:45,647
-it to answer only if it knew.
+00:01:37,067 --> 00:01:38,726
+one of their birthdays and told
 
 60
-00:01:46,207 --> 00:01:48,266
-Three tries, three different
+00:01:38,727 --> 00:01:40,327
+it to answer only if it knew.
 
 61
-00:01:48,267 --> 00:01:49,987
-dates, all wrong.
+00:01:40,887 --> 00:01:42,886
+Three tries, three different
 
 62
-00:01:54,067 --> 00:01:56,206
-Question two, why does it sound
+00:01:42,887 --> 00:01:44,607
+dates, all wrong.
 
 63
-00:01:56,207 --> 00:01:56,747
-so sure?
+00:01:48,667 --> 00:01:50,706
+Question two, why does it sound
 
 64
-00:01:57,847 --> 00:01:59,346
-Remember, it's always guessing
+00:01:50,707 --> 00:01:51,247
+so sure?
 
 65
-00:01:59,347 --> 00:02:00,327
-what sounds right.
+00:01:52,527 --> 00:01:53,566
+Remember, it's always guessing
 
 66
-00:02:00,767 --> 00:02:02,506
-A real fact and a made up one
+00:01:53,567 --> 00:01:54,467
+what sounds right.
 
 67
-00:02:02,507 --> 00:02:04,366
-come out of the same machine, in
+00:01:55,007 --> 00:01:56,626
+A real fact and a made up one
 
 68
-00:02:04,367 --> 00:02:06,387
-the same smooth, friendly voice.
+00:01:56,627 --> 00:01:58,386
+come out of the same machine in
 
 69
-00:02:06,947 --> 00:02:08,226
-There's no wobble when it's
+00:01:58,387 --> 00:02:00,367
+the same smooth, friendly voice.
 
 70
-00:02:08,227 --> 00:02:08,527
-wrong.
+00:02:00,967 --> 00:02:02,146
+There's no wobble when it's
 
 71
-00:02:09,407 --> 00:02:10,966
-And its training to be a helpful
+00:02:02,147 --> 00:02:02,447
+wrong.
 
 72
-00:02:10,967 --> 00:02:12,466
-assistant was marked the same
+00:02:03,207 --> 00:02:04,666
+And its training to be a helpful
 
 73
-00:02:12,467 --> 00:02:12,807
-way.
+00:02:04,667 --> 00:02:06,126
+assistant was marked the same
 
 74
-00:02:13,247 --> 00:02:15,066
-A sure answer beats, I'm not
+00:02:06,127 --> 00:02:06,467
+way.
 
 75
-00:02:15,067 --> 00:02:15,387
-sure.
+00:02:06,887 --> 00:02:08,606
+A sure answer beats, I'm not
 
 76
-00:02:16,327 --> 00:02:18,086
-That's how an airline's chatbot
+00:02:08,607 --> 00:02:08,907
+sure.
 
 77
-00:02:18,087 --> 00:02:20,126
-in Canada told a man whose
+00:02:09,607 --> 00:02:11,326
+That's how an airline's chatbot
 
 78
-00:02:20,127 --> 00:02:22,166
-grandmother had just died that
+00:02:11,327 --> 00:02:13,286
+in Canada told a man whose
 
 79
-00:02:22,167 --> 00:02:23,786
-he could buy a full price ticket
+00:02:13,287 --> 00:02:15,306
+grandmother had just died that
 
 80
-00:02:23,787 --> 00:02:25,706
-and claim a family funeral
+00:02:15,307 --> 00:02:16,946
+he could buy a full price ticket
 
 81
-00:02:25,707 --> 00:02:26,627
-discount later.
+00:02:16,947 --> 00:02:18,726
+and claim a family funeral
 
 82
-00:02:27,247 --> 00:02:28,786
-The airline's own website said
+00:02:18,727 --> 00:02:19,627
+discount later.
 
 83
-00:02:28,787 --> 00:02:29,267
-the opposite.
+00:02:20,227 --> 00:02:21,726
+The airline's own website said
 
 84
-00:02:30,387 --> 00:02:32,826
-In 2024, a tribunal made the
+00:02:21,727 --> 00:02:22,207
+the opposite.
 
 85
-00:02:32,827 --> 00:02:33,587
-airline pay.
+00:02:23,127 --> 00:02:25,486
+In 2024, a tribunal made the
 
 86
-00:02:34,127 --> 00:02:35,447
-Its chatbot, its mistake.
+00:02:25,487 --> 00:02:26,267
+airline pay.
 
 87
-00:02:36,300 --> 00:02:38,239
-Question three, how do you
+00:02:26,787 --> 00:02:28,047
+Its chatbot, its mistake.
 
 88
-00:02:38,240 --> 00:02:39,040
-protect yourself?
+00:02:28,867 --> 00:02:30,706
+Question three, how do you
 
 89
-00:02:39,680 --> 00:02:40,320
-Three habits.
+00:02:30,707 --> 00:02:31,467
+protect yourself?
 
 90
-00:02:41,420 --> 00:02:43,499
-One, ask for sources and then
+00:02:32,147 --> 00:02:32,727
+Three habits.
 
 91
-00:02:43,500 --> 00:02:44,580
-actually open them.
+00:02:33,687 --> 00:02:35,686
+One, ask for sources and then
 
 92
-00:02:45,080 --> 00:02:45,900
-Remember the lawyer?
+00:02:35,687 --> 00:02:36,727
+actually open them.
 
 93
-00:02:46,540 --> 00:02:48,239
-He asked for cases and got
+00:02:37,207 --> 00:02:38,107
+Remember the lawyer.
 
 94
-00:02:48,240 --> 00:02:48,700
-cases.
+00:02:38,707 --> 00:02:40,326
+He asked for cases and got
 
 95
-00:02:49,320 --> 00:02:50,500
-They just weren't real.
+00:02:40,327 --> 00:02:40,767
+cases.
 
 96
-00:02:51,140 --> 00:02:52,159
-A link you haven't clicked
+00:02:41,367 --> 00:02:42,487
+They just weren't real.
 
 97
-00:02:52,160 --> 00:02:52,960
-proves nothing.
+00:02:43,127 --> 00:02:44,106
+A link you haven't clicked
 
 98
-00:02:53,840 --> 00:02:55,760
-Two, make it an open book exam.
+00:02:44,107 --> 00:02:44,847
+proves nothing.
 
 99
-00:02:56,740 --> 00:02:58,099
-Paste in the real thing, the
+00:02:45,567 --> 00:02:47,467
+Two, make it an open book exam.
 
 100
-00:02:58,100 --> 00:02:59,860
-letter, the webpage, the rules,
+00:02:48,147 --> 00:02:49,666
+Paste in the real thing, the
 
 101
-00:03:00,220 --> 00:03:01,859
-and ask it to answer only from
+00:02:49,667 --> 00:02:51,347
+letter, the web page, the rules,
 
 102
-00:03:01,860 --> 00:03:02,140
-that.
+00:02:51,667 --> 00:02:53,286
+and ask it to answer only from
 
 103
-00:03:02,620 --> 00:03:04,319
-It guesses far less when the
+00:02:53,287 --> 00:02:53,567
+that.
 
 104
-00:03:04,320 --> 00:03:05,819
-answer is right in front of it.
+00:02:54,087 --> 00:02:55,766
+It guesses far less when the
 
 105
-00:03:05,820 --> 00:03:08,280
-Far less, not never.
+00:02:55,767 --> 00:02:57,266
+answer is right in front of it.
 
 106
-00:03:09,460 --> 00:03:11,099
-Three, double check the details
+00:02:57,267 --> 00:02:59,567
+Far less, not never.
 
 107
-00:03:11,100 --> 00:03:12,360
-that are easiest to bluff.
+00:03:00,507 --> 00:03:02,086
+Three, double check the details
 
 108
-00:03:13,440 --> 00:03:14,579
-Names, numbers, dates, and
+00:03:02,087 --> 00:03:03,327
+that are easiest to bluff.
 
 109
-00:03:14,580 --> 00:03:14,800
-quotes.
+00:03:04,327 --> 00:03:05,426
+Names, numbers, dates, and
 
 110
-00:03:15,533 --> 00:03:17,353
-So why does AI hallucinate?
+00:03:05,427 --> 00:03:05,647
+quotes.
 
 111
-00:03:18,273 --> 00:03:19,892
-It's a guesser, marked like a
+00:03:06,367 --> 00:03:08,167
+So why does AI hallucinate?
 
 112
-00:03:19,893 --> 00:03:21,612
-student in an exam where a blank
+00:03:08,907 --> 00:03:10,506
+It's a guesser, marked like a
 
 113
-00:03:21,613 --> 00:03:22,413
-scores zero.
+00:03:10,507 --> 00:03:12,146
+student in an exam where a blank
 
 114
-00:03:22,993 --> 00:03:23,653
-So it bluffs.
+00:03:12,147 --> 00:03:12,967
+scores zero.
 
 115
-00:03:24,333 --> 00:03:26,252
-And right answers and wrong ones
+00:03:13,507 --> 00:03:14,147
+So it bluffs.
 
 116
-00:03:26,253 --> 00:03:27,772
-come out in the same confident
+00:03:14,807 --> 00:03:16,706
+And right answers and wrong ones
 
 117
-00:03:27,773 --> 00:03:28,253
-voice.
+00:03:16,707 --> 00:03:18,186
+come out in the same confident
 
 118
-00:03:28,753 --> 00:03:29,732
-So you can't hear the
+00:03:18,187 --> 00:03:18,647
+voice.
 
 119
-00:03:29,733 --> 00:03:30,133
-difference.
+00:03:19,107 --> 00:03:20,046
+So you can't hear the
 
 120
-00:03:31,233 --> 00:03:32,892
-Sounding sure is not the same as
+00:03:20,047 --> 00:03:20,427
+difference.
 
 121
-00:03:32,893 --> 00:03:33,413
-being right.
+00:03:21,387 --> 00:03:23,026
+Sounding sure is not the same as
 
 122
-00:03:34,353 --> 00:03:35,932
-So treat it like a very fast
+00:03:23,027 --> 00:03:23,527
+being right.
 
 123
-00:03:35,933 --> 00:03:37,493
-student, not an expert.
+00:03:24,247 --> 00:03:25,786
+So treat it like a very fast
 
 124
-00:03:38,093 --> 00:03:40,112
-Give it the book and check its
+00:03:25,787 --> 00:03:27,247
+student, not an expert.
 
 125
-00:03:40,113 --> 00:03:40,393
-work.
+00:03:27,827 --> 00:03:29,786
+Give it the book and check its
 
 126
-00:03:41,100 --> 00:03:43,080
-But so far, AI only talks.
+00:03:29,787 --> 00:03:30,047
+work.
 
 127
-00:03:43,720 --> 00:03:45,339
-What happens when it can act and
+00:03:30,767 --> 00:03:32,607
+But so far, AI only talks.
 
 128
-00:03:45,340 --> 00:03:47,020
-book the flight, send the email,
+00:03:33,267 --> 00:03:34,806
+What happens when it can act and
 
 129
-00:03:47,260 --> 00:03:47,860
-spend the money?
+00:03:34,807 --> 00:03:36,407
+book the flight, send the email,
 
 130
-00:03:48,440 --> 00:03:50,239
-That's called an AI agent, and
+00:03:36,587 --> 00:03:37,187
+spend the money?
 
 131
-00:03:50,240 --> 00:03:50,720
-it's next.
+00:03:37,727 --> 00:03:39,426
+That's called an AI agent and
 
 132
-00:03:52,200 --> 00:03:53,320
+00:03:39,427 --> 00:03:39,907
+it's next.
+
+133
+00:03:41,267 --> 00:03:42,267
 Subscribe so you don't miss it.

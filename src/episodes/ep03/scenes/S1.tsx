@@ -12,13 +12,13 @@ const S = scene("S1");
 
 // Times (s) from the S1 word timings in captions.json. Re-voice S1 → re-check these.
 const T = {
-  made: 1.52, cases: 2.12, notOne: 3.4, list: 4.34, real: 6.18, judge: 8.08, looked: 9.98, exist: 11.38,
-  asked: 13.48, isThis: 14.26, said: 15.44, yes: 15.84, last: 17.48, sounds: 19.76, isRight: 21.2, split: 23.0,
-  why: 24.72, lets: 26.74, jargon: 27.16,
+  made: 1.44, cases: 2.02, notOne: 3.16, list: 4.14, real: 5.84, judge: 7.76, looked: 9.42, exist: 10.82,
+  asked: 12.84, isThis: 13.58, said: 14.86, yes: 15.12, last: 16.56, sounds: 18.68, isRight: 20.06, split: 21.76,
+  why: 23.28, lets: 25.1, jargon: 25.5,
 };
 
 // Shots: the fake filing → handed to the judge → looked up, not found → "is it real?" → sounds vs is → ? → logo.
-const P = { doc: [0, 12.6], chat: [12.6, 17.25], venn: [17.25, 24.5] } as const;
+const P = { doc: [0.0, 12.02], chat: [12.02, 16.37], venn: [16.37, 23.1] } as const;
 
 const PAPER = "#F3EBDD";
 const RED = "#E0533B";
@@ -34,7 +34,7 @@ const CASES = [
 ];
 // Frame 0 already shows two cases with a third being typed; the rest pop in on "Not one. A whole list."
 const TYPING = 2;
-const LINE_AT = [0, 0, 0, 3.5, 4.0, 4.5];
+const LINE_AT = [0, 0, 0, 3.32, 3.81, 4.31];
 const LINE_GONE = (i: number) => T.exist + i * 0.12;
 
 const TRACK: MoodKey[] = [
@@ -90,7 +90,7 @@ const Filing: React.FC<{ frame: number }> = ({ frame }) => {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
         <div style={{ fontSize: 52, fontWeight: 800, letterSpacing: 3 }}>COURT FILING</div>
         <div style={{ fontSize: 44, fontWeight: 600, opacity: 0.55 }}>New York, 2023</div>
-        <div style={{ position: "absolute", left: interpolate(chipMove, [0, 1], [60, 640]), top: interpolate(chipMove, [0, 1], [570, -64]), whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: 12, padding: "12px 26px", borderRadius: 999, backgroundColor: colors.yellow, color: colors.ink, fontSize: 44, fontWeight: 800, transform: "rotate(4deg)" }}>
+        <div style={{ position: "absolute", left: chipMove < 0.5 ? 60 : 640, top: chipMove < 0.5 ? 570 : -64, opacity: chipMove < 0.5 ? 1 - 2 * chipMove : 2 * chipMove - 1, whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: 12, padding: "12px 26px", borderRadius: 999, backgroundColor: colors.yellow, color: colors.ink, fontSize: 44, fontWeight: 800, transform: "rotate(4deg)" }}>
           <svg width={44} height={40} viewBox="0 0 44 40" aria-hidden><path d="M 4 4 H 40 V 28 H 18 L 8 37 V 28 H 4 Z" fill={colors.ink} /></svg>
           written by AI
         </div>

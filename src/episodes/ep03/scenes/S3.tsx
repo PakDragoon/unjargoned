@@ -14,15 +14,15 @@ const S = scene("S3");
 
 // Times (s) from the S3 word timings in captions.json. Re-voice S3 → re-check these.
 const T = {
-  why: 1.52, because: 3.74, marked: 4.68, y2025: 5.86, researchers: 7.3, openai: 8.2, company: 9.6, published: 12.1,
-  title: 13.36, titleEnd: 14.7, answer: 15.96, exam: 16.9, when: 18.34, tested: 19.74, scoring: 21.1,
-  right: 23.18, point: 24.28, wrong: 25.32, zero: 26.18, idk: 27.4, zero2: 28.6, bluffing: 29.88, wins: 30.4,
-  facts: 32.46, barely: 33.08, asked: 34.88, birthdays: 36.98, told: 38.14, knew: 39.72,
-  three: 40.54, tries: 40.76, three2: 41.94, dates: 42.6, allWrong: 43.64,
+  why: 1.42, because: 3.36, marked: 4.38, y2025: 5.54, researchers: 6.98, openai: 7.8, company: 9.14, published: 11.48,
+  title: 12.8, titleEnd: 14.02, answer: 15.22, exam: 16.2, when: 17.34, tested: 18.76, scoring: 20.1,
+  right: 22.12, point: 23.2, wrong: 24.2, zero: 25.04, idk: 26.22, zero2: 27.38, bluffing: 28.6, wins: 29.1,
+  facts: 30.96, barely: 31.54, asked: 33.26, birthdays: 35.26, told: 36.38, knew: 37.92,
+  three: 38.72, tries: 38.92, three2: 40.14, dates: 40.72, allWrong: 41.62,
 };
 
 // Shots: the marker's red pen → the paper → the scoreboard (honest vs bluffer) → the birthday test.
-const P = { pen: [0, 5.6], paper: [5.6, 17.6], board: [17.6, 32.0], bday: [32.0, 99] } as const;
+const P = { pen: [0.0, 5.26], paper: [5.26, 16.77], board: [16.77, 30.54], bday: [30.54, 99] } as const;
 
 const TRACK: MoodKey[] = [
   { at: 0, mood: "curious" },

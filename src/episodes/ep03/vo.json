@@ -3,6 +3,11 @@
   "title": "Why AI Hallucinates (and Sounds So Sure)",
   "scriptDoc": "https://claude.ai/artifact/LXuH9FinV8xdqo5NbfBPZW",
   "markup": "[beat] = short pause; [silence N] = N-second pause with music dipped. Everything else is read word for word.",
+  "voiceSettings": {
+    "voice": "af_heart",
+    "speed": 0.97,
+    "pauseScale": 1.0
+  },
   "scenes": [
     {
       "id": "S1",

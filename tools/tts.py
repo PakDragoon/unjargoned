@@ -105,6 +105,12 @@ def run_episode(ep: str, only: list[str]) -> None:
     durations_path = ep_dir / "durations.json"
     durations = json.loads(durations_path.read_text(encoding="utf-8")) if durations_path.exists() else {}
 
+    # Per-episode voice settings (vo.json "voiceSettings"), e.g. Ep 3: {"speed": 0.97, "pauseScale": 1.0}.
+    global VOICE, SPEED, PAUSE_SCALE
+    vs = vo.get("voiceSettings", {})
+    VOICE, SPEED, PAUSE_SCALE = vs.get("voice", VOICE), vs.get("speed", SPEED), vs.get("pauseScale", PAUSE_SCALE)
+    print(f"voice {VOICE}, speed {SPEED}, pauses x{PAUSE_SCALE}")
+
     wanted = {s.upper() for s in only}
     unknown = wanted - {s["id"] for s in vo["scenes"]}
     if unknown:

@@ -14,15 +14,15 @@ const S = scene("S4");
 
 // Times (s) from the S4 word timings in captions.json. Re-voice S4 → re-check these.
 const T = {
-  why: 1.5, remember: 3.78, guessing: 4.94, realFact: 6.9, madeUp: 7.84, machine: 9.0, voice: 10.72, wobble: 13.4, wrong: 14.16,
-  training: 15.74, assistant: 16.9, marked: 17.72, sureAnswer: 19.4, beats: 19.98, notSure: 20.62,
-  airline: 22.92, chatbot: 23.58, canada: 24.24, grandmother: 26.06, died: 27.08, ticket: 29.3, claim: 30.36, discount: 31.64, later: 32.14,
-  website: 34.0, opposite: 34.84, y2024: 36.42, tribunal: 37.84, pay: 39.18, its: 40.06, mistake: 41.12,
+  why: 1.5, remember: 3.86, guessing: 4.58, realFact: 6.44, madeUp: 7.4, machine: 8.5, voice: 10.16, wobble: 12.72, wrong: 13.48,
+  training: 14.9, assistant: 16.0, marked: 16.78, sureAnswer: 18.42, beats: 18.96, notSure: 19.58,
+  airline: 21.62, chatbot: 22.26, canada: 22.88, grandmother: 24.62, died: 25.66, ticket: 27.84, claim: 28.84, discount: 30.06, later: 30.56,
+  website: 32.34, opposite: 33.2, y2024: 34.54, tribunal: 35.94, pay: 37.24, its: 38.12, mistake: 39.1,
 };
 
 // Shots: one guess slot drops a true and a made-up answer, same look, same voice → helper training rated the same way
 // → the airline chatbot vs the airline's own page → the tribunal: pay.
-const P = { twins: [0, 15.2], rating: [15.2, 22.0], airline: [22.0, 35.9], ruling: [35.9, 99] } as const;
+const P = { twins: [0.0, 14.42], rating: [14.42, 20.75], airline: [20.75, 34.11], ruling: [34.11, 99] } as const;
 
 const TRACK: MoodKey[] = [
   { at: 0, mood: "curious" },
