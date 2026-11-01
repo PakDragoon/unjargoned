@@ -51,8 +51,8 @@ MUSIC = {
         "period": 48.0,
         "extra_loops": 3,
         "silences": [],  # no planned pause: Ep 3's only quiet beat is the S3b gag (bed muffled automatically)
-        "under_voice_db": -16.0,  # G4 v3 note: music 3 dB quieter than Ep 2 (-13) under the voice
-        "gap_db": -7.0,  # and 3 dB quieter in gaps (Ep 2: -4)
+        "under_voice_db": -19.0,  # G4 notes: music 6 dB quieter than Ep 2 (-13) under the voice
+        "gap_db": -10.0,  # and 6 dB quieter in gaps (Ep 2: -4)
         "fade_in": 0.12,  # G4 note: the opening felt flat; music is up from the first frame, with a hit (sfx S1 0.0)
         "dips": [],
     },
