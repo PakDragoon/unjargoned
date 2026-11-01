@@ -1,6 +1,8 @@
 import React from "react";
 import { Composition, Series } from "remotion";
-import { VIDEO } from "../../shared/brand";
+import { SHORT, VIDEO } from "../../shared/brand";
+import { Short1, Short2, shortFrames } from "./Shorts";
+import { ThumbA, ThumbB } from "./Thumbnails";
 import { scenes, totalFrames } from "./timeline";
 import { S1 } from "./scenes/S1";
 import { S2 } from "./scenes/S2";
@@ -27,7 +29,7 @@ export const Ep03Full: React.FC = () => (
   </Series>
 );
 
-/** One composition per scene (Ep03-S1 … Ep03-S7) + Ep03-Full. Shorts and thumbnails are added at G5. */
+/** One composition per scene (Ep03-S1 … Ep03-S7) + Ep03-Full. + Shorts and thumbnails. */
 export const Ep03Compositions: React.FC = () => (
   <>
     {scenes.map((s) => (
@@ -41,6 +43,10 @@ export const Ep03Compositions: React.FC = () => (
         height={VIDEO.height}
       />
     ))}
+    <Composition id="Ep03-Short1" component={Short1} durationInFrames={shortFrames("Short1")} fps={SHORT.fps} width={SHORT.width} height={SHORT.height} />
+    <Composition id="Ep03-Short2" component={Short2} durationInFrames={shortFrames("Short2")} fps={SHORT.fps} width={SHORT.width} height={SHORT.height} />
+    <Composition id="Ep03-ThumbA" component={ThumbA} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
+    <Composition id="Ep03-ThumbB" component={ThumbB} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
     <Composition id="Ep03-Full" component={Ep03Full} durationInFrames={totalFrames} fps={VIDEO.fps} width={VIDEO.width} height={VIDEO.height} />
   </>
 );
