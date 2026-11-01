@@ -51,6 +51,8 @@ MUSIC = {
         "period": 48.0,
         "extra_loops": 3,
         "silences": [],  # no planned pause: Ep 3's only quiet beat is the S3b gag (bed muffled automatically)
+        "under_voice_db": -16.0,  # G4 v3 note: music 3 dB quieter than Ep 2 (-13) under the voice
+        "gap_db": -7.0,  # and 3 dB quieter in gaps (Ep 2: -4)
         "fade_in": 0.12,  # G4 note: the opening felt flat; music is up from the first frame, with a hit (sfx S1 0.0)
         "dips": [],
     },
@@ -143,12 +145,13 @@ def main() -> None:
 
     # Gain curve (dB) at 100 Hz: gaps, under the voice, end screen, silences, dips.
     hz = 100
-    g = np.full(int(total * hz) + 1, GAP_DB)
+    under_db, gap_db = plan.get("under_voice_db", UNDER_VOICE_DB), plan.get("gap_db", GAP_DB)
+    g = np.full(int(total * hz) + 1, gap_db)
     for sid, ws in words.items():
         off = offsets[sid]
         for w in ws:
             a, b = int((off + w["start"] - 0.15) * hz), int((off + w["end"] + 0.35) * hz)
-            g[max(0, a) : b] = UNDER_VOICE_DB
+            g[max(0, a) : b] = under_db
     last = vo["scenes"][-1]
     end_screen = offsets[last["id"]] + durations[last["id"]] + TAIL_SECONDS
     g[int(end_screen * hz) :] = 0.0
@@ -170,7 +173,7 @@ def main() -> None:
         a = offsets[sid]
         nxt = scene_ids.index(sid) + 1
         b = offsets[scene_ids[nxt]] if nxt < len(scene_ids) else total
-        g[int(a * hz) : int(b * hz)] = GAP_DB
+        g[int(a * hz) : int(b * hz)] = gap_db
         gags.append((a, b))
     for sid, w, delay, length in plan["dips"]:
         a = word_end(sid, w) + delay
