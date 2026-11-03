@@ -127,9 +127,46 @@ def sting() -> np.ndarray:  # logo sting: rising three-note chime
     return norm(np.concatenate(parts + [last]), 0.5)
 
 
+# Ep 4 additions.
+def chime() -> np.ndarray:  # soft "Allow?" chime: two gentle sine notes, a fifth apart
+    x = t(0.7)
+    y = np.sin(2 * np.pi * 784 * x) * env(len(x), 0.01, 0.22)
+    y2 = np.concatenate([np.zeros(int(0.09 * SR)), np.sin(2 * np.pi * 1175 * x[: len(x) - int(0.09 * SR)])])
+    return norm(y + 0.8 * y2 * env(len(x), 0.1, 0.25), 0.4)
+
+
+def scratch() -> np.ndarray:  # record scratch: noise through a fast rising-then-falling band
+    x = t(0.38)
+    noise = rng.standard_normal(len(x))
+    wob = 0.5 + 0.5 * np.sin(2 * np.pi * 11 * x)
+    y = noise - lowpass(noise, 600 + 2600 * wob.mean())
+    y = lowpass(y, 3500) * (0.4 + 0.6 * wob)
+    return norm(y * env(len(x), 0.005, 0.16), 0.55)
+
+
+def whirr() -> np.ndarray:  # counter spinning up: fast tick train speeding up
+    x = t(0.85)
+    rate = 12 + 60 * (x / x[-1]) ** 2
+    phase = np.cumsum(rate) / SR
+    clicks = (np.diff(np.floor(phase), prepend=0) > 0).astype(float)
+    y = np.convolve(clicks, np.sin(2 * np.pi * 2200 * t(0.006)) * np.exp(-np.arange(int(0.006 * SR)) / (0.0015 * SR)))[: len(x)]
+    return norm(y, 0.45)
+
+
+def rewind() -> np.ndarray:  # tape rewind: chirpy noise with a falling pitch sweep
+    x = t(0.5)
+    f = 2400 * np.exp(-x * 3.5) + 300
+    tone = np.sin(2 * np.pi * np.cumsum(f) / SR)
+    noise = rng.standard_normal(len(x))
+    y = 0.5 * tone + 0.5 * (noise - lowpass(noise, 1200))
+    return norm(y * env(len(x), 0.02, 0.25) * (0.6 + 0.4 * np.sin(2 * np.pi * 30 * x)), 0.4)
+
+
 KIT = {
     "pop": pop, "tick": tick, "type": type_, "whoosh": whoosh, "ding": ding, "buzz": buzz,
     "chop": chop, "scribble": scribble, "thunk": thunk, "slide": slide, "sting": sting,
+    # Ep 4 (last, so the shared noise seed leaves the older sounds unchanged)
+    "chime": chime, "scratch": scratch, "whirr": whirr, "rewind": rewind,
 }
 
 

@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import math
 import subprocess
 import sys
@@ -55,6 +56,20 @@ MUSIC = {
         "gap_db": -10.0,  # and 6 dB quieter in gaps (Ep 2: -4)
         "fade_in": 0.12,  # G4 note: the opening felt flat; music is up from the first frame, with a hit (sfx S1 0.0)
         "dips": [],
+    },
+    "ep04": {
+        "file": "fade.mp3",  # series bed
+        "start": "auto",
+        "loop_from": 23.0,
+        "period": 48.0,
+        "extra_loops": 2,
+        "silences": [],  # no planned pause: the only quiet beat is the S3b gag (bed muffled automatically)
+        "under_voice_db": -19.0,  # Ep 3 levels
+        "gap_db": -10.0,
+        "fade_in": 0.12,  # frame 0 is already moving: music up from the first frame, with the "Order placed" ding
+        "dips": [],
+        # The end screen builds UNDER the last line (from "Until", vo.json endScreenFromWord); the bed comes up to
+        # full only after the voice ends, as before.
     },
 }
 
@@ -106,7 +121,13 @@ def main() -> None:
     for s in vo["scenes"]:
         offsets[s["id"]] = t
         seconds = durations[s["id"]] if not s.get("silent") else s["estSeconds"]
-        t += math.ceil((seconds + TAIL_SECONDS + s.get("endScreenSeconds", 0)) * FPS) / FPS
+        end_screen = s.get("endScreenSeconds", 0)
+        if s.get("endScreenFromWord"):
+            # Ep 4+: the end screen starts at that word, under the voice (same rule as timeline.ts).
+            until = next(w["start"] for w in words[s["id"]] if re.sub(r"[^A-Za-z']", "", w["word"]) == s["endScreenFromWord"])
+            t += math.ceil(max(seconds + TAIL_SECONDS, until + end_screen) * FPS) / FPS
+        else:
+            t += math.ceil((seconds + TAIL_SECONDS + end_screen) * FPS) / FPS
     total = t
     n = int(round(total * SR))
 
