@@ -99,3 +99,36 @@ export const ChatView: React.FC<{ w: number; shown: number; text: string }> = ({
     </div>
   );
 };
+
+/**
+ * A self-checkout machine (paper cut-out): the screen on top, a body below with a receipt printer slot, on feet.
+ * `bodyH` = height of the body under the screen (to the floor). The receipt feeds DOWN out of the slot:
+ * `receipt` is the paper (children of the feed), `feed` = how many px have come out.
+ */
+export const Checkout: React.FC<{ w: number; bodyH: number; feed: number; receipt: React.ReactNode; children?: React.ReactNode }> = ({ w, bodyH, feed, receipt, children }) => {
+  const h = w * 0.66;
+  const bw = w * 0.62;
+  const bx = (w - bw) / 2;
+  const slotY = h + 36;
+  const rw = w * 0.3;
+  return (
+    <div style={{ position: "relative", width: w, height: h + bodyH, fontFamily }}>
+      {/* body */}
+      <div style={{ position: "absolute", left: bx, top: h - 14, width: bw, height: bodyH + 14, borderRadius: `0 0 ${w * 0.03}px ${w * 0.03}px`, backgroundColor: "#3A3F4D", border: `${OUT}px solid ${INK}`, boxSizing: "border-box", filter: `drop-shadow(10px 12px 0 ${SHADOW})` }}>
+        <div style={{ position: "absolute", left: bw * 0.08, right: bw * 0.08, bottom: bodyH * 0.18, height: 8, borderRadius: 4, backgroundColor: INK, opacity: 0.35 }} />
+        {/* status light next to the slot */}
+        <div style={{ position: "absolute", right: bw * 0.07, top: 30, width: 16, height: 16, borderRadius: 8, backgroundColor: feed > 2 ? colors.mint : "#5B6378", border: `3px solid ${INK}` }} />
+      </div>
+      {/* the receipt feeding out of the slot */}
+      <div style={{ position: "absolute", left: w / 2 - rw / 2, top: slotY, width: rw, height: feed, overflow: "hidden" }}>
+        <div style={{ position: "absolute", left: 0, bottom: 0 }}>{receipt}</div>
+      </div>
+      {/* the printer slot (drawn over the paper's top edge) */}
+      <div style={{ position: "absolute", left: w / 2 - rw / 2 - 18, top: slotY - 10, width: rw + 36, height: 20, borderRadius: 10, backgroundColor: INK, border: `4px solid #5B6378`, boxSizing: "border-box" }} />
+      {/* screen */}
+      <div style={{ position: "absolute", left: 0, top: 0 }}>
+        <Kiosk w={w} stand={false}>{children}</Kiosk>
+      </div>
+    </div>
+  );
+};
