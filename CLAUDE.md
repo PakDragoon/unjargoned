@@ -3,7 +3,7 @@
 Faceless YouTube explainer channel: tech explained in plain words for non-tech viewers (kids, older people).
 Full context: Master Handoff https://claude.ai/artifact/4PwzEhzvSMM3Wqa5244neX (brand, pipeline, decisions, Ep 2 lessons,
 the "Starting Episode 3" checklist). Read it once at the start of a session; don't re-read it every turn.
-Status: Ep 1, Ep 2 and Ep 3 shipped. Ep 3 (`src/episodes/ep03`) is the newest reference build (voiceSettings in vo.json, captions aligned to vo.json, per-episode mix levels); copy it for new episodes.
+Status: Ep 1, Ep 2 and Ep 3 shipped; Ep 4 in revamp (see docs/ep04/README.md). Ep 3 (`src/episodes/ep03`) is the newest reference build (voiceSettings in vo.json, captions aligned to vo.json, per-episode mix levels); copy it for new episodes.
 
 ## Layout (one folder per episode)
 - `src/shared/` — reused by every episode: `brand.ts` (colours, font), `SceneShell`, `Dot.tsx` (mascot rig),
@@ -56,6 +56,23 @@ Status: Ep 1, Ep 2 and Ep 3 shipped. Ep 3 (`src/episodes/ep03`) is the newest re
 ## Gates (stop for the user's OK at each)
 G0 pre-checks (pronunciation test clip, facts flagged in the script doc) → G1 shared kit (Dot moods + style frame, 1 still sheet)
 → G2 proof scene (fully built) → G3 remaining scenes (2 stills each) → G4 full render + mix + SRT → G5 thumbnail + Shorts.
+
+## Characters, rig and self-QA (from Ep 4 revamp — applies to every episode)
+- Characters are built on the rig in `src/episodes/ep04/Rig.tsx` (move it to `src/shared/` when a 2nd episode uses it):
+  two-bone IK arms (shoulder → elbow → wrist) and a glove built from the wrist outward. A hand is ALWAYS on an arm;
+  never draw a loose hand.
+- Natural body movement: reaching away from the body → elbow folds in/down toward the body; arm down or holding
+  something close → elbow points out, away from the body (`bend: "natural"` does this; don't hand-pick elbows).
+  Fingers point away from the wrist; thumb on the correct side; pointing index comes from the front of the palm.
+- Props held in a hand are placed from the rig (`handFrame`), never by eye; press/tap points are computed from the
+  target's real position (`wristFor` in ep04 S1), so fingertips land on what they press.
+- Every object has a clear source and identity: a receipt comes out of a printer slot, a message comes from a person,
+  a screen that isn't in use is switched off. A held object's colour must differ from the glove.
+- Style: cut-paper (ink outlines, offset paper shadow), one stage with a floor and a spotlight; the camera moves
+  between areas (one continuous shot per scene where possible) instead of objects popping into a void.
+- Self-QA before sending ANY still or video (the user won't point these out): ~20 frames per scene, check identity &
+  source of every object, unintended overlaps, fingertips on targets, labels readable and uncovered, elbow/hand rules,
+  Dot clear of the subject, nothing shown before the voice mentions it. Fix, re-check, then send.
 
 ## Brand / content rules
 - Colours in `src/shared/brand.ts`. Yellow always = "the thing to watch". Font: Bricolage Grotesque (thumbnails: Inter Black).
