@@ -86,7 +86,7 @@ def clean_words(words: list[dict]) -> list[dict]:
     return out
 
 
-SCRIPT_MARKUP = re.compile(r"\[[^\]]*\]")
+SCRIPT_MARKUP = re.compile(r"\[[^\]]*\]|\{\w+\}")
 
 
 def _norm(word: str) -> str:

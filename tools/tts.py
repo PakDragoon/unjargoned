@@ -48,6 +48,12 @@ PRONOUNCE: dict[str, str] = {
     "lawyer": "law-yer",  # Ep 3: plain "lawyer" (lˈɔɪɚ) sounded like "liar"; this gives LAW-yer
 }
 
+# Delivery tags (Ep 4, "voice B"): {fast} / {slow} / {slower} before a sentence change that sentence's pace
+# (a multiplier on the episode speed). Punctuation does the rest: "…" holds, "—" breaks, "!" lifts.
+# Captions ignore the tags (captions.py strips {…}).
+DELIVERY = {"fast": 1.1, "slow": 0.93, "slower": 0.9}
+TAG = re.compile(r"^\{(\w+)\}\s*")
+
 MARKER = re.compile(r"\[(beat|silence\s+[\d.]+)\]", re.IGNORECASE)
 SENTENCE_END = re.compile(r"(?<=[.!?…])[\"”']?\s+")
 
@@ -85,7 +91,14 @@ def voice_text(kokoro: Kokoro, vo: str) -> tuple[np.ndarray, int]:
         for n, sentence in enumerate(split_sentences(tok)):
             if n > 0:
                 pieces.append(silence(SENTENCE_GAP, sr))
-            samples, sr = kokoro.create(apply_pronunciation(sentence), voice=VOICE, speed=SPEED, lang=LANG)
+            speed = SPEED
+            tag = TAG.match(sentence)
+            if tag:
+                if tag.group(1) not in DELIVERY:
+                    sys.exit(f"Unknown delivery tag {{{tag.group(1)}}} (use {', '.join(DELIVERY)})")
+                speed = round(SPEED * DELIVERY[tag.group(1)], 3)
+                sentence = sentence[tag.end():]
+            samples, sr = kokoro.create(apply_pronunciation(sentence), voice=VOICE, speed=speed, lang=LANG)
             pieces.append(np.asarray(samples, dtype=np.float32))
     audio = np.concatenate(pieces) if pieces else silence(0.5, sr)
     return audio, sr
