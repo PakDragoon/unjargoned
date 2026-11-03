@@ -3,7 +3,7 @@
 Faceless YouTube explainer channel: tech explained in plain words for non-tech viewers (kids, older people).
 Full context: Master Handoff https://claude.ai/artifact/4PwzEhzvSMM3Wqa5244neX (brand, pipeline, decisions, Ep 2 lessons,
 the "Starting Episode 3" checklist). Read it once at the start of a session; don't re-read it every turn.
-Status: Ep 1 and Ep 2 shipped. Ep 2 (`src/episodes/ep02`) is the reference build for every new episode.
+Status: Ep 1, Ep 2 and Ep 3 shipped. Ep 3 (`src/episodes/ep03`) is the newest reference build (voiceSettings in vo.json, captions aligned to vo.json, per-episode mix levels); copy it for new episodes.
 
 ## Layout (one folder per episode)
 - `src/shared/` — reused by every episode: `brand.ts` (colours, font), `SceneShell`, `Dot.tsx` (mascot rig),
@@ -19,8 +19,8 @@ Status: Ep 1 and Ep 2 shipped. Ep 2 (`src/episodes/ep02`) is the reference build
   `sfx.py` (synthesised SFX kit) · `mix.py` (voice + looped music bed with ducking + SFX → −13 LUFS, `--mux` onto the render)
   · `shorts.py` (cuts each Short's audio from the episode mix, −14 LUFS, muxes onto the muted Short render).
 
-## New episode recipe (copy Ep 2, don't start from scratch)
-1. Copy `src/episodes/ep02` → `epNN`; rename `Ep02-` ids; add a `<Folder>` in `src/Root.tsx`. Rewrite `vo.json` from the script.
+## New episode recipe (copy the latest episode, now Ep 3; don't start from scratch)
+1. Copy `src/episodes/ep03` → `epNN`; rename `Ep03-` ids; add a `<Folder>` in `src/Root.tsx`. Rewrite `vo.json` from the script.
 2. Voice: `python3 tools/tts.py epNN`, then `python3 tools/captions.py epNN` (word timings for the scenes' `T` tables).
 3. Build scenes; Dot gets a route per scene (`hops([...])` + `glances([...])`), not a fixed spot.
 4. Write `sfx.json` cues from the scenes' `T` tables; add an `epNN` entry to `MUSIC` in `tools/mix.py`
