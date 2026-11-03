@@ -5,6 +5,8 @@ import { Short1, Short2, shortFrames } from "./Shorts";
 import { ThumbA, ThumbB } from "./Thumbnails";
 import { scenes, totalFrames } from "./timeline";
 import { KIT, Kit } from "./Kit";
+import { RigSheet } from "./RigSheet";
+import { StyleA, StyleB } from "./StyleFrames";
 import { S1 } from "./scenes/S1";
 import { S2 } from "./scenes/S2";
 import { S3 } from "./scenes/S3";
@@ -33,6 +35,9 @@ export const Ep04Full: React.FC = () => (
 /** One composition per scene (Ep04-S1 … Ep04-S7) + Ep04-Full. + Shorts and thumbnails. */
 export const Ep04Compositions: React.FC = () => (
   <>
+    <Composition id="Ep04-StyleA" component={StyleA} durationInFrames={1} fps={VIDEO.fps} width={VIDEO.width} height={VIDEO.height} />
+    <Composition id="Ep04-StyleB" component={StyleB} durationInFrames={1} fps={VIDEO.fps} width={VIDEO.width} height={VIDEO.height} />
+    <Composition id="Ep04-RigSheet" component={RigSheet} durationInFrames={1} fps={VIDEO.fps} width={VIDEO.width} height={VIDEO.height} />
     <Composition id="Ep04-Kit" component={Kit} durationInFrames={1} fps={VIDEO.fps} width={KIT.width} height={KIT.height} />
     {scenes.map((s) => (
       <Composition
