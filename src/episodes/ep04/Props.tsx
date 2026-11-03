@@ -390,3 +390,41 @@ export const ProductTile: React.FC<{ w?: number; children?: React.ReactNode; pic
     {children}
   </div>
 );
+
+/* ───────────── Small shared objects (S1, S3b, S5, S6, S7) ───────────── */
+
+/** Magnifying glass = "find". Yellow rim; `children` shows through the lens (pre-scaled by the caller). */
+export const Magnifier: React.FC<{ size?: number; children?: React.ReactNode }> = ({ size = 220, children }) => (
+  <div style={{ position: "relative", width: size, height: size }}>
+    <div style={{ position: "absolute", left: size * 0.08, top: size * 0.08, width: size * 0.56, height: size * 0.56, borderRadius: "50%", overflow: "hidden", backgroundColor: "rgba(255,201,60,0.10)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      {children}
+    </div>
+    <svg width={size} height={size} viewBox="0 0 200 200" style={{ position: "absolute", inset: 0 }} aria-hidden>
+      <circle cx={72} cy={72} r={58} fill="none" stroke={colors.yellow} strokeWidth={14} />
+      <line x1={116} y1={116} x2={182} y2={182} stroke={colors.yellow} strokeWidth={24} strokeLinecap="round" />
+    </svg>
+  </div>
+);
+
+/** A mouse-pointer arrow (drawn), white with dark outline; `press` squashes it a touch. */
+export const Cursor: React.FC<{ size?: number; press?: number }> = ({ size = 70, press = 0 }) => (
+  <svg width={size} height={size * 1.3} viewBox="0 0 40 52" aria-hidden style={{ transform: `scale(${1 - 0.15 * press})`, transformOrigin: "0 0", overflow: "visible" }}>
+    <path d="M 2 2 L 2 42 L 12 32 L 20 50 L 28 46 L 20 29 L 34 29 Z" fill={colors.white} stroke={colors.ink} strokeWidth={4} strokeLinejoin="round" />
+  </svg>
+);
+
+/** A gold coin (money). */
+export const Coin: React.FC<{ size?: number }> = ({ size = 110 }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" aria-hidden>
+    <circle cx={50} cy={50} r={44} fill="#F2B632" stroke="#C98A00" strokeWidth={8} />
+    <circle cx={50} cy={50} r={30} fill="none" stroke="#C98A00" strokeWidth={5} opacity={0.6} />
+    <text x={50} y={66} textAnchor="middle" fontFamily={fontFamily} fontWeight={800} fontSize={44} fill="#9A6A00">$</text>
+  </svg>
+);
+
+/** A big rounded "Buy" button; `press` 0→1 pushes it in. */
+export const BuyButton: React.FC<{ w?: number; press?: number; label?: string }> = ({ w = 300, press = 0, label = "Buy" }) => (
+  <div style={{ width: w, height: w * 0.36, borderRadius: w * 0.18, backgroundColor: colors.mint, boxShadow: `0 ${w * 0.04 * (1 - press)}px 0 #2FA37E`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily, fontWeight: 800, fontSize: w * 0.17, color: colors.ink, marginTop: w * 0.035 * press }}>
+    {label}
+  </div>
+);
