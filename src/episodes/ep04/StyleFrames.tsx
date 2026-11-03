@@ -6,8 +6,8 @@ import { EggCarton } from "./Props";
 import { Figure2, INK, OUT, PAPER, SHADOW, SHOULDER_L, Stage, handFrame } from "./Rig";
 
 // A: the card arm, raised with the elbow out; the card sits in the fist (placed from the rig, not by eye).
-const CARD_ARM = { target: { x: 112, y: 196 }, bend: -1 as const };
-const CARD = handFrame(SHOULDER_L, CARD_ARM.target, CARD_ARM.bend, 66);
+const CARD_ARM = { target: { x: 112, y: 196 }, bend: "natural" as const };
+const CARD = handFrame(SHOULDER_L, CARD_ARM.target, CARD_ARM.bend, 66, 140, 130, 300);
 
 // Revamp style frames for the S1 opening (one still each). The agent — jar head, paper body, gloved hands on arms —
 // presses "Buy" itself. A: wide, the agent at a shop kiosk with the card held up. B: over-the-shoulder close-up.

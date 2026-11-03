@@ -50,7 +50,7 @@ const cam = (t: number) => {
 
 // ── Arm keys (figure frame) ──
 const IDLE_R: Pt = { x: 545, y: 520 };
-const PRESS: Pt = { x: 620, y: 440 };
+const PRESS: Pt = { x: 620, y: 456 };
 const TAP: Pt = { x: 566, y: 420 };
 const RAISED_L: Pt = { x: 112, y: 196 };
 type Key = [number, Pt];
@@ -115,7 +115,7 @@ const S1Content: React.FC = () => {
   // arms
   const right = along(RIGHT_KEYS, t);
   const left = along(LEFT_KEYS, t);
-  const card = handFrame(SHOULDER_L, left, "auto", 66);
+  const card = handFrame(SHOULDER_L, left, "natural", 66, 140, 130, 300);
   const press1 = during(frame, 0.38, 0.85, 0.06);
   const press2 = during(frame, T.buyBtn - 0.04, 13.8, 0.06);
   const tapP = during(frame, 7.9, 8.35, 0.06);
