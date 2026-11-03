@@ -13,7 +13,7 @@ const CARD = handFrame(SHOULDER_L, CARD_ARM.target, CARD_ARM.bend, 66);
 // presses "Buy" itself. A: wide, the agent at a shop kiosk with the card held up. B: over-the-shoulder close-up.
 
 /** A shop screen as a paper cut-out device: dark bezel, light page, the carton, a price, and a big yellow Buy. */
-const ShopScreen: React.FC<{ w: number; press?: number; showCard?: boolean }> = ({ w, press = 0 }) => {
+const ShopScreen: React.FC<{ w: number; press?: number; pressX?: number }> = ({ w, press = 0, pressX = 0.25 }) => {
   const h = w * 0.66;
   return (
     <div style={{ position: "relative", width: w, height: h, borderRadius: w * 0.045, backgroundColor: "#2B3142", border: `${OUT}px solid ${INK}`, boxSizing: "border-box", padding: w * 0.03, filter: `drop-shadow(10px 12px 0 ${SHADOW})`, fontFamily }}>
@@ -33,7 +33,7 @@ const ShopScreen: React.FC<{ w: number; press?: number; showCard?: boolean }> = 
           Buy
         </div>
         {/* press ripple */}
-        <div style={{ position: "absolute", left: w * 0.25 - w * 0.09, top: w * 0.425 - w * 0.09, width: w * 0.18, height: w * 0.18, borderRadius: "50%", border: `${w * 0.008}px solid ${colors.white}`, opacity: 0.8 * press }} />
+        <div style={{ position: "absolute", left: w * pressX - w * 0.09, top: w * 0.425 - w * 0.09, width: w * 0.18, height: w * 0.18, borderRadius: "50%", border: `${w * 0.008}px solid ${colors.white}`, opacity: 0.8 * press }} />
       </div>
     </div>
   );
@@ -66,7 +66,7 @@ export const StyleA: React.FC = () => (
         look={{ x: 0.9, y: 0.35 }}
         notebook={1}
         left={{ target: CARD_ARM.target, pose: "grip", thumb: "up", bend: CARD_ARM.bend }}
-        right={{ target: { x: 620, y: 440 }, pose: "point", thumb: "up", bend: -1, press: 1 }}
+        right={{ target: { x: 620, y: 440 }, pose: "point", thumb: "up", press: 1 }}
       >
         <HeldCard x={CARD.at.x} y={CARD.at.y} rot={CARD.angle + 90} />
       </Figure2>
@@ -79,8 +79,8 @@ export const StyleA: React.FC = () => (
 export const StyleB: React.FC = () => (
   <AbsoluteFill style={{ fontFamily, backgroundColor: colors.ink }}>
     <Stage spotX={1150} floorY={980} />
-    <div style={{ position: "absolute", left: 640, top: 110 }}>
-      <ShopScreen w={1160} press={1} />
+    <div style={{ position: "absolute", left: 770, top: 110 }}>
+      <ShopScreen w={1060} press={1} pressX={0.13} />
     </div>
     <div style={{ position: "absolute", left: -250, top: 330 }}>
       <Figure2
@@ -88,7 +88,7 @@ export const StyleB: React.FC = () => (
         eyes={1}
         look={{ x: 0.9, y: -0.4 }}
         notebook={1}
-        right={{ target: { x: 560, y: 205 }, pose: "point", thumb: "up", bend: -1, press: 1 }}
+        right={{ target: { x: 617, y: 241 }, pose: "point", thumb: "up", press: 1 }}
       />
     </div>
     <Dot x={1700} y={960} mood="surprised" blinks={false} seed="sfB" look={{ x: -0.9, y: -0.6 }} />

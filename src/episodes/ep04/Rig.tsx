@@ -17,8 +17,19 @@ export const SHADOW = "rgba(0,0,0,0.38)";
 export type Pt = { x: number; y: number };
 export type HandPose = "relaxed" | "open" | "point" | "grip" | "fist";
 
-/** Two-bone IK: the elbow for a shoulder→wrist chain. `bend` = +1 / −1 picks which side the elbow bows to. */
-export const solveElbow = (s: Pt, w: Pt, upper: number, lower: number, bend: 1 | -1): { elbow: Pt; wrist: Pt } => {
+export type Bend = 1 | -1 | "auto";
+
+/**
+ * Two-bone IK: the elbow for a shoulder→wrist chain. `bend` = +1 / −1 picks which side the elbow bows to;
+ * "auto" (the default everywhere) takes the natural one: the elbow DROPS (the lower of the two solutions), as gravity
+ * and the body pull it — never pointing up over a reach.
+ */
+export const solveElbow = (s: Pt, w: Pt, upper: number, lower: number, bend: Bend = "auto"): { elbow: Pt; wrist: Pt } => {
+  if (bend === "auto") {
+    const a = solveElbow(s, w, upper, lower, 1);
+    const b = solveElbow(s, w, upper, lower, -1);
+    return a.elbow.y >= b.elbow.y ? a : b;
+  }
   const dx = w.x - s.x;
   const dy = w.y - s.y;
   const reach = upper + lower - 0.5;
@@ -38,7 +49,7 @@ export const solveElbow = (s: Pt, w: Pt, upper: number, lower: number, bend: 1 |
 };
 
 /** Where a hand is: the wrist, the forearm angle (degrees) and a point `dist` px along the hand (e.g. inside the fist). */
-export const handFrame = (shoulder: Pt, target: Pt, bend: 1 | -1, dist: number, upper = 140, lower = 130) => {
+export const handFrame = (shoulder: Pt, target: Pt, bend: Bend, dist: number, upper = 140, lower = 130) => {
   const { elbow, wrist } = solveElbow(shoulder, target, upper, lower, bend);
   const ang = Math.atan2(wrist.y - elbow.y, wrist.x - elbow.x);
   return { wrist, angle: (ang * 180) / Math.PI, at: { x: wrist.x + Math.cos(ang) * dist, y: wrist.y + Math.sin(ang) * dist } };
@@ -93,9 +104,9 @@ export const Hand: React.FC<{ pose?: HandPose; thumb?: "up" | "down"; size?: num
  * oriented along the forearm. `hand` 0 → an empty dashed slot at the wrist; 1 → the glove is on.
  */
 export const Arm: React.FC<{
-  shoulder: Pt; target: Pt; upper?: number; lower?: number; bend?: 1 | -1; width?: number;
+  shoulder: Pt; target: Pt; upper?: number; lower?: number; bend?: Bend; width?: number;
   pose?: HandPose; thumb?: "up" | "down"; hand?: number; handSize?: number; press?: number; color?: string;
-}> = ({ shoulder, target, upper = 140, lower = 130, bend = 1, width = 34, pose = "relaxed", thumb = "up", hand = 1, handSize = 1.25, press = 0, color = PAPER }) => {
+}> = ({ shoulder, target, upper = 140, lower = 130, bend = "auto", width = 34, pose = "relaxed", thumb = "up", hand = 1, handSize = 1.25, press = 0, color = PAPER }) => {
   const { elbow, wrist } = solveElbow(shoulder, target, upper, lower, bend);
   const ang = (Math.atan2(wrist.y - elbow.y, wrist.x - elbow.x) * 180) / Math.PI;
   const path = `M ${shoulder.x} ${shoulder.y} L ${elbow.x} ${elbow.y} L ${wrist.x} ${wrist.y}`;
@@ -157,7 +168,7 @@ export const HeadJar: React.FC<{ eyes?: number; look?: Pt; guess?: string; wrong
   </g>
 );
 
-export type ArmSpec = { target: Pt; pose?: HandPose; thumb?: "up" | "down"; bend?: 1 | -1; press?: number; hand?: number };
+export type ArmSpec = { target: Pt; pose?: HandPose; thumb?: "up" | "down"; bend?: Bend; press?: number; hand?: number };
 // Figure frame: 600×900. Shoulders sit at the top corners of the torso.
 export const SHOULDER_L: Pt = { x: 226, y: 338 };
 export const SHOULDER_R: Pt = { x: 374, y: 338 };
@@ -174,7 +185,7 @@ export const Figure2: React.FC<{
   /** behind-the-arm props (e.g. a held card), in the figure frame */ children?: React.ReactNode;
 }> = ({ size = 640, left = REST_L, right = REST_R, eyes = 0, look, notebook = 0, guess, wrong, glow, children }) => {
   const arm = (s: Pt, a: ArmSpec) => (
-    <Arm shoulder={s} target={a.target} pose={a.pose ?? "relaxed"} thumb={a.thumb ?? "up"} bend={a.bend ?? 1} press={a.press ?? 0} hand={a.hand ?? 1} upper={140} lower={130} width={38} />
+    <Arm shoulder={s} target={a.target} pose={a.pose ?? "relaxed"} thumb={a.thumb ?? "up"} bend={a.bend ?? "auto"} press={a.press ?? 0} hand={a.hand ?? 1} upper={140} lower={130} width={38} />
   );
   return (
     <svg width={(size * 600) / 900} height={size} viewBox="0 0 600 900" aria-hidden style={{ overflow: "visible" }}>
