@@ -97,7 +97,8 @@ def match_script(words: list[dict], vo_text: str) -> list[dict]:
     """Whisper mishears words in context ("all rung", "the liar", "it's" for "its"). The script is the truth:
     where Whisper and vo.json differ one word for one word, take the script's word (Whisper's timing and
     end punctuation stay). Longer differences (e.g. "2023" for "twenty twenty-three") keep Whisper's text."""
-    script = [w.strip('"“”') for w in SCRIPT_MARKUP.sub(" ", vo_text).split()]
+    # Quote marks stay on the script's words (so '"Buy".' shows as written); _norm ignores them when matching.
+    script = SCRIPT_MARKUP.sub(" ", vo_text).split()
     a, b = [_norm(w["word"]) for w in words], [_norm(w) for w in script]
     for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
         if op in ("replace", "equal") and i2 - i1 == j2 - j1:  # equal: same words, take the script's punctuation
@@ -108,6 +109,28 @@ def match_script(words: list[dict], vo_text: str) -> list[dict]:
                 tail = re.search(r"[.,!?…:;]*$", words[i]["word"]).group(0)
                 words[i]["word"] = re.sub(r"[.,!?…:;]+$", "", script[j]) + tail
     return words
+
+
+# Numbers are voiced as words (vo.json) but shown as figures on screen and in captions.
+# Each entry: the spoken words (normalised) -> the caption text; the joined word keeps the last word's punctuation.
+SCREEN_TEXT = [(["thirtyone", "dollars"], "$31")]
+
+
+def screen_text(words: list[dict]) -> list[dict]:
+    out: list[dict] = []
+    i = 0
+    while i < len(words):
+        for spoken, shown in SCREEN_TEXT:
+            n = len(spoken)
+            if [_norm(w["word"]) for w in words[i:i + n]] == spoken:
+                tail = re.search(r"[.,!?…:;]*$", words[i + n - 1]["word"]).group(0)
+                out.append({"word": shown + tail, "start": words[i]["start"], "end": words[i + n - 1]["end"]})
+                i += n
+                break
+        else:
+            out.append(words[i])
+            i += 1
+    return out
 
 
 def group_words(words: list[dict]) -> list[dict]:
@@ -160,7 +183,7 @@ def main() -> None:
             {"word": w.word.strip(), "start": round(w.start, 3), "end": round(w.end, 3)}
             for seg in segments for w in (seg.words or []) if w.word.strip()
         ]
-        words = match_script(clean_words(words), scene["vo"])
+        words = screen_text(match_script(clean_words(words), scene["vo"]))
         per_scene[sid] = words
         for cue in group_words(words):
             all_cues.append({"start": cue["start"] + offset, "end": cue["end"] + offset, "text": cue["text"]})

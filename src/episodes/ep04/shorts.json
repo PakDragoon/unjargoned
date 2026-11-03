@@ -1,0 +1,11 @@
+{
+  "_doc": "Vertical Shorts: each is one or more clips (scene, seconds into the scene). Video: Shorts.tsx; audio: tools/shorts.py cuts the same clips from the episode mix.",
+  "Short1": {
+    "hook": "ChatGPT made up ", "hookHighlight": "court cases",
+    "clips": [{ "scene": "S1", "from": 0.0, "to": 16.3 }, { "scene": "S2", "from": 0.0, "to": 7.3 }, { "scene": "S6", "from": 14.8, "to": 17.9 }]
+  },
+  "Short2": {
+    "hook": "Why does AI ", "hookHighlight": "make things up?",
+    "clips": [{ "scene": "S3", "from": 1.3, "to": 55.2 }]
+  }
+}
