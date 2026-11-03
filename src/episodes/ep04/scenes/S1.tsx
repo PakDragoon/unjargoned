@@ -1,25 +1,73 @@
 import React from "react";
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
 import { colors, fontFamily } from "../../../shared/brand";
-import { ChatBubble, ChatWindow, StreamText } from "../../../shared/ChatWindow";
 import { Dot, MoodKey, glances, hops } from "../../../shared/Dot";
 import { LogoMark, Wordmark } from "../../../shared/Logo";
 import { during, pop, ramp, sec } from "../../../shared/motion";
 import { SceneShell } from "../../../shared/SceneShell";
-import { BuyButton, Cursor, DeliveryBag, EggCarton, HandShape, Magnifier, PriceTag, ProductTile, Receipt, ShopPage } from "../Props";
+import { Magnifier, Receipt } from "../Props";
+import { Figure2, INK, OUT, PAPER, Pt, REST_L, SHOULDER_L, Stage, handFrame } from "../Rig";
+import { ChatView, Kiosk, PlacedView, ProductView, ResultsView } from "../Screens";
 import { scene } from "../timeline";
 
 const S = scene("S1");
 
 // Times (s) from the S1 word timings in captions.json. Re-voice S1 → re-check these.
 const T = {
-  order: 1.46, card: 2.64, d31: 4.22, eggs: 5.38, never: 6.52, buy: 7.58, find: 9.48, findEnd: 9.9,
-  most: 10.84, talks: 11.68, thisOne: 12.7, buyBtn: 13.38, so: 14.44, changed: 15.96, lets: 17.36,
+  ai: 0.36, order: 1.46, card: 2.64, d31: 4.22, eggs: 5.38, never: 6.52, buy: 7.58, asked: 8.7, find: 9.48,
+  most: 10.84, talks: 11.68, thisOne: 12.7, clicked: 13.08, buyBtn: 13.38, so: 14.44, changed: 15.96, lets: 17.36,
 };
 
-// Phases: the order lands (frame 0 already moving) → rewind: what he asked vs what it did → a chatbot talks,
-// this one clicked Buy → "?" → logo sting on the "?".
-const P = { order: [0, 6.3], rewind: [6.3, 10.75], talk: [10.75, 14.35], q: [14.35, 99] } as const;
+// One continuous shot on one stage; the camera does the cutting.
+// close: the agent's own finger presses Buy → pull back: it holds the reporter's card, the receipt prints ($31.43) →
+// rewind: what it was asked (find) vs what it did → most AI just talks (a chatbot screen) vs this one clicks Buy →
+// a "?" over the jar; the camera pushes into it → logo.
+
+// ── World layout (wide shot = 1920×1080) ──
+const FIG = { left: 420, top: 160, size: 720 };
+const FK = FIG.size / 900;
+const SCREEN = { left: 790, top: 300, w: 640 };
+const CHAT = { left: 20, top: 400, w: 440 };
+const SLOT = { x: 900, y: SCREEN.top + SCREEN.w * 0.66 - 6 }; // receipt printer slot under the screen
+const Q = { x: FIG.left + 300 * FK, y: 70 }; // the "?" above the jar
+
+// ── Camera: [t, centreX, centreY, zoom], eased between keys ──
+const CAM: [number, number, number, number][] = [
+  [-1, 830, 415, 2.0], [2.3, 850, 420, 2.1], [3.3, 960, 540, 1.0], [3.75, 960, 540, 1.0],
+  [4.25, 900, 860, 1.9], [5.95, 900, 850, 1.95], [6.65, 880, 480, 1.35], [10.6, 880, 470, 1.3],
+  [11.25, 560, 540, 1.2], [12.55, 580, 540, 1.2], [13.05, 880, 480, 1.45], [14.25, 860, 470, 1.4],
+  [14.95, Q.x, 300, 1.55], [15.95, Q.x, 290, 1.6], [16.45, Q.x, Q.y + 10, 8],
+];
+const cam = (t: number) => {
+  let i = 0;
+  while (i < CAM.length - 2 && t > CAM[i + 1][0]) i++;
+  const [t0, x0, y0, z0] = CAM[i];
+  const [t1, x1, y1, z1] = CAM[i + 1];
+  const k = Easing.inOut(Easing.cubic)(Math.max(0, Math.min(1, (t - t0) / (t1 - t0))));
+  // zoom interpolates in log space so pushes feel even
+  return { x: x0 + (x1 - x0) * k, y: y0 + (y1 - y0) * k, z: Math.exp(Math.log(z0) + (Math.log(z1) - Math.log(z0)) * k) };
+};
+
+// ── Arm keys (figure frame) ──
+const IDLE_R: Pt = { x: 545, y: 520 };
+const PRESS: Pt = { x: 620, y: 440 };
+const TAP: Pt = { x: 566, y: 420 };
+const RAISED_L: Pt = { x: 112, y: 196 };
+type Key = [number, Pt];
+const RIGHT_KEYS: Key[] = [
+  [-0.4, IDLE_R], [0.42, PRESS], [0.8, PRESS], [1.5, { x: 590, y: 480 }],
+  [7.55, { x: 590, y: 480 }], [7.95, TAP], [8.3, TAP], [8.9, IDLE_R],
+  [12.75, IDLE_R], [T.buyBtn, PRESS], [13.75, PRESS], [14.4, IDLE_R],
+];
+const LEFT_KEYS: Key[] = [[-1, REST_L.target], [2.45, REST_L.target], [3.05, RAISED_L], [6.4, RAISED_L], [7.0, REST_L.target]];
+const along = (keys: Key[], t: number): Pt => {
+  let i = 0;
+  while (i < keys.length - 2 && t > keys[i + 1][0]) i++;
+  const [t0, a] = keys[i];
+  const [t1, b] = keys[i + 1];
+  const k = Easing.inOut(Easing.cubic)(Math.max(0, Math.min(1, (t - t0) / (t1 - t0))));
+  return { x: a.x + (b.x - a.x) * k, y: a.y + (b.y - a.y) * k };
+};
 
 const TRACK: MoodKey[] = [
   { at: 0, mood: "curious" },
@@ -31,186 +79,144 @@ const TRACK: MoodKey[] = [
   { at: sec(T.so), mood: "intrigued" },
   { at: sec(T.lets), mood: "happy" },
 ];
-
-// Route: already mid-hop at frame 0 → lands on the doormat by the bag → watches the rewind → by the chat → beside the logo.
+// Dot lives in screen space (the camera doesn't scale it): hops in after the pull-back, jumps on "$31".
 const ROUTE = hops([
-  { at: -4, x: 1880, y: 420 },
-  { at: sec(0.4), x: 1600, y: 640 },
-  { at: sec(1.7), x: 1690, y: 850 }, // onto the doormat
-  { at: sec(6.9), x: 1700, y: 900 },
-  { at: sec(T.find - 0.4), x: 1720, y: 700 }, // up beside the magnifier
-  { at: sec(10.6), x: 1680, y: 900 },
-  { at: sec(11.4), x: 1610, y: 880 },
-  { at: sec(T.so + 0.2), x: 1480, y: 830 },
-  { at: sec(T.lets + 0.2), x: 1560, y: 860 },
+  { at: 0, x: 2080, y: 930 },
+  { at: sec(3.4), x: 1700, y: 930 },
+  { at: sec(T.d31 + 0.05), x: 1640, y: 890 },
+  { at: sec(T.never), x: 1700, y: 930 },
+  { at: sec(T.find - 0.2), x: 1660, y: 920 },
+  { at: sec(T.so + 0.1), x: 1640, y: 330 }, // up in the empty corner, looking at the "?"
+  { at: sec(T.lets + 0.2), x: 1580, y: 860 },
 ]);
 const LOOK = glances([
-  { at: 0, x: -0.8, y: 0.2 },
-  { at: sec(1.7), x: -0.9, y: 0.1 }, // the bag
-  { at: sec(3.9), x: -0.7, y: -0.9 }, // the receipt flying up
-  { at: sec(6.9), x: -0.9, y: -0.6 },
-  { at: sec(T.find - 0.4), x: -0.6, y: -0.6 },
-  { at: sec(10.6), x: -0.9, y: -0.6 },
-  { at: sec(T.so + 0.2), x: -0.9, y: -0.4 },
+  { at: 0, x: -0.9, y: -0.3 },
+  { at: sec(3.9), x: -0.9, y: -0.1 },
+  { at: sec(T.asked), x: -0.9, y: -0.8 },
+  { at: sec(T.most), x: -1, y: -0.4 },
+  { at: sec(T.so), x: -1, y: -0.2 },
+  { at: sec(16.3), x: -0.9, y: -0.5 },
 ]);
 
-/** A plain bank card (no brand): chip and dots only. */
-const BankCard: React.FC<{ w?: number }> = ({ w = 300 }) => (
-  <div style={{ width: w, height: w * 0.63, borderRadius: w * 0.07, background: "linear-gradient(135deg, #8EA7FF, #6F86E0)", boxShadow: "0 20px 40px rgba(0,0,0,0.4)", position: "relative" }}>
-    <div style={{ position: "absolute", left: w * 0.1, top: w * 0.2, width: w * 0.17, height: w * 0.13, borderRadius: w * 0.025, backgroundColor: colors.yellow }} />
-    <div style={{ position: "absolute", left: w * 0.1, bottom: w * 0.12, display: "flex", gap: w * 0.04 }}>
-      {[0, 1, 2, 3].map((i) => (
-        <div key={i} style={{ display: "flex", gap: w * 0.012 }}>
-          {[0, 1, 2, 3].map((j) => <div key={j} style={{ width: w * 0.022, height: w * 0.022, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.85)" }} />)}
-        </div>
-      ))}
-    </div>
-  </div>
+/** The reporter's card (plain, no brand), held in the fist. */
+const HeldCard: React.FC<{ x: number; y: number; rot: number }> = ({ x, y, rot }) => (
+  <g transform={`translate(${x} ${y}) rotate(${rot})`}>
+    <rect x={-70} y={-44} width={140} height={88} rx={12} fill="#8EA7FF" stroke={INK} strokeWidth={OUT * 0.8} />
+    <rect x={-52} y={-24} width={28} height={20} rx={4} fill={colors.yellow} stroke={INK} strokeWidth={3} />
+    {[0, 1, 2, 3].map((i) => <rect key={i} x={-52 + i * 28} y={16} width={20} height={6} rx={3} fill={PAPER} opacity={0.9} />)}
+  </g>
 );
 
 const S1Content: React.FC = () => {
   const frame = useCurrentFrame();
   const t = frame / 30;
-  const f = (r: readonly [number, number], d = 0.3) => during(frame, r[0], r[1], d);
+  const c = cam(t);
 
-  // ── Order lands ──
-  const banner = pop(frame, -0.18); // already mid-pop on frame 0
-  const bagDrop = interpolate(t, [0.85, 1.3], [-520, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (x) => x * x });
-  const bagSquash = during(frame, 1.3, 1.45, 0.06);
-  const fly = interpolate(t, [3.85, T.d31 + 0.05], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (x) => 1 - Math.pow(1 - x, 3) });
-  const receipt = { x: interpolate(fly, [0, 1], [-200, 1110]), y: interpolate(fly, [0, 1], [1150, 150]), s: interpolate(fly, [0, 1], [2.6, 1]), r: interpolate(fly, [0, 1], [-30, 4]) };
-  const card = pop(frame, T.card - 0.1);
+  // arms
+  const right = along(RIGHT_KEYS, t);
+  const left = along(LEFT_KEYS, t);
+  const card = handFrame(SHOULDER_L, left, "auto", 66);
+  const press1 = during(frame, 0.38, 0.85, 0.06);
+  const press2 = during(frame, T.buyBtn - 0.04, 13.8, 0.06);
+  const tapP = during(frame, 7.9, 8.35, 0.06);
 
-  // ── Rewind ──
-  const rw = during(frame, P.rewind[0] - 0.05, P.rewind[0] + 0.45, 0.08);
-  const typed = "eggs".slice(0, Math.floor(interpolate(t, [6.9, 7.6], [0, 4], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })));
-  const toCart = ramp(frame, 8.0, 0.45);
-  const cheaper = ramp(frame, 8.45, 0.3);
-  const mag = pop(frame, T.find - 0.9);
-  const knock = ramp(frame, T.findEnd + 0.05, 0.45);
-  const bagSwing = ramp(frame, T.findEnd - 0.25, 0.3);
-  const cursor = (() => {
-    const keys: [number, number, number][] = [[6.5, 900, 700], [6.85, 520, 330], [7.7, 520, 330], [7.95, 500, 520], [8.4, 870, 290]];
-    let p = { x: keys[0][1], y: keys[0][2] };
-    for (let i = 1; i < keys.length; i++) {
-      const k = Math.max(0, Math.min(1, (t - keys[i - 1][0]) / (keys[i][0] - keys[i - 1][0])));
-      if (t >= keys[i - 1][0]) p = { x: p.x + (keys[i][1] - p.x) * k, y: p.y + (keys[i][2] - p.y) * k };
-    }
-    return p;
-  })();
+  // screen state
+  const rewinding = t >= 6.2 && t < 6.7;
+  const placedP = t < 6.2 ? pop(frame, T.order - 0.1) : pop(frame, 13.6);
+  const screen =
+    t < T.order - 0.1 ? "product" : t < 6.45 ? "placed" : t < 12.3 ? "results" : t < 13.6 ? "product" : "placed";
+  const typed = "eggs".slice(0, Math.floor(interpolate(t, [6.75, 7.25], [0, 4], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })));
 
-  // ── Talk → hands → Buy ──
-  const sprout = [0, 1, 2].map((i) => pop(frame, T.thisOne + i * 0.1));
-  const pressT = during(frame, T.buyBtn - 0.05, T.buyBtn + 0.3, 0.08);
-  const reachB = ramp(frame, T.buyBtn - 0.35, 0.3);
+  // receipt prints (3.6–4.2), retracts on the rewind (6.2–6.5)
+  const L = 330 * (t < 6.2 ? ramp(frame, 3.55, 0.6) : 1 - ramp(frame, 6.2, 0.3));
 
-  // ── "?" → logo ──
-  const qIn = pop(frame, T.so);
-  const toLogo = ramp(frame, T.changed - 0.1, 0.25);
+  // request bubble + "?" + logo
+  const ask = during(frame, T.asked - 0.15, 10.8, 0.25);
+  const q = pop(frame, T.so);
+  const logo = ramp(frame, 16.25, 0.25);
+  const shake = rewinding ? Math.sin(frame * 3.1) * 10 : 0;
 
   return (
-    <AbsoluteFill style={{ fontFamily }}>
-      {/* 1 · Order placed (no fade-in: already moving on frame 0) */}
-      <AbsoluteFill style={{ opacity: 1 - ramp(frame, P.order[1] - 0.2, 0.2) }}>
-        <div style={{ position: "absolute", left: 110, top: 170 }}>
-          <ShopPage w={860} cart={1}>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 30, paddingTop: 20 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 26, padding: "26px 48px", borderRadius: 28, backgroundColor: colors.mint, transform: `scale(${Math.min(1.08, banner)})` }}>
-                <svg width={70} height={70} viewBox="0 0 84 84" aria-hidden><path d="M 12 44 L 34 66 L 74 18" fill="none" stroke={colors.ink} strokeWidth={14} strokeLinecap="round" strokeLinejoin="round" /></svg>
-                <div style={{ fontSize: 62, fontWeight: 800, color: colors.ink }}>Order placed</div>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 24, opacity: ramp(frame, 0.3, 0.3) }}>
-                <EggCarton w={190} />
-                <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                  {[220, 160].map((w) => <div key={w} style={{ width: w, height: 22, borderRadius: 11, backgroundColor: "rgba(20,22,28,0.18)" }} />)}
-                </div>
-              </div>
-            </div>
-          </ShopPage>
+    <AbsoluteFill style={{ fontFamily, backgroundColor: colors.ink }}>
+      {/* ── the world, seen through the camera ── */}
+      <AbsoluteFill style={{ transformOrigin: "0 0", translate: `${960 - c.x * c.z + shake}px ${540 - c.y * c.z}px`, scale: `${c.z}` }}>
+        <Stage spotX={920} floorY={830} />
+
+        {/* a chatbot's screen: it can only talk */}
+        <div style={{ position: "absolute", left: CHAT.left, top: CHAT.top }}>
+          <Kiosk w={CHAT.w}>
+            {t >= T.most - 0.3 ? (
+              <ChatView w={CHAT.w} shown={interpolate(t, [T.most + 0.1, T.talks + 0.5], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })} text="Here are some cheap eggs…" />
+            ) : null}
+          </Kiosk>
         </div>
-        <div style={{ position: "absolute", left: 600, top: 660, transform: `rotate(-8deg) scale(${Math.min(1, card)})`, opacity: Math.min(1, card) }}>
-          <BankCard w={300} />
-        </div>
-        {/* doormat + bag */}
-        <div style={{ position: "absolute", left: 1180, top: 880, width: 600, height: 90, borderRadius: 30, backgroundColor: "#6B5136", border: "6px dashed #8A6A47", boxSizing: "border-box" }} />
-        <div style={{ position: "absolute", left: 1250, top: 600 + bagDrop, transform: `scale(${1 + 0.12 * bagSquash}, ${1 - 0.14 * bagSquash})`, transformOrigin: "50% 100%" }}>
-          <DeliveryBag w={260} />
-        </div>
-        <div style={{ position: "absolute", left: receipt.x, top: receipt.y, transform: `scale(${receipt.s}) rotate(${receipt.r}deg)`, transformOrigin: "0 0", opacity: t > 3.85 ? 1 : 0 }}>
-          <Receipt w={330} />
-          <div style={{ marginTop: 22, display: "inline-block", padding: "8px 22px", borderRadius: 999, backgroundColor: colors.panel, border: `3px solid ${colors.line}`, fontSize: 34, fontWeight: 700, color: colors.subtext, opacity: ramp(frame, T.d31 + 0.4, 0.3) }}>
-            USA, 2025
+
+        {/* receipt printing from the slot under the shop screen */}
+        <div style={{ position: "absolute", left: SLOT.x - 110, top: SLOT.y, width: 220, height: L, overflow: "hidden" }}>
+          <div style={{ position: "absolute", left: 0, bottom: 0 }}>
+            <Receipt w={220} />
           </div>
         </div>
+        <div style={{ position: "absolute", left: SLOT.x - 125, top: SLOT.y - 8, width: 250, height: 16, borderRadius: 8, backgroundColor: INK }} />
+
+        {/* the shop screen */}
+        <div style={{ position: "absolute", left: SCREEN.left, top: SCREEN.top }}>
+          <Kiosk w={SCREEN.w}>
+            {screen === "product" ? (
+              <ProductView w={SCREEN.w} press={t < 6 ? press1 : press2} ripple={t < 6 ? ramp(frame, 0.42, 0.5) : ramp(frame, T.buyBtn, 0.5)} />
+            ) : screen === "placed" ? (
+              <PlacedView w={SCREEN.w} p={placedP} />
+            ) : (
+              <ResultsView w={SCREEN.w} typed={typed} tiles={pop(frame, 7.2)} tap={t >= 8.0 ? 1 : 0} skip={ramp(frame, 8.35, 0.3)} />
+            )}
+            {rewinding ? <div style={{ position: "absolute", inset: 0, backgroundColor: colors.white, opacity: 0.5 * (1 - Math.abs(Math.sin(frame * 1.7))) }} /> : null}
+          </Kiosk>
+        </div>
+
+        {/* the agent */}
+        <div style={{ position: "absolute", left: FIG.left, top: FIG.top }}>
+          <Figure2
+            size={FIG.size}
+            eyes={1}
+            notebook={1}
+            look={t >= T.so ? { x: 0, y: -1 } : t >= T.most && t < T.thisOne ? { x: -1, y: 0.2 } : { x: 0.9, y: 0.3 }}
+            left={{ target: left, pose: "grip", thumb: "up" }}
+            right={{ target: right, pose: "point", thumb: "up", press: Math.max(press1, press2, tapP) }}
+          >
+            <HeldCard x={card.at.x} y={card.at.y} rot={card.angle + 90} />
+          </Figure2>
+        </div>
+
+        {/* "?" over the jar — the camera pushes into it */}
+        <div style={{ position: "absolute", left: Q.x, top: Q.y, translate: "-50% -50%", scale: `${Math.min(1.05, q)}`, opacity: Math.min(1, q * 2), fontSize: 150, fontWeight: 800, color: colors.yellow, lineHeight: 1, WebkitTextStroke: `6px ${INK}`, paintOrder: "stroke" }}>?</div>
       </AbsoluteFill>
 
-      {/* 2 · Rewind: it was asked to FIND (magnifier) — a shopping bag knocks the magnifier aside */}
-      <AbsoluteFill style={{ opacity: f(P.rewind, 0.25) }}>
-        <div style={{ position: "absolute", left: 110, top: 170 }}>
-          <ShopPage w={860} query={typed} cart={toCart > 0.9 ? 1 : 0} cartPop={ramp(frame, 8.45, 0.3)}>
-            <div style={{ display: "flex", gap: 34, justifyContent: "center", alignItems: "flex-start", paddingTop: 16, opacity: ramp(frame, 7.7, 0.25) }}>
-              <ProductTile w={230}>
-                <div style={{ transform: `translate(${toCart * 330}px, ${-toCart * 240}px) scale(${1 - 0.8 * toCart})`, opacity: 1 - ramp(frame, 8.35, 0.1) }}><EggCarton w={170} /></div>
-                <PriceTag price="$13.19" w={140} />
-              </ProductTile>
-              <div style={{ marginTop: 120, opacity: cheaper, transform: `scale(${0.8 + 0.2 * cheaper})` }}>
-                <PriceTag price="cheaper" w={170} crossed={ramp(frame, 8.7, 0.3)} />
-              </div>
-            </div>
-          </ShopPage>
+      {/* ── screen-space overlays ── */}
+      <div style={{ position: "absolute", left: 60, bottom: 60, padding: "10px 26px", borderRadius: 999, backgroundColor: colors.panel, border: `3px solid ${colors.line}`, fontSize: 36, fontWeight: 700, color: colors.subtext, opacity: during(frame, T.d31 + 0.3, 6.1, 0.25) }}>
+        USA, 2025
+      </div>
+      {/* what he asked: a message from the reporter (off-screen left) */}
+      <div style={{ position: "absolute", left: 90, top: 90, opacity: ask, scale: `${Math.min(1, pop(frame, T.asked - 0.15))}`, transformOrigin: "0 100%" }}>
+        <div style={{ position: "relative", display: "flex", alignItems: "center", gap: 22, padding: "22px 36px 22px 24px", borderRadius: 36, backgroundColor: colors.white, color: colors.ink, border: `${OUT}px solid ${INK}`, fontSize: 54, fontWeight: 700 }}>
+          <div style={{ scale: `${1 + 0.15 * during(frame, T.find, T.find + 0.5, 0.15)}` }}><Magnifier size={90} /></div>
+          Find me cheap eggs
+          <div style={{ position: "absolute", left: -28, bottom: 18, width: 0, height: 0, borderTop: "18px solid transparent", borderBottom: "18px solid transparent", borderRight: `30px solid ${INK}` }} />
         </div>
-        <div style={{ position: "absolute", left: cursor.x, top: cursor.y, opacity: ramp(frame, 6.5, 0.2) }}>
-          <Cursor size={64} press={during(frame, 7.95, 8.15, 0.05)} />
-        </div>
-        <div style={{ position: "absolute", left: 1230, top: 170, transform: `translate(${-knock * 520}px, ${-knock * 260}px) rotate(${-knock * 200}deg) scale(${Math.min(1, mag)})`, opacity: 1 - ramp(frame, T.findEnd + 0.35, 0.15) }}>
-          <Magnifier size={320} />
-        </div>
-        <div style={{ position: "absolute", left: 1560 - 380 * bagSwing, top: 170 + 60 * bagSwing, transform: `rotate(${24 - 40 * bagSwing}deg)`, opacity: Math.min(1, bagSwing * 3) }}>
-          <DeliveryBag w={240} />
-        </div>
-        {/* tape-rewind streaks */}
-        <AbsoluteFill style={{ opacity: rw }}>
-          {Array.from({ length: 9 }, (_, i) => (
-            <div key={i} style={{ position: "absolute", left: -200 + ((frame * 140 + i * 377) % 2300), top: 80 + i * 110, width: 320, height: 10, borderRadius: 5, backgroundColor: colors.white, opacity: 0.25 }} />
-          ))}
-          <svg style={{ position: "absolute", left: 80, top: 60 }} width={120} height={70} viewBox="0 0 120 70" aria-hidden>
-            <path d="M 58 5 L 8 35 L 58 65 Z M 112 5 L 62 35 L 112 65 Z" fill={colors.yellow} />
-          </svg>
-        </AbsoluteFill>
-      </AbsoluteFill>
-
-      {/* 3 · Most AI just talks — this one sprouts hands and clicks Buy */}
-      <AbsoluteFill style={{ opacity: f(P.talk, 0.3) }}>
-        <div style={{ position: "absolute", left: 510, top: 210 }}>
-          <ChatWindow width={900} height={600}>
-            <ChatBubble from="ai" o={pop(frame, T.most + 0.1)} fontSize={50}>
-              <StreamText text="Here are some cheap egg options…" frame={frame} from={sec(T.most + 0.2)} to={sec(T.talks + 0.6)} />
-            </ChatBubble>
-            <div style={{ flex: 1 }} />
-            <div style={{ alignSelf: "center", transform: `scale(${Math.min(1, pop(frame, T.thisOne + 0.2))})` }}>
-              <BuyButton w={330} press={pressT} />
-            </div>
-          </ChatWindow>
-        </div>
-        <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }} aria-hidden>
-          <g style={{ transform: `scale(${Math.max(0, sprout[0])})`, transformOrigin: "490px 420px" }}><HandShape cx={470} cy={420} r={48} /></g>
-          <g style={{ transform: `scale(${Math.max(0, sprout[1])})`, transformOrigin: "1430px 420px" }}><HandShape cx={1450} cy={420} r={48} flip /></g>
-          <g style={{ transform: `scale(${Math.max(0, sprout[2])})`, transformOrigin: "1180px 900px" }}>
-            <HandShape cx={1180 - 210 * reachB} cy={900 - 95 * reachB} r={52} press={pressT} />
-          </g>
+      </div>
+      {/* tape-rewind streaks */}
+      <AbsoluteFill style={{ opacity: rewinding ? 1 : 0 }}>
+        {Array.from({ length: 9 }, (_, i) => (
+          <div key={i} style={{ position: "absolute", left: 2100 - ((frame * 160 + i * 377) % 2400), top: 80 + i * 110, width: 340, height: 10, borderRadius: 5, backgroundColor: colors.white, opacity: 0.3 }} />
+        ))}
+        <svg style={{ position: "absolute", left: 80, top: 60 }} width={120} height={70} viewBox="0 0 120 70" aria-hidden>
+          <path d="M 58 5 L 8 35 L 58 65 Z M 112 5 L 62 35 L 112 65 Z" fill={colors.yellow} stroke={INK} strokeWidth={5} strokeLinejoin="round" />
         </svg>
       </AbsoluteFill>
-
-      {/* 4 · "?" — the logo sting lands on it */}
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: f([P.q[0], 99]) * (1 - toLogo) }}>
-        <div style={{ fontSize: 420, fontWeight: 800, color: colors.yellow, lineHeight: 1, transform: `scale(${Math.min(1.05, qIn) * (1 - 0.6 * toLogo)}) rotate(${(1 - Math.min(1, qIn)) * -20}deg)` }}>?</div>
-      </AbsoluteFill>
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: ramp(frame, T.changed, 0.2) }}>
+      {/* logo: the "?" opens into it */}
+      <AbsoluteFill style={{ backgroundColor: colors.ink, opacity: logo, alignItems: "center", justifyContent: "center" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 36 }}>
-          <div style={{ transform: `scale(${Math.min(1.1, pop(frame, T.changed))})` }}>
-            <LogoMark size={260} />
-          </div>
-          <div style={{ opacity: ramp(frame, T.changed + 0.3, 0.3), transform: `translateX(${interpolate(ramp(frame, T.changed + 0.3, 0.4), [0, 1], [-40, 0])}px)` }}>
+          <div style={{ scale: `${Math.min(1.1, pop(frame, 16.3))}` }}><LogoMark size={260} /></div>
+          <div style={{ opacity: ramp(frame, 16.6, 0.3), translate: `${interpolate(ramp(frame, 16.6, 0.4), [0, 1], [-40, 0])}px 0px` }}>
             <Wordmark fontSize={150} />
           </div>
         </div>
@@ -221,7 +227,7 @@ const S1Content: React.FC = () => {
   );
 };
 
-// Scene S1 — hook: an AI placing a $31 egg order. Frame 0 is already moving (no fade-in). Edit only this file for S1 changes.
+// Scene S1 — hook: the agent itself places the $31 egg order. Frame 0 is already moving (no fade-in). Edit only this file for S1 changes.
 export const S1: React.FC = () => (
   <SceneShell sceneId={S.id} title={S.title} audioSrc={S.audioSrc}>
     <S1Content />
