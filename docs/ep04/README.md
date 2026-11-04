@@ -7,6 +7,7 @@ delivery tags in vo.json ({fast}/{slow}/{slower}). Runtime 3:36.
 - G0–G4 done on the v1 look (v1 render: Unjargoned_Ep4_v1.mp4, not shipped).
 - User asked for a full graphics/animation revamp after G4. New style + rig approved; **S1 revamped and approved**.
 - S2–S7 (+ S3b) revamped in the S1 style; **G3 approved** (S3b: Dot has its own white bendy arms + borrowed gloves).
+- G4: v2 rendered + mixed (out/Unjargoned_Ep4_v2.mp4, 215.9 s, −13.0 LUFS); SRT re-checked (128 cues, no overlaps). Awaiting review.
 - Next: re-render Full + remix
   (`tools/mix.py ep04 --mux`), re-check SRT, then G5 (thumbnails A/B + 2 Shorts + description).
 - Audio is final unless a scene's timing changes: voice, captions, 171 SFX cues (S1 cues retimed for the revamp;
