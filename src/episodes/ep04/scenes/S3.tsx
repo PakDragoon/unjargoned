@@ -1,14 +1,19 @@
 import React from "react";
-import { AbsoluteFill, Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
 import { colors, fontFamily } from "../../../shared/brand";
-import { ChatBubble, ChatWindow } from "../../../shared/ChatWindow";
 import { Dot, MoodKey, glances, hops } from "../../../shared/Dot";
 import { LineWipeIn } from "../../../shared/LineWipe";
-import { during, pop, pushIn, ramp, sec } from "../../../shared/motion";
+import { during, pop, ramp, sec } from "../../../shared/motion";
 import { SceneShell } from "../../../shared/SceneShell";
-import { BrainShape, EggCarton, EyeShape, Figure, HandShape, HelperBox, PriceTag, ProductTile, ShopPage, ToolBelt } from "../Props";
+import { EggCarton } from "../Props";
 import { QuestionStrip } from "../QuestionStrip";
+import { Figure2, INK, Pt, Stage } from "../Rig";
+import { Checkout, Kiosk } from "../Screens";
 import { scene } from "../timeline";
+import {
+  BODY_H, BeltKit, Bubble, CHAT, CamKey, FIG, FLOOR, HELPER_SLOT, Key, KioskChat, LoopRing, PersonSays, REST_WIDE_L, REST_WIDE_R, SCREEN, SHOP_TILE,
+  ScreenOff, ShopView, Tag, World, along, armJoints, camAt, forearmPt, fw, onPage, pageCart, wristFor,
+} from "../World";
 
 const S = scene("S3");
 
@@ -23,327 +28,300 @@ const T = {
   chatTells: 42.14, agentDoes: 43.84, doesIt: 44.48,
 };
 
-// Phases (one hero each): figure + tool belt → helper box (the brain only asks) → chatbot vs agent split →
-// eyes → the loop → "tells… does".
-const P = {
-  belt: [0, 11.0], helper: [11.0, 22.1], split: [22.1, 30.5], eyes: [30.5, 36.9], loop: [36.9, 42.0], punch: [42.0, 99],
-} as const;
+// One continuous shot on the S1 stage (chatbot kiosk left · agent · self-checkout right):
+// gloves pop back on → tool belt wraps the waist, four tools in pouches → a helper box clips to the buckle: the brain
+// can't move the hands, it only asks; its request drops into the helper, which drives the arm by cables (search) and
+// sends the result back up → a chatbot only lists vs the agent shops at the checkout → it's blind until the goggles
+// click on and check the cart → the loop rings the agent (look · think · do) → "tells you" vs "does it".
 
-// The figure stays in one place whenever it's on screen (continuity across scenes).
-const FIG = { left: 150, top: 330, size: 600 };
-const K = FIG.size / 900;
-const fp = (x: number, y: number) => ({ x: FIG.left + x * K, y: FIG.top + y * K });
-const SLOT_L = fp(100, 566);
-const SLOT_R = fp(500, 566);
-const JAR_TOP = fp(300, 40);
-const JAR_MID = fp(300, 170);
-
-// Helper box (phase 2) and where the hands hang from its ports.
-const HB = { left: 740, top: 600, w: 300 };
-const HB_SLOT = { x: HB.left + HB.w / 2, y: HB.top + 20 };
-const PORT_L = { x: HB.left + HB.w * 0.38, y: HB.top + HB.w * 0.78 - 45 };
-const PORT_R = { x: HB.left + HB.w * 0.7, y: HB.top + HB.w * 0.78 - 45 };
-const HANG_L = { x: PORT_L.x, y: PORT_L.y + 90 };
-const HANG_R = { x: PORT_R.x, y: PORT_R.y + 90 };
-
-// Tool belt: big and central while the tools are named, then slides right for the helper.
-const BELT_A = { left: 700, top: 560, w: 800 };
-const BELT_B = { left: 1220, top: 640, w: 600 };
-const basketAt = (b: { left: number; top: number; w: number }) => ({ x: b.left + b.w * 0.93, y: b.top + b.w * 0.135 });
-
-// The loop.
-const LOOP = { x: 1200, y: 610, r: 250 };
-const LAP = 0.95; // seconds per lap of the yellow dot
+const JAR: Pt = fw({ x: 300, y: 192 });
+const SLOT_W: Pt = fw(HELPER_SLOT);
+const KIOSK_C: Pt = { x: CHAT.left + CHAT.w / 2, y: CHAT.top + CHAT.w * 0.33 };
+const RING = { cx: 660, cy: 520, rx: 300, ry: 350 };
+const onRing = (deg: number, out = 0): Pt => ({ x: RING.cx + (RING.rx + out) * Math.cos((deg * Math.PI) / 180), y: RING.cy + (RING.ry + out) * Math.sin((deg * Math.PI) / 180) });
+const ST = { look: -120, think: -60, doo: 20 }; // stations on the ring
+const LAP = 1.0;
 const RUN_FROM = 38.3;
-const dotAngle = (t: number) => -90 + (360 * Math.max(0, Math.min(t, T.done) - RUN_FROM)) / LAP;
-const onLoop = (deg: number, r = LOOP.r) => ({ x: LOOP.x + r * Math.cos((deg * Math.PI) / 180), y: LOOP.y + r * Math.sin((deg * Math.PI) / 180) });
+const runnerDeg = (t: number) => ST.look + (360 * Math.max(0, Math.min(t, T.done) - RUN_FROM)) / LAP;
 
-// Dot rides the loop just behind the yellow dot, then hops off when the tick lands.
-const RIDE = [38.5, T.done] as const;
-const ridePos = (t: number) => onLoop(dotAngle(t) - 34, LOOP.r + 100);
-const RIDE_START = ridePos(RIDE[0]);
-const RIDE_END = ridePos(RIDE[1]);
-const OFF = { x: 1660, y: 900 };
-const AFTER = { at: 42.3, x: 940, y: 960 };
+const CAM: CamKey[] = [
+  [-1, 660, 470, 1.2], [1.6, 660, 470, 1.2], [2.6, 660, 660, 1.9], [5.0, 660, 660, 1.9], [5.6, 660, 668, 3.1], [10.9, 660, 668, 3.1],
+  [11.6, 680, 470, 1.55], [17.4, 700, 470, 1.5], [18.1, 900, 450, 1.25], [21.6, 900, 450, 1.25],
+  [22.5, 360, 540, 1.7], [25.6, 360, 540, 1.7], [26.4, 975, 470, 1.25], [30.4, 975, 470, 1.25], [31.0, 900, 420, 1.35],
+  [33.3, 900, 420, 1.35], [34.4, 1070, 340, 1.6], [36.8, 1070, 340, 1.6], [37.3, 700, 500, 1.05], [41.6, 700, 500, 1.05],
+  [42.3, 770, 520, 0.95], [99, 770, 520, 0.95],
+];
+
+// ── right arm: helper-driven presses (fingertips computed from the page) ──
+const BAR = wristFor(onPage(0.09, 0.065));
+const STEP = 70;
+const stepK = (t: number) => {
+  const e = Easing.inOut(Easing.cubic);
+  return e(Math.max(0, Math.min(1, (t - 28.35) / 0.45))) - e(Math.max(0, Math.min(1, (t - 29.85) / 0.45)));
+};
+const TILE = wristFor(SHOP_TILE(), "R", FIG.left + STEP);
+const GROPE = [wristFor(onPage(-0.06, 0.42)), wristFor(onPage(0.01, 0.62)), wristFor(onPage(-0.1, 0.58)), wristFor(onPage(-0.03, 0.36))];
+const NEAR = wristFor(onPage(0.02, 0.55));
+const RIGHT_KEYS: Key[] = [
+  [-1, REST_WIDE_R], [17.7, REST_WIDE_R], [18.5, BAR], [19.0, BAR], [19.6, REST_WIDE_R],
+  [27.0, REST_WIDE_R], [27.55, BAR], [28.25, BAR], [28.95, TILE], [29.35, TILE], [29.9, REST_WIDE_R],
+  [30.7, REST_WIDE_R], [31.2, GROPE[0]], [31.7, GROPE[1]], [32.2, GROPE[2]], [32.7, GROPE[3]], [33.4, NEAR],
+  [37.6, NEAR], [37.76, BAR], [37.95, BAR], [38.3, NEAR], [99, NEAR],
+];
 
 const TRACK: MoodKey[] = [
   { at: 0, mood: "curious" },
-  { at: sec(11.9), mood: "neutral" },
+  { at: sec(T.handsIn), mood: "happy" },
+  { at: sec(T.odd), mood: "neutral" },
   { at: sec(T.cant), mood: "surprised" },
   { at: sec(T.ask), mood: "curious" },
-  { at: sec(T.askChat), mood: "curious" },
+  { at: sec(T.askChat), mood: "deadpan" },
+  { at: sec(T.askAgent), mood: "curious" },
   { at: sec(T.cart), mood: "happy" },
-  { at: sec(T.but), mood: "neutral" },
+  { at: sec(T.but), mood: "worried" },
   { at: sec(T.eyes), mood: "aha" },
   { at: sec(T.look1), mood: "happy" },
   { at: sec(T.done), mood: "relieved" },
+  { at: sec(T.agentDoes), mood: "smug" },
 ];
-
-// Route: by the figure → at the belt → onto the helper box (the tap) → down to watch → left half → right half →
-// middle → by the figure → onto the loop (ride, custom path below) → off → centre for the punchline.
 const ROUTE = hops([
-  { at: 0, x: 760, y: 880 },
-  { at: sec(3.4), x: 1600, y: 900 },
-  { at: sec(12.3), x: 1110, y: 560 }, // lands on the helper box: the tap
-  { at: sec(14.9), x: 1170, y: 930 },
-  { at: sec(22.6), x: 470, y: 970 },
-  { at: sec(26.0), x: 1450, y: 990 },
-  { at: sec(29.9), x: 960, y: 980 },
-  { at: sec(31.2), x: 760, y: 860 },
-  { at: sec(RIDE[0]), x: RIDE_START.x, y: RIDE_START.y },
+  { at: 0, x: 1640, y: 900 },
+  { at: sec(5.3), x: 1560, y: 900 },
+  { at: sec(12.0), x: 1580, y: 890 },
+  { at: sec(18.2), x: 1820, y: 940 },
+  { at: sec(22.6), x: 1060, y: 975 },
+  { at: sec(26.4), x: 1790, y: 950 },
+  { at: sec(34.5), x: 1720, y: 900 },
+  { at: sec(37.4), x: 1740, y: 940 },
+  { at: sec(42.4), x: 1230, y: 990 },
 ]);
-const AFTER_HOP = hops([
-  { at: sec(RIDE[1]), x: RIDE_END.x, y: RIDE_END.y },
-  { at: sec(41.6), x: OFF.x, y: OFF.y },
-  { at: sec(AFTER.at), x: AFTER.x, y: AFTER.y },
-]);
-const dotPath = (frame: number) => {
-  const t = frame / 30;
-  if (t < RIDE[0]) return ROUTE.path(frame);
-  if (t < RIDE[1]) return ridePos(t);
-  return AFTER_HOP.path(frame);
-};
-const dotSquash = (frame: number) => Math.max(ROUTE.squash(frame), AFTER_HOP.squash(frame));
-
 const LOOK = glances([
-  { at: 0, x: -0.8, y: -0.5 }, // the jar
-  { at: sec(3.4), x: -0.8, y: -0.4 }, // the belt
-  { at: sec(12.3), x: -0.7, y: 0.5 }, // into the slot under it
-  { at: sec(14.9), x: -0.9, y: -0.6 }, // the bubble rising from the jar
-  { at: sec(17.4), x: -0.4, y: -0.4 }, // into the slot
-  { at: sec(18.2), x: 0.9, y: -0.6 }, // the hand reaching the basket
-  { at: sec(20.2), x: -0.9, y: -0.5 }, // result back to the jar
-  { at: sec(22.6), x: 0.2, y: -0.8 },
-  { at: sec(26.0), x: 0, y: -0.9 },
-  { at: sec(29.9), x: 0.8, y: -0.7 },
-  { at: sec(31.2), x: -0.8, y: -0.8 },
-  { at: sec(RIDE[0]), x: -0.6, y: 0 },
-  { at: sec(41.6), x: -0.9, y: -0.3 },
-  { at: sec(AFTER.at), x: 0.7, y: -0.6 },
+  { at: 0, x: -0.8, y: -0.5 },
+  { at: sec(5.3), x: -1, y: -0.2 },
+  { at: sec(12.0), x: -0.9, y: -0.5 },
+  { at: sec(15.4), x: -0.9, y: -0.7 },
+  { at: sec(17.3), x: -0.9, y: 0.1 },
+  { at: sec(18.2), x: -0.8, y: -0.6 },
+  { at: sec(22.6), x: -0.9, y: -0.6 },
+  { at: sec(26.4), x: -0.9, y: -0.6 },
+  { at: sec(34.5), x: -0.8, y: -0.8 },
+  { at: sec(37.4), x: -1, y: -0.4 },
+  { at: sec(42.4), x: -0.9, y: -0.6 },
+  { at: sec(T.agentDoes), x: 0.6, y: -0.8 },
 ]);
-
-/** A loop station: a round tile holding an icon, highlighted (yellow ring) when its word is said. */
-const Station: React.FC<{ at: { x: number; y: number }; on: number; children: React.ReactNode }> = ({ at, on, children }) => (
-  <div
-    style={{
-      position: "absolute", left: at.x - 70, top: at.y - 70, width: 140, height: 140, borderRadius: 70, backgroundColor: colors.panel,
-      border: `6px solid ${on > 0.5 ? colors.yellow : colors.line}`, display: "flex", alignItems: "center", justifyContent: "center",
-      transform: `scale(${1 + 0.15 * Math.sin(Math.min(1, on) * Math.PI)})`, boxSizing: "border-box",
-    }}
-  >
-    {children}
-  </div>
-);
 
 const S3Content: React.FC = () => {
   const frame = useCurrentFrame();
   const t = frame / 30;
-  const { durationInFrames } = useVideoConfig();
-  const f = (r: readonly [number, number]) => during(frame, r[0], r[1], 0.35);
-  const lerp = (a: number, b: number, k: number) => a + (b - a) * k;
-  const arc = (a: { x: number; y: number }, b: { x: number; y: number }, k: number, lift = 120) => {
+  const c = camAt(CAM, t);
+  const arc = (a: Pt, b: Pt, k: number, lift: number): Pt => {
     const e = Easing.inOut(Easing.cubic)(Math.max(0, Math.min(1, k)));
-    return { x: lerp(a.x, b.x, e), y: lerp(a.y, b.y, e) - Math.sin(e * Math.PI) * lift };
+    return { x: a.x + (b.x - a.x) * e, y: a.y + (b.y - a.y) * e - Math.sin(e * Math.PI) * lift };
   };
 
-  // ── Figure state across the scene ──
-  const figO = Math.max(during(frame, -1, P.split[0], 0.35), during(frame, P.eyes[0], P.loop[1], 0.35));
-  const hands = frame < sec(T.handsIn - 0.05) ? 0 : pop(frame, T.handsIn);
-  const handsAway = t >= T.cant && t < P.eyes[0];
-  const eyes = t < T.eyes - 0.05 ? 0 : pop(frame, T.eyes);
-  const figLook = t >= P.loop[0] ? { x: 1, y: 0.1 } : t >= T.looks ? { x: 1, y: -0.35 } : { x: 0.4, y: 0.1 };
-  const resultBack = ramp(frame, T.tells, 0.8);
-  const jarGlow = during(frame, T.tells + 0.8, T.happened + 0.6, 0.2);
+  // ── agent ──
+  const figLeft = FIG.left + STEP * stepK(t);
+  const right = along(RIGHT_KEYS, t);
+  const left = REST_WIDE_L;
+  const gloveL = t < T.handsIn - 0.02 ? 0 : Math.min(1.08, pop(frame, T.handsIn));
+  const gloveR = t < 3.13 ? 0 : Math.min(1.08, pop(frame, 3.15));
+  const eyes = t < T.eyes - 0.02 ? 0 : Math.min(1.1, pop(frame, T.eyes));
+  const typingTap = [27.62, 27.78, 27.94, 28.1].reduce((m, at) => Math.max(m, during(frame, at - 0.03, at + 0.07, 0.03)), 0);
+  const press = Math.max(during(frame, 18.58, 18.85, 0.05), typingTap, during(frame, 29.0, 29.3, 0.05), during(frame, 37.74, 37.92, 0.04));
+  const look = t >= T.eyes && t < 36.9 ? { x: 1, y: 0.25 } : t >= 36.9 ? { x: 0.9, y: 0.4 } : { x: 0.6, y: 0.2 };
 
-  // ── Phase 1: belt ──
-  const beltMove = ramp(frame, T.odd - 0.1, 0.7);
-  const belt = { left: lerp(BELT_A.left, BELT_B.left, beltMove), top: lerp(BELT_A.top, BELT_B.top, beltMove), w: lerp(BELT_A.w, BELT_B.w, beltMove) };
-  const toolsShown = [T.internet, T.email, T.calendar, T.shop].map((at) => (t < at - 0.05 ? 0 : pop(frame, at)));
-  const beltO = Math.max(f(P.belt), f(P.helper));
+  // belt, helper, cables
+  const strap = ramp(frame, 5.66, 0.45);
+  const tools = [T.internet, T.email, T.calendar, T.shop].map((at) => (t < at - 0.03 ? 0 : Math.min(1.1, pop(frame, at))));
+  const toolGlow = [T.internet, T.email, T.calendar, T.shop].map((at) => during(frame, at, at + 0.9, 0.15));
+  const helper = t < 11.78 ? 0 : Math.min(1.1, pop(frame, 11.8));
+  const cablesO = ramp(frame, 13.78, 0.12);
+  const tug = Math.max(during(frame, 17.62, 19.6, 0.2), during(frame, 27.0, 29.9, 0.2), during(frame, 37.6, 38.3, 0.1));
+  const slotGlow = during(frame, 17.25, 18.0, 0.12);
+  const light = t >= 17.62 ? 1 : 0;
 
-  // ── Phase 2: helper ──
-  const helperIn = t < T.odd + 0.6 ? 0 : pop(frame, T.odd + 0.6);
-  const fly = ramp(frame, T.cant, 0.9); // hands lift off the figure and plug into the helper
-  const handL = arc(SLOT_L, HANG_L, fly, 140);
-  const reach = ramp(frame, T.simple - 0.1, 0.55) - ramp(frame, T.clicking + 0.2, 0.5);
-  const basket = basketAt(BELT_B);
-  const handR0 = arc(SLOT_R, HANG_R, fly, 140);
-  const handR = { x: lerp(handR0.x, basket.x - 10, reach), y: lerp(handR0.y, basket.y + 70, reach) };
-  const press = during(frame, T.simple + 0.65, T.simple + 1.05, 0.1);
-  const basketFlash = during(frame, T.simple + 0.7, T.clicking + 0.3, 0.15);
-  const bubbleIn = pop(frame, T.ask);
-  const bubbleGo = ramp(frame, T.please + 0.2, 0.55);
-  const bubble = arc({ x: JAR_TOP.x + 330, y: JAR_TOP.y + 70 }, { x: HB_SLOT.x, y: HB_SLOT.y }, bubbleGo, 120);
-  const slotGlow = during(frame, T.please + 0.6, T.simple + 0.4, 0.15);
-  const result = arc({ x: HB_SLOT.x, y: HB_SLOT.y - 40 }, JAR_MID, resultBack, 180);
-  const resultO = during(frame, T.tells - 0.05, T.happened + 0.1, 0.12);
-  const handsO = during(frame, T.cant - 0.05, P.helper[1], 0.3);
+  // the brain strains (can't reach the hands itself)
+  const strain = during(frame, 12.85, 13.75, 0.12);
+  // its request: a bubble from the jar that drops into the helper's slot
+  const reqIn = pop(frame, T.ask);
+  const reqGo = ramp(frame, 17.08, 0.4);
+  const REQ0: Pt = { x: JAR.x + 112, y: JAR.y + 6 };
+  const req = arc(REQ0, SLOT_W, reqGo, 60);
+  // the result note climbs back up from the slot into the jar
+  const resK = ramp(frame, 20.2, 0.75);
+  const res = arc({ x: SLOT_W.x, y: SLOT_W.y - 10 }, JAR, resK, 40);
+  const jarGlow = Math.max(during(frame, 20.9, 21.8, 0.15), during(frame, T.think - 0.02, T.think + 0.3, 0.05));
 
-  // ── Phase 3: split ──
-  const typed = "eggs".slice(0, Math.floor(interpolate(t, [T.searches - 0.2, T.searches + 0.4], [0, 4], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })));
-  const tilesIn = pop(frame, T.compares);
-  const picked = t >= T.compares + 0.55;
+  // ── screens ──
+  const shop1 = t >= 17.62 && t < 21.6;
+  const shop2 = t >= T.opens;
+  const typed1 = "eggs".slice(0, Math.floor(interpolate(t, [17.75, 18.35], [0, 4], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })));
+  const typed2 = "eggs".slice(0, [27.62, 27.78, 27.94, 28.1].filter((at) => t >= at).length);
+  const kioskOn = t >= 22.4;
   const cartN = t >= T.cart ? 1 : 0;
-  const cursorKeys: [number, number, number][] = [
-    [T.opens, 1170, 330], [T.searches + 0.5, 1170, 330], [T.compares + 0.5, 1230, 450], [T.fills + 0.1, 1230, 450], [T.cart, 1768, 320],
-  ];
-  const cursor = (() => {
-    let p = { x: cursorKeys[0][1], y: cursorKeys[0][2] };
-    for (let i = 1; i < cursorKeys.length; i++) {
-      const [at, x, y] = cursorKeys[i];
-      const [pat] = cursorKeys[i - 1];
-      const k = Math.max(0, Math.min(1, (t - pat) / Math.max(0.01, at - pat)));
-      if (t >= pat) p = { x: lerp(p.x, x, Easing.inOut(Easing.cubic)(k)), y: lerp(p.y, y, Easing.inOut(Easing.cubic)(k)) };
-    }
-    return p;
-  })();
-  const typing = t > T.searches - 0.2 && t < T.searches + 0.45 ? Math.sin(frame * 2.2) * 8 : 0;
-  const cursorPress = Math.max(during(frame, T.compares + 0.45, T.compares + 0.75, 0.08), during(frame, T.cart - 0.05, T.cart + 0.25, 0.08));
+  const cartRing = during(frame, T.looks, 36.3, 0.2);
+  const cartCheck = t >= T.done ? 1 : 0;
+  const inCart = t < T.doesIt - 0.03 ? 0 : Math.min(1.08, pop(frame, T.doesIt));
 
-  // ── Phase 5: loop ──
-  const ring = ramp(frame, P.loop[0] + 0.1, 0.4);
-  const runO = t >= RUN_FROM - 0.1 ? 1 : 0;
-  const runner = onLoop(dotAngle(t));
-  const stationOn = (at: number) => (t >= at ? Math.min(1, (t - at) / 0.3) : 0);
-  const lapFlash = (deg: number) => {
-    // a station lights again each time the runner passes it
-    const a = ((dotAngle(t) - deg) % 360 + 360) % 360;
-    return t > RUN_FROM && t < T.done && a < 25 ? 1 : 0;
+  // ── loop ──
+  const ringDraw = ramp(frame, 36.95, 0.4);
+  const ringO = during(frame, 36.9, 41.75, 0.3);
+  const stationOn = (at: number, deg: number) => {
+    const first = t >= at ? Math.min(1, (t - at) / 0.25) * (t < at + 0.5 ? 1 : 0) : 0;
+    const a = (((runnerDeg(t) - deg) % 360) + 360) % 360;
+    const lap = t > RUN_FROM && t < T.done && a < 28 ? 1 : 0;
+    return Math.max(first, lap);
   };
-  const tick = ramp(frame, T.done, 0.35);
+  const onLook = Math.max(stationOn(T.look1, ST.look), stationOn(T.again, ST.look));
+  const onThink = stationOn(T.think, ST.think);
+  const onDo = stationOn(T.doo, ST.doo);
+
+  // hand slot ring (for the "do" highlight)
+  const { elbow, wrist } = armJoints("R", right);
+  const ha = Math.atan2(wrist.y - elbow.y, wrist.x - elbow.x);
+  const handC = { x: wrist.x + Math.cos(ha) * 60, y: wrist.y + Math.sin(ha) * 60 };
 
   return (
-    <AbsoluteFill style={{ transform: `scale(${pushIn(frame, durationInFrames)})`, fontFamily }}>
-      <QuestionStrip active={0} />
+    <AbsoluteFill style={{ fontFamily, backgroundColor: colors.ink }}>
+      <World cam={c}>
+        <Stage spotX={760} floorY={FLOOR} />
 
-      {/* Tool belt (phase 1 central, phase 2 to the right) */}
-      <div style={{ position: "absolute", left: belt.left, top: belt.top, opacity: beltO }}>
-        <ToolBelt w={belt.w} shown={toolsShown} strap={ramp(frame, T.internet - 0.6, 0.5)} />
-        <div style={{ position: "absolute", left: belt.w * 0.83 - 6, top: -6, width: belt.w * 0.2 + 12, height: belt.w * 0.27 + 12, borderRadius: 28, border: `6px solid ${colors.yellow}`, opacity: basketFlash, boxSizing: "border-box" }} />
-      </div>
-
-      {/* Helper box with cables to the hands */}
-      <AbsoluteFill style={{ opacity: f(P.helper) }}>
-        <div style={{ position: "absolute", left: HB.left, top: HB.top, transform: `scale(${Math.max(0, helperIn)})`, transformOrigin: "50% 100%" }}>
-          <HelperBox w={HB.w} slotGlow={slotGlow} light={t >= T.simple + 0.7 ? 1 : 0} />
+        {/* the chatbot kiosk: off until it's asked; then it only lists */}
+        <div style={{ position: "absolute", left: CHAT.left, top: CHAT.top }}>
+          <Kiosk w={CHAT.w}>
+            <ScreenOff o={kioskOn ? 0 : 1} />
+            {kioskOn ? (
+              <KioskChat
+                w={CHAT.w}
+                msgs={[
+                  { from: "me", o: pop(frame, 22.46), text: "Cheap eggs?" },
+                  {
+                    from: "ai", o: pop(frame, 24.02), text: (
+                      <>
+                        Here's a list:
+                        {["A local store", "A supermarket", "A delivery app"].map((s, i) => (
+                          <div key={s} style={{ fontWeight: 600, fontSize: CHAT.w * 0.048, opacity: ramp(frame, 24.25 + i * 0.22, 0.15), color: "#C9CED8" }}>• {s}</div>
+                        ))}
+                      </>
+                    ),
+                  },
+                ]}
+              />
+            ) : null}
+          </Kiosk>
         </div>
-        <svg width={1920} height={1080} style={{ position: "absolute", inset: 0, opacity: handsO * ramp(frame, T.itself - 0.2, 0.3) }} aria-hidden>
-          <path d={`M ${PORT_L.x} ${PORT_L.y} Q ${PORT_L.x} ${(PORT_L.y + handL.y) / 2 + 30} ${handL.x} ${handL.y - 30}`} stroke={colors.lineStrong} strokeWidth={10} fill="none" strokeLinecap="round" />
-          <path d={`M ${PORT_R.x} ${PORT_R.y} Q ${(PORT_R.x + handR.x) / 2} ${Math.max(PORT_R.y, handR.y) + 80} ${handR.x} ${handR.y - 30}`} stroke={colors.lineStrong} strokeWidth={10} fill="none" strokeLinecap="round" />
-        </svg>
-      </AbsoluteFill>
 
-      {/* The figure */}
-      <div style={{ position: "absolute", left: FIG.left, top: FIG.top, opacity: figO }}>
-        <Figure size={FIG.size} brain={1} hands={hands} eyes={eyes} handsAway={handsAway} look={figLook} glow={jarGlow} />
-      </div>
-
-      {/* Flying / plugged-in hands (phase 2) */}
-      <svg width={1920} height={1080} style={{ position: "absolute", inset: 0, opacity: handsO }} aria-hidden>
-        <HandShape cx={handL.x} cy={handL.y} r={30} />
-        <HandShape cx={handR.x} cy={handR.y} r={30} flip press={press} />
-      </svg>
-
-      {/* "search for eggs, please" rises from the jar and drops into the helper's slot */}
-      <div
-        style={{
-          position: "absolute", left: bubble.x, top: bubble.y, opacity: f([T.ask - 0.1, T.please + 0.7]),
-          transform: `translate(-50%, -100%) scale(${Math.min(1, bubbleIn) * (1 - 0.85 * bubbleGo)})`, transformOrigin: "50% 100%",
-        }}
-      >
-        <div style={{ position: "relative", padding: "18px 30px", borderRadius: 30, backgroundColor: colors.white, color: colors.ink, fontSize: 44, fontWeight: 700, whiteSpace: "nowrap", boxShadow: "0 16px 30px rgba(0,0,0,0.35)" }}>
-          search for eggs, please
-          <div style={{ position: "absolute", left: -18, bottom: 22, width: 0, height: 0, borderTop: "16px solid transparent", borderBottom: "16px solid transparent", borderRight: `24px solid ${colors.white}` }} />
+        {/* the self-checkout */}
+        <div style={{ position: "absolute", left: SCREEN.left, top: SCREEN.top }}>
+          <Checkout w={SCREEN.w} bodyH={BODY_H} feed={0} receipt={null}>
+            {shop1 ? (
+              <ShopView w={SCREEN.w} query={typed1} tiles={pop(frame, 18.68)} picked={0} cart={0} />
+            ) : shop2 ? (
+              <>
+                <ShopView w={SCREEN.w} query={typed2} tiles={pop(frame, T.compares)} picked={t >= 29.05 ? 1 : 0} cart={cartN} cartPop={ramp(frame, T.cart, 0.35)} cartRing={cartRing} cartCheck={cartCheck} />
+                {inCart > 0 ? (
+                  <div style={{ position: "absolute", left: "50%", top: "62%", translate: "-50% -50%", scale: `${inCart}`, rotate: "-6deg", padding: "10px 30px", borderRadius: 18, backgroundColor: colors.mint, border: `6px solid ${INK}`, fontSize: 52, fontWeight: 800, color: INK, whiteSpace: "nowrap" }}>
+                    In your cart ✓
+                  </div>
+                ) : null}
+              </>
+            ) : (
+              <ScreenOff />
+            )}
+          </Checkout>
         </div>
-      </div>
 
-      {/* The result card slides back up into the jar */}
-      <div style={{ position: "absolute", left: result.x, top: result.y, opacity: resultO, transform: `translate(-50%, -50%) scale(${1 - 0.5 * resultBack})` }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 22px", borderRadius: 22, backgroundColor: colors.panel, border: `5px solid ${colors.mint}` }}>
-          <EggCarton w={110} />
-          <svg width={56} height={56} viewBox="0 0 84 84" aria-hidden><path d="M 12 44 L 34 66 L 74 18" fill="none" stroke={colors.mint} strokeWidth={14} strokeLinecap="round" strokeLinejoin="round" /></svg>
+        {/* the loop ring round the agent (behind it) */}
+        {ringO > 0 ? (
+          <div style={{ position: "absolute", inset: 0, opacity: ringO }}>
+            <LoopRing cx={RING.cx} cy={RING.cy} rx={RING.rx} ry={RING.ry} draw={ringDraw} runner={runnerDeg(t)} runnerO={t > RUN_FROM - 0.05 && t < T.done + 0.05 ? 1 : 0} />
+          </div>
+        ) : null}
+
+        {/* the agent */}
+        <div style={{ position: "absolute", left: figLeft, top: FIG.top - 12 * Math.abs(Math.sin(Math.PI * stepK(t))) }}>
+          <Figure2
+            size={FIG.size}
+            eyes={eyes}
+            notebook={0}
+            look={look}
+            glow={jarGlow}
+            left={{ target: left, pose: "relaxed", thumb: "up", hand: gloveL }}
+            right={{ target: right, pose: t > 17.6 && t < 30.2 ? "point" : t > 30.6 ? "point" : "relaxed", thumb: t > 17.6 ? "up" : "down", hand: gloveR, press }}
+            front={
+              <g>
+                {strain > 0 ? (
+                  <g opacity={strain} stroke={colors.coral} strokeWidth={6} strokeDasharray="12 10" fill="none" strokeLinecap="round">
+                    <path d={`M 270 300 L ${REST_WIDE_L.x + 20} ${REST_WIDE_L.y - 30}`} />
+                    <path d={`M 330 300 L ${REST_WIDE_R.x - 20} ${REST_WIDE_R.y - 30}`} />
+                    {[[(270 + REST_WIDE_L.x + 20) / 2, (300 + REST_WIDE_L.y - 30) / 2], [(330 + REST_WIDE_R.x - 20) / 2, (300 + REST_WIDE_R.y - 30) / 2]].map(([x, y], i) => (
+                      <path key={i} d={`M ${x - 16} ${y - 16} L ${x + 16} ${y + 16} M ${x + 16} ${y - 16} L ${x - 16} ${y + 16}`} strokeDasharray="none" strokeWidth={9} />
+                    ))}
+                  </g>
+                ) : null}
+                {onLook > 0 ? <g opacity={onLook}>{[256, 344].map((x) => <circle key={x} cx={x} cy={66} r={44} fill="none" stroke={colors.yellow} strokeWidth={8} />)}</g> : null}
+                {onDo > 0 ? <circle cx={handC.x} cy={handC.y} r={66} fill="none" stroke={colors.yellow} strokeWidth={8} opacity={onDo} /> : null}
+              </g>
+            }
+          >
+            <BeltKit
+              strap={strap}
+              tools={tools}
+              toolGlow={toolGlow}
+              helper={helper}
+              slotGlow={slotGlow}
+              light={light}
+              cables={{ l: forearmPt("L", left), r: forearmPt("R", right), o: cablesO, tug }}
+            />
+          </Figure2>
         </div>
-      </div>
 
-      {/* Phase 3: chatbot (left) vs agent (right) */}
-      <AbsoluteFill style={{ opacity: f(P.split) }}>
-        <div style={{ position: "absolute", left: 960, top: 170, bottom: 60, width: 4, borderRadius: 2, backgroundColor: colors.line }} />
-        <ChatWindow width={760} height={640} style={{ position: "absolute", left: 110, top: 220 }}>
-          <ChatBubble from="me" o={pop(frame, T.askChat + 0.1)} fontSize={46}>Cheap eggs?</ChatBubble>
-          <ChatBubble from="ai" o={pop(frame, T.list - 0.9)} fontSize={42}>
-            Here's a list:
-            {["A local store", "A big supermarket", "A delivery app"].map((s, i) => (
-              <div key={s} style={{ opacity: ramp(frame, T.list - 0.7 + i * 0.25, 0.2), fontWeight: 600, fontSize: 38, color: colors.subtext }}>• {s}</div>
-            ))}
-          </ChatBubble>
-        </ChatWindow>
-        <div style={{ position: "absolute", left: 990, top: 210, transform: `scale(${Math.min(1, pop(frame, T.opens - 0.15))})`, transformOrigin: "50% 50%" }}>
-          <ShopPage w={860} query={typed} cart={cartN} cartPop={ramp(frame, T.cart, 0.35)}>
-            <div style={{ display: "flex", gap: 40, justifyContent: "center", paddingTop: 10, transform: `scale(${Math.min(1, tilesIn)})`, opacity: Math.min(1, tilesIn * 2) }}>
-              <ProductTile w={220} picked={picked ? 1 : 0}><EggCarton w={170} /><PriceTag price="$4.99" w={130} yellow={picked} /></ProductTile>
-              <ProductTile w={220}><EggCarton w={170} /><PriceTag price="$6.49" w={130} /></ProductTile>
+        {/* the brain's request → into the helper's slot */}
+        {t > T.ask - 0.05 && reqGo < 1 ? (
+          <div style={{ position: "absolute", left: req.x, top: req.y, translate: "0 -100%", scale: `${Math.min(1, reqIn) * (1 - 0.9 * reqGo)}`, transformOrigin: "0 100%" }}>
+            <Bubble fontSize={22} tail="bottom-left">search for eggs, please</Bubble>
+          </div>
+        ) : null}
+        {/* the result climbs back up into the jar */}
+        {resK > 0 && resK < 1 ? (
+          <div style={{ position: "absolute", left: res.x, top: res.y, translate: "-50% -50%", scale: `${0.45 + 0.55 * Math.sin(resK * Math.PI)}` }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, padding: "6px 10px", borderRadius: 12, backgroundColor: "#F3EBDD", border: `4px solid ${INK}` }}>
+              <EggCarton w={46} />
+              <svg width={24} height={24} viewBox="0 0 84 84" aria-hidden><path d="M 12 44 L 34 66 L 74 18" fill="none" stroke="#2FA37E" strokeWidth={16} strokeLinecap="round" strokeLinejoin="round" /></svg>
             </div>
-          </ShopPage>
-        </div>
-        <svg width={1920} height={1080} style={{ position: "absolute", inset: 0, opacity: during(frame, T.opens + 0.05, P.split[1] - 0.2, 0.2) }} aria-hidden>
-          <HandShape cx={cursor.x + typing} cy={cursor.y + 50} r={40} press={cursorPress} />
-        </svg>
-      </AbsoluteFill>
+          </div>
+        ) : null}
 
-      {/* Phase 4: eyes check the last click (the cart badge) */}
-      <AbsoluteFill style={{ opacity: f(P.eyes) }}>
-        <div style={{ position: "absolute", left: 1090, top: 340 }}>
-          <ShopPage w={680} query="eggs" cart={1} cartPop={ramp(frame, T.looks + 0.2, 0.4)}>
-            <div style={{ display: "flex", gap: 30, justifyContent: "center" }}>
-              <ProductTile w={170} picked={1}><EggCarton w={130} /><PriceTag price="$4.99" w={104} yellow /></ProductTile>
-              <ProductTile w={170}><EggCarton w={130} /><PriceTag price="$6.49" w={104} /></ProductTile>
-            </div>
-          </ShopPage>
-          <div style={{ position: "absolute", left: 680 - 74, top: 50, width: 70, height: 70, borderRadius: 35, border: `6px solid ${colors.yellow}`, opacity: ramp(frame, T.looks, 0.3), transform: `scale(${1 + 0.3 * during(frame, T.looks, T.did, 0.3)})` }} />
-        </div>
-      </AbsoluteFill>
+        {/* loop station tags */}
+        {ringO > 0 ? (
+          <div style={{ opacity: ringO }}>
+            {([["look", ST.look, onLook, T.look1], ["think", ST.think, onThink, T.think], ["do", ST.doo, onDo, T.doo]] as [string, number, number, number][]).map(([w, deg, on, at]) => {
+              const p = onRing(deg, 58);
+              return (
+                <div key={w} style={{ position: "absolute", left: p.x, top: p.y, translate: "-50% -50%" }}>
+                  <Tag fontSize={30} o={t < at - 0.05 ? 0 : Math.min(1, pop(frame, at))} on={on}>{w}</Tag>
+                </div>
+              );
+            })}
+          </div>
+        ) : null}
 
-      {/* Phase 5: the loop — look, think, do, look again */}
-      <AbsoluteFill style={{ opacity: f(P.loop) }}>
-        <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }} aria-hidden>
-          <circle cx={LOOP.x} cy={LOOP.y} r={LOOP.r} fill="none" stroke={colors.yellow} strokeWidth={14} strokeDasharray={`${2 * Math.PI * LOOP.r * ring} 9999`} transform={`rotate(-90 ${LOOP.x} ${LOOP.y})`} strokeLinecap="round" />
-          <circle cx={runner.x} cy={runner.y} r={22} fill={colors.yellow} opacity={runO * (1 - tick)} />
-        </svg>
-        <Station at={onLoop(-90)} on={Math.max(stationOn(T.look1), lapFlash(-90))}>
-          <svg width={90} height={90} viewBox="-45 -45 90 90" aria-hidden><EyeShape cx={0} cy={0} r={34} look={{ x: 0.4, y: 0 }} /></svg>
-        </Station>
-        <Station at={onLoop(0)} on={Math.max(stationOn(T.think), lapFlash(0))}>
-          <svg width={100} height={80} viewBox="0 0 200 160" aria-hidden><BrainShape x={0} y={0} /></svg>
-        </Station>
-        <Station at={onLoop(90)} on={Math.max(stationOn(T.doo), lapFlash(90))}>
-          <svg width={90} height={90} viewBox="-50 -50 100 100" aria-hidden><HandShape cx={0} cy={0} r={38} /></svg>
-        </Station>
-        <Station at={onLoop(180)} on={Math.max(stationOn(T.again), lapFlash(180))}>
-          <svg width={90} height={90} viewBox="-45 -45 90 90" aria-hidden><EyeShape cx={0} cy={0} r={34} look={{ x: -0.4, y: 0 }} /></svg>
-        </Station>
-        <div style={{ position: "absolute", left: LOOP.x - 90, top: LOOP.y - 90, width: 180, height: 180, borderRadius: 90, backgroundColor: "rgba(94,230,184,0.14)", border: `8px solid ${colors.mint}`, display: "flex", alignItems: "center", justifyContent: "center", opacity: tick, transform: `scale(${Math.min(1.1, pop(frame, T.done))})`, boxSizing: "border-box" }}>
-          <svg width={110} height={110} viewBox="0 0 84 84" aria-hidden><path d="M 12 44 L 34 66 L 74 18" fill="none" stroke={colors.mint} strokeWidth={13} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - tick} /></svg>
+        {/* tells vs does */}
+        <div style={{ position: "absolute", left: KIOSK_C.x, top: 870, translate: "-50% 0" }}>
+          <Tag fontSize={40} o={t < T.chatTells - 0.05 ? 0 : Math.min(1, pop(frame, T.chatTells))}>tells you</Tag>
         </div>
-      </AbsoluteFill>
+        <div style={{ position: "absolute", left: 660, top: 870, translate: "-50% 0" }}>
+          <Tag fontSize={40} o={t < T.agentDoes - 0.05 ? 0 : Math.min(1, pop(frame, T.agentDoes))} on={t >= T.agentDoes ? 1 : 0}>does it</Tag>
+        </div>
+      </World>
 
-      {/* Phase 6: a chatbot tells you · an agent does it */}
-      <AbsoluteFill style={{ opacity: f(P.punch) }}>
-        <div style={{ position: "absolute", left: 200, top: 380, width: 640 }}>
-          <ChatBubble from="ai" o={pop(frame, T.chatTells)} fontSize={50}>
-            Here's a list of shops…
-          </ChatBubble>
-        </div>
-        <div style={{ position: "absolute", left: 1080, top: 230, width: 620, height: 600, transform: `scale(${Math.min(1.05, pop(frame, T.agentDoes)) * (1 + 0.06 * during(frame, T.doesIt, T.doesIt + 0.35, 0.12))})`, transformOrigin: "50% 80%" }}>
-          <div style={{ position: "absolute", left: 60, top: 40, width: 500, height: 500, borderRadius: 250, backgroundColor: colors.yellow, opacity: 0.12 }} />
-          <div style={{ position: "absolute", left: 130, top: 140 }}><EggCarton w={360} /></div>
-          <svg width={620} height={600} style={{ position: "absolute", inset: 0 }} aria-hidden>
-            <HandShape cx={190} cy={420} r={78} />
-            <HandShape cx={430} cy={420} r={78} flip />
-          </svg>
-        </div>
-      </AbsoluteFill>
+      {/* the person asking the agent (screen space, as in S1) */}
+      <div style={{ position: "absolute", left: 60, top: 880, opacity: during(frame, 26.85, 30.4, 0.2), scale: `${Math.min(1, pop(frame, 26.85))}`, transformOrigin: "0 100%" }}>
+        <PersonSays fontSize={46}>Cheap eggs, please</PersonSays>
+      </div>
 
-      <Dot path={dotPath} squash={dotSquash} track={TRACK} seed="e4s3" look={LOOK} />
+      <QuestionStrip active={0} o={1 - ramp(frame, 3.0, 0.4)} />
+      <Dot path={ROUTE.path} squash={ROUTE.squash} track={TRACK} seed="e4s3" look={LOOK} />
     </AbsoluteFill>
   );
 };

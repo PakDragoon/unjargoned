@@ -117,18 +117,23 @@ export const Hand: React.FC<{ pose?: HandPose; thumb?: "up" | "down"; size?: num
 export const Arm: React.FC<{
   shoulder: Pt; target: Pt; upper?: number; lower?: number; bend?: Bend; width?: number;
   pose?: HandPose; thumb?: "up" | "down"; hand?: number; handSize?: number; press?: number; color?: string; bodyX?: number;
-}> = ({ shoulder, target, upper = 140, lower = 130, bend = "auto", bodyX, width = 34, pose = "relaxed", thumb = "up", hand = 1, handSize = 1.25, press = 0, color = PAPER }) => {
+  /** 0 = solid sleeve; 1 = only a faint see-through sleeve (the figure's body outline). */ ghost?: number;
+}> = ({ shoulder, target, upper = 140, lower = 130, bend = "auto", bodyX, width = 34, pose = "relaxed", thumb = "up", hand = 1, handSize = 1.25, press = 0, color = PAPER, ghost = 0 }) => {
   const { elbow, wrist } = solveElbow(shoulder, target, upper, lower, bend, bodyX);
   const ang = (Math.atan2(wrist.y - elbow.y, wrist.x - elbow.x) * 180) / Math.PI;
   const path = `M ${shoulder.x} ${shoulder.y} L ${elbow.x} ${elbow.y} L ${wrist.x} ${wrist.y}`;
   const hp = Math.max(0, hand);
+  // a glove coming on/off slides along the forearm (off the fingertips' end) as it shrinks — never floats free
+  const slide = hp < 1 ? (1 - hp) * 46 * handSize : 0;
   return (
     <g>
-      <path d={path} fill="none" stroke={INK} strokeWidth={width + OUT * 2} strokeLinecap="round" strokeLinejoin="round" />
-      <path d={path} fill="none" stroke={color} strokeWidth={width} strokeLinecap="round" strokeLinejoin="round" />
+      <g opacity={1 - 0.86 * ghost}>
+        <path d={path} fill="none" stroke={INK} strokeWidth={width + OUT * 2} strokeLinecap="round" strokeLinejoin="round" opacity={1 - ghost} />
+        <path d={path} fill="none" stroke={color} strokeWidth={width} strokeLinecap="round" strokeLinejoin="round" />
+      </g>
       {/* empty slot (dashed) until the hand arrives */}
       <circle cx={wrist.x + Math.cos((ang * Math.PI) / 180) * 48 * handSize} cy={wrist.y + Math.sin((ang * Math.PI) / 180) * 48 * handSize} r={46 * handSize} fill="none" stroke={colors.subtext} strokeWidth={5} strokeDasharray="12 10" opacity={Math.max(0, 1 - hp * 2) * 0.9} />
-      <g transform={`translate(${wrist.x} ${wrist.y}) rotate(${ang}) scale(${hp})`}>
+      <g transform={`translate(${wrist.x} ${wrist.y}) rotate(${ang}) translate(${slide} 0) scale(${hp})`}>
         <Hand pose={pose} thumb={thumb} size={handSize} press={press} />
       </g>
     </g>
@@ -141,7 +146,25 @@ const BRAIN_Y = "#FFC93C";
 const BRAIN_D = "#D9A21F";
 
 /** The jar head: lid with goggle-eyes (optional), glass, yellow brain with its guess slot. Drawn in a 260×300 box. */
-export const HeadJar: React.FC<{ eyes?: number; look?: Pt; guess?: string; wrong?: number; glow?: number }> = ({ eyes = 0, look = { x: 0, y: 0 }, guess = "", wrong = 0, glow = 0 }) => (
+/** A lid closing over one goggle lens from the top (0 open … 1 shut, with a lash line). */
+const Lid: React.FC<{ cx: number; cy: number; r: number; k: number }> = ({ cx, cy, r, k }) => {
+  if (k <= 0.01) return null;
+  if (k >= 0.97) {
+    return (
+      <g>
+        <circle cx={cx} cy={cy} r={r} fill="#5B6378" stroke={INK} strokeWidth={OUT} />
+        <path d={`M ${cx - r * 0.62} ${cy + 2} Q ${cx} ${cy + r * 0.42} ${cx + r * 0.62} ${cy + 2}`} fill="none" stroke={INK} strokeWidth={5} strokeLinecap="round" />
+      </g>
+    );
+  }
+  const y0 = cy - r + 2 * r * k;
+  const hw = Math.sqrt(Math.max(0, r * r - (y0 - cy) * (y0 - cy)));
+  return (
+    <path d={`M ${cx - hw} ${y0} A ${r} ${r} 0 ${y0 > cy ? 1 : 0} 1 ${cx + hw} ${y0} Z`} fill="#5B6378" stroke={INK} strokeWidth={OUT} strokeLinejoin="round" />
+  );
+};
+
+export const HeadJar: React.FC<{ eyes?: number; look?: Pt; guess?: string; wrong?: number; glow?: number; lids?: number; dim?: number }> = ({ eyes = 0, look = { x: 0, y: 0 }, guess = "", wrong = 0, glow = 0, lids = 0, dim = 0 }) => (
   <g>
     {glow > 0 ? <ellipse cx={130} cy={170} rx={150} ry={150} fill={BRAIN_Y} opacity={0.18 * glow} /> : null}
     {/* glass */}
@@ -158,6 +181,7 @@ export const HeadJar: React.FC<{ eyes?: number; look?: Pt; guess?: string; wrong
       <rect x={56} y={118} width={88} height={40} rx={11} fill={INK} stroke={wrong > 0.5 ? "#FF8A5C" : BRAIN_D} strokeWidth={5} />
       <text x={100} y={146} textAnchor="middle" fontFamily="inherit" fontWeight={800} fontSize={24} fill={wrong > 0.5 ? "#FF8A5C" : BRAIN_Y}>{guess}</text>
     </g>
+    {dim > 0 ? <rect x={30} y={66} width={200} height={216} rx={52} fill={INK} opacity={0.45 * dim} /> : null}
     {/* glass shine */}
     <path d="M 46 96 Q 40 150 48 214" stroke="#FFFFFF" strokeWidth={10} strokeLinecap="round" opacity={0.35} fill="none" />
     {/* lid */}
@@ -171,6 +195,7 @@ export const HeadJar: React.FC<{ eyes?: number; look?: Pt; guess?: string; wrong
           <circle cx={cx} cy={44} r={34} fill="#FFFFFF" stroke={INK} strokeWidth={OUT} />
           <circle cx={cx + look.x * 12} cy={44 + look.y * 12} r={14} fill={INK} />
           <circle cx={cx + look.x * 12 - 5} cy={44 + look.y * 12 - 5} r={4.5} fill="#FFFFFF" />
+          <Lid cx={cx} cy={44} r={34} k={lids} />
         </g>
       ))}
     </g>
@@ -194,14 +219,29 @@ export const REST_R: ArmSpec = { target: { x: 414, y: 600 }, pose: "relaxed", th
 export const Figure2: React.FC<{
   size?: number; left?: ArmSpec; right?: ArmSpec; eyes?: number; look?: Pt; notebook?: number; guess?: string; wrong?: number; glow?: number;
   /** behind-the-arm props (e.g. a held card), in the figure frame */ children?: React.ReactNode;
-}> = ({ size = 640, left = REST_L, right = REST_R, eyes = 0, look, notebook = 0, guess, wrong, glow, children }) => {
+  /** 1 = solid paper body; 0 = only a faint see-through outline of it (the jar stays solid). */ body?: number;
+  lids?: number; dim?: number;
+  /** drawn over everything (in the figure frame), e.g. a highlight ring */ front?: React.ReactNode;
+}> = ({ size = 640, left = REST_L, right = REST_R, eyes = 0, look, notebook = 0, guess, wrong, glow, children, body = 1, lids = 0, dim = 0, front }) => {
+  const ghost = 1 - Math.max(0, Math.min(1, body));
   const arm = (s: Pt, a: ArmSpec) => (
-    <Arm shoulder={s} target={a.target} pose={a.pose ?? "relaxed"} thumb={a.thumb ?? "up"} bend={a.bend ?? "natural"} bodyX={300} press={a.press ?? 0} hand={a.hand ?? 1} upper={140} lower={130} width={38} />
+    <Arm shoulder={s} target={a.target} pose={a.pose ?? "relaxed"} thumb={a.thumb ?? "up"} bend={a.bend ?? "natural"} bodyX={300} press={a.press ?? 0} hand={a.hand ?? 1} upper={140} lower={130} width={38} ghost={ghost} />
   );
+  const TORSO = "M 222 326 C 222 308 238 298 256 298 L 344 298 C 362 298 378 308 378 326 L 396 594 C 398 616 382 632 360 632 L 240 632 C 218 632 202 616 204 594 Z";
   return (
     <svg width={(size * 600) / 900} height={size} viewBox="0 0 600 900" aria-hidden style={{ overflow: "visible" }}>
       <ellipse cx={300} cy={858} rx={190} ry={24} fill="#000" opacity={0.35} />
       <g style={{ filter: `drop-shadow(8px 10px 0 ${SHADOW})` }}>
+        {ghost > 0 ? (
+          <g opacity={ghost}>
+            {/* the body's outline: dashed, see-through */}
+            {[[262, 236], [338, 364]].map(([x, fx]) => (
+              <path key={x} d={`M ${x} 610 L ${x + (fx > 300 ? 6 : -6)} 820`} stroke={PAPER} strokeOpacity={0.12} strokeWidth={52} strokeLinecap="round" />
+            ))}
+            <path d={TORSO} fill={PAPER} fillOpacity={0.1} stroke="#B9BDC8" strokeWidth={5} strokeDasharray="14 12" />
+          </g>
+        ) : null}
+        <g opacity={1 - ghost}>
         {/* legs + feet */}
         {[[262, 236], [338, 364]].map(([x, fx]) => (
           <g key={x}>
@@ -211,7 +251,7 @@ export const Figure2: React.FC<{
           </g>
         ))}
         {/* torso */}
-        <path d="M 222 326 C 222 308 238 298 256 298 L 344 298 C 362 298 378 308 378 326 L 396 594 C 398 616 382 632 360 632 L 240 632 C 218 632 202 616 204 594 Z" fill={PAPER} stroke={INK} strokeWidth={OUT} strokeLinejoin="round" />
+        <path d={TORSO} fill={PAPER} stroke={INK} strokeWidth={OUT} strokeLinejoin="round" />
         <path d="M 340 312 C 356 316 364 330 364 346 L 380 590 C 381 606 372 616 360 618 L 340 618 Z" fill={PAPER_SHADE} opacity={0.7} />
         <path d="M 236 340 L 230 560" stroke="#FFFFFF" strokeWidth={8} strokeLinecap="round" opacity={0.5} />
         {/* pocket */}
@@ -223,14 +263,16 @@ export const Figure2: React.FC<{
           <rect x={348} y={382} width={7} height={64} fill={BRAIN_Y} />
         </g>
         <path d="M 304 420 L 372 420 L 370 446 L 306 446 Z" fill={PAPER_SHADE} stroke={INK} strokeWidth={OUT * 0.7} opacity={Math.min(1, notebook * 3)} />
+        </g>
         {children}
         {/* head */}
         <g transform="translate(170 22)">
-          <HeadJar eyes={eyes} look={look} guess={guess} wrong={wrong} glow={glow} />
+          <HeadJar eyes={eyes} look={look} guess={guess} wrong={wrong} glow={glow} lids={lids} dim={dim} />
         </g>
         {/* arms (in front of the torso) */}
         {arm(SHOULDER_L, left)}
         {arm(SHOULDER_R, right)}
+        {front}
       </g>
     </svg>
   );
