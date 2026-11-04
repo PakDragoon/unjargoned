@@ -149,6 +149,8 @@ type Props = {
   tailLength?: number;
   /** Tail thickness in body radii. */
   tailWidth?: number;
+  /** Optional: where the tail starts, in body radii from the centre (default keeps the Ep 1 gap). */
+  tailStart?: number;
   blinks?: boolean;
   seed?: string;
   /** Render as of this frame instead of the current one (onion-skin / sheets). */
@@ -173,6 +175,7 @@ export const Dot: React.FC<Props> = ({
   tailAngle = 0,
   tailLength = 1.7,
   tailWidth = 0.3,
+  tailStart,
   blinks = true,
   seed = "dot",
   frame: frameOverride,
@@ -196,7 +199,7 @@ export const Dot: React.FC<Props> = ({
   const pull = Math.min(1, speed / 18);
   const bend = Math.max(-70, Math.min(70, wrap(moveAngle + 180 - tailAngle))) * pull;
   const tipAngle = tailAngle + bend;
-  const start = 112 + tailWidth * 50;
+  const start = tailStart !== undefined ? tailStart * 100 : 112 + tailWidth * 50;
   const L = tailLength * 100;
   const p0 = { x: Math.cos(deg(tailAngle)) * start, y: Math.sin(deg(tailAngle)) * start };
   const c1 = { x: Math.cos(deg(tailAngle)) * (start + L * 0.5), y: Math.sin(deg(tailAngle)) * (start + L * 0.5) };

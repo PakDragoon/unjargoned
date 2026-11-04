@@ -32,14 +32,19 @@ const TRACK: MoodKey[] = [
  * the wrist — clearly not the agent's jointed paper sleeve. The borrowed glove sits on the end, along the arm's tangent.
  */
 const HOSE_LEN = 130;
-const HoseArm: React.FC<{ shoulder: Pt; wrist: Pt; grow: number; glove: number; pose: HandPose; thumb: "up" | "down"; bow: 1 | -1; press?: number }> = ({ shoulder, wrist, grow, glove, pose, thumb, bow, press = 0 }) => {
+const HoseArm: React.FC<{ shoulder: Pt; wrist: Pt; bodyX: number; grow: number; glove: number; pose: HandPose; thumb: "up" | "down"; press?: number }> = ({ shoulder, wrist, bodyX, grow, glove, pose, thumb, press = 0 }) => {
   if (grow <= 0) return null;
   const w = { x: shoulder.x + (wrist.x - shoulder.x) * grow, y: shoulder.y + (wrist.y - shoulder.y) * grow };
   const dx = w.x - shoulder.x;
   const dy = w.y - shoulder.y;
   const d = Math.hypot(dx, dy) || 1;
   const sag = Math.sqrt(Math.max(0, HOSE_LEN * grow * HOSE_LEN * grow - d * d)) * 0.45;
-  const ctl = { x: (shoulder.x + w.x) / 2 + (-dy / d) * sag * bow, y: (shoulder.y + w.y) / 2 + (dx / d) * sag * bow };
+  const mid = { x: (shoulder.x + w.x) / 2, y: (shoulder.y + w.y) / 2 };
+  const a = { x: mid.x - (dy / d) * sag, y: mid.y + (dx / d) * sag };
+  const b = { x: mid.x + (dy / d) * sag, y: mid.y - (dx / d) * sag };
+  // natural bend: reaching out sideways → the arm sags (bulge down); hanging or raised → it bows out, away from the body
+  const side = Math.sign(shoulder.x - bodyX) || 1;
+  const ctl = Math.abs(dx) > Math.abs(dy) ? (a.y >= b.y ? a : b) : ((a.x - bodyX) * side >= (b.x - bodyX) * side ? a : b);
   const ang = (Math.atan2(w.y - ctl.y, w.x - ctl.x) * 180) / Math.PI;
   const path = `M ${shoulder.x} ${shoulder.y} Q ${ctl.x} ${ctl.y} ${w.x} ${w.y}`;
   return (
@@ -79,11 +84,12 @@ const S3bContent: React.FC = () => {
   const reach = interpolate(t, [0.82, TAP - 0.02], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) - interpolate(t, [1.38, 1.55], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const d = Math.hypot(buy.x - shR.x, buy.y - shR.y);
   const wristBuy = { x: buy.x - ((buy.x - shR.x) / d) * HAND, y: buy.y - ((buy.y - shR.y) / d) * HAND };
-  const restR = { x: shR.x + 30, y: shR.y + 78 };
-  const wristR = { x: restR.x + (wristBuy.x - restR.x) * reach, y: restR.y + (wristBuy.y - restR.y) * reach };
+  const restR0 = { x: shR.x + 16, y: shR.y + 100 };
   const panicK = ramp(frame, 1.95, 0.15);
   const wave = panicK * Math.sin(t * 22) * 14;
-  const wristL = { x: shL.x - 30 - 20 * panicK + wave, y: shL.y + 78 - 190 * panicK };
+  const restR = { x: restR0.x + (34 * panicK) + wave, y: restR0.y - 225 * panicK }; // panic: the right arm shoots up and waves
+  const wristR = { x: restR.x + (wristBuy.x - restR.x) * reach, y: restR.y + (wristBuy.y - restR.y) * reach };
+  const wristL = { x: shL.x - 16, y: shL.y + 100 };
 
   return (
     <AbsoluteFill style={{ fontFamily, backgroundColor: colors.ink }}>
@@ -116,12 +122,12 @@ const S3bContent: React.FC = () => {
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }} aria-hidden>
         {grow > 0 ? (
           <>
-            <HoseArm shoulder={shL} wrist={wristL} grow={grow} glove={gloves} pose={t > 1.95 ? "open" : "relaxed"} thumb="down" bow={-1} />
-            <HoseArm shoulder={shR} wrist={wristR} grow={grow} glove={gloves} pose={t > 0.7 && t < 1.6 ? "point" : "relaxed"} thumb="up" bow={1} press={press} />
+            <HoseArm shoulder={shL} wrist={wristL} bodyX={dot.x} grow={grow} glove={gloves} pose="relaxed" thumb="up" />
+            <HoseArm shoulder={shR} wrist={wristR} bodyX={dot.x} grow={grow} glove={gloves} pose={t > 0.84 && t < 1.6 ? "point" : t > 1.95 ? "open" : "relaxed"} thumb={t > 0.84 && t < 1.6 ? "up" : "down"} press={press} />
           </>
         ) : null}
       </svg>
-      <Dot x={dot.x} y={dot.y} size={100} squash={(fr) => Math.max(route.squash(fr), 0.12 * press)} tailAngle={180} track={TRACK} blinks={false} seed="gag4" look={{ x: t < 1.6 ? 1 : 0.8, y: t < 1.6 ? 0 : 0.6 }} />
+      <Dot x={dot.x} y={dot.y} size={100} squash={(fr) => Math.max(route.squash(fr), 0.12 * press)} tailAngle={198} tailStart={1.08} tailLength={1.2} tailWidth={0.24} track={TRACK} blinks={false} seed="gag4" look={{ x: t < 1.6 ? 1 : 0.8, y: t < 1.6 ? 0 : 0.6 }} />
     </AbsoluteFill>
   );
 };
