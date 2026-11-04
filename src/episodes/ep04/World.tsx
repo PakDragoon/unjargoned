@@ -183,7 +183,10 @@ export const BeltKit: React.FC<{
       ) : null}
       {/* the "Allow?" gate, standing on the helper's slot */}
       {gateMissing > 0 ? (
-        <rect x={GATE.x - GATE.w / 2} y={GATE.bottom - GATE.h} width={GATE.w} height={GATE.h} rx={10} fill="none" stroke={colors.coral} strokeWidth={4} strokeDasharray="9 7" opacity={gateMissing} />
+        <g opacity={gateMissing}>
+          <rect x={GATE.x - GATE.w / 2} y={GATE.bottom - GATE.h} width={GATE.w} height={GATE.h} rx={10} fill={colors.coral} fillOpacity={0.18} stroke={colors.coral} strokeWidth={6} strokeDasharray="10 7" />
+          <text x={GATE.x} y={GATE.bottom - GATE.h / 2 + 6} textAnchor="middle" fontFamily={fontFamily} fontWeight={800} fontSize={18} fill={colors.coral}>Allow?</text>
+        </g>
       ) : null}
       {gate > 0.001 ? (
         <g transform={`translate(${GATE.x} ${GATE.bottom}) scale(${gate}) translate(${-GATE.x} ${-GATE.bottom})`}>
