@@ -8,7 +8,7 @@ delivery tags in vo.json ({fast}/{slow}/{slower}). Runtime 3:36.
 - User asked for a full graphics/animation revamp after G4. New style + rig approved; **S1 revamped and approved**.
 - S2–S7 (+ S3b) revamped in the S1 style; **G3 approved** (S3b: Dot has its own white bendy arms + borrowed gloves).
 - G4: v2 rendered + mixed. v3: pink detailed brain; S1 `tailSeconds: 0.05` so "Let's un-jargon it." runs into S2 with ~0.25 s; S2 4-frame fade; SRT shifted −0.333 s after S1 (215.6 s, −13.0 LUFS).
-- G5: thumbnails A/B + 3 Shorts (see shorts-and-thumbnails.md). Awaiting review.
+- G5: thumbnails A/B + 3 Shorts (see shorts-and-thumbnails.md). v4: ~1 s pause after "Let's un-jargon it" (S1 tailSeconds 0.9), look/think/do cycle, "One catch" card. v5: S3b Subscribe tag (Dot turns, happy, points at a drawn Subscribe pill + thumbs-up; S3b 4.6 s, SRT +1.6 s). 218.0 s.
 - Next: re-render Full + remix
   (`tools/mix.py ep04 --mux`), re-check SRT, then G5 (thumbnails A/B + 2 Shorts + description).
 - Audio is final unless a scene's timing changes: voice, captions, 171 SFX cues (S1 cues retimed for the revamp;
