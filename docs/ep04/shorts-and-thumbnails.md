@@ -8,7 +8,7 @@
 ## Shorts (1080×1920, 30 fps; cut from the episode mix, −14 LUFS, burned-in captions)
 | Short | Hook | Cut | Length |
 | --- | --- | --- | --- |
-| 1 | "This AI spent $31 without asking" | S1 0–18.62 (hook → "Let's un-jargon it.") + S2 0–13.45 ("It got hands!" → brain in a jar → body) + S6 14.6–17.95 (headline, no captions) | 35.5 s |
+| 1 | "This AI spent $31 without asking" | S1 0–19.5 (hook → "Let's un-jargon it." + the pause) + S2 0–13.45 ("It got hands!" → brain in a jar → body) + S6 14.6–17.95 (headline, no captions) | 36.3 s |
 | 2 | "Chatbot vs AI agent" | S3 22.25–45.2 (list vs shopping → eyes → loop → tells/does) + S5 13.1–19.95 (risky clicks stop at "Allow?") + S5 26.3–37.0 (the egg flashback: "That time… it didn't.") | 40.5 s |
 | 3 | "Does AI really remember you?" | S4 2.1–34.3 (fresh every chat → the notebook → reads it first → old/wrong notes → "It isn't remembering. It's reading.") | 32.2 s |
 
