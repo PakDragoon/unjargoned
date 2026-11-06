@@ -33,7 +33,7 @@ def offsets(ep: str) -> dict[str, float]:
     for s in vo["scenes"]:
         out[s["id"]] = t
         seconds = s["estSeconds"] if s.get("silent") else durations[s["id"]]
-        t += math.ceil((seconds + TAIL_SECONDS + s.get("endScreenSeconds", 0)) * FPS) / FPS
+        t += math.ceil((seconds + s.get("tailSeconds", TAIL_SECONDS) + s.get("endScreenSeconds", 0)) * FPS) / FPS
     return out
 
 

@@ -174,7 +174,7 @@ def main() -> None:
     for scene in vo["scenes"]:
         sid = scene["id"]
         if scene.get("silent"):
-            offset += math.ceil((scene["estSeconds"] + TAIL_SECONDS) * FPS) / FPS
+            offset += math.ceil((scene["estSeconds"] + scene.get("tailSeconds", TAIL_SECONDS)) * FPS) / FPS
             continue
         if sid not in durations:
             sys.exit(f"{sid} has no voice yet: run tools/tts.py {ep} first")
@@ -188,7 +188,7 @@ def main() -> None:
         for cue in group_words(words):
             all_cues.append({"start": cue["start"] + offset, "end": cue["end"] + offset, "text": cue["text"]})
         end_screen = scene.get("endScreenSeconds", 0)
-        frames = math.ceil((durations[sid] + TAIL_SECONDS + end_screen) * FPS)
+        frames = math.ceil((durations[sid] + scene.get("tailSeconds", TAIL_SECONDS) + end_screen) * FPS)
         offset += frames / FPS
 
     # No overlaps: trim each cue to end just before the next one starts.

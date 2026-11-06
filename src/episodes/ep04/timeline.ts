@@ -5,7 +5,7 @@ import captions from "./captions.json";
 
 // Scene length = its voice length (written by tools/tts.py into durations.json).
 // Until the voice exists, the script's estimate is used and there is no audio.
-const TAIL_SECONDS = 0.4; // breathing room after the last word of each scene
+const TAIL_SECONDS = 0.4; // breathing room after the last word of each scene (vo.json "tailSeconds" overrides per scene)
 
 export type SceneInfo = {
   id: string;
@@ -24,7 +24,8 @@ const measured = durations as Record<string, number>;
 export const scenes: SceneInfo[] = vo.scenes.map((s) => {
   const audioSeconds = measured[s.id];
   const endScreen = "endScreenSeconds" in s ? (s.endScreenSeconds as number) : 0;
-  const voiceEnd = (audioSeconds ?? s.estSeconds) + TAIL_SECONDS;
+  const tail = "tailSeconds" in s ? (s.tailSeconds as number) : TAIL_SECONDS; // S1: "Let's un-jargon it." runs straight into S2
+  const voiceEnd = (audioSeconds ?? s.estSeconds) + tail;
   // Ep 4 ending: the end screen builds under the last line, and its 8 s count from that word ("Until").
   const fromWord = "endScreenFromWord" in s ? (s.endScreenFromWord as string) : undefined;
   const cue = fromWord ? words[s.id]?.find((w) => w.word.replace(/[^A-Za-z']/g, "") === fromWord) : undefined;

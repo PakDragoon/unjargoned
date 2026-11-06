@@ -1,11 +1,25 @@
 {
-  "_doc": "Vertical Shorts: each is one or more clips (scene, seconds into the scene). Video: Shorts.tsx; audio: tools/shorts.py cuts the same clips from the episode mix.",
+  "_doc": "Vertical Shorts (1080×1920): each is one or more clips (scene, seconds into the scene). cam = [sceneSec, centreX in scene px, zoom] keys for the vertical crop (zoom 0.85 = 1271 px of the 1920 frame, 918 px tall; 0.66 = the full-width strip). Video: Shorts.tsx; audio: tools/shorts.py cuts the same clips from the episode mix.",
   "Short1": {
-    "hook": "ChatGPT made up ", "hookHighlight": "court cases",
-    "clips": [{ "scene": "S1", "from": 0.0, "to": 16.3 }, { "scene": "S2", "from": 0.0, "to": 7.3 }, { "scene": "S6", "from": 14.8, "to": 17.9 }]
+    "hook": "This AI spent $31 ", "hookHighlight": "without asking",
+    "clips": [
+      { "scene": "S1", "from": 0.0, "to": 18.62, "cam": [[0, 1000, 0.85], [1.4, 1000, 0.85], [1.9, 1100, 0.7], [2.8, 1100, 0.7], [3.3, 1060, 0.85], [6.6, 1060, 0.85], [7.2, 960, 0.66]] },
+      { "scene": "S2", "from": 0.0, "to": 13.45, "cam": [[0, 960, 0.85]] },
+      { "scene": "S6", "from": 14.6, "to": 17.95, "cam": [[14.6, 960, 0.66]], "captions": false }
+    ]
   },
   "Short2": {
-    "hook": "Why does AI ", "hookHighlight": "make things up?",
-    "clips": [{ "scene": "S3", "from": 1.3, "to": 55.2 }]
+    "hook": "Chatbot vs ", "hookHighlight": "AI agent",
+    "clips": [
+      { "scene": "S3", "from": 22.25, "to": 45.2, "cam": [[22.25, 1010, 0.8], [26.0, 1010, 0.8], [26.8, 880, 0.66], [30.4, 880, 0.66], [31.1, 1010, 0.75], [33.6, 1010, 0.75], [34.2, 860, 0.72], [36.8, 860, 0.72], [37.3, 800, 0.8], [41.6, 800, 0.8], [42.2, 960, 0.66]] },
+      { "scene": "S5", "from": 13.1, "to": 19.95, "cam": [[13.1, 1000, 0.85]] },
+      { "scene": "S5", "from": 26.3, "to": 37.0, "cam": [[26.3, 1000, 0.66], [33.9, 1000, 0.66], [34.4, 1150, 0.8], [35.6, 1150, 0.8], [36.0, 1040, 0.72]] }
+    ]
+  },
+  "Short3": {
+    "hook": "Does AI really ", "hookHighlight": "remember you?",
+    "clips": [
+      { "scene": "S4", "from": 2.1, "to": 34.3, "cam": [[2.1, 800, 0.85], [2.6, 800, 0.85], [3.2, 1000, 0.85], [5.3, 1000, 0.85], [5.9, 830, 0.85], [13.0, 830, 0.85], [13.7, 1000, 0.85], [17.6, 1000, 0.85], [18.2, 830, 0.85], [26.0, 830, 0.85], [26.7, 790, 0.7]] }
+    ]
   }
 }

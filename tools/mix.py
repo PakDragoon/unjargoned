@@ -125,9 +125,9 @@ def main() -> None:
         if s.get("endScreenFromWord"):
             # Ep 4+: the end screen starts at that word, under the voice (same rule as timeline.ts).
             until = next(w["start"] for w in words[s["id"]] if re.sub(r"[^A-Za-z']", "", w["word"]) == s["endScreenFromWord"])
-            t += math.ceil(max(seconds + TAIL_SECONDS, until + end_screen) * FPS) / FPS
+            t += math.ceil(max(seconds + s.get("tailSeconds", TAIL_SECONDS), until + end_screen) * FPS) / FPS
         else:
-            t += math.ceil((seconds + TAIL_SECONDS + end_screen) * FPS) / FPS
+            t += math.ceil((seconds + s.get("tailSeconds", TAIL_SECONDS) + end_screen) * FPS) / FPS
     total = t
     n = int(round(total * SR))
 

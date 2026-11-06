@@ -146,6 +146,56 @@ const BRAIN_Y = "#FFC93C";
 const BRAIN_D = "#D9A21F";
 
 /** The jar head: lid with goggle-eyes (optional), glass, yellow brain with its guess slot. Drawn in a 260×300 box. */
+const PINK = "#F2A0B5";
+const PINK_LIGHT = "#FFC9D6";
+const PINK_DARK = "#D9718F";
+const PINK_FOLD = "#B4506F";
+const CEREBRUM = "M 22 96 C 6 70 14 34 44 22 C 60 6 92 0 114 10 C 136 0 170 8 182 30 C 200 44 202 76 188 94 C 192 110 180 122 162 120 C 146 128 126 126 112 118 C 92 128 62 130 44 120 C 30 118 18 110 22 96 Z";
+const CEREBELLUM = "M 128 112 C 132 134 166 142 182 126 C 192 116 188 100 174 100 C 160 98 140 102 128 112 Z";
+/** The agent's brain, drawn in the jar's brain frame (about 200 × 150). */
+const Brain: React.FC = () => {
+  const id = React.useId().replace(/:/g, "");
+  return (
+    <g>
+      {/* stem (behind, mostly hidden by the guess slot) */}
+      <path d="M 108 112 C 110 130 104 146 100 160 L 124 160 C 122 144 126 128 132 114 Z" fill={PINK_DARK} stroke={INK} strokeWidth={OUT * 0.8} strokeLinejoin="round" />
+      {/* cerebellum: finely striped */}
+      <path d={CEREBELLUM} fill={PINK_DARK} stroke={INK} strokeWidth={OUT * 0.8} strokeLinejoin="round" />
+      <clipPath id={`cb${id}`}><path d={CEREBELLUM} /></clipPath>
+      <g clipPath={`url(#cb${id})`} fill="none" stroke={PINK_FOLD} strokeWidth={3.5} strokeLinecap="round">
+        {[106, 114, 122, 130, 138].map((y) => <path key={y} d={`M 126 ${y} Q 156 ${y + 10} 192 ${y - 4}`} />)}
+      </g>
+      {/* cerebrum: base, inner light, folds */}
+      <path d={CEREBRUM} fill={PINK} stroke={INK} strokeWidth={OUT * 0.8} strokeLinejoin="round" />
+      <clipPath id={`cr${id}`}><path d={CEREBRUM} /></clipPath>
+      <g clipPath={`url(#cr${id})`}>
+        <path d={CEREBRUM} fill={PINK_DARK} transform="translate(6 10)" opacity={0.55} />
+        <path d={CEREBRUM} fill={PINK} transform="translate(-3 -4)" />
+        <ellipse cx={70} cy={38} rx={38} ry={20} fill={PINK_LIGHT} opacity={0.7} transform="rotate(-14 70 38)" />
+        <ellipse cx={142} cy={30} rx={24} ry={12} fill={PINK_LIGHT} opacity={0.6} transform="rotate(10 142 30)" />
+        <g fill="none" stroke={PINK_FOLD} strokeWidth={4.5} strokeLinecap="round" strokeLinejoin="round">
+          {/* central sulcus + the deep side fissure */}
+          <path d="M 106 12 C 96 32 114 44 102 64 C 94 78 106 88 98 104" strokeWidth={5.5} />
+          <path d="M 48 102 C 70 92 92 100 116 90 C 130 84 142 92 152 100" strokeWidth={5.5} />
+          {/* gyri */}
+          <path d="M 38 40 C 50 32 58 46 70 38 C 76 34 82 40 86 36" />
+          <path d="M 28 70 C 42 60 52 78 64 66 C 72 58 80 70 90 62" />
+          <path d="M 70 18 C 76 28 66 38 76 50 C 82 56 78 66 84 74" />
+          <path d="M 44 88 C 54 82 62 90 72 84" />
+          <path d="M 124 24 C 136 18 142 32 156 26 C 162 24 168 28 172 34" />
+          <path d="M 120 48 C 132 42 140 58 154 50 C 164 44 172 56 186 56" />
+          <path d="M 118 72 C 130 66 136 80 150 74 C 160 70 168 80 182 78" />
+          <path d="M 60 112 C 72 106 82 118 96 110" />
+          <path d="M 120 104 C 128 98 136 108 144 106" />
+        </g>
+        {/* tiny shine dots */}
+        <circle cx={52} cy={30} r={4} fill="#FFFFFF" opacity={0.75} />
+        <circle cx={150} cy={22} r={3} fill="#FFFFFF" opacity={0.65} />
+      </g>
+    </g>
+  );
+};
+
 /** A lid closing over one goggle lens from the top (0 open … 1 shut, with a lash line). */
 const Lid: React.FC<{ cx: number; cy: number; r: number; k: number }> = ({ cx, cy, r, k }) => {
   if (k <= 0.01) return null;
@@ -169,16 +219,10 @@ export const HeadJar: React.FC<{ eyes?: number; look?: Pt; guess?: string; wrong
     {glow > 0 ? <ellipse cx={130} cy={170} rx={150} ry={150} fill={BRAIN_Y} opacity={0.18 * glow} /> : null}
     {/* glass */}
     <rect x={22} y={58} width={216} height={232} rx={58} fill="#DCE6FA" fillOpacity={0.62} stroke={INK} strokeWidth={OUT} />
-    {/* brain */}
+    {/* brain: a pink side-view brain (cerebrum with folds, cerebellum, stem), soft paper shading */}
     <g transform="translate(34 104)">
-      {[[60, 70, 50], [104, 52, 54], [148, 72, 46], [80, 106, 44], [128, 108, 44]].map(([cx, cy, r], i) => (
-        <circle key={i} cx={cx} cy={cy} r={r} fill={BRAIN_Y} stroke={INK} strokeWidth={OUT * 0.8} />
-      ))}
-      {[[60, 70, 50], [104, 52, 54], [148, 72, 46], [80, 106, 44], [128, 108, 44]].map(([cx, cy, r], i) => (
-        <circle key={`f${i}`} cx={cx} cy={cy} r={r - OUT * 0.4} fill={BRAIN_Y} />
-      ))}
-      <path d="M 100 18 C 92 48, 112 70, 100 100 M 40 64 C 58 54, 66 76, 80 68 M 128 44 C 140 58, 160 50, 168 64 M 58 106 C 70 98, 76 114, 88 106" fill="none" stroke={BRAIN_D} strokeWidth={6} strokeLinecap="round" />
-      <rect x={56} y={118} width={88} height={40} rx={11} fill={INK} stroke={wrong > 0.5 ? "#FF8A5C" : BRAIN_D} strokeWidth={5} />
+      <Brain />
+      <rect x={56} y={118} width={88} height={40} rx={11} fill={INK} stroke={wrong > 0.5 ? "#FF8A5C" : "#3A3F4D"} strokeWidth={5} />
       <text x={100} y={146} textAnchor="middle" fontFamily="inherit" fontWeight={800} fontSize={24} fill={wrong > 0.5 ? "#FF8A5C" : BRAIN_Y}>{guess}</text>
     </g>
     {dim > 0 ? <rect x={30} y={66} width={200} height={216} rx={52} fill={INK} opacity={0.45 * dim} /> : null}
