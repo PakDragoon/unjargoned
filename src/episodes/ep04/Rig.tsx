@@ -153,7 +153,7 @@ const PINK_FOLD = "#B4506F";
 const CEREBRUM = "M 22 96 C 6 70 14 34 44 22 C 60 6 92 0 114 10 C 136 0 170 8 182 30 C 200 44 202 76 188 94 C 192 110 180 122 162 120 C 146 128 126 126 112 118 C 92 128 62 130 44 120 C 30 118 18 110 22 96 Z";
 const CEREBELLUM = "M 128 112 C 132 134 166 142 182 126 C 192 116 188 100 174 100 C 160 98 140 102 128 112 Z";
 /** The agent's brain, drawn in the jar's brain frame (about 200 × 150). */
-const Brain: React.FC = () => {
+export const Brain: React.FC = () => {
   const id = React.useId().replace(/:/g, "");
   return (
     <g>

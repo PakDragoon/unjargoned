@@ -10,7 +10,7 @@ import { Figure2, INK, Stage } from "../Rig";
 import { Checkout, Kiosk, ProductView } from "../Screens";
 import { scene } from "../timeline";
 import {
-  BODY_H, BUY_TIP, BeltKit, CHAT, CamKey, FIG, FLOOR, Key, LoopRing, REST_WIDE_L, REST_WIDE_R, SCREEN, ScreenOff, World, along, camAt, forearmPt,
+  BODY_H, BUY_TIP, BeltKit, CHAT, CamKey, FIG, FLOOR, Key, LoopCycle, REST_WIDE_L, REST_WIDE_R, SCREEN, ScreenOff, World, along, camAt, forearmPt,
   wristFor,
 } from "../World";
 
@@ -26,12 +26,12 @@ const T = {
 // → goggles → notebook → the loop rings it → the "Allow?" gate → the headline alone on a dark stage → back at the
 // checkout: the jar's guess slot spins and lands on "Buy" (wrong), and the finger presses Buy.
 
-const RING = { cx: 660, cy: 520, rx: 300, ry: 350 };
+const CYCLE = { cx: 250, cy: 230, r: 125 }; // same loop diagram as S3
 const LAP = 0.9;
 const GUESSES = ["eggs", "milk", "bread", "rice", "jam"];
 const CAM: CamKey[] = [
   [-1, 660, 480, 1.2], [2.6, 660, 480, 1.2], [3.1, 660, 330, 1.9], [4.4, 660, 330, 1.9], [4.9, 660, 600, 1.75], [5.9, 660, 600, 1.75],
-  [6.35, 660, 320, 1.95], [7.4, 660, 320, 1.95], [7.9, 680, 470, 1.9], [9.2, 680, 470, 1.9], [9.7, 700, 500, 1.05], [11.7, 700, 500, 1.05],
+  [6.35, 660, 320, 1.95], [7.4, 660, 320, 1.95], [7.9, 680, 470, 1.9], [9.2, 680, 470, 1.9], [9.7, 520, 330, 1.5], [11.7, 520, 330, 1.5],
   [12.2, 680, 600, 1.9], [14.4, 680, 600, 1.9], [18.1, 840, 480, 1.4], [20.9, 840, 480, 1.4], [21.4, 660, 300, 2.1], [23.2, 660, 300, 2.1],
   [23.8, 840, 470, 1.4], [99, 840, 470, 1.4],
 ];
@@ -49,14 +49,16 @@ const TRACK: MoodKey[] = [
 ];
 const ROUTE = hops([
   { at: 0, x: 1650, y: 920 },
-  { at: sec(9.8), x: 1720, y: 930 },
+  { at: sec(9.8), x: 1800, y: 1000 }, // low in the corner, clear of the loop
+  { at: sec(12.0), x: 1720, y: 930 },
   { at: sec(18.3), x: 1790, y: 950 },
   { at: sec(21.5), x: 1320, y: 640 }, // beside the jar, watching the slot spin
   { at: sec(23.9), x: 1790, y: 950 },
 ]);
 const LOOK = glances([
   { at: 0, x: -1, y: -0.4 },
-  { at: sec(9.8), x: -1, y: -0.4 },
+  { at: sec(9.8), x: -1, y: -0.5 },
+  { at: sec(12.0), x: -1, y: -0.4 },
   { at: sec(18.3), x: -1, y: -0.5 },
   { at: sec(21.5), x: -1, y: -0.2 },
   { at: sec(23.9), x: -0.9, y: -0.6 },
@@ -78,6 +80,7 @@ const S6Content: React.FC = () => {
   // the loop
   const ringO = during(frame, 9.36, 11.9, 0.3);
   const runner = -90 + (360 * Math.max(0, Math.min(t, T.done) - 9.6)) / LAP;
+  const lit = (deg: number) => { const a = (((runner - deg) % 360) + 360) % 360; return t > 9.6 && t < T.done && (a < 26 || a > 346) ? 1 : 0; };
 
   // the guess slot
   const spinning = t > 21.16 && t < T.wrong;
@@ -101,7 +104,12 @@ const S6Content: React.FC = () => {
         </div>
         {ringO > 0 ? (
           <div style={{ position: "absolute", inset: 0, opacity: ringO }}>
-            <LoopRing cx={RING.cx} cy={RING.cy} rx={RING.rx} ry={RING.ry} draw={ramp(frame, 9.36, 0.35)} runner={runner} runnerO={t > 9.55 && t < T.done + 0.1 ? 1 : 0} color={t >= T.done ? colors.mint : colors.yellow} />
+            <LoopCycle
+              cx={CYCLE.cx} cy={CYCLE.cy} r={CYCLE.r} draw={ramp(frame, 9.36, 0.35)} runnerDeg={runner} runnerO={t > 9.55 && t < T.done ? 1 : 0}
+              shown={{ look: pop(frame, 9.36), think: pop(frame, 9.42), do: pop(frame, 9.48) }}
+              on={{ look: lit(-90), think: lit(30), do: lit(150) }}
+              done={t < T.done ? 0 : Math.min(1.1, pop(frame, T.done))}
+            />
           </div>
         ) : null}
 
@@ -121,11 +129,7 @@ const S6Content: React.FC = () => {
               cables={{ l: forearmPt("L", REST_WIDE_L), r: forearmPt("R", right), o: hands >= 1 ? 1 : 0 }} />
           </Figure2>
         </div>
-        {t >= T.done && t < 11.95 ? (
-          <div style={{ position: "absolute", left: RING.cx + RING.rx - 40, top: RING.cy - 40, width: 80, height: 80, borderRadius: 40, backgroundColor: colors.mint, border: `6px solid ${INK}`, display: "flex", alignItems: "center", justifyContent: "center", scale: `${Math.min(1.1, pop(frame, T.done))}` }}>
-            <svg width={44} height={44} viewBox="0 0 84 84" aria-hidden><path d="M 12 44 L 34 66 L 74 18" fill="none" stroke={INK} strokeWidth={14} strokeLinecap="round" strokeLinejoin="round" /></svg>
-          </div>
-        ) : null}
+
       </World>
 
       {/* the headline, alone on a dark stage */}

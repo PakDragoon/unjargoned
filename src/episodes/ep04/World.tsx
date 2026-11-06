@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, Easing } from "remotion";
 import { colors, fontFamily } from "../../shared/brand";
 import { EggCarton, NoteIcon, ToolIcon, ToolKind } from "./Props";
-import { Arm, INK, OUT, PAPER, PAPER_SHADE, Pt, SHADOW, SHOULDER_L, SHOULDER_R, solveElbow } from "./Rig";
+import { Arm, Brain, INK, OUT, PAPER, PAPER_SHADE, Pt, SHADOW, SHOULDER_L, SHOULDER_R, solveElbow } from "./Rig";
 
 // Ep 4 revamp kit for S2–S7: the same stage and layout as S1 (agent, self-checkout, chatbot kiosk), a camera,
 // keyframe helpers, and the agent's add-ons drawn in its own 600×900 figure frame (tool belt, helper box, "Allow?" gate).
@@ -464,6 +464,111 @@ export const LoopRing: React.FC<{ cx: number; cy: number; rx: number; ry: number
       <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill="none" stroke={INK} strokeWidth={20} strokeDasharray={`${per * draw} 99999`} transform={`rotate(-90 ${cx} ${cy})`} strokeLinecap="round" />
       <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill="none" stroke={color} strokeWidth={10} strokeDasharray={`${per * draw} 99999`} transform={`rotate(-90 ${cx} ${cy})`} strokeLinecap="round" />
       {runnerO > 0 ? <circle cx={cx + rx * Math.cos(a)} cy={cy + ry * Math.sin(a)} r={20} fill={color} stroke={INK} strokeWidth={5} opacity={runnerO} /> : null}
+    </svg>
+  );
+};
+
+/* ───────────── The look → think → do loop, as a cycle diagram ───────────── */
+export type LoopKind = "look" | "think" | "do";
+const LoopIcon: React.FC<{ kind: LoopKind }> = ({ kind }) =>
+  kind === "look" ? (
+    <g>
+      <path d="M -36 0 Q 0 -28 36 0 Q 0 28 -36 0 Z" fill="#FFFFFF" stroke={INK} strokeWidth={5} strokeLinejoin="round" />
+      <circle r={14} fill={colors.periwinkle} stroke={INK} strokeWidth={4} />
+      <circle r={6.5} fill={INK} />
+      <circle cx={-4} cy={-4} r={2.6} fill="#FFFFFF" />
+    </g>
+  ) : kind === "think" ? (
+    <g transform="scale(0.36) translate(-104 -78)"><Brain /></g>
+  ) : (
+    <g>
+      <g stroke={INK} strokeWidth={5} strokeLinecap="round">
+        <path d="M -22 -26 L -30 -34 M -8 -32 L -8 -42 M -28 -12 L -38 -12" />
+      </g>
+      <path d="M -12 -20 L -12 22 L -2 12 L 6 30 L 14 26 L 6 8 L 20 8 Z" fill="#FFFFFF" stroke={INK} strokeWidth={5} strokeLinejoin="round" />
+    </g>
+  );
+
+/**
+ * The agent's loop as a clockwise cycle: look (top) → think (right) → do (left) → look again. Curved arrows show the
+ * direction; a dot runs the laps; the station it reaches lights up. At `done` the arrows turn mint and a tick replaces
+ * "until done" in the middle. World space.
+ */
+export const LoopCycle: React.FC<{
+  cx: number; cy: number; r?: number; draw: number; runnerDeg: number; runnerO: number;
+  shown: Record<LoopKind, number>; on: Record<LoopKind, number>; done?: number;
+}> = ({ cx, cy, r = 150, draw, runnerDeg, runnerO, shown, on, done = 0 }) => {
+  const ST: [LoopKind, number][] = [["look", -90], ["think", 30], ["do", 150]];
+  const B = 58; // badge radius
+  const gap = (Math.asin(Math.min(1, (B + 14) / r)) * 180) / Math.PI; // angular half-width kept clear round a badge
+  const pt = (deg: number, rr = r) => ({ x: cx + rr * Math.cos((deg * Math.PI) / 180), y: cy + rr * Math.sin((deg * Math.PI) / 180) });
+  const col = done > 0.5 ? colors.mint : colors.yellow;
+  const d = Math.max(0, Math.min(1, draw));
+  return (
+    <svg width={1920} height={1080} style={{ position: "absolute", left: 0, top: 0, overflow: "visible" }} aria-hidden>
+      {/* arrows between the stations (each drawn in turn) */}
+      {ST.map(([, a0], i) => {
+        const a1 = ST[(i + 1) % 3][1] + (i === 2 ? 360 : 0);
+        const s0 = a0 + gap;
+        const s1 = a1 - gap;
+        const k = Math.max(0, Math.min(1, d * 3 - i));
+        if (k <= 0) return null;
+        const e = s0 + (s1 - s0) * k;
+        const p0 = pt(s0);
+        const p1 = pt(e);
+        const arc = `M ${p0.x} ${p0.y} A ${r} ${r} 0 0 1 ${p1.x} ${p1.y}`;
+        const tan = ((e + 90) * Math.PI) / 180;
+        const head = (dx: number, dy: number) => `${p1.x + dx} ${p1.y + dy}`;
+        const ux = Math.cos(tan);
+        const uy = Math.sin(tan);
+        return (
+          <g key={i}>
+            <path d={arc} fill="none" stroke={INK} strokeWidth={18} strokeLinecap="round" />
+            <path d={arc} fill="none" stroke={col} strokeWidth={9} strokeLinecap="round" />
+            {k > 0.98 ? (
+              <path d={`M ${head(ux * 22, uy * 22)} L ${head(-ux * 6 - uy * 18, -uy * 6 + ux * 18)} L ${head(-ux * 6 + uy * 18, -uy * 6 - ux * 18)} Z`} fill={col} stroke={INK} strokeWidth={5} strokeLinejoin="round" />
+            ) : null}
+          </g>
+        );
+      })}
+      {/* the runner */}
+      {runnerO > 0 ? (() => { const p = pt(runnerDeg); return <circle cx={p.x} cy={p.y} r={15} fill={colors.white} stroke={INK} strokeWidth={5} opacity={runnerO} />; })() : null}
+      {/* stations */}
+      {ST.map(([kind, a]) => {
+        const s = Math.max(0, shown[kind]);
+        if (s <= 0.001) return null;
+        const p = pt(a);
+        const lit = Math.min(1, on[kind]);
+        const sc = s * (1 + 0.14 * lit);
+        const lab = { x: p.x, y: kind === "look" ? p.y - B - 30 : p.y + B + 28 }; // label above the top badge, below the others
+        return (
+          <g key={kind}>
+            <g transform={`translate(${p.x} ${p.y}) scale(${sc})`}>
+              {lit > 0 ? <circle r={B + 14} fill={colors.yellow} opacity={0.35 * lit} /> : null}
+              <circle r={B} fill={PAPER} stroke={lit > 0.5 ? colors.yellow : INK} strokeWidth={lit > 0.5 ? 9 : 6} />
+              <LoopIcon kind={kind} />
+            </g>
+            <g transform={`translate(${lab.x} ${lab.y}) scale(${Math.min(1, s)})`}>
+              <rect x={-56} y={-22} width={112} height={44} rx={16} fill={lit > 0.5 ? colors.yellow : PAPER} stroke={INK} strokeWidth={5} />
+              <text y={11} textAnchor="middle" fontFamily={fontFamily} fontWeight={800} fontSize={30} fill={INK}>{kind}</text>
+            </g>
+          </g>
+        );
+      })}
+      {/* middle: "until done" → tick */}
+      {d >= 1 ? (
+        done > 0 ? (
+          <g transform={`translate(${cx} ${cy + 6}) scale(${Math.min(1.1, done)})`}>
+            <circle r={40} fill={colors.mint} stroke={INK} strokeWidth={6} />
+            <path d="M -18 2 L -5 15 L 19 -12" fill="none" stroke={INK} strokeWidth={9} strokeLinecap="round" strokeLinejoin="round" />
+          </g>
+        ) : (
+          <text x={cx} y={cy + 16} textAnchor="middle" fontFamily={fontFamily} fontWeight={700} fontSize={26} fill="#C9CED8">
+            <tspan x={cx} dy={-16}>until</tspan>
+            <tspan x={cx} dy={30}>done</tspan>
+          </text>
+        )
+      ) : null}
     </svg>
   );
 };

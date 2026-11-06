@@ -13,7 +13,7 @@
       "id": "S1",
       "title": "Hook",
       "estSeconds": 16,
-      "tailSeconds": 0.05,
+      "tailSeconds": 0.9,
       "vo": "{fast} That's an AI, placing an order! With a reporter's card. For thirty-one dollars of eggs. [beat] {slow} He never asked it to buy them… {slower} He asked it to find them. [beat] Most AI just talks. {fast} This one clicked \"Buy\"! [beat] {slow} So… what changed? [beat] Let's un-jargon it."
     },
     {

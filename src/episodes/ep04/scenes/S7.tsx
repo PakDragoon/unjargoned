@@ -158,11 +158,36 @@ const S7Content: React.FC = () => {
   );
 };
 
+/** "One catch." — a card pops up in the middle (pop + thunk in sfx.json), holds, then flies up before the hack beat. */
+const OneCatch: React.FC = () => {
+  const frame = useCurrentFrame();
+  const t = frame / 30;
+  if (t > 1.5) return null;
+  const inK = pop(frame, 0.05);
+  const out = ramp(frame, 1.1, 0.3);
+  return (
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+      <AbsoluteFill style={{ backgroundColor: colors.ink, opacity: 0.6 * Math.min(1, inK * 2) * (1 - out) }} />
+      <div
+        style={{
+          padding: "36px 90px", borderRadius: 40, backgroundColor: PAPER, border: `${OUT}px solid ${INK}`, filter: `drop-shadow(12px 14px 0 ${SHADOW})`,
+          fontFamily, fontSize: 150, fontWeight: 800, color: INK, whiteSpace: "nowrap",
+          scale: `${Math.max(0, Math.min(1.12, inK)) * (1 - 0.5 * out)}`, rotate: `${-3 + 3 * Math.min(1, inK)}deg`,
+          translate: `0 ${-420 * out * out}px`, opacity: 1 - out,
+        }}
+      >
+        One <span style={{ backgroundColor: colors.yellow, padding: "0 18px", borderRadius: 18 }}>catch.</span>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 // Scene S7 — Ep 5 tease + Ep 3 bridge over the end screen. Edit only this file for S7 changes.
 export const S7: React.FC = () => (
   <SceneShell sceneId={S.id} title={S.title} audioSrc={S.audioSrc}>
     <FadeIn>
       <S7Content />
     </FadeIn>
+    <OneCatch />
   </SceneShell>
 );

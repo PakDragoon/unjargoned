@@ -220,7 +220,7 @@ const S2Content: React.FC = () => {
 // Scene S2 — first payoff: it got hands; chatbot = brain in a jar; the body; the three promises. Edit only this file for S2 changes.
 export const S2: React.FC = () => (
   <SceneShell sceneId={S.id} title={S.title} audioSrc={S.audioSrc}>
-    <FadeIn frames={4}>
+    <FadeIn>
       <S2Content />
     </FadeIn>
   </SceneShell>

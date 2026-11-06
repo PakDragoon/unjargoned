@@ -11,7 +11,7 @@ import { Figure2, INK, Pt, Stage } from "../Rig";
 import { Checkout, Kiosk } from "../Screens";
 import { scene } from "../timeline";
 import {
-  BODY_H, BeltKit, Bubble, CHAT, CamKey, FIG, FLOOR, HELPER_SLOT, Key, KioskChat, LoopRing, PersonSays, REST_WIDE_L, REST_WIDE_R, SCREEN, SHOP_TILE,
+  BODY_H, BeltKit, Bubble, CHAT, CamKey, FIG, FLOOR, HELPER_SLOT, Key, KioskChat, LoopCycle, PersonSays, REST_WIDE_L, REST_WIDE_R, SCREEN, SHOP_TILE,
   ScreenOff, ShopView, Tag, World, along, armJoints, camAt, forearmPt, fw, onPage, pageCart, wristFor,
 } from "../World";
 
@@ -37,9 +37,8 @@ const T = {
 const JAR: Pt = fw({ x: 300, y: 192 });
 const SLOT_W: Pt = fw(HELPER_SLOT);
 const KIOSK_C: Pt = { x: CHAT.left + CHAT.w / 2, y: CHAT.top + CHAT.w * 0.33 };
-const RING = { cx: 660, cy: 520, rx: 300, ry: 350 };
-const onRing = (deg: number, out = 0): Pt => ({ x: RING.cx + (RING.rx + out) * Math.cos((deg * Math.PI) / 180), y: RING.cy + (RING.ry + out) * Math.sin((deg * Math.PI) / 180) });
-const ST = { look: -120, think: -60, doo: 20 }; // stations on the ring
+const CYCLE = { cx: 250, cy: 230, r: 125 }; // the loop diagram, in the empty space above the kiosk
+const ST = { look: -90, think: 30, doo: 150 }; // stations on the cycle (clockwise)
 const LAP = 1.0;
 const RUN_FROM = 38.3;
 const runnerDeg = (t: number) => ST.look + (360 * Math.max(0, Math.min(t, T.done) - RUN_FROM)) / LAP;
@@ -48,7 +47,7 @@ const CAM: CamKey[] = [
   [-1, 660, 470, 1.2], [1.6, 660, 470, 1.2], [2.6, 660, 660, 1.9], [5.0, 660, 660, 1.9], [5.6, 660, 668, 3.1], [10.9, 660, 668, 3.1],
   [11.6, 680, 470, 1.55], [17.4, 700, 470, 1.5], [18.1, 900, 450, 1.25], [21.6, 900, 450, 1.25],
   [22.5, 360, 540, 1.7], [25.6, 360, 540, 1.7], [26.4, 975, 470, 1.25], [30.4, 975, 470, 1.25], [31.0, 900, 420, 1.35],
-  [33.3, 900, 420, 1.35], [34.4, 1070, 340, 1.6], [36.8, 1070, 340, 1.6], [37.3, 700, 500, 1.05], [41.6, 700, 500, 1.05],
+  [33.3, 900, 420, 1.35], [34.4, 1070, 340, 1.6], [36.8, 1070, 340, 1.6], [37.3, 520, 330, 1.5], [41.6, 520, 330, 1.5],
   [42.3, 770, 520, 0.95], [99, 770, 520, 0.95],
 ];
 
@@ -92,7 +91,7 @@ const ROUTE = hops([
   { at: sec(22.6), x: 1060, y: 975 },
   { at: sec(26.4), x: 1790, y: 950 },
   { at: sec(34.5), x: 1720, y: 900 },
-  { at: sec(37.4), x: 1740, y: 940 },
+  { at: sec(37.4), x: 1800, y: 1000 }, // low in the corner, clear of the screen and the loop
   { at: sec(42.4), x: 1230, y: 990 },
 ]);
 const LOOK = glances([
@@ -105,7 +104,7 @@ const LOOK = glances([
   { at: sec(22.6), x: -0.9, y: -0.6 },
   { at: sec(26.4), x: -0.9, y: -0.6 },
   { at: sec(34.5), x: -0.8, y: -0.8 },
-  { at: sec(37.4), x: -1, y: -0.4 },
+  { at: sec(37.4), x: -1, y: -0.5 },
   { at: sec(42.4), x: -0.9, y: -0.6 },
   { at: sec(T.agentDoes), x: 0.6, y: -0.8 },
 ]);
@@ -150,7 +149,7 @@ const S3Content: React.FC = () => {
   // the result note climbs back up from the slot into the jar
   const resK = ramp(frame, 20.2, 0.75);
   const res = arc({ x: SLOT_W.x, y: SLOT_W.y - 10 }, JAR, resK, 40);
-  const jarGlow = Math.max(during(frame, 20.9, 21.8, 0.15), during(frame, T.think - 0.02, T.think + 0.3, 0.05));
+  const jarGlowBase = Math.max(during(frame, 20.9, 21.8, 0.15), during(frame, T.think - 0.02, T.think + 0.3, 0.05));
 
   // ── screens ──
   const shop1 = t >= 17.62 && t < 21.6;
@@ -169,13 +168,15 @@ const S3Content: React.FC = () => {
   const stationOn = (at: number, deg: number) => {
     const first = t >= at ? Math.min(1, (t - at) / 0.25) * (t < at + 0.5 ? 1 : 0) : 0;
     const a = (((runnerDeg(t) - deg) % 360) + 360) % 360;
-    const lap = t > RUN_FROM && t < T.done && a < 28 ? 1 : 0;
+    const lap = t > RUN_FROM && t < T.done && (a < 26 || a > 346) ? 1 : 0;
     return Math.max(first, lap);
   };
   const onLook = Math.max(stationOn(T.look1, ST.look), stationOn(T.again, ST.look));
   const onThink = stationOn(T.think, ST.think);
   const onDo = stationOn(T.doo, ST.doo);
 
+  const jarGlow = Math.max(jarGlowBase, onThink); // "think" lights the brain
+  const loopDone = t < T.done ? 0 : Math.min(1.1, pop(frame, T.done));
   // hand slot ring (for the "do" highlight)
   const { elbow, wrist } = armJoints("R", right);
   const ha = Math.atan2(wrist.y - elbow.y, wrist.x - elbow.x);
@@ -231,10 +232,15 @@ const S3Content: React.FC = () => {
           </Checkout>
         </div>
 
-        {/* the loop ring round the agent (behind it) */}
+        {/* the loop: look → think → do → look again, as a cycle; the matching body part lights with each station */}
         {ringO > 0 ? (
           <div style={{ position: "absolute", inset: 0, opacity: ringO }}>
-            <LoopRing cx={RING.cx} cy={RING.cy} rx={RING.rx} ry={RING.ry} draw={ringDraw} runner={runnerDeg(t)} runnerO={t > RUN_FROM - 0.05 && t < T.done + 0.05 ? 1 : 0} />
+            <LoopCycle
+              cx={CYCLE.cx} cy={CYCLE.cy} r={CYCLE.r} draw={ringDraw} runnerDeg={runnerDeg(t)} runnerO={t > RUN_FROM - 0.05 && t < T.done ? 1 : 0}
+              shown={{ look: t < T.look1 - 0.05 ? 0 : pop(frame, T.look1), think: t < T.think - 0.05 ? 0 : pop(frame, T.think), do: t < T.doo - 0.05 ? 0 : pop(frame, T.doo) }}
+              on={{ look: onLook, think: onThink, do: onDo }}
+              done={loopDone}
+            />
           </div>
         ) : null}
 
@@ -289,20 +295,6 @@ const S3Content: React.FC = () => {
               <EggCarton w={46} />
               <svg width={24} height={24} viewBox="0 0 84 84" aria-hidden><path d="M 12 44 L 34 66 L 74 18" fill="none" stroke="#2FA37E" strokeWidth={16} strokeLinecap="round" strokeLinejoin="round" /></svg>
             </div>
-          </div>
-        ) : null}
-
-        {/* loop station tags */}
-        {ringO > 0 ? (
-          <div style={{ opacity: ringO }}>
-            {([["look", ST.look, onLook, T.look1], ["think", ST.think, onThink, T.think], ["do", ST.doo, onDo, T.doo]] as [string, number, number, number][]).map(([w, deg, on, at]) => {
-              const p = onRing(deg, 58);
-              return (
-                <div key={w} style={{ position: "absolute", left: p.x, top: p.y, translate: "-50% -50%" }}>
-                  <Tag fontSize={30} o={t < at - 0.05 ? 0 : Math.min(1, pop(frame, at))} on={on}>{w}</Tag>
-                </div>
-              );
-            })}
           </div>
         ) : null}
 
