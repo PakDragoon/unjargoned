@@ -1,0 +1,40 @@
+TITLE
+Chatbots Talk. AI Agents Do Things.
+
+DESCRIPTION
+What is an AI agent, and how is it different from a chatbot like ChatGPT? AI agents explained simply: a chatbot tells you, an agent does it for you.
+
+In under 4 minutes: why an AI agent spent $31 on eggs nobody asked it to buy, what changes when AI gets "hands" (apps it can use), whether AI really remembers you, and when a good agent stops to ask you first.
+
+Chapters
+0:00 An AI bought $31 of eggs
+0:19 What an AI agent is
+0:44 Chatbot vs agent: what changes with hands
+1:34 Does AI remember you?
+2:09 What switches it on, and when it asks you
+2:51 Putting it together
+3:17 Next: Can you hack an AI?
+
+Sources
+Geoffrey A. Fowler, "I let ChatGPT's new agent manage my life. It spent $31 on a dozen eggs.", The Washington Post, February 2025 (OpenAI's Operator agent)
+OpenAI, "Introducing ChatGPT agent", July 17, 2025
+
+Previous episode: Why AI Hallucinates
+Next episode: Can You Hack an AI? (coming soon)
+
+Music: Fade by Snoozy Beats https://soundcloud.com/snoozybeats
+License: Creative Commons — Attribution 3.0 Unported — CC BY 3.0
+Free Download / Stream: https://links.al/sUN
+Music promoted by Audio Library: https://links.al/youtube
+
+#Unjargoned #AI #AIAgents
+
+TAGS
+what is an ai agent, ai agents explained, ai agent vs chatbot, chatbot vs ai agent, chatgpt agent, how ai agents work, openai operator, does chatgpt remember you, ai memory explained, ai explained simply, ai for beginners, artificial intelligence explained, unjargoned
+
+PINNED COMMENT
+If an AI agent could do one boring job for you, what would it be? And what would you NEVER let it do? 👇 Next: Can You Hack an AI?
+
+SETTINGS
+Not made for kids · Category: Education · Playlist: Unjargoned · Subtitles: upload docs/ep04/ep04.en.srt (English, with timing)
+End screen: Subscribe + Ep 3 as "Best for viewer". Also add Ep 4 to Ep 3's end screen, and change Ep 3's "Next episode" line to "Chatbots Talk. AI Agents Do Things."
