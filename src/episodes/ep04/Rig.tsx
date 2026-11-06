@@ -113,20 +113,22 @@ export const Hand: React.FC<{ pose?: HandPose; thumb?: "up" | "down"; size?: num
 };
 
 /**
- * A gloved thumbs-up, drawn upright (front view: curled fingers facing the viewer, thumb standing straight up).
- * Local frame: wrist at (0,0), the hand rises toward −y. `side` = which side the thumb is on (−1 left, +1 right).
+ * A gloved thumbs-up (the 👍 silhouette): fist with four curled fingers stacked on its front, thumb straight up.
+ * Local frame: wrist at (0,0), the hand rises toward −y. `side` = +1 fingers face right, −1 mirrored.
  */
-export const ThumbsUpHand: React.FC<{ size?: number; side?: -1 | 1 }> = ({ size = 1, side = -1 }) => (
+export const ThumbsUpHand: React.FC<{ size?: number; side?: -1 | 1 }> = ({ size = 1, side = 1 }) => (
   <g transform={`scale(${size * side} ${size})`}>
-    {/* thumb (behind the fist's top edge) */}
-    <rect x={4} y={-112} width={26} height={60} rx={13} fill={GLOVE} stroke={INK} strokeWidth={OUT * 0.8} />
-    {/* fist */}
-    <rect x={-32} y={-72} width={68} height={60} rx={20} fill={GLOVE} stroke={INK} strokeWidth={OUT * 0.8} />
-    {/* curled fingers: knuckle creases across the front */}
-    {[-56, -42, -28].map((y) => <path key={y} d={`M -28 ${y} Q -6 ${y + 4} 18 ${y}`} fill="none" stroke={GLOVE_SHADE} strokeWidth={5} strokeLinecap="round" />)}
-    <path d="M 30 -64 Q 36 -40 30 -20" fill="none" stroke={CUFF} strokeWidth={5} strokeLinecap="round" opacity={0.7} />
-    {/* cuff */}
-    <rect x={-22} y={-18} width={44} height={20} rx={9} fill={CUFF} stroke={INK} strokeWidth={OUT * 0.8} />
+    {/* thumb: big, standing straight up from the top of the fist */}
+    <rect x={-34} y={-116} width={32} height={64} rx={16} fill={GLOVE} stroke={INK} strokeWidth={OUT * 0.85} />
+    <path d="M -24 -106 Q -18 -112 -12 -106" fill="none" stroke={CUFF} strokeWidth={5} strokeLinecap="round" />
+    {/* back of the fist */}
+    <rect x={-40} y={-72} width={56} height={70} rx={22} fill={GLOVE} stroke={INK} strokeWidth={OUT * 0.85} />
+    {/* four curled fingers stacked on the front, the top one longest */}
+    {[[-72, 44, 20], [-55, 42, 19], [-39, 39, 18], [-24, 34, 17]].map(([y, w, h]) => (
+      <rect key={y} x={-6} y={y} width={w} height={h} rx={h / 2} fill={GLOVE} stroke={INK} strokeWidth={OUT * 0.8} />
+    ))}
+    {/* cuff at the wrist */}
+    <rect x={-40} y={-8} width={48} height={22} rx={10} fill={CUFF} stroke={INK} strokeWidth={OUT * 0.8} />
   </g>
 );
 

@@ -73,7 +73,7 @@ const HoseArm: React.FC<{ shoulder: Pt; wrist: Pt; bodyX: number; grow: number; 
       {glove > 0 && pose === "thumbsup" ? (
         // upright thumbs-up on the wrist, leaning a little with the arm
         <g transform={`translate(${w.x} ${w.y}) rotate(${(ang + 90) * 0.35}) scale(${glove * thumbPop})`}>
-          <ThumbsUpHand size={0.88} side={-1} />
+          <ThumbsUpHand size={0.95} side={1} />
         </g>
       ) : glove > 0 ? (
         <g transform={`translate(${w.x} ${w.y}) rotate(${ang}) scale(${glove})`}>
