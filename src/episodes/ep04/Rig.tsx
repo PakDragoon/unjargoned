@@ -15,7 +15,7 @@ export const OUT = 7; // outline width (ink) for every cut-out
 export const SHADOW = "rgba(0,0,0,0.38)";
 
 export type Pt = { x: number; y: number };
-export type HandPose = "relaxed" | "open" | "point" | "grip" | "fist";
+export type HandPose = "relaxed" | "open" | "point" | "grip" | "fist" | "thumbsup";
 
 export type Bend = 1 | -1 | "auto" | "natural";
 
@@ -81,22 +81,24 @@ const Finger: React.FC<{ y: number; len: number; w: number; curl: number; spread
  * `thumb` = which side (local y) the thumb is on: "up" = −y, "down" = +y. At size 1 it is ~110 px long, 60 px wide
  * (about 1.6× the default arm width).
  */
-export const Hand: React.FC<{ pose?: HandPose; thumb?: "up" | "down"; size?: number; press?: number }> = ({ pose = "relaxed", thumb = "up", size = 1.25, press = 0 }) => {
+export const Hand: React.FC<{ pose?: HandPose; thumb?: "up" | "down"; size?: number; press?: number; /** thumbs-up: the hand's on-screen angle (deg), so the thumb points straight up on screen */ screenAngle?: number }> = ({ pose = "relaxed", thumb = "up", size = 1.25, press = 0, screenAngle }) => {
   const t = thumb === "up" ? -1 : 1;
   // index finger sits nearest the thumb
   const base = pose === "point" ? [-13, -2, 8, 18] : [-20, -7, 6, 19]; // pointing index comes from the front edge, not the side
   const ys = (t === -1 ? base : base.map((v) => -v)).map((y) => y * (1 - 0.04 * press));
   const lens = [46, 52, 48, 38];
   const curls: number[] =
-    pose === "point" ? [0, 1, 1, 1] : pose === "grip" ? [0.85, 0.9, 0.9, 0.9] : pose === "fist" ? [1, 1, 1, 1] : pose === "open" ? [0, 0, 0, 0] : [0.15, 0.2, 0.25, 0.3];
+    pose === "point" ? [0, 1, 1, 1] : pose === "grip" ? [0.85, 0.9, 0.9, 0.9] : pose === "fist" || pose === "thumbsup" ? [1, 1, 1, 1] : pose === "open" ? [0, 0, 0, 0] : [0.15, 0.2, 0.25, 0.3];
   const spreads = pose === "open" ? [-16, -5, 5, 16].map((v) => v * (t === -1 ? 1 : -1)) : pose === "relaxed" ? [-3, 0, 2, 5].map((v) => v * (t === -1 ? 1 : -1)) : [0, 0, 0, 0];
-  const thumbAng = pose === "grip" || pose === "fist" ? 18 : pose === "open" ? 68 : pose === "point" ? 28 : 42;
+  // thumbs-up: a fist with the thumb standing straight out of the thumb side (perpendicular to the forearm)
+  const thumbAng = pose === "thumbsup" ? Math.max(0, Math.min(160, 90 + t * -1 * (screenAngle ?? 0) * (t === -1 ? 1 : -1))) : pose === "grip" || pose === "fist" ? 18 : pose === "open" ? 68 : pose === "point" ? 28 : 42;
+  const thumbLen = pose === "thumbsup" ? 50 : 38;
   const order = [3, 2, 1, 0]; // draw the little finger first so the index overlaps it
   return (
     <g transform={`scale(${size})`}>
       {/* thumb (tucked under the palm edge) */}
       <g transform={`translate(26 ${t * 20}) rotate(${t * thumbAng})`}>
-        <rect x={-8} y={-9} width={38} height={18} rx={9} fill={GLOVE} stroke={INK} strokeWidth={OUT * 0.8} />
+        <rect x={-8} y={-9} width={thumbLen} height={pose === "thumbsup" ? 20 : 18} rx={9} fill={GLOVE} stroke={INK} strokeWidth={OUT * 0.8} />
       </g>
       {order.map((i) => (
         <Finger key={i} y={ys[i]} len={lens[i] * (i === 0 && pose === "point" ? 1.25 : 1)} w={i === 0 && pose === "point" ? 21 : 18} curl={curls[i]} spread={spreads[i]} />
@@ -109,6 +111,24 @@ export const Hand: React.FC<{ pose?: HandPose; thumb?: "up" | "down"; size?: num
     </g>
   );
 };
+
+/**
+ * A gloved thumbs-up, drawn upright (front view: curled fingers facing the viewer, thumb standing straight up).
+ * Local frame: wrist at (0,0), the hand rises toward −y. `side` = which side the thumb is on (−1 left, +1 right).
+ */
+export const ThumbsUpHand: React.FC<{ size?: number; side?: -1 | 1 }> = ({ size = 1, side = -1 }) => (
+  <g transform={`scale(${size * side} ${size})`}>
+    {/* thumb (behind the fist's top edge) */}
+    <rect x={4} y={-112} width={26} height={60} rx={13} fill={GLOVE} stroke={INK} strokeWidth={OUT * 0.8} />
+    {/* fist */}
+    <rect x={-32} y={-72} width={68} height={60} rx={20} fill={GLOVE} stroke={INK} strokeWidth={OUT * 0.8} />
+    {/* curled fingers: knuckle creases across the front */}
+    {[-56, -42, -28].map((y) => <path key={y} d={`M -28 ${y} Q -6 ${y + 4} 18 ${y}`} fill="none" stroke={GLOVE_SHADE} strokeWidth={5} strokeLinecap="round" />)}
+    <path d="M 30 -64 Q 36 -40 30 -20" fill="none" stroke={CUFF} strokeWidth={5} strokeLinecap="round" opacity={0.7} />
+    {/* cuff */}
+    <rect x={-22} y={-18} width={44} height={20} rx={9} fill={CUFF} stroke={INK} strokeWidth={OUT * 0.8} />
+  </g>
+);
 
 /**
  * An arm from the shoulder to a target wrist position (IK), drawn as a paper sleeve (upper + forearm), with the hand

@@ -5,7 +5,7 @@ import { Dot, MoodKey, hops } from "../../../shared/Dot";
 import { during, pop, ramp, sec } from "../../../shared/motion";
 import { SceneShell } from "../../../shared/SceneShell";
 import { EggCarton } from "../Props";
-import { Hand, HandPose, INK, Pt, Stage } from "../Rig";
+import { Hand, HandPose, INK, Pt, Stage, ThumbsUpHand } from "../Rig";
 import { Checkout } from "../Screens";
 import { scene } from "../timeline";
 import { BODY_H, BUY_TIP, CamKey, FLOOR, QtyView, SCREEN, SLOT, World, camAt, toScreen } from "../World";
@@ -15,7 +15,7 @@ const S = scene("S3b");
 // The silent gag (~3 s, music muffled in tools/mix.py), hard cut in, SFX only: on the same stage, Dot sprouts its own
 // little white arms, pulls on the agent's gloves, hops up and taps "Buy" — the quantity spins 1 → 400 — and egg cartons
 // shoot out of the checkout's slot onto a growing pile (one thud each). Tag (3.2–5.0 s): Dot freezes, turns to the
-// viewer with a sheepish deadpan and points down at a drawn Subscribe pill — "this one's safe to press" — tap, tap.
+// viewer, happy, points down at a drawn Subscribe pill with one hand (tap, tap) and gives a thumbs-up with the other.
 const CAM: CamKey[] = [[-1, 1040, 540, 1.55], [0.6, 1050, 530, 1.5], [1.9, 1060, 560, 1.4], [99, 1070, 575, 1.32]];
 const DOT: Pt = { x: 470, y: 600 }; // Dot (screen)
 const TAP = 1.0;
@@ -30,7 +30,7 @@ const TRACK: MoodKey[] = [
   { at: sec(1.55), mood: "surprised" },
   { at: sec(1.95), mood: "panic" },
   { at: sec(3.15), mood: "neutral" },
-  { at: sec(TURN + 0.35), mood: "deadpan" },
+  { at: sec(TURN + 0.3), mood: "happy" },
 ];
 
 /** A drawn Subscribe pill (our style, not YouTube's): yellow paper with an ink outline and a little bell. */
@@ -51,7 +51,7 @@ const SubscribePill: React.FC<{ p: number; jab: number }> = ({ p, jab }) => (
  * the wrist — clearly not the agent's jointed paper sleeve. The borrowed glove sits on the end, along the arm's tangent.
  */
 const HOSE_LEN = 130;
-const HoseArm: React.FC<{ shoulder: Pt; wrist: Pt; bodyX: number; grow: number; glove: number; pose: HandPose; thumb: "up" | "down"; press?: number }> = ({ shoulder, wrist, bodyX, grow, glove, pose, thumb, press = 0 }) => {
+const HoseArm: React.FC<{ shoulder: Pt; wrist: Pt; bodyX: number; grow: number; glove: number; pose: HandPose; thumb: "up" | "down"; press?: number; thumbPop?: number }> = ({ shoulder, wrist, bodyX, grow, glove, pose, thumb, press = 0, thumbPop = 1 }) => {
   if (grow <= 0) return null;
   const w = { x: shoulder.x + (wrist.x - shoulder.x) * grow, y: shoulder.y + (wrist.y - shoulder.y) * grow };
   const dx = w.x - shoulder.x;
@@ -70,7 +70,12 @@ const HoseArm: React.FC<{ shoulder: Pt; wrist: Pt; bodyX: number; grow: number; 
     <g>
       <path d={path} fill="none" stroke={INK} strokeWidth={22} strokeLinecap="round" />
       <path d={path} fill="none" stroke={colors.white} strokeWidth={12} strokeLinecap="round" />
-      {glove > 0 ? (
+      {glove > 0 && pose === "thumbsup" ? (
+        // upright thumbs-up on the wrist, leaning a little with the arm
+        <g transform={`translate(${w.x} ${w.y}) rotate(${(ang + 90) * 0.35}) scale(${glove * thumbPop})`}>
+          <ThumbsUpHand size={0.88} side={-1} />
+        </g>
+      ) : glove > 0 ? (
         <g transform={`translate(${w.x} ${w.y}) rotate(${ang}) scale(${glove})`}>
           <Hand pose={pose} thumb={thumb} size={0.8} press={press} />
         </g>
@@ -106,7 +111,11 @@ const S3bContent: React.FC = () => {
   const restR0 = { x: shR.x + 16, y: shR.y + 100 };
   const panicK = ramp(frame, 1.95, 0.15) - ramp(frame, 3.15, 0.2); // arm shoots up, then drops as Dot freezes
   const wave = panicK * Math.sin(t * 22) * 14;
-  const restR = { x: restR0.x + (34 * panicK) + wave, y: restR0.y - 225 * panicK }; // panic: the right arm shoots up and waves
+  // tag: the right arm comes up beside Dot with a thumbs-up
+  const thumbK = ramp(frame, 3.95, 0.25);
+  const THUMB_AT = { x: shR.x + 80, y: shR.y - 70 };
+  const thumbPop = t < 4.05 ? 1 : 1 + 0.25 * Math.max(0, Math.sin(Math.min(1, (t - 4.05) / 0.3) * Math.PI));
+  const restR = { x: restR0.x + (34 * panicK) + wave + (THUMB_AT.x - restR0.x) * thumbK, y: restR0.y - 225 * panicK + (THUMB_AT.y - restR0.y) * thumbK }; // panic: the right arm shoots up and waves
   const wristR = { x: restR.x + (wristBuy.x - restR.x) * reach, y: restR.y + (wristBuy.y - restR.y) * reach };
   // tag: the left arm points down at the Subscribe pill, with two little jabs (fingertip computed from the pill)
   const jab = during(frame, 4.1, 4.22, 0.05) + during(frame, 4.4, 4.52, 0.05);
@@ -159,7 +168,7 @@ const S3bContent: React.FC = () => {
         {grow > 0 ? (
           <>
             <HoseArm shoulder={shL} wrist={wristL} bodyX={dot.x} grow={grow} glove={gloves} pose={pointK > 0.3 ? "point" : "relaxed"} thumb={pointK > 0.3 ? "down" : "up"} press={jab} />
-            <HoseArm shoulder={shR} wrist={wristR} bodyX={dot.x} grow={grow} glove={gloves} pose={t > 0.84 && t < 1.6 ? "point" : t > 1.95 ? "open" : "relaxed"} thumb={t > 0.84 && t < 1.6 ? "up" : "down"} press={press} />
+            <HoseArm shoulder={shR} wrist={wristR} bodyX={dot.x} grow={grow} glove={gloves} pose={t > 0.84 && t < 1.6 ? "point" : thumbK > 0.4 ? "thumbsup" : t > 1.95 && t < 3.25 ? "open" : "relaxed"} thumb={(t > 0.84 && t < 1.6) || thumbK > 0.4 ? "up" : "down"} press={press} thumbPop={thumbPop} />
           </>
         ) : null}
       </svg>
