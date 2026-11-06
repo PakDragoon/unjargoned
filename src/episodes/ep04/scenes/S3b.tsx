@@ -14,18 +14,37 @@ const S = scene("S3b");
 
 // The silent gag (~3 s, music muffled in tools/mix.py), hard cut in, SFX only: on the same stage, Dot sprouts its own
 // little white arms, pulls on the agent's gloves, hops up and taps "Buy" — the quantity spins 1 → 400 — and egg cartons
-// shoot out of the checkout's slot onto a growing pile (one thud each).
+// shoot out of the checkout's slot onto a growing pile (one thud each). Tag (3.2–5.0 s): Dot freezes, turns to the
+// viewer with a sheepish deadpan and points down at a drawn Subscribe pill — "this one's safe to press" — tap, tap.
 const CAM: CamKey[] = [[-1, 1040, 540, 1.55], [0.6, 1050, 530, 1.5], [1.9, 1060, 560, 1.4], [99, 1070, 575, 1.32]];
 const DOT: Pt = { x: 470, y: 600 }; // Dot (screen)
 const TAP = 1.0;
 const N = 6;
 const pileAt = (i: number): Pt => ({ x: 1120 + [0, 170, -150, 90, -60, 40][i], y: FLOOR - 45 - [0, 0, 0, 80, 80, 155][i] });
 
+const TURN = 3.35; // Dot turns to the viewer
+const SUB = { x: 235, y: 805, w: 330, h: 100 }; // the drawn Subscribe pill (screen), below Dot, toward the real button
+const SUB_TIP: Pt = { x: SUB.x + 70, y: SUB.y - SUB.h / 2 + 8 }; // fingertip lands on the pill's top edge, right of centre
 const TRACK: MoodKey[] = [
   { at: 0, mood: "smug" },
   { at: sec(1.55), mood: "surprised" },
   { at: sec(1.95), mood: "panic" },
+  { at: sec(3.15), mood: "neutral" },
+  { at: sec(TURN + 0.35), mood: "deadpan" },
 ];
+
+/** A drawn Subscribe pill (our style, not YouTube's): yellow paper with an ink outline and a little bell. */
+const SubscribePill: React.FC<{ p: number; jab: number }> = ({ p, jab }) => (
+  <div style={{ position: "absolute", left: SUB.x - SUB.w / 2, top: SUB.y - SUB.h / 2, width: SUB.w, height: SUB.h, scale: `${Math.max(0, p) * (1 - 0.06 * jab)}`, translate: `0 ${5 * jab}px`, opacity: Math.min(1, Math.max(0, p) * 3) }}>
+    <div style={{ position: "absolute", inset: 0, borderRadius: SUB.h / 2, backgroundColor: colors.yellow, border: `6px solid ${INK}`, boxSizing: "border-box", boxShadow: `6px 8px 0 rgba(0,0,0,0.38)`, display: "flex", alignItems: "center", justifyContent: "center", gap: 12, fontFamily, fontSize: 50, fontWeight: 800, color: INK }}>
+      <svg width={40} height={40} viewBox="0 0 40 40" aria-hidden>
+        <path d="M 20 5 C 12 5 9 12 9 18 L 9 26 L 5 31 L 35 31 L 31 26 L 31 18 C 31 12 28 5 20 5 Z" fill="#FFFFFF" stroke={INK} strokeWidth={4} strokeLinejoin="round" />
+        <path d="M 16 34 Q 20 39 24 34" fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" />
+      </svg>
+      Subscribe
+    </div>
+  </div>
+);
 
 /**
  * Dot's own arm: a short white rubber-hose arm (Dot's body colour, thin ink line), bowing smoothly from its side to
@@ -85,14 +104,27 @@ const S3bContent: React.FC = () => {
   const d = Math.hypot(buy.x - shR.x, buy.y - shR.y);
   const wristBuy = { x: buy.x - ((buy.x - shR.x) / d) * HAND, y: buy.y - ((buy.y - shR.y) / d) * HAND };
   const restR0 = { x: shR.x + 16, y: shR.y + 100 };
-  const panicK = ramp(frame, 1.95, 0.15);
+  const panicK = ramp(frame, 1.95, 0.15) - ramp(frame, 3.15, 0.2); // arm shoots up, then drops as Dot freezes
   const wave = panicK * Math.sin(t * 22) * 14;
   const restR = { x: restR0.x + (34 * panicK) + wave, y: restR0.y - 225 * panicK }; // panic: the right arm shoots up and waves
   const wristR = { x: restR.x + (wristBuy.x - restR.x) * reach, y: restR.y + (wristBuy.y - restR.y) * reach };
-  const wristL = { x: shL.x - 16, y: shL.y + 100 };
+  // tag: the left arm points down at the Subscribe pill, with two little jabs (fingertip computed from the pill)
+  const jab = during(frame, 4.1, 4.22, 0.05) + during(frame, 4.4, 4.52, 0.05);
+  const tipNow = { x: SUB_TIP.x, y: SUB_TIP.y - 14 + 14 * jab };
+  const dl = Math.hypot(tipNow.x - shL.x, tipNow.y - shL.y) || 1;
+  const wristSub = { x: tipNow.x - ((tipNow.x - shL.x) / dl) * HAND, y: tipNow.y - ((tipNow.y - shL.y) / dl) * HAND };
+  const pointK = ramp(frame, 3.7, 0.3);
+  const restL = { x: shL.x - 16, y: shL.y + 100 };
+  const wristL = { x: restL.x + (wristSub.x - restL.x) * pointK, y: restL.y + (wristSub.y - restL.y) * pointK };
+  const subP = t < 3.78 ? 0 : pop(frame, 3.8);
+  const focus = ramp(frame, TURN, 0.4); // the stage dims behind Dot
+  const push = ramp(frame, TURN - 0.05, 0.55); // screen-space push-in on Dot (and everything behind it)
+  const turnLook = ramp(frame, TURN, 0.25);
+  const lookNow = t < 1.6 ? { x: 1, y: 0 } : { x: 0.8 * (1 - turnLook), y: 0.6 * (1 - turnLook) };
 
   return (
-    <AbsoluteFill style={{ fontFamily, backgroundColor: colors.ink }}>
+    <AbsoluteFill style={{ fontFamily, backgroundColor: colors.ink, overflow: "hidden" }}>
+     <AbsoluteFill style={{ transformOrigin: "470px 640px", transform: `translate(${260 * push}px, ${-40 * push}px) scale(${1 + 0.5 * push})` }}>
       <World cam={c}>
         <Stage spotX={1200} floorY={FLOOR} />
         {/* cartons that already landed sit on the floor behind the machine's front edge */}
@@ -118,16 +150,21 @@ const S3bContent: React.FC = () => {
         })}
       </World>
 
+      {/* tag: the stage dims, the Subscribe pill pops up below Dot */}
+      <AbsoluteFill style={{ backgroundColor: colors.ink, opacity: 0.55 * focus }} />
+      <SubscribePill p={subP} jab={jab} />
+
       {/* Dot with its borrowed gloves (arms attached at its sides) */}
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }} aria-hidden>
         {grow > 0 ? (
           <>
-            <HoseArm shoulder={shL} wrist={wristL} bodyX={dot.x} grow={grow} glove={gloves} pose="relaxed" thumb="up" />
+            <HoseArm shoulder={shL} wrist={wristL} bodyX={dot.x} grow={grow} glove={gloves} pose={pointK > 0.3 ? "point" : "relaxed"} thumb={pointK > 0.3 ? "down" : "up"} press={jab} />
             <HoseArm shoulder={shR} wrist={wristR} bodyX={dot.x} grow={grow} glove={gloves} pose={t > 0.84 && t < 1.6 ? "point" : t > 1.95 ? "open" : "relaxed"} thumb={t > 0.84 && t < 1.6 ? "up" : "down"} press={press} />
           </>
         ) : null}
       </svg>
-      <Dot x={dot.x} y={dot.y} size={100} squash={(fr) => Math.max(route.squash(fr), 0.12 * press)} tailAngle={198} tailStart={1.08} tailLength={1.2} tailWidth={0.24} track={TRACK} blinks={false} seed="gag4" look={{ x: t < 1.6 ? 1 : 0.8, y: t < 1.6 ? 0 : 0.6 }} />
+      <Dot x={dot.x} y={dot.y} size={100} squash={(fr) => Math.max(route.squash(fr), 0.12 * press)} tailAngle={198} tailStart={1.08} tailLength={1.2} tailWidth={0.24} track={TRACK} blinks={false} seed="gag4" look={lookNow} />
+     </AbsoluteFill>
     </AbsoluteFill>
   );
 };
