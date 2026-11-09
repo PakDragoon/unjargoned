@@ -2,7 +2,7 @@ import React from "react";
 import { Composition, Series } from "remotion";
 import { SHORT, VIDEO } from "../../shared/brand";
 import { Short1, Short2, Short3, shortFrames } from "./Shorts";
-import { ThumbA, ThumbB } from "./Thumbnails";
+import { ThumbA, ThumbB, ThumbC, ThumbD } from "./Thumbnails";
 import { scenes, totalFrames } from "./timeline";
 import { KIT, Kit } from "./Kit";
 import { RigSheet } from "./RigSheet";
@@ -55,6 +55,8 @@ export const Ep04Compositions: React.FC = () => (
     <Composition id="Ep04-Short3" component={Short3} durationInFrames={shortFrames("Short3")} fps={SHORT.fps} width={SHORT.width} height={SHORT.height} />
     <Composition id="Ep04-ThumbA" component={ThumbA} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
     <Composition id="Ep04-ThumbB" component={ThumbB} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
+    <Composition id="Ep04-ThumbC" component={ThumbC} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
+    <Composition id="Ep04-ThumbD" component={ThumbD} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
     <Composition id="Ep04-Full" component={Ep04Full} durationInFrames={totalFrames} fps={VIDEO.fps} width={VIDEO.width} height={VIDEO.height} />
   </>
 );

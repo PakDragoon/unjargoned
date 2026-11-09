@@ -1,8 +1,8 @@
 TITLE
-Chatbots Talk. AI Agents Do Things.
+AI Agents Explained Simply (One Spent $31 Without Asking)
 
 DESCRIPTION
-What is an AI agent, and how is it different from a chatbot like ChatGPT? AI agents explained simply: a chatbot tells you, an agent does it for you.
+AI agents explained simply: what is an AI agent, and how is it different from a chatbot like ChatGPT? A chatbot tells you. An agent does it for you, like the one that spent $31 on eggs nobody asked it to buy.
 
 In under 4 minutes: why an AI agent spent $31 on eggs nobody asked it to buy, what changes when AI gets "hands" (apps it can use), whether AI really remembers you, and when a good agent stops to ask you first.
 

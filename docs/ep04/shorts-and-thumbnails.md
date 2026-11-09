@@ -42,3 +42,11 @@ Posting: Short 1 one to two days after the episode, then Short 2 and Short 3 two
 video as Related video.
 Rebuild: `npx remotion render Ep04-ShortN out/shortN-video.mp4 --muted --jpeg-quality=95 --crf=16`
 then `python3 tools/shorts.py ep04 ShortN`.
+
+## Repackage (Nov 9, 2026: 8 views, 2% CTR after 3 days)
+- Title → **AI Agents Explained Simply (One Spent $31 Without Asking)**
+  (alternatives: "What Is an AI Agent? Explained Simply" · "This AI Spent $31 Without Asking | AI Agents Explained")
+- New thumbnails, both putting the AI and the $31 in one picture (Test & Compare):
+  - **C · IT PAID?!** (`thumbnail-C-it-paid.png`): the agent holds the egg carton up, $31.43 receipt hanging from it, shocked Dot.
+  - **D · AI DID THIS?!** (`thumbnail-D-ai-did-this.png`): shocked Dot holds a big receipt "Ordered by: AI agent … $31.43".
+- Description first line updated to lead with "AI agents explained simply".
