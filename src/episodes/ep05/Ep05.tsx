@@ -11,12 +11,17 @@ import { S2b } from "./scenes/S2b";
 import { S3 } from "./scenes/S3";
 import { S3b } from "./scenes/S3b";
 import { S3c } from "./scenes/S3c";
+import { S4 } from "./scenes/S4";
+import { S5 } from "./scenes/S5";
+import { S5b } from "./scenes/S5b";
+import { S6 } from "./scenes/S6";
+import { S7 } from "./scenes/S7";
 
 const placeholder = (id: string): React.FC => () => {
   const s = scene(id);
   return <SceneShell sceneId={s.id} title={s.title} audioSrc={s.audioSrc} />;
 };
-const built: Record<string, React.FC> = { S1, S2, S2b, S3, S3b, S3c };
+const built: Record<string, React.FC> = { S1, S2, S2b, S3, S3b, S3c, S4, S5, S5b, S6, S7 };
 const components: Record<string, React.FC> = Object.fromEntries(scenes.map((s) => [s.id, built[s.id] ?? placeholder(s.id)]));
 
 /** Full episode: every scene in order. Render this ONCE, at the end. */
