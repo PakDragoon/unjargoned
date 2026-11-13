@@ -14,7 +14,7 @@
 | G2 proof scene | S1 approved. |
 | G3 | Skipped as a gate at the user's request ("move to G4"); S2–S7 built with self-QA stills. |
 | G4 | Full render + mix (5:37, −13 LUFS) + SRT, waiting for the user's review. |
-| G5 | Not started. |
+| G5 | Thumbnails A/B, 4 Shorts, description + chapters done; waiting for the user's review. |
 
 ## Next session: ElevenLabs A/B test
 
