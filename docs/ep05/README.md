@@ -8,7 +8,8 @@
 | Gate | State |
 | --- | --- |
 | G0 voice + captions | Done with Kokoro (af_heart 0.95), 317 s of voice, 191 cues, no overlaps. User: words fine, but **the voice sounds flat**. |
-| Next | A/B test ElevenLabs v3 (audio tags) against Kokoro on S1 and S4, then re-voice the episode if it wins. |
+| A/B (Nov 13) | `tools/tts_eleven.py` built; S1 + S4 voiced in 3 v3 takes (Matilda natural, Matilda creative, Jessica) → `out/ab/`, Kokoro copies beside them. Waiting for the user's pick. Free-tier credits used: ~4,900 of 10,000. |
+| Next | If v3 wins: set `voiceSettings.elevenTake` in vo.json, `python3 tools/tts_eleven.py ep05` (Starter plan first), captions, Whisper diff. If Kokoro wins: re-voice S5 with tts.py (Hi Mom). |
 | G1–G5 | Not started. |
 
 ## Next session: ElevenLabs A/B test
@@ -21,6 +22,15 @@
 6. Change "Hi Mum" → "Hi Mom" in S5 (US is the biggest audience) in vo.json and the script doc.
 7. If v3 wins: voice all scenes, re-run `tools/captions.py ep05`, re-check with a raw-Whisper diff against vo.json.
 8. Plan: ElevenLabs Free for the test only (no commercial license); Starter ($6/mo, 30k credits) before the real voice-over. Ep 5 is ~4,700 characters per full take.
+
+## ElevenLabs notes (A/B)
+
+- Free tier can use premade voices via the API (not library voices); `eleven_v3`, `pcm_24000`. Stability is only 0 / 0.5 / 1.
+- One request per scene (v3 phrases better with the whole paragraph); split only at `[silence N]`. Responses cached in `out/eleven_cache/`.
+- `[short pause]` came out 1.2–2.4 s, so `cap_gaps` cuts any internal silence to 0.8 s.
+- Whisper diff: no tags read aloud, words match vo.json in all 6 takes (only Whisper noise: "protection", "unjargon"). Matilda runs ~6% longer than Kokoro, Jessica ~22% longer.
+- "Hi Mum" → "Hi Mom" done in vo.json and the script doc (captions/SRT still say Mum until the re-voice).
+- `eleven_v4` is also on the account now; not tested.
 
 ## Lessons from G0 (already fixed in tools)
 
