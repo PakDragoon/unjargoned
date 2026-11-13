@@ -43,7 +43,13 @@ TAKES: dict[str, dict] = {
     "matilda": {"voice": "XrExE9yKIg1WjnnlVkGX", "stability": 0.5, "seed": 11},   # US female, educator, upbeat
     "matilda-creative": {"voice": "XrExE9yKIg1WjnnlVkGX", "stability": 0.0, "seed": 12},
     "jessica": {"voice": "cgSgspJ2msm6clMCkdW9", "stability": 0.5, "seed": 13},   # US female, playful, warm
+    # Same Jessica audio (cache hit, no credits), tighter pauses: breaths count as silence (-35 dB), gaps cut to 0.55 s.
+    "jessica-tight": {"voice": "cgSgspJ2msm6clMCkdW9", "stability": 0.5, "seed": 13, "max_gap": 0.55, "gap_db": -35},
+    # …and 7% faster, pitch kept (ffmpeg atempo).
+    "jessica-tight-fast": {"voice": "cgSgspJ2msm6clMCkdW9", "stability": 0.5, "seed": 13, "max_gap": 0.55, "gap_db": -35,
+                           "tempo": 1.07},
 }
+# Optional per-take keys: max_gap (s), gap_db (silence threshold for cap_gaps), tempo (speed-up, pitch kept).
 DEFAULT_TAKE = "matilda"  # vo.json "voiceSettings.elevenTake" overrides
 
 PAUSE_SCALE = 1.0
@@ -156,13 +162,13 @@ def trim(audio: np.ndarray) -> np.ndarray:
     return audio[max(0, loud[0] - pad): loud[-1] + pad]
 
 
-def cap_gaps(audio: np.ndarray) -> np.ndarray:
-    """Shorten silences longer than MAX_GAP (20 ms frames under SILENCE_DB), keeping their middle cut out."""
+def cap_gaps(audio: np.ndarray, max_gap: float = MAX_GAP, gap_db: float = SILENCE_DB) -> np.ndarray:
+    """Shorten silences longer than max_gap (20 ms frames under gap_db), keeping their middle cut out."""
     hop = int(0.02 * SR)
     n = len(audio) // hop
-    quiet = np.abs(audio[: n * hop]).reshape(n, hop).max(axis=1) < 10 ** (SILENCE_DB / 20)
+    quiet = np.abs(audio[: n * hop]).reshape(n, hop).max(axis=1) < 10 ** (gap_db / 20)
     keep = np.ones(len(audio), dtype=bool)
-    max_frames = int(MAX_GAP / 0.02)
+    max_frames = int(max_gap / 0.02)
     i = 0
     while i < n:
         if quiet[i]:
@@ -178,13 +184,27 @@ def cap_gaps(audio: np.ndarray) -> np.ndarray:
     return audio[keep]
 
 
+def tempo(audio: np.ndarray, factor: float) -> np.ndarray:
+    """Speed up without changing pitch (ffmpeg atempo)."""
+    import subprocess
+    raw = subprocess.run(
+        ["ffmpeg", "-v", "error", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-",
+         "-filter:a", f"atempo={factor}", "-f", "f32le", "-"],
+        input=audio.astype("<f4").tobytes(), capture_output=True, check=True).stdout
+    return np.frombuffer(raw, dtype="<f4").copy()
+
+
 def voice_scene(scene_id: str, vo: str, take: str) -> np.ndarray:
+    cfg = TAKES[take]
     pieces = []
     for part in to_v3(scene_id, vo):
         if isinstance(part, float):
             pieces.append(np.zeros(int(part * SR), dtype=np.float32))
         else:
-            pieces.append(cap_gaps(trim(synth(part, take))))
+            audio = cap_gaps(trim(synth(part, take)), cfg.get("max_gap", MAX_GAP), cfg.get("gap_db", SILENCE_DB))
+            if cfg.get("tempo"):
+                audio = tempo(audio, cfg["tempo"])
+            pieces.append(audio)
     return np.concatenate(pieces) if pieces else np.zeros(int(0.5 * SR), dtype=np.float32)
 
 
