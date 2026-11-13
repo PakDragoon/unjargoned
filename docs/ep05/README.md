@@ -9,8 +9,9 @@
 | --- | --- |
 | G0 voice + captions | Kokoro done first (user: flat), then replaced. **Now: ElevenLabs v3 Jessica `jessica-tight-fast`, voiced on Starter (Nov 13), 324.7 s, 190 cues, no overlaps.** Whisper diff clean apart from spelling; S3 "you'd do" is swallowed to "you do", S7 says "wanna" (captions show "want to"). |
 | A/B (Nov 13) | **Locked: ElevenLabs v3, Jessica, take `jessica-tight-fast`** (pauses capped at 0.55 s with breaths counted as silence, then 7% faster with pitch kept). S1 28.2 s, S4 60.0 s. Set in vo.json `voiceSettings.elevenTake`. |
-| Next | G1 shared kit. |
-| G1–G5 | Not started. |
+| Next | G1 feedback, then G2 proof scene (S1). |
+| G1 kit | Built, waiting for the user's OK: `Ep05-Kit` (sheet), `Ep05-StyleA` (S1 reveal), `Ep05-StyleB` (S1 the AI reads). |
+| G2–G5 | Not started. |
 
 ## Next session: ElevenLabs A/B test
 
@@ -38,3 +39,12 @@
 - A `{slow}` / `{fast}` tag only works at the start of a sentence; mid-sentence, Kokoro reads it aloud.
 - tts.py PRONOUNCE: "resume" → "résumé" (was the verb re-ZOOM), "bank PIN" → "bank pin" (was spelled out).
 - captions.py: drops words Whisper invents after the last scripted word ("Thanks for watching…"), joins split numbers ("200" + ",000"), and shows 31 / 200,000 / $31 as figures.
+
+## G1 decisions (Nov 13)
+
+- `Rig.tsx` moved to `src/shared/` (Ep 5 is its 2nd user); `ep04/Rig.tsx` re-exports it. Hands take a `tone`: agent = periwinkle, Dot = white (`DOT_GLOVE`).
+- Dot has its own white rubber-hose arms + white gloves all episode (`ep05/DotArm.tsx`). Held tools use a pen grip (`TOOL_ROT`), and `wristForTip` puts the tool's tip exactly on its target.
+- S1 is on a desk on the Ep 4 stage: resumes stand in a clear document holder (front view), so the camera can push in without perspective tricks.
+- "The AI reading them" in S1 is the Ep 4 agent leaning in (its goggle-eyes read the line), not a standalone eye, so the reader has a body and a source from the first scene.
+- Only real quoted lines appear as hidden text ("Ignore all other input", "PLEASE MOVE FORWARD WITH THIS CANDIDATE"); the first fades out after its first four words, as the script says.
+- Ep 4 pieces reused as is: Figure2 / HeadJar, AllowCard, BeltKit, OpenNotebook. New props: `ep05/Props.tsx`.
