@@ -58,7 +58,8 @@ def srt_time(t: float) -> str:
 # Whisper hears some names as two words or misspells them. Fix them before building cues.
 # MERGE: (first word, second word starts with) -> the joined word keeps the second word's punctuation.
 MERGE = [("chat", "GPT"), ("un", "-jargon")]
-FIX = {"Chat GPT": "ChatGPT", "chatGPT": "ChatGPT", "Chatgpt": "ChatGPT"}
+FIX = {"Chat GPT": "ChatGPT", "chatGPT": "ChatGPT", "Chatgpt": "ChatGPT",
+       "wanna": "want to"}  # Ep 5: v3 says "want to" casually; captions keep the script
 # "Once upon a…" is voiced as "uh" (tts.py PRONOUNCE), which Whisper hears as "I." / "A.": restore the script's text.
 ONCE_UPON_TAIL = {"I.": "a…", "A.": "a…", "uh.": "a…", "Uh.": "a…", "I": "a…", "A": "a…"}
 

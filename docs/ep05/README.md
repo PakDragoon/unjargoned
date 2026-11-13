@@ -7,9 +7,9 @@
 
 | Gate | State |
 | --- | --- |
-| G0 voice + captions | Done with Kokoro (af_heart 0.95), 317 s of voice, 191 cues, no overlaps. User: words fine, but **the voice sounds flat**. |
+| G0 voice + captions | Kokoro done first (user: flat), then replaced. **Now: ElevenLabs v3 Jessica `jessica-tight-fast`, voiced on Starter (Nov 13), 324.7 s, 190 cues, no overlaps.** Whisper diff clean apart from spelling; S3 "you'd do" is swallowed to "you do", S7 says "wanna" (captions show "want to"). |
 | A/B (Nov 13) | **Locked: ElevenLabs v3, Jessica, take `jessica-tight-fast`** (pauses capped at 0.55 s with breaths counted as silence, then 7% faster with pitch kept). S1 28.2 s, S4 60.0 s. Set in vo.json `voiceSettings.elevenTake`. |
-| Next | Upgrade to Starter (commercial license), then `python3 tools/tts_eleven.py ep05` (all scenes; S1/S4 come from the cache), `python3 tools/captions.py ep05`, raw-Whisper diff against vo.json. |
+| Next | G1 shared kit. |
 | G1–G5 | Not started. |
 
 ## Next session: ElevenLabs A/B test
@@ -29,7 +29,8 @@
 - One request per scene (v3 phrases better with the whole paragraph); split only at `[silence N]`. Responses cached in `out/eleven_cache/`.
 - `[short pause]` came out 1.2–2.4 s, so `cap_gaps` cuts any internal silence to 0.8 s.
 - Whisper diff: no tags read aloud, words match vo.json in all 6 takes (only Whisper noise: "protection", "unjargon"). Matilda runs ~6% longer than Kokoro, Jessica ~22% longer.
-- "Hi Mum" → "Hi Mom" done in vo.json and the script doc (captions/SRT still say Mum until the re-voice).
+- "Hi Mum" → "Hi Mom" done in vo.json, the script doc, captions and SRT.
+- Licence: all episode audio was generated on Starter (Free-plan A/B cache moved to `out/eleven_cache_free/`, not used). Free-plan audio can't be upgraded to commercial use later.
 - `eleven_v4` is also on the account now; not tested.
 
 ## Lessons from G0 (already fixed in tools)
