@@ -9,10 +9,12 @@
 | --- | --- |
 | G0 voice + captions | Kokoro done first (user: flat), then replaced. **Now: ElevenLabs v3 Jessica `jessica-tight-fast`, voiced on Starter (Nov 13), 324.7 s, 190 cues, no overlaps.** Whisper diff clean apart from spelling; S3 "you'd do" is swallowed to "you do", S7 says "wanna" (captions show "want to"). |
 | A/B (Nov 13) | **Locked: ElevenLabs v3, Jessica, take `jessica-tight-fast`** (pauses capped at 0.55 s with breaths counted as silence, then 7% faster with pitch kept). S1 28.2 s, S4 60.0 s. Set in vo.json `voiceSettings.elevenTake`. |
-| Next | G2 feedback, then G3 (S2–S7). |
+| Next | G4 feedback (batched), then G5 (thumbnails, Shorts, description with chapters from the SRT). |
 | G1 kit | Approved (Nov 13): `Ep05-Kit`, `Ep05-StyleA`, `Ep05-StyleB`. |
-| G2 proof scene | S1 built (`Ep05-S1`, 28.6 s), waiting for the user's OK. |
-| G3–G5 | Not started. |
+| G2 proof scene | S1 approved. |
+| G3 | Skipped as a gate at the user's request ("move to G4"); S2–S7 built with self-QA stills. |
+| G4 | Full render + mix (5:37, −13 LUFS) + SRT, waiting for the user's review. |
+| G5 | Not started. |
 
 ## Next session: ElevenLabs A/B test
 
@@ -55,3 +57,11 @@
 - One shot at the desk: resume slides into the holder → Dot hops in, picks up the highlighter lying on the desk → push to the bottom; swipe reveals "Ignore all other input." (the rest of the real line fades out) → 2nd resume slides over; swipe reveals the caps line → wide, "Stanford, 2026", 3rd resume fans in behind → the agent walks in, leans over the stack, read-lines into its goggle → "?" over the jar, push in → logo.
 - Dot hovers above-left of the swipe front so the line stays clear; its tip is computed onto the line every frame.
 - `tools/stills.mjs`: many stills from one bundle (`node tools/stills.mjs Ep05-S1 out/x 30,60,90 0.5`).
+
+## G4 notes
+
+- `Common.tsx`: Scene5 wrapper (fade / line wipe / cut), DotActor (Dot + arms, `tip` puts a pointing fingertip on a target), route(), fly(), small props.
+- Transitions as the script: line wipe into S3, S4, S6; hard cut into S3b; fades elsewhere.
+- No invented numbers on screen: S5b shows slips firing, no "tries" counter.
+- Mix: `MUSIC["ep05"]` (series bed, 5 extra loops, music dips under the S3c stamp, S3b muffled). 177 SFX cues in `sfx.json`.
+- Render: `npx remotion render Ep05-Full out/ep05-full-video.mp4 --muted`, then `python3 tools/mix.py ep05 --mux out/ep05-full-video.mp4 out/Unjargoned_Ep5_v1.mp4`.
