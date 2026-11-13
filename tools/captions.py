@@ -68,6 +68,11 @@ def clean_words(words: list[dict]) -> list[dict]:
     for w in words:
         if out:
             prev = out[-1]
+            # Ep 5: Whisper splits "200,000" into "200" + ",000"; join them back into one word.
+            if re.match(r"^,\d", w["word"]) and re.search(r"\d$", prev["word"]):
+                prev["word"] += w["word"]
+                prev["end"] = w["end"]
+                continue
             for first, second in MERGE:
                 if prev["word"].lower() == first and w["word"].startswith(second):
                     prev["word"] = "ChatGPT" + w["word"][len(second):] if second == "GPT" else prev["word"] + w["word"]
@@ -100,7 +105,13 @@ def match_script(words: list[dict], vo_text: str) -> list[dict]:
     # Quote marks stay on the script's words (so '"Buy".' shows as written); _norm ignores them when matching.
     script = SCRIPT_MARKUP.sub(" ", vo_text).split()
     a, b = [_norm(w["word"]) for w in words], [_norm(w) for w in script]
-    for op, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
+    ops = difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes()
+    # Ep 5: Whisper sometimes invents an outro after the last word ("Thanks for watching. See you next time.",
+    # zero-length words in the final 0.2 s). Words heard after the script's last word are dropped.
+    if ops and ops[-1][0] == "delete" and ops[-1][2] == len(a):
+        del words[ops[-1][1]:]
+        ops = ops[:-1]
+    for op, i1, i2, j1, j2 in ops:
         if op in ("replace", "equal") and i2 - i1 == j2 - j1:  # equal: same words, take the script's punctuation
             for i, j in zip(range(i1, i2), range(j1, j2)):
                 if op == "equal":
@@ -113,7 +124,11 @@ def match_script(words: list[dict], vo_text: str) -> list[dict]:
 
 # Numbers are voiced as words (vo.json) but shown as figures on screen and in captions.
 # Each entry: the spoken words (normalised) -> the caption text; the joined word keeps the last word's punctuation.
-SCREEN_TEXT = [(["thirtyone", "dollars"], "$31")]
+SCREEN_TEXT = [
+    (["thirtyone", "dollars"], "$31"),
+    (["thirtyone"], "31"),  # Ep 5: "thirty-one real companies"
+    (["two", "hundred", "thousand"], "200,000"),  # Ep 5
+]
 
 
 def screen_text(words: list[dict]) -> list[dict]:

@@ -46,6 +46,8 @@ PRONOUNCE: dict[str, str] = {
     "Once upon a": "Once upon uh",
     "un-jargon": "un jargon",  # Ep 1 says it as two stressed words
     "lawyer": "law-yer",  # Ep 3: plain "lawyer" (lˈɔɪɚ) sounded like "liar"; this gives LAW-yer
+    "resume": "résumé",  # Ep 5: plain "resume" is the verb (ɹᵻzˈuːm); the accented form gives REZ-oo-may (also "resumes")
+    "bank PIN": "bank pin",  # Ep 5: "PIN" was spelled out as P-I-N
 }
 
 # Delivery tags (Ep 4, "voice B"): {fast} / {slow} / {slower} before a sentence change that sentence's pace
