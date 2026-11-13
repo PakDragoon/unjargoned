@@ -8,8 +8,8 @@
 | Gate | State |
 | --- | --- |
 | G0 voice + captions | Done with Kokoro (af_heart 0.95), 317 s of voice, 191 cues, no overlaps. User: words fine, but **the voice sounds flat**. |
-| A/B (Nov 13) | `tools/tts_eleven.py` built; S1 + S4 voiced in 3 v3 takes (Matilda natural, Matilda creative, Jessica) → `out/ab/`, Kokoro copies beside them. Waiting for the user's pick. Free-tier credits used: ~4,900 of 10,000. |
-| Next | If v3 wins: set `voiceSettings.elevenTake` in vo.json, `python3 tools/tts_eleven.py ep05` (Starter plan first), captions, Whisper diff. If Kokoro wins: re-voice S5 with tts.py (Hi Mom). |
+| A/B (Nov 13) | **Locked: ElevenLabs v3, Jessica, take `jessica-tight-fast`** (pauses capped at 0.55 s with breaths counted as silence, then 7% faster with pitch kept). S1 28.2 s, S4 60.0 s. Set in vo.json `voiceSettings.elevenTake`. |
+| Next | Upgrade to Starter (commercial license), then `python3 tools/tts_eleven.py ep05` (all scenes; S1/S4 come from the cache), `python3 tools/captions.py ep05`, raw-Whisper diff against vo.json. |
 | G1–G5 | Not started. |
 
 ## Next session: ElevenLabs A/B test

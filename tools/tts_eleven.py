@@ -50,7 +50,7 @@ TAKES: dict[str, dict] = {
                            "tempo": 1.07},
 }
 # Optional per-take keys: max_gap (s), gap_db (silence threshold for cap_gaps), tempo (speed-up, pitch kept).
-DEFAULT_TAKE = "matilda"  # vo.json "voiceSettings.elevenTake" overrides
+DEFAULT_TAKE = "jessica-tight-fast"  # locked for Ep 5 (Nov 13); vo.json "voiceSettings.elevenTake" overrides
 
 PAUSE_SCALE = 1.0
 EDGE_SILENCE = 0.05     # seconds kept before the first / after the last sound

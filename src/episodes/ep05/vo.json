@@ -6,7 +6,9 @@
   "voiceSettings": {
     "voice": "af_heart",
     "speed": 0.95,
-    "pauseScale": 1.0
+    "pauseScale": 1.0,
+    "engine": "elevenlabs",
+    "elevenTake": "jessica-tight-fast"
   },
   "scenes": [
     {
