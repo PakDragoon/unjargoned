@@ -1,8 +1,10 @@
 import React from "react";
 import { Composition, Series } from "remotion";
-import { VIDEO } from "../../shared/brand";
+import { SHORT, VIDEO } from "../../shared/brand";
 import { SceneShell } from "../../shared/SceneShell";
 import { KIT, Kit } from "./Kit";
+import { Short1, Short2, Short3, Short4, shortFrames } from "./Shorts";
+import { ThumbA, ThumbB } from "./Thumbnails";
 import { StyleA, StyleB } from "./StyleFrames";
 import { scene, scenes, totalFrames } from "./timeline";
 import { S1 } from "./scenes/S1";
@@ -47,6 +49,11 @@ export const Ep05Compositions: React.FC = () => (
     {scenes.map((s) => (
       <Composition key={s.id} id={`Ep05-${s.id}`} component={components[s.id]} durationInFrames={s.frames} fps={VIDEO.fps} width={VIDEO.width} height={VIDEO.height} />
     ))}
+    {([["Short1", Short1], ["Short2", Short2], ["Short3", Short3], ["Short4", Short4]] as const).map(([id, C]) => (
+      <Composition key={id} id={`Ep05-${id}`} component={C} durationInFrames={shortFrames(id)} fps={SHORT.fps} width={SHORT.width} height={SHORT.height} />
+    ))}
+    <Composition id="Ep05-ThumbA" component={ThumbA} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
+    <Composition id="Ep05-ThumbB" component={ThumbB} durationInFrames={1} fps={VIDEO.fps} width={1280} height={720} />
     <Composition id="Ep05-Full" component={Ep05Full} durationInFrames={totalFrames} fps={VIDEO.fps} width={VIDEO.width} height={VIDEO.height} />
   </>
 );
