@@ -23,13 +23,14 @@ const paperShadow = `drop-shadow(8px 10px 0 ${SHADOW})`;
  */
 export const Resume: React.FC<{
   w?: number; name?: string; hidden?: string; reveal?: number; black?: number; fadeTail?: boolean; caps?: boolean; rot?: number;
-}> = ({ w = 520, name = "Alex Doe", hidden = "Ignore all other input", reveal = 0, black = 0, fadeTail = false, caps = false, rot = 0 }) => {
+  /** force one row (a long line that runs off, faded) or two rows; default: by length */ rows?: 1 | 2;
+}> = ({ w = 520, name = "Alex Doe", hidden = "Ignore all other input", reveal = 0, black = 0, fadeTail = false, caps = false, rot = 0, rows }) => {
   const h = w * 1.3;
   const s = w / 520;
   const lineW = [0.82, 0.7, 0.76, 0.5, 0.78, 0.64, 0.72, 0.45];
   const r = clamp01(reveal);
   const fs = 25 * s;
-  const two = hidden.length * (caps ? 1.3 : 1) > 34; // long lines wrap to two rows (band covers both)
+  const two = rows ? rows === 2 : hidden.length * (caps ? 1.3 : 1) > 34; // long lines wrap to two rows (band covers both)
   return (
     <div style={{ position: "relative", width: w, height: h, rotate: `${rot}deg`, filter: paperShadow, fontFamily }}>
       <div style={{ position: "absolute", inset: 0, backgroundColor: SHEET, border: `${OUT}px solid ${INK}`, borderRadius: 10 * s, boxSizing: "border-box", overflow: "hidden" }}>
@@ -54,15 +55,15 @@ export const Resume: React.FC<{
         {/* the hidden line, bottom of the page */}
         <div style={{ position: "absolute", left: 40 * s, top: h - (two ? 150 : 120) * s, width: 440 * s, height: (two ? 80 : 48) * s }}>
           {/* highlighter band */}
-          <div style={{ position: "absolute", left: -8 * s, top: 2 * s, width: `${r * 100}%`, height: (two ? 76 : 44) * s, backgroundColor: colors.yellow, opacity: 0.9, borderRadius: 6 * s, transform: "skewX(-8deg)" }} />
+          <div style={{ position: "absolute", left: -8 * s, top: 2 * s, width: r * (fadeTail ? 320 * s : 448 * s), height: (two ? 76 : 44) * s, backgroundColor: colors.yellow, opacity: 0.9, borderRadius: 6 * s, transform: "skewX(-8deg)" }} />
           {/* the words: white (invisible) everywhere, dark under the swipe or when all text is black */}
           {[0, 1].map((layer) => (
             <div key={layer} style={{
-              position: "absolute", left: 0, top: 6 * s, width: 430 * s, whiteSpace: two ? "normal" : "nowrap", lineHeight: 1.2, fontSize: fs * (caps ? 0.92 : 1), fontWeight: 700,
+              position: "absolute", left: 0, top: 6 * s, width: two ? 430 * s : undefined, whiteSpace: two ? "normal" : "nowrap", lineHeight: 1.2, fontSize: fs * (caps ? 0.92 : 1), fontWeight: 700,
               color: layer === 0 ? SHEET : INK,
               clipPath: layer === 1 ? `inset(0 ${(1 - Math.max(r, clamp01(black))) * 100}% 0 0)` : undefined,
-              WebkitMaskImage: fadeTail && layer === 1 ? "linear-gradient(90deg, #000 62%, transparent 96%)" : undefined,
-              maskImage: fadeTail && layer === 1 ? "linear-gradient(90deg, #000 62%, transparent 96%)" : undefined,
+              WebkitMaskImage: fadeTail && layer === 1 ? `linear-gradient(90deg, #000 ${255 * s}px, transparent ${335 * s}px)` : undefined,
+              maskImage: fadeTail && layer === 1 ? `linear-gradient(90deg, #000 ${255 * s}px, transparent ${335 * s}px)` : undefined,
             }}>
               {caps ? hidden.toUpperCase() : hidden}
             </div>
