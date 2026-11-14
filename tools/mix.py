@@ -71,6 +71,19 @@ MUSIC = {
         # The end screen builds UNDER the last line (from "Until", vo.json endScreenFromWord); the bed comes up to
         # full only after the voice ends, as before.
     },
+    "ep05": {
+        "file": "fade.mp3",  # series bed
+        "start": "auto",
+        "loop_from": 23.0,
+        "period": 48.0,
+        "extra_loops": 5,
+        "silences": [],  # the S3b gag is muffled automatically
+        "under_voice_db": -19.0,  # Ep 3/4 levels
+        "gap_db": -10.0,
+        "fade_in": 0.12,  # frame 0 is already moving
+        "dips": [("S3c", 'rude."', 0.05, 0.9)],  # music drops out under the ONLY HALF stamp (script)
+        # End screen builds under the last line (from "here's", vo.json endScreenFromWord).
+    },
 }
 
 MUSIC_LUFS = -13.0  # bed is normalised to this before gain changes (so 0 dB = end-screen level)

@@ -1,0 +1,48 @@
+TITLE (run all three in Test & Compare)
+A: Can You Hack an AI With One Sentence? (Prompt Injection Explained)
+B: People Are Hiding Secret Messages for AI | Prompt Injection Explained
+C: Prompt Injection Explained Simply (Hidden Words That Hijack AI)
+
+DESCRIPTION
+Prompt injection explained simply: can you really hack an AI with one sentence? Job seekers are hiding secret messages for AI in their resumes, a hidden note in a calendar invite once made an AI assistant turn on someone's boiler, and one email made an AI agent write a resignation letter.
+
+In about 5 minutes: what prompt injection is, where hidden notes hide, why AI can't tell your words from a stranger's, why AI agents make it dangerous, how AI companies fight back, and three simple ways to stay safe.
+
+Chapters
+0:00 The secret message in a resume
+0:28 What is prompt injection?
+1:04 Where can a hidden note hide?
+1:29 Did the resume trick work?
+2:01 Myth check: is it just jailbreaking?
+2:25 The calendar invite that turned on a boiler
+3:28 Why can't AI just ignore it?
+4:10 How AI companies fight back
+4:34 3 ways to stay safe
+5:11 So, can you hack an AI?
+
+Sources
+Fast Company, July 2026: hidden AI prompts in job applications (Stanford lab hiring)
+USENIX Security 2026: study of 196,682 resumes (about 1% with hidden text)
+"Invitation Is All You Need" (Tel Aviv University, Technion, SafeBreach), Black Hat, August 2025
+OpenAI, ChatGPT Atlas security post, December 2025 (prompt injection "unlikely to ever be fully solved"; the out-of-office test; the automated attacker)
+Microsoft Security blog, February 10, 2026: "Summarize with AI" buttons and AI memory
+
+Previous episode: AI Agents Explained Simply (One Spent $31 Without Asking)
+
+Music: Fade by Snoozy Beats https://soundcloud.com/snoozybeats
+License: Creative Commons — Attribution 3.0 Unported — CC BY 3.0
+Free Download / Stream: https://links.al/sUN
+Music promoted by Audio Library: https://links.al/youtube
+
+#Unjargoned #AI #PromptInjection
+
+TAGS
+prompt injection, prompt injection explained, what is prompt injection, can you hack ai, hidden text resume ai, ai agent security, ai hacking explained, chatgpt security, ai explained simply, ai for beginners, unjargoned
+
+PINNED COMMENT
+Would you let an AI agent pay for things without asking you first? Yes, no, or only small amounts? 👇
+
+SETTINGS
+Not made for kids · Category: Education · Playlist: Unjargoned · Subtitles: upload docs/ep05/ep05.en.srt (English, with timing)
+End screen (from 5:29): Ep 4 as "Best for viewer" on the left slot, Subscribe on the right. Also add Ep 5 to Ep 4's end screen and update Ep 4's "Next episode" line.
+Voice: ElevenLabs (Starter plan, commercial licence). No attribution required on paid plans.

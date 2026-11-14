@@ -1,0 +1,31 @@
+{
+  "_doc": "Vertical Shorts (1080×1920): clips (scene, seconds into the scene) + cam [sceneSec, centreX, zoom] keys for the vertical crop (0.85 = 1271 px of the 1920 frame; 0.66 = full-width strip). Video: Shorts.tsx; audio: tools/shorts.py cuts the same clips from the episode mix.",
+  "Short1": {
+    "hook": "People are hiding secret messages for AI ", "hookHighlight": "in their resumes",
+    "clips": [
+      { "scene": "S1", "from": 0.0, "to": 22.3, "cam": [[0, 1000, 0.85], [13.4, 1000, 0.85], [14.2, 1050, 0.66]] },
+      { "scene": "S3", "from": 2.9, "to": 27.75, "cam": [[2.9, 960, 0.66], [9.6, 960, 0.66], [10.4, 960, 0.8], [19.0, 960, 0.8], [19.6, 1020, 0.85]] }
+    ]
+  },
+  "Short2": {
+    "hook": "A calendar invite turned on someone's ", "hookHighlight": "boiler",
+    "clips": [
+      { "scene": "S4", "from": 23.3, "to": 46.7, "cam": [[23.3, 1000, 0.75]] },
+      { "scene": "S7", "from": 7.5, "to": 9.9, "cam": [[7.5, 1180, 0.8]], "captions": true }
+    ]
+  },
+  "Short3": {
+    "hook": "Asked for an out-of-office reply, it wrote a ", "hookHighlight": "resignation letter",
+    "clips": [
+      { "scene": "S4", "from": 47.2, "to": 62.6, "cam": [[47.2, 1000, 0.7]] },
+      { "scene": "S6", "from": 2.1, "to": 17.95, "cam": [[2.1, 900, 0.75], [14.6, 900, 0.75], [15.3, 960, 0.85]] }
+    ]
+  },
+  "Short4": {
+    "hook": "Companies are planting notes in ", "hookHighlight": "your AI's memory",
+    "clips": [
+      { "scene": "S5", "from": 31.4, "to": 41.9, "cam": [[31.4, 1000, 0.66]] },
+      { "scene": "S6", "from": 26.5, "to": 36.6, "cam": [[26.5, 1000, 0.66]] }
+    ]
+  }
+}
