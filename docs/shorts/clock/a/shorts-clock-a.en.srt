@@ -1,0 +1,83 @@
+1
+00:00:00,000 --> 00:00:02,519
+In a 2024 test, an AI looked
+
+2
+00:00:02,520 --> 00:00:04,980
+at this clock and said: 9:30.
+
+3
+00:00:05,933 --> 00:00:06,813
+It's quarter to six.
+
+4
+00:00:07,267 --> 00:00:09,286
+Others said nine o'clock, or ten
+
+5
+00:00:09,287 --> 00:00:09,747
+to five.
+
+6
+00:00:10,607 --> 00:00:13,126
+Out of five AIs, only one
+
+7
+00:00:13,127 --> 00:00:13,927
+got it right.
+
+8
+00:00:14,333 --> 00:00:14,713
+Why?
+
+9
+00:00:15,333 --> 00:00:16,453
+It swapped the hands.
+
+10
+00:00:17,093 --> 00:00:18,592
+It read the long hand, on the
+
+11
+00:00:18,593 --> 00:00:20,852
+nine, as the hour, and the short
+
+12
+00:00:20,853 --> 00:00:22,752
+hand, near the six, as the
+
+13
+00:00:22,753 --> 00:00:22,993
+minutes.
+
+14
+00:00:23,567 --> 00:00:24,986
+It's like someone describing a
+
+15
+00:00:24,987 --> 00:00:26,247
+clock to you over the phone:
+
+16
+00:00:27,247 --> 00:00:28,966
+"One hand near the nine, one
+
+17
+00:00:28,967 --> 00:00:30,887
+near the six." Which is which?
+
+18
+00:00:31,607 --> 00:00:33,506
+Guess wrong, and quarter to six
+
+19
+00:00:33,507 --> 00:00:34,527
+becomes 9:30.
+
+20
+00:00:35,000 --> 00:00:36,760
+So when an AI sounds sure,
+
+21
+00:00:37,440 --> 00:00:37,680
+remember:

@@ -1,1 +1,369 @@
-{}
+{
+ "L1": [
+  {
+   "word": "Last",
+   "start": 0.0,
+   "end": 0.3
+  },
+  {
+   "word": "year,",
+   "start": 0.3,
+   "end": 0.6
+  },
+  {
+   "word": "the",
+   "start": 0.86,
+   "end": 0.98
+  },
+  {
+   "word": "best",
+   "start": 0.98,
+   "end": 1.26
+  },
+  {
+   "word": "AI",
+   "start": 1.26,
+   "end": 1.7
+  },
+  {
+   "word": "read",
+   "start": 1.7,
+   "end": 2.06
+  },
+  {
+   "word": "about",
+   "start": 2.06,
+   "end": 2.32
+  },
+  {
+   "word": "one",
+   "start": 2.32,
+   "end": 2.66
+  },
+  {
+   "word": "clock",
+   "start": 2.66,
+   "end": 3.04
+  },
+  {
+   "word": "in",
+   "start": 3.04,
+   "end": 3.44
+  },
+  {
+   "word": "eight.",
+   "start": 3.44,
+   "end": 3.7
+  }
+ ],
+ "L2": [
+  {
+   "word": "And",
+   "start": 0.0,
+   "end": 0.14
+  },
+  {
+   "word": "when",
+   "start": 0.14,
+   "end": 0.3
+  },
+  {
+   "word": "it",
+   "start": 0.3,
+   "end": 0.42
+  },
+  {
+   "word": "missed,",
+   "start": 0.42,
+   "end": 0.82
+  },
+  {
+   "word": "it",
+   "start": 1.32,
+   "end": 1.5
+  },
+  {
+   "word": "was",
+   "start": 1.5,
+   "end": 1.62
+  },
+  {
+   "word": "off",
+   "start": 1.62,
+   "end": 1.86
+  },
+  {
+   "word": "by",
+   "start": 1.86,
+   "end": 2.08
+  },
+  {
+   "word": "about",
+   "start": 2.08,
+   "end": 2.36
+  },
+  {
+   "word": "an",
+   "start": 2.36,
+   "end": 2.58
+  },
+  {
+   "word": "hour.",
+   "start": 2.58,
+   "end": 2.84
+  }
+ ],
+ "L3": [
+  {
+   "word": "Today,",
+   "start": 0.0,
+   "end": 0.28
+  },
+  {
+   "word": "the",
+   "start": 0.46,
+   "end": 0.5
+  },
+  {
+   "word": "best",
+   "start": 0.5,
+   "end": 0.8
+  },
+  {
+   "word": "AI",
+   "start": 0.8,
+   "end": 1.2
+  },
+  {
+   "word": "reads",
+   "start": 1.2,
+   "end": 1.56
+  },
+  {
+   "word": "almost",
+   "start": 1.56,
+   "end": 1.9
+  },
+  {
+   "word": "nine",
+   "start": 1.9,
+   "end": 2.46
+  },
+  {
+   "word": "in",
+   "start": 2.46,
+   "end": 2.82
+  },
+  {
+   "word": "ten.",
+   "start": 2.82,
+   "end": 3.12
+  }
+ ],
+ "L4": [
+  {
+   "word": "Same",
+   "start": 0.0,
+   "end": 0.26
+  },
+  {
+   "word": "kind",
+   "start": 0.26,
+   "end": 0.42
+  },
+  {
+   "word": "of",
+   "start": 0.42,
+   "end": 0.56
+  },
+  {
+   "word": "test,",
+   "start": 0.56,
+   "end": 0.84
+  },
+  {
+   "word": "and",
+   "start": 1.4,
+   "end": 1.48
+  },
+  {
+   "word": "the",
+   "start": 1.48,
+   "end": 1.6
+  },
+  {
+   "word": "test",
+   "start": 1.6,
+   "end": 1.84
+  },
+  {
+   "word": "clocks",
+   "start": 1.84,
+   "end": 2.12
+  },
+  {
+   "word": "are",
+   "start": 2.12,
+   "end": 2.38
+  },
+  {
+   "word": "kept",
+   "start": 2.38,
+   "end": 2.56
+  },
+  {
+   "word": "secret,",
+   "start": 2.56,
+   "end": 3.04
+  },
+  {
+   "word": "so",
+   "start": 3.5,
+   "end": 3.58
+  },
+  {
+   "word": "it",
+   "start": 3.58,
+   "end": 3.72
+  },
+  {
+   "word": "couldn't",
+   "start": 3.72,
+   "end": 3.96
+  },
+  {
+   "word": "just",
+   "start": 3.96,
+   "end": 4.12
+  },
+  {
+   "word": "memorise",
+   "start": 4.12,
+   "end": 4.68
+  },
+  {
+   "word": "them.",
+   "start": 4.68,
+   "end": 4.9
+  }
+ ],
+ "L5": [
+  {
+   "word": "People?",
+   "start": 0.0,
+   "end": 0.32
+  },
+  {
+   "word": "Just",
+   "start": 1.0,
+   "end": 1.12
+  },
+  {
+   "word": "over",
+   "start": 1.12,
+   "end": 1.36
+  },
+  {
+   "word": "nine",
+   "start": 1.36,
+   "end": 1.6
+  },
+  {
+   "word": "in",
+   "start": 1.6,
+   "end": 1.72
+  },
+  {
+   "word": "ten.",
+   "start": 1.72,
+   "end": 1.94
+  },
+  {
+   "word": "It's",
+   "start": 2.58,
+   "end": 2.78
+  },
+  {
+   "word": "nearly",
+   "start": 2.78,
+   "end": 2.96
+  },
+  {
+   "word": "caught",
+   "start": 2.96,
+   "end": 3.28
+  },
+  {
+   "word": "up.",
+   "start": 3.28,
+   "end": 3.5
+  }
+ ],
+ "L6": [
+  {
+   "word": "But",
+   "start": 0.0,
+   "end": 0.14
+  },
+  {
+   "word": "two",
+   "start": 0.14,
+   "end": 0.34
+  },
+  {
+   "word": "years",
+   "start": 0.34,
+   "end": 0.58
+  },
+  {
+   "word": "ago,",
+   "start": 0.58,
+   "end": 0.94
+  },
+  {
+   "word": "this",
+   "start": 1.32,
+   "end": 1.48
+  },
+  {
+   "word": "clock",
+   "start": 1.48,
+   "end": 1.74
+  },
+  {
+   "word": "fooled",
+   "start": 1.74,
+   "end": 2.12
+  },
+  {
+   "word": "almost",
+   "start": 2.12,
+   "end": 2.52
+  },
+  {
+   "word": "every",
+   "start": 2.52,
+   "end": 3.12
+  },
+  {
+   "word": "AI\u2026",
+   "start": 3.12,
+   "end": 3.58
+  },
+  {
+   "word": "and",
+   "start": 4.34,
+   "end": 4.4
+  },
+  {
+   "word": "last",
+   "start": 4.4,
+   "end": 4.64
+  },
+  {
+   "word": "year,",
+   "start": 4.64,
+   "end": 4.98
+  }
+ ]
+}

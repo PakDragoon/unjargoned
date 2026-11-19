@@ -62,7 +62,7 @@ def sub(ep: str) -> str:
     return ep if "/" in ep else f"episodes/{ep}"
 
 
-MERGE = [("chat", "GPT"), ("un", "-jargon")]
+MERGE = [("chat", "GPT"), ("un", "-jargon"), ("o", "'clock")]  # clock Shorts: "o" + "'clock" -> "o'clock"
 FIX = {"Chat GPT": "ChatGPT", "chatGPT": "ChatGPT", "Chatgpt": "ChatGPT",
        "wanna": "want to"}  # Ep 5: v3 says "want to" casually; captions keep the script
 # "Once upon a…" is voiced as "uh" (tts.py PRONOUNCE), which Whisper hears as "I." / "A.": restore the script's text.

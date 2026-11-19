@@ -1,0 +1,59 @@
+1
+00:00:00,000 --> 00:00:02,059
+Last year, the best AI read
+
+2
+00:00:02,060 --> 00:00:03,700
+about one clock in eight.
+
+3
+00:00:04,100 --> 00:00:05,959
+And when it missed, it was off
+
+4
+00:00:05,960 --> 00:00:06,940
+by about an hour.
+
+5
+00:00:07,400 --> 00:00:09,299
+Today, the best AI reads almost
+
+6
+00:00:09,300 --> 00:00:10,520
+nine in ten.
+
+7
+00:00:10,967 --> 00:00:12,806
+Same kind of test, and the test
+
+8
+00:00:12,807 --> 00:00:14,686
+clocks are kept secret, so it
+
+9
+00:00:14,687 --> 00:00:15,867
+couldn't just memorise them.
+
+10
+00:00:16,333 --> 00:00:16,653
+People?
+
+11
+00:00:17,333 --> 00:00:18,273
+Just over nine in ten.
+
+12
+00:00:18,913 --> 00:00:19,833
+It's nearly caught up.
+
+13
+00:00:20,200 --> 00:00:21,939
+But two years ago, this clock
+
+14
+00:00:21,940 --> 00:00:23,780
+fooled almost every AI…
+
+15
+00:00:24,540 --> 00:00:25,180
+and last year,

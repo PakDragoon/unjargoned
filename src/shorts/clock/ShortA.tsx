@@ -96,7 +96,8 @@ export const ShortA: React.FC = () => (
       /* ── readouts under the clock ── */
       const read9 = popAt(t, tNine) * (1 - kk(t, l5, l5 + 0.3));
       const read30 = popAt(t, tMinutes) * (1 - kk(t, l5, l5 + 0.3));
-      const bubbleO = kk(t, l5 + 0.1, l5 + 0.4) * (1 - kk(t, tGuess, tGuess + 0.3));
+      const tQuote = w("L5", "One"); // the caller's line appears when the voice starts quoting it, not on "It's like…"
+      const bubbleO = kk(t, tQuote - 0.1, tQuote + 0.2) * (1 - kk(t, tGuess, tGuess + 0.3));
       const qO = kk(t, tWhich, tWhich + 0.25) * (1 - kk(t, tGuess, tGuess + 0.3));
       const flip = kk(t, w("L5", "becomes"), w("L5", "becomes") + 0.35);
       const guessO = kk(t, tGuess, tGuess + 0.3) * (1 - kk(t, l6, l6 + 0.3));
