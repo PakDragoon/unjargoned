@@ -4,8 +4,12 @@ Shorts audio: cut each Short's clips (src/episodes/<ep>/shorts.json) out of the 
 (out/<ep>-mix.wav from tools/mix.py), so voice, music and SFX match the long video. Then normalise to
 −14 LUFS and mux onto the muted Short render.
 
-  npx remotion render Ep02-Short1 out/short1-video.mp4 --muted
+  npx remotion render Ep02-Short1 out/ep02-short1-video.mp4 --muted
   python3 tools/shorts.py ep02 Short1           # -> out/Unjargoned_Ep2_Short1.mp4
+  python3 tools/shorts.py ep02 Short1 out/my-render.mp4   # optional: a muted render at another path
+
+The muted render is looked up as out/<ep>-short<N>-video.mp4, then the old shared name out/short<N>-video.mp4
+(which different episodes overwrite, so prefer the per-episode name).
 """
 from __future__ import annotations
 
@@ -38,9 +42,9 @@ def offsets(ep: str) -> dict[str, float]:
 
 
 def main() -> None:
-    if len(sys.argv) != 3:
-        sys.exit("usage: python3 tools/shorts.py ep02 Short1")
-    ep, sid = sys.argv[1:]
+    if len(sys.argv) not in (3, 4):
+        sys.exit("usage: python3 tools/shorts.py ep02 Short1 [muted-render.mp4]")
+    ep, sid = sys.argv[1:3]
     spec = json.loads((ROOT / "src" / "episodes" / ep / "shorts.json").read_text())[sid]
     mix, sr = sf.read(ROOT / "out" / f"{ep}-mix.wav", dtype="float32", always_2d=True)
     off = offsets(ep)
@@ -55,8 +59,14 @@ def main() -> None:
         parts.append(seg)
     audio = np.concatenate(parts)
     num = sid.replace("Short", "")
-    video = ROOT / "out" / f"short{num}-video.mp4"
-    final = ROOT / "out" / f"Unjargoned_{ep.replace('ep0', 'Ep')}_{sid}.mp4"
+    if len(sys.argv) == 4:
+        video = Path(sys.argv[3]).resolve()
+    else:
+        video = next((v for v in (ROOT / "out" / f"{ep}-short{num}-video.mp4", ROOT / "out" / f"short{num}-video.mp4") if v.exists()),
+                     ROOT / "out" / f"{ep}-short{num}-video.mp4")
+    if not video.exists():
+        sys.exit(f"muted render not found: {video} (npx remotion render {ep.capitalize()}-{sid} {video.relative_to(ROOT) if video.is_relative_to(ROOT) else video} --muted)")
+    final = ROOT / "out" / f"Unjargoned_Ep{int(ep[2:])}_{sid}.mp4"  # ep05 -> Ep5, ep12 -> Ep12
     with tempfile.NamedTemporaryFile(suffix=".wav") as tmp:
         sf.write(tmp.name, audio, sr, subtype="FLOAT")
         subprocess.run(

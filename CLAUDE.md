@@ -3,7 +3,9 @@
 Faceless YouTube explainer channel: tech explained in plain words for non-tech viewers (kids, older people).
 Full context: Master Handoff https://claude.ai/artifact/4PwzEhzvSMM3Wqa5244neX (brand, pipeline, decisions, Ep 2 lessons,
 the "Starting Episode 3" checklist). Read it once at the start of a session; don't re-read it every turn.
-Status: Ep 1, Ep 2 and Ep 3 shipped; Ep 4 in revamp (see docs/ep04/README.md). Ep 3 (`src/episodes/ep03`) is the newest reference build (voiceSettings in vo.json, captions aligned to vo.json, per-episode mix levels); copy it for new episodes.
+Status: Ep 1–5 shipped (Ep 5 published Nov 14, 2026). Ep 5 (`src/episodes/ep05`) is the newest reference build: shared
+`Rig.tsx`, `Common.tsx` (Scene5 wrapper, DotActor, route/fly), ElevenLabs voice (`voiceSettings.elevenTake` in vo.json);
+copy it for new episodes. Channel analytics and the next-5-uploads plan: `docs/channel/analytics-2026-11-19.md`.
 
 ## Layout (one folder per episode)
 - `src/shared/` — reused by every episode: `brand.ts` (colours, font), `SceneShell`, `Dot.tsx` (mascot rig),
@@ -15,24 +17,26 @@ Status: Ep 1, Ep 2 and Ep 3 shipped; Ep 4 in revamp (see docs/ep04/README.md). E
   `durations.json` + `captions.json` (generated).
 - `public/episodes/epNN/` — `audio/S*.wav` (voice), `music/` (the bed). `public/sfx/` — the SFX kit (generated).
 - `docs/epNN/` — README (decisions), final SRT, `description.txt`, `shorts-and-thumbnails.md`, shipped thumbnail.
-- `tools/` — `tts.py` (Kokoro, per scene, PRONOUNCE fixes) · `captions.py` (faster-whisper → captions.json + SRT) ·
+- `tools/` — `tts_eleven.py` (ElevenLabs v3, the current voice; same CLI as tts.py, see docs/ep05/README.md) ·
+  `tts.py` (Kokoro, per scene, PRONOUNCE fixes) · `captions.py` (faster-whisper → captions.json + SRT) ·
   `sfx.py` (synthesised SFX kit) · `mix.py` (voice + looped music bed with ducking + SFX → −13 LUFS, `--mux` onto the render)
   · `shorts.py` (cuts each Short's audio from the episode mix, −14 LUFS, muxes onto the muted Short render).
 
-## New episode recipe (copy the latest episode, now Ep 3; don't start from scratch)
-1. Copy `src/episodes/ep03` → `epNN`; rename `Ep03-` ids; add a `<Folder>` in `src/Root.tsx`. Rewrite `vo.json` from the script.
-2. Voice: `python3 tools/tts.py epNN`, then `python3 tools/captions.py epNN` (word timings for the scenes' `T` tables).
+## New episode recipe (copy the latest episode, now Ep 5; don't start from scratch)
+1. Copy `src/episodes/ep05` → `epNN`; rename `Ep05-` ids; add a `<Folder>` in `src/Root.tsx`. Rewrite `vo.json` from the script.
+2. Voice: `python3 tools/tts_eleven.py epNN` (Kokoro fallback: `tools/tts.py`), then `python3 tools/captions.py epNN` (word timings for the scenes' `T` tables).
 3. Build scenes; Dot gets a route per scene (`hops([...])` + `glances([...])`), not a fixed spot.
 4. Write `sfx.json` cues from the scenes' `T` tables; add an `epNN` entry to `MUSIC` in `tools/mix.py`
    (file, `loop_from`/`period` of the track's repeating section, `extra_loops`, silences, dips; `start: "auto"`).
 5. Render `EpNN-Full --muted`, then `python3 tools/mix.py epNN --mux out/epNN-full-video.mp4 out/Unjargoned_EpN_v1.mp4`.
-6. Shorts: clips in `shorts.json`; `npx remotion render EpNN-Short1 out/short1-video.mp4 --muted` then `python3 tools/shorts.py epNN Short1`.
+6. Shorts: clips in `shorts.json` (follow "Packaging and Shorts" below); `npx remotion render EpNN-Short1 out/epNN-short1-video.mp4 --muted`
+   then `python3 tools/shorts.py epNN Short1`.
 
 ## Usage-saving rules (the user has a weekly limit — follow strictly)
 1. Every scene is its own composition (`Ep02-S4`). A change to one scene touches one scene file only.
 2. Review with stills, not videos: `npx remotion still Ep02-S4 out/s4-f120.png --frame=120`. 2–3 frames per check.
    Render a scene MP4 only when asked. Render the Full video once per review round.
-3. Re-voice only the scenes whose lines changed: `python3 tools/tts.py ep02 S4` (then re-run captions.py and update that
+3. Re-voice only the scenes whose lines changed: `python3 tools/tts_eleven.py ep05 S4` (then re-run captions.py and update that
    scene's `T` table).
 4. Audio-only changes (music, SFX, levels) are a remix: `tools/mix.py … --mux` on the existing render, no re-render.
 5. Batch: present everything for a gate in one message, then wait for the user's batched feedback.
@@ -58,7 +62,7 @@ G0 pre-checks (pronunciation test clip, facts flagged in the script doc) → G1 
 → G2 proof scene (fully built) → G3 remaining scenes (2 stills each) → G4 full render + mix + SRT → G5 thumbnail + Shorts.
 
 ## Characters, rig and self-QA (from Ep 4 revamp — applies to every episode)
-- Characters are built on the rig in `src/episodes/ep04/Rig.tsx` (move it to `src/shared/` when a 2nd episode uses it):
+- Characters are built on the rig in `src/shared/Rig.tsx` (`ep04/Rig.tsx` re-exports it):
   two-bone IK arms (shoulder → elbow → wrist) and a glove built from the wrist outward. A hand is ALWAYS on an arm;
   never draw a loose hand.
 - Natural body movement: reaching away from the body → elbow folds in/down toward the body; arm down or holding
@@ -73,6 +77,21 @@ G0 pre-checks (pronunciation test clip, facts flagged in the script doc) → G1 
 - Self-QA before sending ANY still or video (the user won't point these out): ~20 frames per scene, check identity &
   source of every object, unintended overlaps, fingertips on targets, labels readable and uncovered, elbow/hand rules,
   Dot clear of the subject, nothing shown before the voice mentions it. Fix, re-check, then send.
+
+## Packaging and Shorts (from the Nov 19 analytics; data in docs/channel/analytics-2026-11-19.md)
+- Shorts are judged by "Stayed to watch" (the swipe test), not impressions. Winners sat at ~50–55%, everything under ~40%
+  died. Aim for 60%+.
+- A Short opens on the payoff: the weird result is on screen in frame 1 (no fade-in from ink, no empty set-up shot), and the
+  first spoken line is a claim, not a question. If the episode's line is a question, start the clip later or put the
+  payoff clip first in `clips`.
+- Never cut the logo sting, "Let's un-jargon it." or the planned S1 pause into a Short.
+- Under 60 s, every second either the payoff or its "why" (winners ran 37 s and 58 s). End on a line that runs back into the opening (loop), not on a sign-off.
+- Short topics follow the winner pattern: a weird AI result tied to an everyday object (strawberry, eggs + $31, a resume),
+  plus a number where there is one. Generic "Why does ChatGPT…?" hooks and payment Shorts flopped.
+- Every Short's Related video = the long-form on the same topic (Shorts gave ~0.3 subs per 1k views, long-form ~36).
+- Long-form titles: the reveal pattern "What Actually Happens When…" (8.1% CTR) over "… Explained Simply" (2–3.5%).
+- Thumbnails: one headline that adds to the title instead of repeating it, one clear subject, readable at 168×94.
+- When proposing Shorts cuts at G5, state each one's frame-1 picture and first line so the user can check them against these rules.
 
 ## Brand / content rules
 - Colours in `src/shared/brand.ts`. Yellow always = "the thing to watch". Font: Bricolage Grotesque (thumbnails: Inter Black).
