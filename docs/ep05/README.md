@@ -9,7 +9,7 @@
 | --- | --- |
 | G0 voice + captions | Kokoro done first (user: flat), then replaced. **Now: ElevenLabs v3 Jessica `jessica-tight-fast`, voiced on Starter (Nov 13), 324.7 s, 190 cues, no overlaps.** Whisper diff clean apart from spelling; S3 "you'd do" is swallowed to "you do", S7 says "wanna" (captions show "want to"). |
 | A/B (Nov 13) | **Locked: ElevenLabs v3, Jessica, take `jessica-tight-fast`** (pauses capped at 0.55 s with breaths counted as silence, then 7% faster with pitch kept). S1 28.2 s, S4 60.0 s. Set in vo.json `voiceSettings.elevenTake`. |
-| Next | G4 feedback (batched), then G5 (thumbnails, Shorts, description with chapters from the SRT). |
+| Shipped | Published Nov 14, 2026. Nov 19: retitled to **"What Actually Happens When Your AI Reads a Booby-Trapped Email"** with a new "INVISIBLE TEXT." thumbnail made outside the repo (the old title got 782 impressions at 2.1% CTR). See docs/channel/analytics-2026-11-19.md. |
 | G1 kit | Approved (Nov 13): `Ep05-Kit`, `Ep05-StyleA`, `Ep05-StyleB`. |
 | G2 proof scene | S1 approved. |
 | G3 | Skipped as a gate at the user's request ("move to G4"); S2–S7 built with self-QA stills. |
