@@ -1,0 +1,88 @@
+{
+ "_doc": "Sound effects per line: [seconds into the line, effect name] (tools/sfx.py kit; placed by tools/mix.py). Anchored to the same words as the scene code.",
+ "gain_db": -8,
+ "cues": {
+  "L2": [
+   [
+    0,
+    "whoosh"
+   ],
+   [
+    0.15,
+    "pop"
+   ]
+  ],
+  "L3": [
+   [
+    0.05,
+    "pop"
+   ],
+   [
+    0.58,
+    "pop"
+   ],
+   [
+    0.73,
+    "pop"
+   ],
+   [
+    1.82,
+    "pop"
+   ],
+   [
+    5.2,
+    "ding"
+   ]
+  ],
+  "L4": [
+   [
+    0.1,
+    "pop"
+   ],
+   [
+    1.2,
+    "whirr"
+   ],
+   [
+    4.26,
+    "pop"
+   ],
+   [
+    8.42,
+    "buzz"
+   ]
+  ],
+  "L5": [
+   [
+    0.2,
+    "slide"
+   ],
+   [
+    3.58,
+    "pop"
+   ],
+   [
+    6.84,
+    "tick"
+   ],
+   [
+    8.04,
+    "whirr"
+   ],
+   [
+    10.09,
+    "buzz"
+   ]
+  ],
+  "L6": [
+   [
+    0,
+    "slide"
+   ],
+   [
+    1.12,
+    "thunk"
+   ]
+  ]
+ }
+}

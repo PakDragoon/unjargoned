@@ -75,9 +75,9 @@ Guess wrong, and quarter to six
 becomes 9:30.
 
 20
-00:00:35,000 --> 00:00:36,760
+00:00:35,000 --> 00:00:36,480
 So when an AI sounds sure,
 
 21
-00:00:37,440 --> 00:00:37,680
-remember:
+00:00:37,280 --> 00:00:37,900
+remember this clock.

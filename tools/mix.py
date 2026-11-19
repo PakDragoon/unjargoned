@@ -6,6 +6,7 @@ so a mix change never needs a new video render.
 
   python3 tools/mix.py ep02                          # -> out/ep02-mix.wav
   python3 tools/mix.py ep02 --mux out/ep02-full-video.mp4 out/ep02-full.mp4
+  python3 tools/mix.py shorts/clock/a --mux out/clock-a-video.mp4 out/clock-a.mp4   # standalone Short: −14 LUFS, no end screen
 
 Reads   src/episodes/<ep>/vo.json, durations.json, captions.json (word timings → when the voice speaks), sfx.json
         public/episodes/<ep>/audio/S*.wav, public/episodes/<ep>/music/<MUSIC>
@@ -84,6 +85,18 @@ MUSIC = {
         "dips": [("S3c", 'rude."', 0.05, 0.9)],  # music drops out under the ONLY HALF stamp (script)
         # End screen builds under the last line (from "here's", vo.json endScreenFromWord).
     },
+    # Standalone Shorts (built natively at 1080×1920): series bed from a fixed point, no end screen, −14 LUFS.
+    # The last frame loops into the first, so only a short fade at either end.
+    "shorts/clock/a": {
+        "file": "episodes/ep05/music/fade.mp3", "start": 23.0, "loop_from": 23.0, "period": 48.0, "extra_loops": 0,
+        "silences": [], "dips": [], "under_voice_db": -19.0, "gap_db": -10.0,
+        "fade_in": 0.05, "fade_out": 0.25, "end_screen": False, "target_lufs": -14.0,
+    },
+    "shorts/clock/b": {
+        "file": "episodes/ep05/music/fade.mp3", "start": 47.0, "loop_from": 23.0, "period": 48.0, "extra_loops": 0,
+        "silences": [], "dips": [], "under_voice_db": -19.0, "gap_db": -10.0,
+        "fade_in": 0.05, "fade_out": 0.25, "end_screen": False, "target_lufs": -14.0,
+    },
 }
 
 MUSIC_LUFS = -13.0  # bed is normalised to this before gain changes (so 0 dB = end-screen level)
@@ -123,7 +136,10 @@ def main() -> None:
     args = ap.parse_args()
     ep = args.episode
     plan = MUSIC[ep]
-    ep_dir = ROOT / "src" / "episodes" / ep
+    sub = ep if "/" in ep else f"episodes/{ep}"  # a standalone Short is given by its path: shorts/clock/a
+    ep_dir = ROOT / "src" / sub
+    pub = ROOT / "public" / sub
+    target = plan.get("target_lufs", TARGET_LUFS)
     vo = json.loads((ep_dir / "vo.json").read_text())
     durations = json.loads((ep_dir / "durations.json").read_text())
     words = json.loads((ep_dir / "captions.json").read_text())
@@ -150,12 +166,13 @@ def main() -> None:
     for sid, off in offsets.items():
         if sid in silent:
             continue
-        v = decode(ROOT / "public" / "episodes" / ep / "audio" / f"{sid}.wav", 1)[:, 0]
+        v = decode(pub / "audio" / f"{sid}.wav", 1)[:, 0]
         i = int(round(off * SR))
         voice[i : i + len(v)] += v[: n - i]
 
     # Music bed: start, then splice extra copies of the repeating section, then the track to its end.
-    m = decode(ROOT / "public" / "episodes" / ep / "music" / plan["file"], 2)
+    music_file = ROOT / "public" / plan["file"] if "/" in plan["file"] else pub / "music" / plan["file"]  # a path = from public/
+    m = decode(music_file, 2)
     lf = int(plan["loop_from"] * SR)
     per = int(round(plan["period"] * SR))
     if plan["start"] == "auto":
@@ -188,7 +205,8 @@ def main() -> None:
             g[max(0, a) : b] = under_db
     last = vo["scenes"][-1]
     end_screen = offsets[last["id"]] + durations[last["id"]] + TAIL_SECONDS
-    g[int(end_screen * hz) :] = 0.0
+    if plan.get("end_screen", True):
+        g[int(end_screen * hz) :] = 0.0
 
     def word_end(sid: str, text: str) -> float:
         return offsets[sid] + next(w["end"] for w in words[sid] if w["word"] == text)
@@ -237,7 +255,7 @@ def main() -> None:
     bed *= gain[:, None]
 
     # Fade the very start and end (an episode can open hot: "fade_in" seconds, default 1.0).
-    fi, f = max(1, int(plan.get("fade_in", 1.0) * SR)), int(1.0 * SR)
+    fi, f = max(1, int(plan.get("fade_in", 1.0) * SR)), int(plan.get("fade_out", 1.0) * SR)
     bed[:fi] *= np.linspace(0, 1, fi)[:, None]
     bed[-f:] *= np.linspace(1, 0, f)[:, None]
 
@@ -261,15 +279,16 @@ def main() -> None:
     mix = bed + voice[:, None] + sfx[:, None]
     out_dir = ROOT / "out"
     out_dir.mkdir(exist_ok=True)
-    raw = out_dir / f"{ep}-mix-raw.wav"
-    final = out_dir / f"{ep}-mix.wav"
+    name = ep.replace("shorts/", "").replace("/", "-")
+    raw = out_dir / f"{name}-mix-raw.wav"
+    final = out_dir / f"{name}-mix.wav"
     sf.write(raw, mix, SR, subtype="FLOAT")
     # Two-pass loudnorm (linear) to −13 LUFS, −1 dBTP.
-    err = ffmpeg("-i", str(raw), "-af", f"loudnorm=I={TARGET_LUFS}:TP={TRUE_PEAK}:LRA=11:print_format=json", "-f", "null", "-")
+    err = ffmpeg("-i", str(raw), "-af", f"loudnorm=I={target}:TP={TRUE_PEAK}:LRA=11:print_format=json", "-f", "null", "-")
     js = json.loads(err[err.rindex("{") : err.rindex("}") + 1])
     ffmpeg(
         "-i", str(raw), "-af",
-        f"loudnorm=I={TARGET_LUFS}:TP={TRUE_PEAK}:LRA=11:measured_I={js['input_i']}:measured_TP={js['input_tp']}"
+        f"loudnorm=I={target}:TP={TRUE_PEAK}:LRA=11:measured_I={js['input_i']}:measured_TP={js['input_tp']}"
         f":measured_LRA={js['input_lra']}:measured_thresh={js['input_thresh']}:offset={js['target_offset']}:linear=true",
         "-ar", str(SR), "-c:a", "pcm_s16le", str(final),
     )

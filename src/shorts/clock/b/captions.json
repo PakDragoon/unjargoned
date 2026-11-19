@@ -303,67 +303,52 @@
   {
    "word": "But",
    "start": 0.0,
-   "end": 0.14
+   "end": 0.16
   },
   {
    "word": "two",
-   "start": 0.14,
-   "end": 0.34
+   "start": 0.16,
+   "end": 0.38
   },
   {
    "word": "years",
-   "start": 0.34,
-   "end": 0.58
+   "start": 0.38,
+   "end": 0.64
   },
   {
    "word": "ago,",
-   "start": 0.58,
-   "end": 0.94
+   "start": 0.64,
+   "end": 1.04
   },
   {
    "word": "this",
-   "start": 1.32,
-   "end": 1.48
+   "start": 1.5,
+   "end": 1.66
   },
   {
    "word": "clock",
-   "start": 1.48,
-   "end": 1.74
+   "start": 1.66,
+   "end": 1.94
   },
   {
    "word": "fooled",
-   "start": 1.74,
-   "end": 2.12
+   "start": 1.94,
+   "end": 2.38
   },
   {
    "word": "almost",
-   "start": 2.12,
-   "end": 2.52
+   "start": 2.38,
+   "end": 2.86
   },
   {
    "word": "every",
-   "start": 2.52,
-   "end": 3.12
+   "start": 2.86,
+   "end": 3.54
   },
   {
-   "word": "AI\u2026",
-   "start": 3.12,
-   "end": 3.58
-  },
-  {
-   "word": "and",
-   "start": 4.34,
-   "end": 4.4
-  },
-  {
-   "word": "last",
-   "start": 4.4,
-   "end": 4.64
-  },
-  {
-   "word": "year,",
-   "start": 4.64,
-   "end": 4.98
+   "word": "AI.",
+   "start": 3.54,
+   "end": 3.82
   }
  ]
 }
