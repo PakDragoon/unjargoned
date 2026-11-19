@@ -37,8 +37,7 @@ export const ShortB: React.FC = () => (
       const tSecret = w("L4", "secret");
       const tPeople = l5;
       const tOver = w("L5", "over");
-      const tThis = w("L6", "this");
-      const tFooled = w("L6", "fooled");
+          const tFooled = w("L6", "fooled");
 
       const gridO = 1 - kk(t, l5, l5 + 0.35);
       const zoomK = kk(t, l2 + 0.05, l2 + 0.5) * (1 - kk(t, l3, l3 + 0.45));
@@ -56,7 +55,7 @@ export const ShortB: React.FC = () => (
       const barsO = kk(t, tPeople, tPeople + 0.3) * (1 - kk(t, l6, l6 + 0.3));
       const aiBar = kk(t, tPeople + 0.1, tPeople + 0.7);
       const humanBar = kk(t, tOver - 0.2, tOver + 0.4);
-      const clockIn = popAt(t, tThis - 0.15);
+      const clockIn = popAt(t, l6 + 0.1);
       const pill = t < l3 ? "Sept 2025" : t < l5 ? "Nov 2026" : null;
 
       const d = route([

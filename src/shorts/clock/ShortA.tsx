@@ -27,7 +27,7 @@ const SWAP_MIN: HandSpec = { angle: A.minute, ...HOUR_HAND };
 const SAME = { len: 0.66, width: 0.065 };
 
 const DOT_HOME: Pt = { x: 200, y: FLOOR_Y - 85 };
-const DOT_RIGHT: Pt = { x: 820, y: FLOOR_Y - 85 };
+const DOT_RIGHT: Pt = { x: 880, y: FLOOR_Y - 85 };
 
 export const ShortA: React.FC = () => (
   <ShortFrame lines={tlA.lines}>
@@ -85,8 +85,8 @@ export const ShortA: React.FC = () => (
       const C = { x: CLOCK.x, y: CLOCK.y };
       const tipH = handTip(CLOCK.r, hour, 0.18);
       const tipM = handTip(CLOCK.r, minute, 0.1);
-      const posHour = { x: C.x + tipH.x, y: C.y + tipH.y + 40 };
-      const posMin = { x: C.x + tipM.x - 10, y: C.y + tipM.y - 70 };
+      const posHour = { x: C.x + tipH.x + 150, y: C.y + tipH.y - 20 };
+      const posMin = { x: C.x + tipM.x * 0.55, y: C.y + 52 }; // under the 9 o'clock hand, clear of the 8 and the 10
       const tagMove = kk(t, tSwap, tSwap + 0.6);
       // before the swap: long hand = MINUTES, short = HOUR (yellow, true); after: long hand = HOUR (red), short = MINUTES (red)
       const hourTagPos = { x: lerp(posHour.x, posMin.x, tagMove), y: lerp(posHour.y, posMin.y, tagMove) - Math.sin(tagMove * Math.PI) * 80 };
@@ -163,7 +163,7 @@ export const ShortA: React.FC = () => (
               })
             : null}
           {read9 > 0 ? (
-            <At x={540} y={1065} o={clamp01(read9)}>
+            <At x={480} y={1120} o={clamp01(read9)}>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, fontWeight: 800, color: RED, fontSize: 140, letterSpacing: -3, textShadow: `0 6px 0 ${colors.ink}` }}>
                 <span style={{ fontSize: 48, color: colors.subtext, fontWeight: 700, marginRight: 16 }}>it read</span>
                 <span style={{ scale: `${read9}` }}>9</span>
@@ -189,6 +189,7 @@ export const ShortA: React.FC = () => (
             x={d.p.x} y={d.p.y} r={85} mood={mood} look={lookAt} squash={d.squash} seed="clockA"
             tailAngle={d.p.x > 540 ? 20 : 200}
             arms={phone}
+            L={{ wrist: { x: d.p.x - 95, y: d.p.y + 70 }, pose: "relaxed" }}
             R={{ wrist: { x: d.p.x + 95, y: d.p.y - 70 }, pose: "grip", holding: <PhoneProp /> }}
           />
         </>
