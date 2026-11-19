@@ -46,7 +46,17 @@ Shorts (feed views aren't counted as impressions, so "Stayed to watch" is the sw
 
 ## Next 5 uploads (plan)
 
-1. Short: "Why AI can't read a clock 🕐": an analog clock at 10:10 with the AI's wrong answer stamped over it. Related: Ep 2.
+1. ~~Short: "Why AI can't read a clock 🕐": an analog clock at 10:10 with the AI's wrong answer stamped over it.~~
+   **Re-angled (Nov 19) into two Shorts sharing one clock kit (`src/shorts/clock/`), both Related: Ep 2.**
+   Reason: the claim is no longer true. ClockBench live leaderboard (checked Nov 19 2026): top model 87.8% vs 90.7%
+   average humans, 95% top humans (launch, Sept 2025: best of 11 models 13.3% vs humans 89.1%; best model's median miss
+   ≈ 1 hour). Never say "AI can't read a clock".
+   - 1a. Short A: "AI looked at this clock and said 9:30 🕐" — built only on the 2024 clock test (arXiv 2410.11756,
+     Galatzer-Levy et al.; models tested as of July 2024): clock at 5:45 → GPT-4o "9:30" (swapped hands), Gemini Pro 1.5
+     and GPT-4 Turbo "9:00" (read only the long hand), Claude Opus 3 "4:50", Claude Sonnet 3.5 correct. Frame 1: the 5:45
+     clock with "9:30" stamped on it. Post first.
+   - 1b. Short B: "A year ago, AI couldn't read a clock. Now? 🕐" — ClockBench "about 1 in 8" (Sept 2025) → "almost 9 in
+     10" now, nearly level with people; ends on Short A's 5:45 clock. Post 2–3 days after A.
 2. Short: "Your AI assistant can be hijacked by a single email 📧": a plain email, then the hidden line revealed. Related: Ep 5.
 3. Short: "I let an AI agent do my grocery shopping. Here's the bill 🧾": run a real test, then rebuild it with the Ep 4 agent and checkout (no real brand UI on screen), with the cart total in the hook. Related: Ep 6.
 4. Long-form Ep 6: "What Actually Happens When an AI Agent Spends Your Money", building on Ep 4 and the grocery Short.
