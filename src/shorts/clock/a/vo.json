@@ -1,0 +1,56 @@
+{
+  "episode": "shorts/clock/a",
+  "title": "AI looked at this clock and said 9:30",
+  "markup": "One scene per spoken line, so a changed line is re-voiced alone. Numbers stay as words here; screen and captions show figures. Approved G0, Nov 19 2026.",
+  "voiceSettings": {
+    "voice": "af_heart",
+    "speed": 0.95,
+    "pauseScale": 1.0,
+    "engine": "elevenlabs",
+    "elevenTake": "jessica-tight-fast"
+  },
+  "scenes": [
+    {
+      "id": "L1",
+      "title": "Line 1",
+      "estSeconds": 5.2,
+      "tailSeconds": 0.2,
+      "vo": "In a twenty twenty-four test, an AI looked at this clock and said: nine-thirty."
+    },
+    {
+      "id": "L2",
+      "title": "Line 2",
+      "estSeconds": 1.5,
+      "tailSeconds": 0.2,
+      "vo": "It's quarter to six."
+    },
+    {
+      "id": "L3",
+      "title": "Line 3",
+      "estSeconds": 6.3,
+      "tailSeconds": 0.2,
+      "vo": "Others said nine o'clock, or ten to five. Out of five AIs, only one got it right."
+    },
+    {
+      "id": "L4",
+      "title": "Line 4",
+      "estSeconds": 9.6,
+      "tailSeconds": 0.2,
+      "vo": "Why? It swapped the hands. It read the long hand, on the nine, as the hour, and the short hand, near the six, as the minutes."
+    },
+    {
+      "id": "L5",
+      "title": "Line 5",
+      "estSeconds": 11.5,
+      "tailSeconds": 0.2,
+      "vo": "It's like someone describing a clock to you over the phone: \"One hand near the nine, one near the six.\" Which is which? Guess wrong, and quarter to six becomes nine-thirty."
+    },
+    {
+      "id": "L6",
+      "title": "Line 6",
+      "estSeconds": 2.6,
+      "tailSeconds": 0.0,
+      "vo": "So when an AI sounds sure, remember:"
+    }
+  ]
+}

@@ -57,6 +57,11 @@ def srt_time(t: float) -> str:
 
 # Whisper hears some names as two words or misspells them. Fix them before building cues.
 # MERGE: (first word, second word starts with) -> the joined word keeps the second word's punctuation.
+def sub(ep: str) -> str:
+    """'ep05' -> 'episodes/ep05'; a standalone Short is given by its path: 'shorts/clock/a'."""
+    return ep if "/" in ep else f"episodes/{ep}"
+
+
 MERGE = [("chat", "GPT"), ("un", "-jargon")]
 FIX = {"Chat GPT": "ChatGPT", "chatGPT": "ChatGPT", "Chatgpt": "ChatGPT",
        "wanna": "want to"}  # Ep 5: v3 says "want to" casually; captions keep the script
@@ -129,6 +134,9 @@ SCREEN_TEXT = [
     (["thirtyone", "dollars"], "$31"),
     (["thirtyone"], "31"),  # Ep 5: "thirty-one real companies"
     (["two", "hundred", "thousand"], "200,000"),  # Ep 5
+    (["twenty", "twentyfour"], "2024"),  # clock Shorts
+    (["ninethirty"], "9:30"),
+    (["nine", "thirty"], "9:30"),
 ]
 
 
@@ -177,10 +185,10 @@ def main() -> None:
     if len(sys.argv) != 2:
         sys.exit("usage: python3 tools/captions.py ep02")
     ep = sys.argv[1]
-    ep_dir = ROOT / "src" / "episodes" / ep
+    ep_dir = ROOT / "src" / sub(ep)
     vo = json.loads((ep_dir / "vo.json").read_text(encoding="utf-8"))
     durations = json.loads((ep_dir / "durations.json").read_text(encoding="utf-8"))
-    audio_dir = ROOT / "public" / "episodes" / ep / "audio"
+    audio_dir = ROOT / "public" / sub(ep) / "audio"
 
     model = WhisperModel(MODEL_SIZE, device="auto", compute_type="auto")
 
@@ -212,7 +220,7 @@ def main() -> None:
         if a["end"] > b["start"] - MIN_GAP:
             a["end"] = round(b["start"] - MIN_GAP, 3)
 
-    out_srt = ROOT / "docs" / ep / f"{ep}.en.srt"
+    out_srt = ROOT / "docs" / ep / f"{ep.replace('/', '-')}.en.srt"
     out_srt.parent.mkdir(parents=True, exist_ok=True)
     out_srt.write_text(
         "\n".join(

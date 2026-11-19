@@ -80,6 +80,11 @@ PRONOUNCE: dict[str, str] = {
     "resume": "résumé",
 }
 
+def sub(ep: str) -> str:
+    """'ep05' -> 'episodes/ep05'; a standalone Short is given by its path: 'shorts/clock/a' -> 'shorts/clock/a'."""
+    return ep if "/" in ep else f"episodes/{ep}"
+
+
 MARKER = re.compile(r"\[(beat|silence\s+[\d.]+)\]", re.IGNORECASE)
 
 
@@ -210,7 +215,7 @@ def voice_scene(scene_id: str, vo: str, take: str) -> np.ndarray:
 
 def run_episode(ep: str, only: list[str], ab_dir: str | None) -> None:
     global PAUSE_SCALE
-    ep_dir = ROOT / "src" / "episodes" / ep
+    ep_dir = ROOT / "src" / sub(ep)
     vo = json.loads((ep_dir / "vo.json").read_text(encoding="utf-8"))
     vs = vo.get("voiceSettings", {})
     PAUSE_SCALE = vs.get("pauseScale", PAUSE_SCALE)
@@ -233,7 +238,7 @@ def run_episode(ep: str, only: list[str], ab_dir: str | None) -> None:
                 print(f"{s['id']} [{t}]: {len(audio) / SR:.2f} s")
         return
 
-    out_dir = ROOT / "public" / "episodes" / ep / "audio"
+    out_dir = ROOT / "public" / sub(ep) / "audio"
     out_dir.mkdir(parents=True, exist_ok=True)
     durations_path = ep_dir / "durations.json"
     durations = json.loads(durations_path.read_text(encoding="utf-8")) if durations_path.exists() else {}

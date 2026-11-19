@@ -1,0 +1,56 @@
+{
+  "episode": "shorts/clock/b",
+  "title": "A year ago, AI couldn't read a clock. Now?",
+  "markup": "One scene per spoken line, so a changed line is re-voiced alone. Numbers stay as words here; screen and captions show figures. Approved G0, Nov 19 2026.",
+  "voiceSettings": {
+    "voice": "af_heart",
+    "speed": 0.95,
+    "pauseScale": 1.0,
+    "engine": "elevenlabs",
+    "elevenTake": "jessica-tight-fast"
+  },
+  "scenes": [
+    {
+      "id": "L1",
+      "title": "Line 1",
+      "estSeconds": 4.1,
+      "tailSeconds": 0.2,
+      "vo": "Last year, the best AI read about one clock in eight."
+    },
+    {
+      "id": "L2",
+      "title": "Line 2",
+      "estSeconds": 4.1,
+      "tailSeconds": 0.2,
+      "vo": "And when it missed, it was off by about an hour."
+    },
+    {
+      "id": "L3",
+      "title": "Line 3",
+      "estSeconds": 3.3,
+      "tailSeconds": 0.2,
+      "vo": "Today, the best AI reads almost nine in ten."
+    },
+    {
+      "id": "L4",
+      "title": "Line 4",
+      "estSeconds": 6.3,
+      "tailSeconds": 0.2,
+      "vo": "Same kind of test, and the test clocks are kept secret, so it couldn't just memorise them."
+    },
+    {
+      "id": "L5",
+      "title": "Line 5",
+      "estSeconds": 3.7,
+      "tailSeconds": 0.2,
+      "vo": "People? Just over nine in ten. It's nearly caught up."
+    },
+    {
+      "id": "L6",
+      "title": "Line 6",
+      "estSeconds": 4.8,
+      "tailSeconds": 0.0,
+      "vo": "But two years ago, this clock fooled almost every AI… and last year,"
+    }
+  ]
+}
