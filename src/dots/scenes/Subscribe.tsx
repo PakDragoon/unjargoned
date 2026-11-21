@@ -19,12 +19,20 @@ const T = {
   release: 164,
 };
 
+/** Thumb capsule from base (inside the palm) to tip; drawn before its palm so the base tucks under it. */
+const Thumb: React.FC<{ x1: number; y1: number; x2: number; y2: number; fill: string }> = ({ x1, y1, x2, y2, fill }) => (
+  <g strokeLinecap="round">
+    <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={C.ink} strokeWidth={23} />
+    <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={fill} strokeWidth={16.6} />
+  </g>
+);
+
 /** Noodle arm (soft curve, no elbow); its mitten hand is drawn on top later. dir: +1 reaching right, -1 reaching left. */
 const NoodleArm: React.FC<{ sx: number; sy: number; hx: number; hy: number; dir: 1 | -1 }> = ({ sx, sy, hx, hy, dir }) => {
   const mx = (sx + hx) / 2, my = Math.max(sy, hy) + 14; // sags a little below the line
   return (
     <svg width={1920} height={1080} style={{ position: "absolute", left: 0, top: 0, overflow: "visible", pointerEvents: "none" }}>
-      <path d={`M ${sx} ${sy} Q ${mx} ${my} ${hx - dir * 24} ${hy}`} fill="none" stroke={C.ink} strokeWidth={17} strokeLinecap="round" />
+      <path d={`M ${sx} ${sy} Q ${mx} ${my} ${hx - dir * 34} ${hy}`} fill="none" stroke={C.ink} strokeWidth={17} strokeLinecap="round" />
     </svg>
   );
 };
@@ -46,6 +54,7 @@ export const Subscribe: React.FC = () => {
   const shake = Math.sin(((f - T.clasp) / 22) * Math.PI * 2) * 22 * shakeEnv;
   const M = { x: (RED.x + WHITE.x) / 2, y: FLOOR - R + 22 + shake };
   const bob = shake * 0.22;
+  const clasped = f >= T.clasp - 2 && f < T.release + 2;
 
   // red Dot: looks toward the newcomer, then to camera to speak
   const redLook = f < 20 ? 0 : f < T.release ? 1 : lerp(1, 0, ramp(f, T.release, T.release + 10));
@@ -64,7 +73,7 @@ export const Subscribe: React.FC = () => {
   const redShoulder = { x: RED.x + R * 0.86, y: shoulderY + bob };
   const whiteShoulder = { x: WHITE.x - R * 0.86, y: shoulderY + bob };
   const hand = (s: { x: number; y: number }, side: 1 | -1) => ({ // tucked at the body side when ext = 0
-    x: lerp(s.x + side * 6, M.x - side * 17, ext),
+    x: lerp(s.x + side * 6, M.x - side * 34, ext),
     y: lerp(s.y + 10, M.y, ext),
   });
   const rh = hand(redShoulder, 1), wh2 = hand(whiteShoulder, -1);
@@ -96,8 +105,8 @@ export const Subscribe: React.FC = () => {
       {/* arms drawn before the bodies so the shoulders tuck under them */}
       {ext > 0.02 && (
         <>
-          <NoodleArm sx={redShoulder.x - 14} sy={redShoulder.y} hx={rh.x} hy={rh.y} dir={1} />
-          <NoodleArm sx={whiteShoulder.x + 14} sy={whiteShoulder.y} hx={wh2.x} hy={wh2.y} dir={-1} />
+          <NoodleArm sx={redShoulder.x - 14} sy={redShoulder.y} hx={clasped ? M.x - 30 : rh.x} hy={clasped ? M.y + 4 : rh.y} dir={1} />
+          <NoodleArm sx={whiteShoulder.x + 14} sy={whiteShoulder.y} hx={clasped ? M.x + 30 : wh2.x} hy={clasped ? M.y : wh2.y} dir={-1} />
         </>
       )}
 
@@ -112,25 +121,32 @@ export const Subscribe: React.FC = () => {
           look={{ x: f < T.release ? -0.6 : -0.2, y: 0 }} tailAngle={0} seed="sub-white" />
       </div>
 
-      {/* hands drawn on top so the clasp reads clearly */}
+      {/* hands drawn on top. Red Dot wears ochre mittens, white Dot white ones, so the two hands read apart. */}
       {ext > 0.02 && (
         <svg width={1920} height={1080} style={{ position: "absolute", left: 0, top: 0, overflow: "visible", pointerEvents: "none" }}>
-          {[{ h: rh, dir: 1 }, { h: wh2, dir: -1 }].map(({ h, dir }, i) => (
-            <g key={i} transform={`translate(${h.x} ${h.y}) scale(${dir} 1)`}>
-              <ellipse cx={6} cy={0} rx={38} ry={30} fill={C.white} stroke={C.ink} strokeWidth={4.5} />
-              <path d="M -14 -6 Q 10 -14 34 -4" fill="none" stroke={C.ink} strokeWidth={3.5} strokeLinecap="round" />
-              <ellipse cx={14} cy={-30} rx={13} ry={16} fill={C.white} stroke={C.ink} strokeWidth={4.5} transform="rotate(-25 14 -30)" />
+          {clasped ? (
+            // one clasp unit, side view: white hand behind (thumb up-left), red hand in front wrapping it (thumb on top)
+            <g transform={`translate(${M.x} ${M.y}) scale(1.35)`} strokeLinejoin="round" strokeLinecap="round">
+              {/* white hand (from the right) behind; its thumb crosses up-left over the top */}
+              <Thumb x1={30} y1={-8} x2={8} y2={-36} fill={C.white} />
+              <rect x={-20} y={-23} width={72} height={46} rx={23} fill={C.white} stroke={C.ink} strokeWidth={3.2} />
+              {/* red hand (from the left) in front, fingers wrapping; its thumb crosses up-right */}
+              <Thumb x1={-14} y1={-6} x2={10} y2={-34} fill={C.ochre} />
+              <rect x={-52} y={-20} width={74} height={46} rx={23} fill={C.ochre} stroke={C.ink} strokeWidth={3.2} />
+              <path d="M 4 -14 Q 12 3 4 20" fill="none" stroke={C.ink} strokeWidth={2.8} />
+              <path d="M 13 -12 Q 20 3 13 17" fill="none" stroke={C.ink} strokeWidth={2.8} />
             </g>
-          ))}
+          ) : (
+            [{ h: rh, dir: 1, fill: C.ochre }, { h: wh2, dir: -1, fill: C.white }].map(({ h, dir, fill }, i) => (
+              // open mitten reaching sideways, thumb up
+              <g key={i} transform={`translate(${h.x} ${h.y}) scale(${dir * 1.35} 1.35)`} strokeLinejoin="round">
+                <Thumb x1={-2} y1={-8} x2={14} y2={-34} fill={fill} />
+                <rect x={-30} y={-22} width={70} height={44} rx={22} fill={fill} stroke={C.ink} strokeWidth={3.2} />
+              </g>
+            ))
+          )}
         </svg>
       )}
-
-      {/* little motion ticks during the shake */}
-      {shakeEnv > 0.3 && [-1, 1].map((k) => (
-        <svg key={k} width={60} height={40} style={{ position: "absolute", left: M.x - 30, top: M.y + k * 44 - 20, opacity: shakeEnv }}>
-          <path d="M 10 20 Q 30 8 50 20" stroke={C.ink} strokeWidth={4} fill="none" strokeLinecap="round" transform={k > 0 ? "rotate(180 30 20)" : undefined} />
-        </svg>
-      ))}
 
       <Sequence from={VOICE_AT} layout="none"><Audio src={staticFile("audio/long_subscribe.mp3")} /></Sequence>
       <Sequence from={T.hop[1] - 2} layout="none"><Audio src={staticFile("sfx-dots/bounce.mp3")} volume={0.35} /></Sequence>

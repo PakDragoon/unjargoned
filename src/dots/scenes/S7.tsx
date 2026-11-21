@@ -71,7 +71,14 @@ export const S7: React.FC = () => {
             <div style={{ position: "absolute", left: 640, top: 660, width: 40, height: 122, background: "#9EA3AD", border: STROKE }} />
             <Bust x={290} y={580} shirt={C.paper} eyes="stress" look={1} tilt={Math.sin(f / 5) * 1.5} />
             <div style={{ position: "absolute", left: 82, top: 780, width: 816, height: 78, background: "#C9B08A", borderTop: STROKE, borderRadius: "0 0 18px 18px" }} />
-            <div style={{ position: "absolute", left: 175, top: 790, width: 230, height: 26, background: "#BFC3CB", border: STROKE, borderRadius: 6 }} />
+            {/* keyboard: grey slab with three rows of keys and a space bar */}
+            <svg width={250} height={46} style={{ position: "absolute", left: 165, top: 782, overflow: "visible" }}>
+              <rect x={2} y={2} width={246} height={42} rx={7} fill="#BFC3CB" stroke={C.ink} strokeWidth={3} />
+              {[0, 1, 2].map((r) => Array.from({ length: 12 - r }, (_, k) => (
+                <rect key={`${r}-${k}`} x={10 + r * 7 + k * 19.4} y={7 + r * 9} width={15} height={7} rx={2} fill={C.paper} stroke={C.ink} strokeWidth={1.5} />
+              )))}
+              <rect x={70} y={34} width={110} height={6} rx={2} fill={C.paper} stroke={C.ink} strokeWidth={1.5} />
+            </svg>
             {/* sweat drops */}
             {f > tPrompt && [0, 1].map((k) => {
               const ph = ((f + k * 30) % 60) / 60;
