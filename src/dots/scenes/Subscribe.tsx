@@ -15,35 +15,15 @@ const CY = FLOOR - R;         // body centre height
 const SLAP = 112;             // palms meet
 const M = { x: (RED.x + WHITE.x) / 2, y: CY - 175 }; // high-five point, above their heads
 
-/**
- * Cartoon glove in SIDE view (profile): palm faces +x, fingers held together pointing up from the wrist at (0,0).
- * You see the hand's edge: a tall rounded finger blade with knuckle lines, the thumb on the near side, a rolled cuff.
- * `flip` mirrors it so the palm faces -x (the other Dot's hand).
- */
-const Glove: React.FC<{ x: number; y: number; rot: number; flip: boolean; s?: number }> = ({ x, y, rot, flip, s = 1 }) => {
-  const cap = (x1: number, y1: number, x2: number, y2: number, w: number, k: string) => (
-    <g key={k} strokeLinecap="round">
-      <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={C.ink} strokeWidth={w + 7} />
-      <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={C.white} strokeWidth={w} />
-    </g>
-  );
-  return (
-    <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${(flip ? -1 : 1) * s} ${s})`} strokeLinejoin="round">
-      {/* thumb sticks out from the back of the hand, angled up and away */}
-      {cap(-10, -26, -34, -58, 17, "th")}
-      {/* four fingers seen from the side: stacked capsules, back to front (pinky, ring, middle, index) */}
-      {cap(-11, -50, -13, -92, 16, "f4")}
-      {cap(-4, -50, -5, -104, 16, "f3")}
-      {cap(3, -50, 4, -100, 16, "f2")}
-      {cap(10, -50, 11, -92, 16, "f1")}
-      {/* palm block; its right edge (x = 20) is the flat palm face that meets the other hand */}
-      <rect x={-20} y={-62} width={40} height={60} rx={14} fill={C.white} stroke={C.ink} strokeWidth={3.5} />
-      {/* rolled cuff */}
-      <rect x={-23} y={-8} width={46} height={22} rx={9} fill={C.white} stroke={C.ink} strokeWidth={3.5} />
-      <path d="M -18 3 L 18 3" stroke={C.ink} strokeWidth={2.5} strokeLinecap="round" />
-    </g>
-  );
-};
+/** Round ball hand (no fingers or thumb), sitting on the end of the arm at the wrist (0,0). */
+const HAND_R = 28;
+const Glove: React.FC<{ x: number; y: number; rot: number; flip: boolean; s?: number }> = ({ x, y, rot, s = 1 }) => (
+  <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${s})`}>
+    <circle cx={0} cy={-HAND_R + 6} r={HAND_R} fill={C.white} stroke={C.ink} strokeWidth={3.5} />
+    {/* small paper highlight so it reads as a ball */}
+    <path d={`M ${-HAND_R * 0.55} ${-HAND_R * 1.1 + 6} Q ${-HAND_R * 0.35} ${-HAND_R * 1.5 + 6} ${HAND_R * 0.05} ${-HAND_R * 1.55 + 6}`} fill="none" stroke={C.ink} strokeWidth={2.5} strokeLinecap="round" opacity={0.35} />
+  </g>
+);
 
 type Key = { f: number; x: number; y: number; rot: number; s: number };
 /** Keyframed hand path for the red Dot (right hand); the white Dot mirrors it around the centre line. */
@@ -51,8 +31,8 @@ const KEYS = (sh: { x: number; y: number }): Key[] => [
   { f: 78, x: sh.x + 10, y: sh.y + 20, rot: 130, s: 0 },          // tucked at the side
   { f: 88, x: sh.x + 34, y: sh.y - 20, rot: 50, s: 1 },           // arm pops out, raising
   { f: 100, x: sh.x + 6, y: sh.y - 150, rot: -28, s: 1 },         // wind-up: pulled back high
-  { f: SLAP, x: M.x - 27, y: M.y + 66, rot: 0, s: 1 },           // swing in -> palms meet
-  { f: SLAP + 10, x: M.x - 50, y: M.y + 60, rot: -10, s: 1 },      // recoil
+  { f: SLAP, x: M.x - 28 * 1.3, y: M.y + 40, rot: 0, s: 1 },           // swing in -> palms meet
+  { f: SLAP + 10, x: M.x - 58, y: M.y + 34, rot: 0, s: 1 },      // recoil
   { f: 140, x: sh.x + 34, y: sh.y - 20, rot: 50, s: 1 },          // lowering
   { f: 152, x: sh.x + 10, y: sh.y + 20, rot: 130, s: 0 },         // tucked away again
 ];
@@ -173,8 +153,8 @@ export const Subscribe: React.FC = () => {
             {Array.from({ length: 8 }, (_, i) => {
               const a = (i / 8) * Math.PI * 2 - Math.PI / 2;
               if (Math.sin(a) > 0.1) return null; // only rays above the hands
-              const r0 = 105 + burst * 40, r1 = r0 + 40 * (1 - burst) + 12;
-              return <line key={i} x1={M.x + Math.cos(a) * r0} y1={M.y - 50 + Math.sin(a) * r0} x2={M.x + Math.cos(a) * r1} y2={M.y - 50 + Math.sin(a) * r1}
+              const r0 = 84 + burst * 30, r1 = r0 + 40 * (1 - burst) + 12;
+              return <line key={i} x1={M.x + Math.cos(a) * r0} y1={M.y + 10 + Math.sin(a) * r0} x2={M.x + Math.cos(a) * r1} y2={M.y + 10 + Math.sin(a) * r1}
                 stroke={C.ochre} strokeWidth={12} strokeLinecap="round" opacity={1 - burst * 0.6} />;
             })}
           </svg>
