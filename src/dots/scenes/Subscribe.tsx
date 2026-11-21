@@ -16,8 +16,9 @@ const SLAP = 112;             // palms meet
 const M = { x: (RED.x + WHITE.x) / 2, y: CY - 175 }; // high-five point, above their heads
 
 /**
- * Cartoon glove (white, 4 fingers, thumb, rolled cuff), drawn with fingers pointing up from the wrist at (0,0).
- * Placed by wrist position + rotation; `flip` mirrors it so the thumb is on the correct side for a left hand.
+ * Cartoon glove in SIDE view (profile): palm faces +x, fingers held together pointing up from the wrist at (0,0).
+ * You see the hand's edge: a tall rounded finger blade with knuckle lines, the thumb on the near side, a rolled cuff.
+ * `flip` mirrors it so the palm faces -x (the other Dot's hand).
  */
 const Glove: React.FC<{ x: number; y: number; rot: number; flip: boolean; s?: number }> = ({ x, y, rot, flip, s = 1 }) => {
   const cap = (x1: number, y1: number, x2: number, y2: number, w: number, k: string) => (
@@ -28,20 +29,18 @@ const Glove: React.FC<{ x: number; y: number; rot: number; flip: boolean; s?: nu
   );
   return (
     <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${(flip ? -1 : 1) * s} ${s})`} strokeLinejoin="round">
-      {/* fingers (bases tuck under the palm) */}
-      {cap(-17, -46, -21, -80, 15, "f1")}
-      {cap(-5, -50, -6, -92, 15, "f2")}
-      {cap(7, -50, 8, -90, 15, "f3")}
-      {cap(18, -46, 22, -76, 14, "f4")}
-      {/* thumb on the inner side, angled out */}
-      {cap(-20, -26, -44, -50, 16, "th")}
-      {/* palm */}
-      <path d="M -28 -14 Q -30 -58 0 -60 Q 30 -58 28 -14 Q 26 0 0 2 Q -26 0 -28 -14 Z" fill={C.white} stroke={C.ink} strokeWidth={3.5} />
-      {/* finger creases on the palm */}
-      <path d="M -11 -50 L -11 -40 M 1 -52 L 1 -42 M 13 -50 L 13 -41" stroke={C.ink} strokeWidth={2.5} strokeLinecap="round" />
+      {/* thumb sticks out from the back of the hand, angled up and away */}
+      {cap(-10, -26, -34, -58, 17, "th")}
+      {/* four fingers seen from the side: stacked capsules, back to front (pinky, ring, middle, index) */}
+      {cap(-11, -50, -13, -92, 16, "f4")}
+      {cap(-4, -50, -5, -104, 16, "f3")}
+      {cap(3, -50, 4, -100, 16, "f2")}
+      {cap(10, -50, 11, -92, 16, "f1")}
+      {/* palm block; its right edge (x = 20) is the flat palm face that meets the other hand */}
+      <rect x={-20} y={-62} width={40} height={60} rx={14} fill={C.white} stroke={C.ink} strokeWidth={3.5} />
       {/* rolled cuff */}
-      <rect x={-25} y={-6} width={50} height={20} rx={9} fill={C.white} stroke={C.ink} strokeWidth={3.5} />
-      <path d="M -20 4 L 20 4" stroke={C.ink} strokeWidth={2.5} strokeLinecap="round" />
+      <rect x={-23} y={-8} width={46} height={22} rx={9} fill={C.white} stroke={C.ink} strokeWidth={3.5} />
+      <path d="M -18 3 L 18 3" stroke={C.ink} strokeWidth={2.5} strokeLinecap="round" />
     </g>
   );
 };
@@ -51,9 +50,9 @@ type Key = { f: number; x: number; y: number; rot: number; s: number };
 const KEYS = (sh: { x: number; y: number }): Key[] => [
   { f: 78, x: sh.x + 10, y: sh.y + 20, rot: 130, s: 0 },          // tucked at the side
   { f: 88, x: sh.x + 34, y: sh.y - 20, rot: 50, s: 1 },           // arm pops out, raising
-  { f: 100, x: sh.x + 6, y: sh.y - 150, rot: -18, s: 1 },         // wind-up: pulled back high
-  { f: SLAP, x: M.x - 60, y: M.y + 46, rot: 20, s: 1 },           // swing in -> palms meet
-  { f: SLAP + 10, x: M.x - 74, y: M.y + 40, rot: 10, s: 1 },      // recoil
+  { f: 100, x: sh.x + 6, y: sh.y - 150, rot: -28, s: 1 },         // wind-up: pulled back high
+  { f: SLAP, x: M.x - 27, y: M.y + 66, rot: 0, s: 1 },           // swing in -> palms meet
+  { f: SLAP + 10, x: M.x - 50, y: M.y + 60, rot: -10, s: 1 },      // recoil
   { f: 140, x: sh.x + 34, y: sh.y - 20, rot: 50, s: 1 },          // lowering
   { f: 152, x: sh.x + 10, y: sh.y + 20, rot: 130, s: 0 },         // tucked away again
 ];
@@ -163,8 +162,8 @@ export const Subscribe: React.FC = () => {
         {/* gloves on top */}
         {armsOn && (
           <svg width={1920} height={1080} style={{ position: "absolute", left: 0, top: 0, overflow: "visible" }}>
-            {rH.s > 0.02 && <Glove x={rH.x} y={rH.y} rot={rH.rot} flip={false} s={rH.s * 1.1} />}
-            {wH.s > 0.02 && <Glove x={wH.x} y={wH.y} rot={wH.rot} flip={true} s={wH.s * 1.1} />}
+            {rH.s > 0.02 && <Glove x={rH.x} y={rH.y} rot={rH.rot} flip={false} s={rH.s * 1.3} />}
+            {wH.s > 0.02 && <Glove x={wH.x} y={wH.y} rot={wH.rot} flip={true} s={wH.s * 1.3} />}
           </svg>
         )}
 
