@@ -34,17 +34,25 @@ const Scene: React.FC<{ s: (typeof SCENES)[number]; fade?: boolean }> = ({ s, fa
   return fade ? <SceneFade total={total}>{body}</SceneFade> : body;
 };
 
+// The approved Subscribe sting plays between Scene 4 (shredder) and Scene 5 ("What could go wrong?").
+const STING_AFTER = "S4";
+const ORDER: { id: string; frames: number; el: (fade: boolean) => React.ReactNode }[] = SCENES.flatMap((s) => {
+  const scene = { id: s.id, frames: sceneFrames(s.key), el: (fade: boolean) => <Scene s={s} fade={fade} /> };
+  if (s.id !== STING_AFTER) return [scene];
+  return [scene, { id: "Subscribe", frames: SUB_FRAMES, el: () => <SceneFade total={SUB_FRAMES}><Subscribe /></SceneFade> }];
+});
+
 const Full: React.FC = () => {
   let at = 0;
   return (
     <AbsoluteFill style={{ background: "#F7F4EB" }}>
-      {SCENES.map((s, i) => {
+      {ORDER.map((o, i) => {
         const from = at;
-        at += sceneFrames(s.key);
-        // first scene opens hard (no fade from cream), last scene fades out
+        at += o.frames;
+        // first scene opens hard (no fade from cream); the others fade in/out
         return (
-          <Sequence key={s.id} from={from} durationInFrames={sceneFrames(s.key)}>
-            <Scene s={s} fade={i > 0} />
+          <Sequence key={o.id} from={from} durationInFrames={o.frames}>
+            {o.el(i > 0)}
           </Sequence>
         );
       })}
@@ -52,7 +60,7 @@ const Full: React.FC = () => {
   );
 };
 
-const total = SCENES.reduce((a, s) => a + sceneFrames(s.key), 0);
+const total = ORDER.reduce((a, o) => a + o.frames, 0);
 
 export const DotsRoot: React.FC = () => (
   <>
