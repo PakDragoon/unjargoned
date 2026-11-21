@@ -10,6 +10,7 @@ import { S4 } from "./scenes/S4";
 import { S5 } from "./scenes/S5";
 import { S6 } from "./scenes/S6";
 import { S7 } from "./scenes/S7";
+import { Subscribe, SUB_FRAMES } from "./scenes/Subscribe";
 
 const SCENES: { id: string; key: SceneKey; C: React.FC }[] = [
   { id: "S1", key: "long_scene1", C: S1 },
@@ -61,6 +62,7 @@ export const DotsRoot: React.FC = () => (
         <Composition key={s.id} id={`Dots-${s.id}`} component={() => <Scene s={s} fade={false} />}
           durationInFrames={sceneFrames(s.key)} fps={FPS} width={1920} height={1080} />
       ))}
+      <Composition id="Dots-Subscribe" component={Subscribe} durationInFrames={SUB_FRAMES} fps={FPS} width={1920} height={1080} />
     </Folder>
   </>
 );

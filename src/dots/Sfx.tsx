@@ -6,6 +6,7 @@ import { SceneKey, useCues } from "./kit";
 type Cue = [sound: string, word: string, nth: number, offset: number, volume: number];
 
 const CUES: Record<SceneKey, Cue[]> = {
+  long_subscribe: [], // the Subscribe sting places its own sounds
   long_scene1: [
     ["typing", "For", 1, 10, 0.35], ["click", "closed", 1, 12, 0.5], ["freeze", "froze", 1, -6, 0.45],
     ["bounce", "email", 1, 10, 0.4], ["bounce", "deadline", 1, 10, 0.4], ["bounce", "finger", 1, 14, 0.4],

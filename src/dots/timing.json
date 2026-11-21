@@ -2910,5 +2910,16 @@
     33.28
    ]
   ]
+ },
+ "long_subscribe": {
+  "seconds": 1.228,
+  "frames": 98,
+  "words": [
+   [
+    "Subscribe!",
+    0.08,
+    1.04
+   ]
+  ]
  }
 }

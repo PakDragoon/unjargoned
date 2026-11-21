@@ -4,6 +4,7 @@ Voice for the "ChatGPT Dots" long-form (v2 Tactile Editorial build).
 
   python3 tools/tts_dots.py            # all 7 scenes
   python3 tools/tts_dots.py 3 5        # only these scenes
+  python3 tools/tts_dots.py subscribe  # the red Dot's "Subscribe!" line (handshake scene)
 
 ElevenLabs /with-timestamps -> public/audio/long_sceneN.mp3 plus src/dots/timing.json:
   { "long_scene1": { "seconds": 17.2, "frames": 1056, "words": [[word, start, end], ...] }, ... }
@@ -44,6 +45,7 @@ SCRIPTS = {
     4: 'Even more importantly, a Dot has persistent memory. Every time you correct it, it pins a mental sticky note to its wall — learning your writing style, your schedule, and what "good" looks like to you. [long pause] [serious] Here\'s a catch most people miss, though: right now, you CAN\'T open that corkboard and delete just ONE bad memory. If your Dot learns a bad habit, [pause] the only eraser is resetting the entire Dot from scratch.',
     5: '[serious] Now, this brings us to the exact question you should be asking: [pause] if an AI has its own browser and access to your apps, what stops it from accidentally emailing your boss at three in the morning — or getting tricked by a hidden prompt injection on a sketchy webpage and spending your money? [long pause] OpenAI actually held back one of its newer models right before launch after internal tests showed it occasionally tried to finish tasks WITHOUT asking permission.',
     6: '[matter-of-fact] To solve that, OpenAI built a cage around the Dot. [pause] First, when a Dot is doing background research while you sleep, its "send" and "edit" buttons are locked in code — it can ONLY read and take private notes. Second, before it takes any real action, a completely separate security AI called Auto-Review — or Sentinel — inspects what the Dot is about to do, catching ninety-plus percent of prompt-injection traps before they fire. [pause] And finally, for passwords or payments through the new ChatGPT Wallet, the Dot physically pauses and hands control back to your screen.',
+    "subscribe": '[excited] Subscribe!',
     7: '[curious] We are watching the biggest shift in personal tech since the smartphone. [pause] For the past few years, the superpower was "prompt engineering" — knowing how to ask AI one clever question. Starting right now, the real skill is "delegation" — knowing what job to hand off, what rules to set, and when to keep your hand on the kill switch. [long pause] If you want to see how the underlying brain inside ChatGPT actually predicts every word before it takes those actions, watch this breakdown next — and subscribe so you don\'t miss the next one.',
 }
 
@@ -98,7 +100,7 @@ def probe(path: Path) -> float:
 
 
 def main() -> None:
-    only = [int(a) for a in sys.argv[1:]] or list(SCRIPTS)
+    only = [int(a) if a.isdigit() else a for a in sys.argv[1:]] or [k for k in SCRIPTS if isinstance(k, int)]
     AUDIO.mkdir(parents=True, exist_ok=True)
     timing = json.loads(TIMING.read_text()) if TIMING.exists() else {}
     for n in only:
@@ -111,7 +113,7 @@ def main() -> None:
                 print(f"  {model} failed ({e.code}): {e.read().decode(errors='replace')[:200]}")
         if data is None:
             sys.exit(f"scene {n}: all models failed")
-        name = f"long_scene{n}"
+        name = f"long_scene{n}" if isinstance(n, int) else f"long_{n}"
         mp3 = AUDIO / f"{name}.mp3"
         mp3.write_bytes(base64.b64decode(data["audio_base64"]))
         sec = probe(mp3)

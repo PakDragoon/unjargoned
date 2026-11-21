@@ -106,8 +106,8 @@ export const Stamp: React.FC<{ at: number; x: number; y: number; rot?: number; c
 /** TheDot — vermilion agent persona with squash & stretch. */
 export const TheDot: React.FC<{
   x: number; y: number; r?: number; squash?: number; look?: number; accessory?: "hat" | "clipboard" | "glass" | null;
-  blink?: boolean; mood?: "happy" | "worried" | "focus";
-}> = ({ x, y, r = 32, squash = 0, look = 0, accessory = null, blink = true, mood = "happy" }) => {
+  blink?: boolean; mood?: "happy" | "worried" | "focus"; mouthOpen?: number;
+}> = ({ x, y, r = 32, squash = 0, look = 0, accessory = null, blink = true, mood = "happy", mouthOpen = 0 }) => {
   const f = useCurrentFrame();
   const sx = 1 + squash * 0.25, sy = 1 - squash * 0.25;
   const blinking = blink && f % 150 > 143;
@@ -123,7 +123,8 @@ export const TheDot: React.FC<{
             ? <line key={s} x1={r + s * r * 0.32 + ex - r * 0.1} x2={r + s * r * 0.32 + ex + r * 0.1} y1={r * 0.85} y2={r * 0.85} stroke={C.ink} strokeWidth={3} strokeLinecap="round" />
             : <ellipse key={s} cx={r + s * r * 0.32 + ex} cy={r * 0.85} rx={r * 0.1} ry={mood === "focus" ? r * 0.07 : r * 0.16} fill={C.ink} />
         ))}
-        {mood === "happy" && <path d={`M ${r * 0.72 + ex} ${r * 1.25} Q ${r + ex} ${r * 1.5} ${r * 1.28 + ex} ${r * 1.25}`} stroke={C.ink} strokeWidth={3} fill="none" strokeLinecap="round" />}
+        {mouthOpen > 0.02 && <path d={`M ${r * 0.7 + ex} ${r * 1.22} Q ${r + ex} ${r * (1.26 + 0.42 * mouthOpen)} ${r * 1.3 + ex} ${r * 1.22} Z`} fill={C.ink} stroke={C.ink} strokeWidth={3} strokeLinejoin="round" />}
+        {mood === "happy" && mouthOpen <= 0.02 && <path d={`M ${r * 0.72 + ex} ${r * 1.25} Q ${r + ex} ${r * 1.5} ${r * 1.28 + ex} ${r * 1.25}`} stroke={C.ink} strokeWidth={3} fill="none" strokeLinecap="round" />}
         {mood === "worried" && <path d={`M ${r * 0.75 + ex} ${r * 1.4} Q ${r + ex} ${r * 1.2} ${r * 1.25 + ex} ${r * 1.4}`} stroke={C.ink} strokeWidth={3} fill="none" strokeLinecap="round" />}
         {mood === "focus" && <line x1={r * 0.8 + ex} x2={r * 1.2 + ex} y1={r * 1.32} y2={r * 1.32} stroke={C.ink} strokeWidth={3} strokeLinecap="round" />}
         {accessory === "hat" && (
@@ -248,14 +249,16 @@ export const Headline: React.FC<{ x: number; y: number; size?: number; children:
     <div style={{ position: "absolute", left: x, top: y, fontFamily: F.head, fontWeight: 700, fontSize: size, color: C.ink, letterSpacing: -1, lineHeight: 1.05, ...style }}>{children}</div>
   );
 
-/** Two-bone arm: shoulder -> elbow -> wrist, elbow bends to `side` (+1 / -1). Mitten hand at the wrist. */
-export const Arm: React.FC<{ sx: number; sy: number; wx: number; wy: number; side?: 1 | -1; len?: number; sleeve?: string; finger?: boolean }> =
-  ({ sx, sy, wx, wy, side = 1, len = 120, sleeve = C.red, finger = false }) => {
+/** Two-bone arm: shoulder -> elbow -> wrist. `len` = upper arm, `len2` = forearm (shorter when it points at the camera).
+ *  side: +1 / -1 picks which way the elbow folds (choose the one that puts the elbow out and down). Mitten hand at the wrist. */
+export const Arm: React.FC<{ sx: number; sy: number; wx: number; wy: number; side?: 1 | -1; len?: number; len2?: number; sleeve?: string; finger?: boolean }> =
+  ({ sx, sy, wx, wy, side = 1, len = 120, len2, sleeve = C.red, finger = false }) => {
+    const l1 = len, l2 = len2 ?? len;
     const dx = wx - sx, dy = wy - sy;
-    const d = Math.min(Math.hypot(dx, dy), len * 1.98);
+    const d = Math.max(Math.abs(l1 - l2) + 1, Math.min(Math.hypot(dx, dy), (l1 + l2) * 0.995));
     const a = Math.atan2(dy, dx);
-    const k = Math.acos(Math.min(1, d / (2 * len)));
-    const ex = sx + Math.cos(a + side * k) * len, ey = sy + Math.sin(a + side * k) * len;
+    const k = Math.acos(Math.max(-1, Math.min(1, (l1 * l1 + d * d - l2 * l2) / (2 * l1 * d))));
+    const ex = sx + Math.cos(a + side * k) * l1, ey = sy + Math.sin(a + side * k) * l1;
     const hx = sx + Math.cos(a) * d, hy = sy + Math.sin(a) * d;
     const fa = Math.atan2(hy - ey, hx - ex);
     return (
@@ -271,8 +274,8 @@ export const Arm: React.FC<{ sx: number; sy: number; wx: number; wy: number; sid
   };
 
 /** Simple editorial bust (head + torso). Arms are drawn separately with <Arm>. */
-export const Bust: React.FC<{ x: number; y: number; shirt?: string; tilt?: number; eyes?: "open" | "calm" | "stress" }> =
-  ({ x, y, shirt = C.ochre, tilt = 0, eyes = "open" }) => {
+export const Bust: React.FC<{ x: number; y: number; shirt?: string; tilt?: number; eyes?: "open" | "calm" | "stress"; look?: number }> =
+  ({ x, y, shirt = C.ochre, tilt = 0, eyes = "open", look = 0 }) => {
     const f = useCurrentFrame();
     const blink = f % 170 > 163;
     return (
@@ -285,7 +288,7 @@ export const Bust: React.FC<{ x: number; y: number; shirt?: string; tilt?: numbe
           <path d="M -60 -26 Q -50 -80 0 -72 Q 56 -78 62 -22 Q 40 -50 -10 -46 Q -40 -48 -60 -26 Z" fill={C.ink} />
           {eyes === "calm" || blink
             ? <g stroke={C.ink} strokeWidth={4} fill="none" strokeLinecap="round"><path d="M -30 -2 Q -22 4 -14 -2" /><path d="M 14 -2 Q 22 4 30 -2" /></g>
-            : <g fill={C.ink}><circle cx={-22} cy={-4} r={6} /><circle cx={22} cy={-4} r={6} /></g>}
+            : <g fill={C.ink}><circle cx={-22 + look * 7} cy={-4} r={6} /><circle cx={22 + look * 7} cy={-4} r={6} /></g>}
           {eyes === "stress"
             ? <path d="M -16 28 Q 0 18 16 28" stroke={C.ink} strokeWidth={4} fill="none" strokeLinecap="round" />
             : <path d="M -16 22 Q 0 34 16 22" stroke={C.ink} strokeWidth={4} fill="none" strokeLinecap="round" />}
