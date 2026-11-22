@@ -1,0 +1,415 @@
+1
+00:00:00,080 --> 00:00:01,740
+For the last three years,
+
+2
+00:00:01,760 --> 00:00:03,500
+every AI you've ever used
+
+3
+00:00:03,520 --> 00:00:05,393
+had a hidden limitation:
+
+4
+00:00:05,413 --> 00:00:06,980
+the second you closed the tab,
+
+5
+00:00:07,000 --> 00:00:08,340
+its brain froze.
+
+6
+00:00:08,360 --> 00:00:09,860
+It couldn't check your email,
+
+7
+00:00:09,880 --> 00:00:10,900
+notice a deadline,
+
+8
+00:00:10,920 --> 00:00:12,140
+or lift a finger until
+
+9
+00:00:12,160 --> 00:00:13,397
+you typed another prompt.
+
+10
+00:00:14,800 --> 00:00:16,940
+That era just ended.
+
+11
+00:00:16,960 --> 00:00:19,320
+OpenAI has started rolling out "Dots" —
+
+12
+00:00:19,340 --> 00:00:21,220
+and if you understand how they actually
+
+13
+00:00:21,240 --> 00:00:22,940
+work under the hood, you'll realize
+
+14
+00:00:22,960 --> 00:00:25,700
+ChatGPT just stopped being a chatbot and
+
+15
+00:00:25,720 --> 00:00:28,010
+became something completely different.
+
+16
+00:00:28,197 --> 00:00:29,377
+In plain English,
+
+17
+00:00:29,397 --> 00:00:32,847
+a Dot is an "always-on AI agent."
+
+18
+00:00:32,933 --> 00:00:34,177
+Instead of living inside a text
+
+19
+00:00:34,197 --> 00:00:35,537
+box on your phone,
+
+20
+00:00:35,557 --> 00:00:38,257
+OpenAI rents each Dot its own tiny,
+
+21
+00:00:38,277 --> 00:00:39,617
+invisible computer and
+
+22
+00:00:39,637 --> 00:00:41,297
+web browser in the cloud.
+
+23
+00:00:41,317 --> 00:00:43,007
+You give it a standing job once —
+
+24
+00:00:43,077 --> 00:00:45,057
+like "watch my inbox for unpaid
+
+25
+00:00:45,077 --> 00:00:47,537
+invoices" or "track flight prices every
+
+26
+00:00:47,557 --> 00:00:49,497
+morning" — and it keeps running
+
+27
+00:00:49,517 --> 00:00:51,430
+twenty-four hours a day, even when your
+
+28
+00:00:51,450 --> 00:00:53,647
+laptop is powered off in your backpack.
+
+29
+00:00:53,927 --> 00:00:55,907
+So how does it actually get things
+
+30
+00:00:55,927 --> 00:00:57,644
+done without getting confused?
+
+31
+00:00:58,527 --> 00:00:59,347
+Under the hood,
+
+32
+00:00:59,367 --> 00:01:00,627
+a Dot doesn't just guess
+
+33
+00:01:00,647 --> 00:01:02,147
+one word at a time.
+
+34
+00:01:02,167 --> 00:01:03,267
+When you give it a goal,
+
+35
+00:01:03,287 --> 00:01:06,577
+a heavy-duty "planner" model — GPT-6 Astra —
+
+36
+00:01:06,887 --> 00:01:08,977
+breaks your goal into a checklist.
+
+37
+00:01:09,127 --> 00:01:11,067
+Then it delegates the boring clicks
+
+38
+00:01:11,087 --> 00:01:13,067
+to smaller helper subagents that
+
+39
+00:01:13,087 --> 00:01:15,547
+open websites, read your connected files,
+
+40
+00:01:15,567 --> 00:01:17,187
+and take private notes.
+
+41
+00:01:17,207 --> 00:01:19,577
+It even has a built-in "time budget" —
+
+42
+00:01:19,740 --> 00:01:21,427
+meaning if it gets stuck on a website,
+
+43
+00:01:21,447 --> 00:01:23,107
+it knows how long to keep trying
+
+44
+00:01:23,127 --> 00:01:25,137
+before coming back to ask you for help.
+
+45
+00:01:25,267 --> 00:01:26,847
+Even more importantly,
+
+46
+00:01:26,867 --> 00:01:29,237
+a Dot has persistent memory.
+
+47
+00:01:29,267 --> 00:01:30,607
+Every time you correct it,
+
+48
+00:01:30,627 --> 00:01:32,957
+it pins a mental sticky note to its wall —
+
+49
+00:01:33,187 --> 00:01:35,527
+learning your writing style, your schedule,
+
+50
+00:01:35,547 --> 00:01:37,730
+and what "good" looks like to you.
+
+51
+00:01:39,240 --> 00:01:41,607
+Here's a catch most people miss, though:
+
+52
+00:01:41,627 --> 00:01:44,047
+right now, you can't open that corkboard
+
+53
+00:01:44,067 --> 00:01:46,437
+and delete just one bad memory.
+
+54
+00:01:46,467 --> 00:01:48,687
+If your Dot learns a bad habit,
+
+55
+00:01:48,707 --> 00:01:50,567
+the only eraser is resetting
+
+56
+00:01:50,587 --> 00:01:52,877
+the entire Dot from scratch.
+
+57
+00:01:56,013 --> 00:01:57,223
+Subscribe!
+
+58
+00:01:58,080 --> 00:02:00,060
+Now, this brings us to the exact
+
+59
+00:02:00,080 --> 00:02:01,770
+question you should be asking:
+
+60
+00:02:02,400 --> 00:02:04,540
+if an AI has its own browser and
+
+61
+00:02:04,560 --> 00:02:06,060
+access to your apps,
+
+62
+00:02:06,080 --> 00:02:07,980
+what stops it from accidentally emailing
+
+63
+00:02:08,000 --> 00:02:09,530
+your boss at three in the morning —
+
+64
+00:02:09,893 --> 00:02:11,260
+or getting tricked by a hidden
+
+65
+00:02:11,280 --> 00:02:12,660
+prompt injection on a sketchy
+
+66
+00:02:12,680 --> 00:02:14,357
+webpage and spending your money?
+
+67
+00:02:16,120 --> 00:02:18,660
+OpenAI actually held back one of its newer
+
+68
+00:02:18,680 --> 00:02:20,860
+models right before launch after internal
+
+69
+00:02:20,880 --> 00:02:22,780
+tests showed it occasionally tried to
+
+70
+00:02:22,800 --> 00:02:25,610
+finish tasks without asking permission.
+
+71
+00:02:25,813 --> 00:02:26,753
+To solve that,
+
+72
+00:02:26,773 --> 00:02:29,463
+OpenAI built a cage around the Dot.
+
+73
+00:02:29,973 --> 00:02:31,753
+First, when a Dot is doing background
+
+74
+00:02:31,773 --> 00:02:33,113
+research while you sleep,
+
+75
+00:02:33,133 --> 00:02:34,833
+its "send" and "edit" buttons
+
+76
+00:02:34,853 --> 00:02:36,063
+are locked in code —
+
+77
+00:02:36,213 --> 00:02:39,273
+it can only read and take private notes.
+
+78
+00:02:39,293 --> 00:02:41,873
+Second, before it takes any real action,
+
+79
+00:02:41,893 --> 00:02:44,193
+a completely separate security AI
+
+80
+00:02:44,213 --> 00:02:46,303
+called Auto-Review — or Sentinel —
+
+81
+00:02:46,613 --> 00:02:48,713
+inspects what the Dot is about to do,
+
+82
+00:02:48,733 --> 00:02:50,273
+catching ninety-plus percent of
+
+83
+00:02:50,293 --> 00:02:53,033
+prompt-injection traps before they fire.
+
+84
+00:02:53,053 --> 00:02:54,873
+And finally, for passwords or
+
+85
+00:02:54,893 --> 00:02:57,153
+payments through the new ChatGPT Wallet,
+
+86
+00:02:57,173 --> 00:02:58,953
+the Dot physically pauses and
+
+87
+00:02:58,973 --> 00:03:01,103
+hands control back to your screen.
+
+88
+00:03:01,460 --> 00:03:03,200
+We are watching the biggest shift in
+
+89
+00:03:03,220 --> 00:03:05,486
+personal tech since the smartphone.
+
+90
+00:03:06,020 --> 00:03:07,360
+For the past few years,
+
+91
+00:03:07,380 --> 00:03:09,910
+the superpower was "prompt engineering" —
+
+92
+00:03:09,940 --> 00:03:11,200
+knowing how to ask AI
+
+93
+00:03:11,220 --> 00:03:13,120
+one clever question.
+
+94
+00:03:13,140 --> 00:03:15,413
+Starting right now, the real skill is
+
+95
+00:03:15,433 --> 00:03:18,400
+"delegation" — knowing what job to hand off,
+
+96
+00:03:18,420 --> 00:03:19,720
+what rules to set,
+
+97
+00:03:19,740 --> 00:03:20,600
+and when to keep your
+
+98
+00:03:20,620 --> 00:03:21,897
+hand on the kill switch.
+
+99
+00:03:23,940 --> 00:03:25,520
+If you want to see how the underlying
+
+100
+00:03:25,540 --> 00:03:28,400
+brain inside ChatGPT actually predicts
+
+101
+00:03:28,420 --> 00:03:30,920
+every word before it takes those actions,
+
+102
+00:03:30,940 --> 00:03:32,350
+watch this breakdown next —
+
+103
+00:03:32,500 --> 00:03:33,440
+and subscribe so you
+
+104
+00:03:33,460 --> 00:03:34,830
+don't miss the next one.
