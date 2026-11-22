@@ -1,0 +1,45 @@
+{
+  "fps": 60,
+  "scenes": {
+    "scene1": {
+      "file": "audio/short_scene1.mp3",
+      "seconds": 5.564,
+      "durationInFrames": 334,
+      "model": "eleven_v4",
+      "voice": "UgBBYS2sOqTuMpoF3BR0",
+      "stability": 0.4
+    },
+    "scene2": {
+      "file": "audio/short_scene2.mp3",
+      "seconds": 10.005,
+      "durationInFrames": 601,
+      "model": "eleven_v4",
+      "voice": "UgBBYS2sOqTuMpoF3BR0",
+      "stability": 0.4
+    },
+    "scene3": {
+      "file": "audio/short_scene3.mp3",
+      "seconds": 11.833,
+      "durationInFrames": 711,
+      "model": "eleven_v4",
+      "voice": "UgBBYS2sOqTuMpoF3BR0",
+      "stability": 0.4
+    },
+    "scene4": {
+      "file": "audio/short_scene4.mp3",
+      "seconds": 13.427,
+      "durationInFrames": 806,
+      "model": "eleven_v4",
+      "voice": "UgBBYS2sOqTuMpoF3BR0",
+      "stability": 0.4
+    },
+    "scene5": {
+      "file": "audio/short_scene5.mp3",
+      "seconds": 7.654,
+      "durationInFrames": 460,
+      "model": "eleven_v4",
+      "voice": "UgBBYS2sOqTuMpoF3BR0",
+      "stability": 0.4
+    }
+  }
+}
