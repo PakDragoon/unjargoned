@@ -26,7 +26,7 @@ SFX = {
     "trickle": ("sand trickling in an hourglass, gentle", 3.0),
     "error": ("short low muted error buzz", 0.5),
     "bell": ("hotel desk service bell ding, single", 1.5),
-    "slap": ("sticky note slapped onto a cork board", 0.4),
+    "slap": ("crisp hand slap, a single clean clap of two palms, close, dry", 0.5),
     "squeak": ("rubber eraser squeak then rubbery bounce boing", 1.0),
     "shredder": ("mechanical paper shredder whirring and shredding paper", 2.5),
     "alert": ("low pulsing warning alert tone, two pulses, subtle", 1.2),

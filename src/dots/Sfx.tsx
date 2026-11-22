@@ -5,6 +5,12 @@ import { SceneKey, useCues } from "./kit";
 
 type Cue = [sound: string, word: string, nth: number, offset: number, volume: number];
 
+// Every SFX file is level-matched to the voice (tools/sfx_dots_level.py), so the mix level is set per sound here:
+// short hits ~10 dB under the narration, longer beds (they run under whole phrases) ~15 dB under.
+const HIT = 0.32, BED = 0.18;
+const BEDS = new Set(["tick", "trickle", "shredder", "scanner", "printer", "chord", "outro", "freeze", "typing", "alert"]);
+export const sfxLevel = (sound: string) => (BEDS.has(sound) ? BED : HIT);
+
 const CUES: Record<SceneKey, Cue[]> = {
   long_subscribe: [], // the Subscribe sting places its own sounds
   long_scene1: [
@@ -49,9 +55,9 @@ export const Sfx: React.FC<{ scene: SceneKey }> = ({ scene }) => {
   const cue = useCues(scene);
   return (
     <>
-      {CUES[scene].map(([s, w, n, off, vol], i) => (
+      {CUES[scene].map(([s, w, n, off], i) => (
         <Sequence key={i} from={Math.max(0, cue(w, n) + off)} layout="none">
-          <Audio src={staticFile(`sfx-dots/${s}.mp3`)} volume={vol} />
+          <Audio src={staticFile(`sfx-dots/${s}.mp3`)} volume={sfxLevel(s)} />
         </Sequence>
       ))}
     </>

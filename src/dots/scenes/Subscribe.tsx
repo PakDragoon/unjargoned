@@ -4,6 +4,7 @@ import React from "react";
 import { Audio, Sequence, staticFile, useCurrentFrame, Easing, interpolate } from "remotion";
 import { Dot, hops } from "../../shared/Dot";
 import { C, F, STROKE, SHADOW, Paper, TheDot, useCues, ramp, lerp } from "../kit";
+import { sfxLevel } from "../Sfx";
 
 export const SUB_FRAMES = 300;
 const FLOOR = 780;            // floor line
@@ -162,12 +163,12 @@ export const Subscribe: React.FC = () => {
       </div>
 
       <Sequence from={VOICE_AT} layout="none"><Audio src={staticFile("audio/long_subscribe.mp3")} /></Sequence>
-      <Sequence from={28} layout="none"><Audio src={staticFile("sfx-dots/bounce.mp3")} volume={0.35} /></Sequence>
-      <Sequence from={58} layout="none"><Audio src={staticFile("sfx-dots/bounce.mp3")} volume={0.35} /></Sequence>
-      <Sequence from={102} layout="none"><Audio src={staticFile("sfx-dots/whoosh.mp3")} volume={0.35} /></Sequence>
-      <Sequence from={SLAP - 1} layout="none"><Audio src={staticFile("sfx-dots/slap.mp3")} volume={0.7} /></Sequence>
-      <Sequence from={speakFrom - 4} layout="none"><Audio src={staticFile("sfx-dots/pop.mp3")} volume={0.45} /></Sequence>
-      <Sequence from={speakFrom + 10} layout="none"><Audio src={staticFile("sfx-dots/bell.mp3")} volume={0.35} /></Sequence>
+      <Sequence from={28} layout="none"><Audio src={staticFile("sfx-dots/bounce.mp3")} volume={sfxLevel("bounce")} /></Sequence>
+      <Sequence from={58} layout="none"><Audio src={staticFile("sfx-dots/bounce.mp3")} volume={sfxLevel("bounce")} /></Sequence>
+      <Sequence from={102} layout="none"><Audio src={staticFile("sfx-dots/whoosh.mp3")} volume={sfxLevel("whoosh")} /></Sequence>
+      <Sequence from={SLAP - 1} layout="none"><Audio src={staticFile("sfx-dots/slap.mp3")} volume={sfxLevel("slap")} /></Sequence>
+      <Sequence from={speakFrom - 4} layout="none"><Audio src={staticFile("sfx-dots/pop.mp3")} volume={sfxLevel("pop")} /></Sequence>
+      <Sequence from={speakFrom + 10} layout="none"><Audio src={staticFile("sfx-dots/bell.mp3")} volume={sfxLevel("bell")} /></Sequence>
     </Paper>
   );
 };
