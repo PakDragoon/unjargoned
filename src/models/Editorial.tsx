@@ -213,12 +213,14 @@ export const taxonomy = [
   ["ChatGPT", "Everyday & voice"],
   ["Claude", "Writing & code"],
   ["Gemini", "Video, files & Google"],
-  ["Thinking / open", "Hard logic & local"],
+  ["Thinking / Local", "Hard logic & local"],
 ];
 export const IndexCard = ({
   n,
   short = false,
+  answer,
 }: {
+  answer?: string;
   n: number;
   short?: boolean;
 }) => (
@@ -245,10 +247,17 @@ export const IndexCard = ({
     </div>
     <Stamp
       size={short ? 32 : 21}
-      text={(short && n === 2
-        ? "Video & huge files"
-        : taxonomy[n][1]
-      ).toUpperCase()}
+      text={
+        answer ??
+        (short
+          ? [
+              "Voice note → clean email",
+              "Rewrite & trace code bugs",
+              "Search inside long videos",
+            ][n]
+          : taxonomy[n][1]
+        ).toUpperCase()
+      }
     />
   </div>
 );

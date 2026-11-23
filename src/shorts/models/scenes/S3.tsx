@@ -17,7 +17,7 @@ export const S3 = ({ words }: SceneProps) => {
       title="Think it through. Or run it locally."
       label="TWO MORE OPTIONS"
     >
-      {["THINKING MODE", "DEEPSEEK / LLAMA"].map((label, i) => (
+      {["THINKING MODE", "LOCAL MODEL"].map((label, i) => (
         <div
           key={label}
           style={{
@@ -39,14 +39,20 @@ export const S3 = ({ words }: SceneProps) => {
           <div>
             <Stamp text={label} size={29} />
             <div style={{ fontSize: 38, fontWeight: 700, marginTop: 20 }}>
-              {i ? "On your laptop" : "Check the logic"}
+              {i
+                ? t >= cue("offline")
+                  ? "Wi-Fi OFF · file summarized"
+                  : "Private_Contract.pdf"
+                : t >= cue("logic")
+                  ? "Maya · 3:00 PM clash"
+                  : "Check the schedule"}
             </div>
           </div>
         </div>
       ))}
       <Foley at={cue("thinking")} name="tick" />
-      <Foley at={cue("double-checks")} name="ding" />
-      <Foley at={cue("locally")} name="vault" />
+      <Foley at={cue("logic")} name="ding" />
+      <Foley at={cue("offline")} name="vault" />
     </Stage>
   );
 };

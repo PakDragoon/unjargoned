@@ -75,6 +75,46 @@ def synthesize(text, key, destination, pauses):
     return words, duration
 
 
+# Let a viewer inspect each worked example before moving to the next spoken beat.
+# Each phrase names the start of the following line; the hold stays on the prior result.
+DEMO_HOLDS = {
+    1: [("Think of ChatGPT", 1.2), ("ChatGPT cleans", 3.0), ("When you want", 4.0)],
+    2: [("Tell Claude", 2.4), ("You get back", 1.5), ("Direct, natural", 2.5), ("Instead of guessing", 2.4)],
+    3: [("Gemini jumps", 2.0), ("Next, Dot", 3.6), ("Gemini finds", 4.4)],
+    4: [("A fast model", 2.2), ("For Open-Weight", 2.0), ("Thinking mode changes", 3.0)],
+}
+DEMO_SPEED = 0.86
+
+
+def pace_demo(audio, words, holds):
+    stops = []
+    normalize = lambda w: w.casefold().strip(".,:;!?\"")
+    tokens = [normalize(w[0]) for w in words]
+    for phrase, seconds in holds:
+        pattern = [normalize(w) for w in phrase.split()]
+        index = next(i for i in range(len(tokens)) if tokens[i:i+len(pattern)] == pattern)
+        stops.append((index, words[index][1], seconds))
+    graph, labels = [], []
+    start = 0
+    for n, (_, end, hold) in enumerate(stops):
+        graph.append(f"[0:a]atrim=start={start}:end={end},asetpts=PTS-STARTPTS,"
+                     f"atempo={DEMO_SPEED},apad=pad_dur={hold}[p{n}]")
+        labels.append(f"[p{n}]")
+        start = end
+    graph.append(f"[0:a]atrim=start={start},asetpts=PTS-STARTPTS,atempo={DEMO_SPEED}[last]")
+    graph.append("".join(labels) + f"[last]concat=n={len(labels)+1}:v=0:a=1[out]")
+    with tempfile.TemporaryDirectory(dir=audio.parent) as directory:
+        out = Path(directory, "paced.mp3")
+        subprocess.run(["ffmpeg", "-v", "error", "-i", audio, "-filter_complex", ";".join(graph),
+                        "-map", "[out]", "-b:a", "128k", out], check=True)
+        duration = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries",
+                         "format=duration", "-of", "csv=p=0", out]))
+        out.replace(audio)
+    return [[token, round(a/DEMO_SPEED + sum(h for j, _, h in stops if j <= i), 4),
+             round(b/DEMO_SPEED + sum(h for j, _, h in stops if j <= i), 4)]
+            for i, (token, a, b) in enumerate(words)], duration
+
+
 def stamp(seconds):
     seconds, ms = divmod(round(seconds * 1000), 1000)
     minutes, s = divmod(seconds, 60)
@@ -97,12 +137,20 @@ def build(short, only, key):
         text = line["text"]
         file = f"audio/{'short_models' if short else 'models'}/s{i+1}.mp3"
         digest = hashlib.sha256((text + MODEL + VOICE + str(SETTINGS) + "".join(line.get("pauseBefore", []))).encode()).hexdigest()
+        raw_digest = digest
+        holds = [] if short else DEMO_HOLDS.get(i, [])
+        if holds:
+            digest = hashlib.sha256(json.dumps([raw_digest, DEMO_SPEED, holds]).encode()).hexdigest()
         prior = scenes[i] if i < len(scenes) else None
         valid = prior and prior['hash'] == digest and (ROOT / "public" / file).exists() and prior["file"]
         if valid and only != i+1:
             words, scene = timings[i], prior
         else:
-            if key and only in (None, i+1):
+            cached_raw = (holds and prior and prior["hash"] == raw_digest and prior["file"] and
+                          (ROOT / "public" / file).is_file())
+            if cached_raw and only != i+1:
+                words, seconds = timings[i], prior["seconds"]
+            elif key and only in (None, i+1):
                 words, seconds = synthesize(text, key, ROOT / "public" / file, line.get("pauseBefore", []))
             elif valid:
                 words, seconds = timings[i], prior["seconds"]
@@ -111,14 +159,24 @@ def build(short, only, key):
                 tokens = text.split()
                 words = [[w, round(j*seconds/len(tokens), 4), round((j+1)*seconds/len(tokens), 4)]
                          for j, w in enumerate(tokens)]
+            if file and holds and (not valid or (key and only == i+1)):
+                words, seconds = pace_demo(ROOT / "public" / file, words, holds)
             scene = dict(file=file, seconds=seconds, frames=math.ceil(seconds*fps), hash=digest)
+        # The service can align trailing punctuation slightly beyond the encoded MP3.
+        words = [[word, min(start, scene["seconds"]), min(end, scene["seconds"])]
+                 for word, start, end in words]
         if i == len(scenes):
             scenes.append(scene)
             timings.append(words)
         else:
             scenes[i], timings[i] = scene, words
-        for j in range(0, len(words), 6):
-            group = words[j:j+6]
+        # Keep the upcoming answer out of subtitles during each viewer-quiz pause.
+        groups = []
+        for word in words:
+            if not groups or len(groups[-1]) == 6 or word[1] - groups[-1][-1][2] >= 1.49:
+                groups.append([])
+            groups[-1].append(word)
+        for group in groups:
             cues.append((offset+group[0][1], offset+group[-1][2], " ".join(w[0] for w in group)))
         offset += scene["frames"]/fps
         if not short and i == 3:

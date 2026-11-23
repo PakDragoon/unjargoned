@@ -1,93 +1,121 @@
 import React from "react";
 import {
   Actor,
-  box,
   Foley,
-  panel,
+  progress,
   SceneProps,
   Stage,
   Stamp,
   useBeat,
 } from "../Editorial";
+import { Label, Slip, Window } from "../Demo";
 import { Prop } from "../Props";
 export const S5 = ({ words }: SceneProps) => {
-  const { t, cue } = useBeat(words);
-  const checks = ["testing", "catching", "verifying"].map(cue),
-    local = cue("offline");
-  const cards = [
-    {
-      title: "Take time to reason",
-      label: t >= cue("answer") ? "ANSWER CHECKED" : "THINKING MODE",
-      kind: "scratchpad" as const,
-    },
-    {
-      title: "Keep it on your device",
-      label: "OPEN WEIGHTS",
-      kind: "cabinet" as const,
-    },
-  ];
+  const { t, cue } = useBeat(words),
+    think = cue("assigned"),
+    clash = cue("maya"),
+    local = cue("deepseek"),
+    off = cue("off"),
+    done = cue("sensitive");
   return (
-    <Stage
-      title="Two ways to work differently"
-      label="BUCKET 04 / UNDER THE HOOD"
-    >
-      {cards.map((card, i) => (
-        <div
-          key={card.kind}
-          style={{
-            ...box(100 + 880 * i, 340, 805),
-            ...panel,
-            height: 530,
-            padding: "30px 42px",
-            background: i && t < cue("second") ? "#EAE4D3" : "#fffdf6",
-          }}
-        >
-          <div style={{ fontSize: 48, fontWeight: 700 }}>{card.title}</div>
-          <div style={box(100, 110)}>
-            <Prop
-              kind={card.kind}
-              width={390}
-              step={
-                i ? (t >= local ? 3 : 0) : checks.filter((a) => t >= a).length
-              }
-            />
-          </div>
-          {!i && (
-            <svg
-              style={box(487, 175)}
-              width="102"
-              height="112"
-              viewBox="0 0 100 112"
-              stroke="#141414"
-              strokeWidth="5"
-              fill="#F7F4EB"
+    <Stage title="Two different switches" label="BUCKET 04 / THINKING & LOCAL">
+      <Window title="Thinking mode / schedule" t={t}>
+        <Label>CAN EVERYONE WORK THEIR ASSIGNED SHIFT?</Label>
+        {t >= think && (
+          <>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1.4fr 1fr",
+                rowGap: 18,
+                padding: 18,
+                background: "#EAE4D3",
+              }}
             >
-              <path d="M39 9h22m-11 1v12" />
-              <circle cx="50" cy="65" r="40" />
-              <path
-                d="M50 65V35"
-                transform={`rotate(${Math.min(t, cue("answer")) * 20} 50 65)`}
-              />
-              <circle cx="50" cy="65" r="4" fill="#FF4D2D" />
-            </svg>
-          )}
-          {i && t >= local ? (
-            <div style={box(480, 155)}>
-              <Prop kind="laptop" width={225} />
+              {[
+                "Person",
+                "Shift",
+                "Starts",
+                "Maya",
+                "Front Desk",
+                "3:00 PM",
+                "Maya",
+                "Inventory",
+                "3:00 PM",
+              ].map((v, i) => (
+                <span
+                  key={i}
+                  style={{
+                    fontWeight: i < 3 ? 700 : 500,
+                    borderRadius: 28,
+                    outline:
+                      v === "3:00 PM" && t >= clash
+                        ? "4px solid #FF4D2D"
+                        : undefined,
+                    textAlign: "center",
+                    fontSize: 29,
+                  }}
+                >
+                  {v}
+                </span>
+              ))}
             </div>
-          ) : null}
-          <div style={box(55, 420)}>
-            <Stamp text={card.label} />
+            <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
+              <Prop
+                kind="scratchpad"
+                width={190}
+                step={t >= clash ? 3 : t >= cue("checks") ? 2 : 0}
+              />
+              {t >= clash && <Stamp size={23} text="DOUBLE BOOKED" />}
+            </div>
+          </>
+        )}
+      </Window>
+      <Window right title="Local model / laptop" t={t}>
+        <Label>CAN I SUMMARIZE THIS PRIVATE FILE OFFLINE?</Label>
+        {t < local ? (
+          <Prop kind="laptop" width={455} />
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              fontSize: 25,
+            }}
+          >
+            <b>DeepSeek / Llama · downloaded</b>
+            <Stamp size={22} text={t >= off ? "WI-FI OFF" : "WI-FI ON"} />
           </div>
-        </div>
-      ))}
-      <Actor x={754} y={750} t={t} />
-      <Actor x={1625} y={750} t={t + 0.3} />
-      {checks.map((at) => (
-        <Foley key={at} at={at} name="tick" />
-      ))}
-      <Foley at={cue("answer")} name="chime" />
-      <Foley at={local} name="vault" />
+        )}
+        {t >= off && <Slip>Private_Contract.pdf</Slip>}
+        {t >= done && (
+          <Slip hot>
+            <Label>LOCAL SUMMARY</Label>• Delivery due October 19
+            <br />• Final assets due Friday
+            <div style={{ color: "#20724d", marginTop: 14, fontSize: 23 }}>
+              <svg
+                width="25"
+                height="29"
+                viewBox="0 0 25 29"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3"
+              >
+                <path d="M6 14V8a6.5 6.5 0 0113 0v6" />
+                <rect x="3" y="13" width="19" height="14" rx="3" />
+              </svg>{" "}
+              Processed on this laptop
+            </div>
+          </Slip>
+        )}
+      </Window>
+      <Actor x={505 + progress(t, local, 1.2) * 860} y={944} t={t} />
+      <Foley at={0} name="whoosh" />
+      <Foley at={cue("checks")} name="tick" />
+      <Foley at={clash} name="ding" />
+      <Foley at={off} name="vault" />
+      <Foley at={done} name="chime" />
     </Stage>
   );
 };

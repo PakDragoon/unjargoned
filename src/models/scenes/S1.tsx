@@ -3,7 +3,6 @@ import {
   Actor,
   box,
   Foley,
-  progress,
   Prompt,
   SceneProps,
   Stage,
@@ -11,62 +10,44 @@ import {
   useBeat,
 } from "../Editorial";
 export const S1 = ({ words }: SceneProps) => {
-  const { t, cue } = useBeat(words);
-  const turn = cue("mistake");
-  const walk = progress(t, 0, turn + 2);
-  const x = 190 + walk * 1450;
+  const { t } = useBeat(words);
+  const selected = t >= 15 ? 1 : t >= 8 ? 2 : -1;
   return (
-    <Stage title="Four apps. One blank box." label="THE ILLUSION">
+    <Stage title="Which box would you open?" label="FIELD GUIDE / THE CHOICE">
       {["ChatGPT", "Claude", "Gemini", "DeepSeek"].map((name, i) => {
-        const enter = progress(t, i * 0.2);
+        const x = 283 + i * 445;
         return (
-          <Prompt
-            key={name}
-            x={282 + 445 * i}
-            y={528 + (1 - enter) * 320}
-            w={392}
-            h={241}
-            name={name}
-            t={t}
-          />
+          <React.Fragment key={name}>
+            <Prompt x={x} y={565} w={392} h={244} name={name} t={t} />
+            {i === selected && (
+              <div
+                style={{
+                  ...box(x - 204, 435, 408),
+                  height: 260,
+                  border: "8px solid #FF4D2D",
+                  borderRadius: 28,
+                  boxSizing: "border-box",
+                }}
+              />
+            )}
+          </React.Fragment>
         );
       })}
-      {t > turn && (
-        <svg
-          width={125}
-          height={125}
-          style={box(x, 721)}
-          fill="none"
-          stroke="#141414"
-          strokeWidth="9"
-          strokeLinecap="round"
-        >
-          <path d={`M41 86Q105 68 54 ${32 + 5 * Math.sin(t * 9)}`} />
-          <circle cx="53" cy={32 + 5 * Math.sin(t * 9)} r="10" fill="#F7F4EB" />
-        </svg>
-      )}
-      <Actor x={x} y={788 - 18 * Math.abs(Math.sin(walk * 25))} t={t} worried />
-      {t >= turn && (
-        <div style={box(100, 824)}>
-          <Stamp
-            text={
-              t < cue("buckets")
-                ? "SAME INTERFACE ≠ SAME STRENGTHS"
-                : "FOUR BUCKETS"
-            }
-          />
-        </div>
-      )}
-      <div
-        style={{
-          ...box(x + 40, 665),
-          fontSize: 52,
-          transform: `rotate(${8 * Math.sin(t * 3)}deg)`,
-        }}
-      >
-        ?
+      <div style={box(106, 310)}>
+        <Stamp
+          size={34}
+          text={selected === 1 ? "REWRITE THE EXPLANATION" : "FIND THE DIAGRAM"}
+        />
       </div>
-      <Foley at={turn} name="click" />
+      <Actor
+        x={selected === 1 ? 728 : selected === 2 ? 1173 : 520}
+        y={805}
+        t={t}
+        worried={selected < 0}
+      />
+      <Foley at={0} name="pop" />
+      <Foley at={8} name="ding" />
+      <Foley at={15} name="click" />
     </Stage>
   );
 };

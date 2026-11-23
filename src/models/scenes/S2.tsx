@@ -1,52 +1,80 @@
 import React from "react";
-import { Foley, SceneProps, Stage, useBeat } from "../Editorial";
-import { Exhibit } from "../Exhibit";
+import {
+  Actor,
+  Foley,
+  progress,
+  SceneProps,
+  Stage,
+  Stamp,
+  useBeat,
+} from "../Editorial";
+import { Label, Slip, Wave, Window } from "../Demo";
+import { Prop } from "../Props";
+const transcript =
+  "Hey uh, can we push Thursday’s sync to Friday at 2? My dentist appointment ran late and I still haven't finished the slides, sorry about that...";
 export const S2 = ({ words }: SceneProps) => {
-  const { t, cue } = useBeat(words);
-  const stamp = cue("everyday"),
-    breadth = cue("breadth"),
-    folder = cue("messy");
+  const { t, cue } = useBeat(words),
+    note = cue("hey"),
+    email = cue("cleans");
   return (
-    <Stage title="The everyday all-rounder" label="BUCKET 01 / CHATGPT">
-      <Exhibit
-        t={t}
-        stampAt={stamp}
-        number={1}
-        stamp="ALL-ROUNDER"
-        beats={[
-          {
-            at: 0,
-            kind: "knife",
-            title: "One tool, many jobs",
-            detail: "A Swiss Army knife for the things you do every day.",
-            tabs: ["CHATGPT"],
-          },
-          {
-            at: breadth,
-            kind: "knife",
-            title: "Pick the tool you need",
-            detail: "Brainstorm a gift, talk hands-free or sketch an idea.",
-            tabs: ["VOICE", "IMAGE", "WEB"],
-          },
-          {
-            at: cue("ecosystem"),
-            kind: "knife",
-            title: "A familiar starting point",
-            detail: "Move from an idea to a draft in one workspace.",
-            tabs: ["ASSISTANTS", "CANVAS", "APPS"],
-          },
-          {
-            at: folder,
-            kind: "folder",
-            title: "The trade-off",
-            detail: "A quick pass can skim the surface of a sprawling project.",
-            tabs: ["MULTI-FILE REVIEW"],
-          },
-        ]}
-      />
-      <Foley at={stamp} name="stamp" />
-      <Foley at={breadth} name="pop" />
-      <Foley at={folder} name="paper" />
+    <Stage title="A voice note becomes an email" label="BUCKET 01 / CHATGPT">
+      <Window title="ChatGPT" t={t}>
+        <Label>{t < note ? "POCKET TOOLKIT" : "DOT’S VOICE NOTE"}</Label>
+        {t < note ? (
+          <>
+            <Prop kind="knife" width={390} />
+            <div
+              style={{
+                opacity: t >= cue("all-rounder") ? 1 : 0,
+                transformOrigin: "left",
+                transform: `scale(${1 + 0.35 * (1 - progress(t, cue("all-rounder"), 0.22))})`,
+              }}
+            >
+              <Stamp text="ALL-ROUNDER" />
+            </div>
+          </>
+        ) : (
+          <>
+            <Wave t={t} />
+            <Slip>
+              {transcript.slice(
+                0,
+                Math.ceil(
+                  transcript.length *
+                    Math.max(0, Math.min(1, (t - note) / (email - note))),
+                ),
+              )}
+            </Slip>
+          </>
+        )}
+      </Window>
+      <Window right title="Email draft" t={t}>
+        {t < email ? (
+          <>
+            <Label>OUTBOX / NEW MESSAGE</Label>
+            <Slip>To: Sarah</Slip>
+            <div style={{ color: "#706b60" }}>
+              Waiting for Dot’s voice note…
+            </div>
+          </>
+        ) : (
+          <div
+            style={{
+              transform: `translateX(${60 * (1 - progress(t, email))}px)`,
+            }}
+          >
+            <Label>TO / SARAH</Label>
+            <b>Subject: Moving Thursday’s Sync to Friday at 2 PM</b>
+            <hr />
+            <p>Hi Sarah,</p>Could we move Thursday’s sync to Friday at 2:00 PM
+            so I can wrap up the slides first? Let me know if that works.
+          </div>
+        )}
+      </Window>
+      <Actor x={470 + progress(t, email, 1) * 690} y={920} t={t} />
+      <Foley at={0} name="whoosh" />
+      <Foley at={cue("all-rounder")} name="stamp" />
+      <Foley at={email} name="ding" />
     </Stage>
   );
 };
