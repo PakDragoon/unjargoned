@@ -1,26 +1,26 @@
 [
   {
     "file": "audio/short_models/s1.mp3",
-    "seconds": 8.0,
-    "frames": 480,
-    "hash": "531c7d29e23be5086878ad49414be7fbf267dac89981984a475b6368bb0b4cf8"
+    "seconds": 6.96,
+    "frames": 418,
+    "hash": "eaef89c8310b2a0564c0dfdd9a776c0fad96c322e8cbe9c25f19153d3c87489c"
   },
   {
     "file": "audio/short_models/s2.mp3",
-    "seconds": 17.36,
-    "frames": 1042,
-    "hash": "770bd42e9216bcd6acfe278b400e52bce5af118838d1d2b06b13aedf300df7fe"
+    "seconds": 15.52,
+    "frames": 932,
+    "hash": "5161fa525375aa739866eae551ec8d636f81c673399501794916a1db35d70ff7"
   },
   {
     "file": "audio/short_models/s3.mp3",
-    "seconds": 9.2,
-    "frames": 552,
-    "hash": "b6d1013fd7d5dd33f6c217a9737d0ba5eec927d681bf678e508cfd254f6cc05f"
+    "seconds": 7.84,
+    "frames": 471,
+    "hash": "d2e9b7f9da20e06956aa6a0b84104531fba76f4baae3c1a61e8d0053e9955e70"
   },
   {
     "file": "audio/short_models/s4.mp3",
-    "seconds": 6.08,
-    "frames": 365,
-    "hash": "28320cb3b512feeabd1fe0e8b6e03ac64e5ce5ecb204d936ec255243c14073a1"
+    "seconds": 5.04,
+    "frames": 303,
+    "hash": "eca57791c2a26799d31396741c4f1b3de44f2c8147c98aebaad0835733b3fc6a"
   }
 ]

@@ -1,71 +1,67 @@
 1
-00:00:00,000 --> 00:00:02,800
+00:00:00,000 --> 00:00:02,640
 Stop using ChatGPT for every single
 
 2
-00:00:02,880 --> 00:00:05,600
-task. Every major AI has evolved
+00:00:02,880 --> 00:00:05,200
+task. Every major AI is built
 
 3
-00:00:05,720 --> 00:00:08,080
-into a completely different specialist.
+00:00:05,240 --> 00:00:07,040
+for a completely different job.
 
 4
-00:00:08,000 --> 00:00:10,480
-Need fast brainstorming, voice mode, or
+00:00:06,967 --> 00:00:08,727
+Turning a rambling voice note into
 
 5
-00:00:10,640 --> 00:00:13,760
-everyday help? Use ChatGPT. Writing long
+00:00:08,807 --> 00:00:12,087
+a clean email? Open ChatGPT. Rewriting
 
 6
-00:00:13,840 --> 00:00:16,560
-documents or building real software? Claude
+00:00:12,167 --> 00:00:13,527
+a stiff message in your own
 
 7
-00:00:16,640 --> 00:00:18,320
-is sharper and sounds more human.
+00:00:13,607 --> 00:00:15,527
+voice or tracing a bug across
 
 8
-00:00:18,640 --> 00:00:21,520
-Analyzing full videos, audio, or massive
+00:00:15,607 --> 00:00:18,247
+code files? Reach for Claude. Finding
 
 9
-00:00:21,600 --> 00:00:24,000
-PDFs inside Google apps? That is
+00:00:18,407 --> 00:00:20,647
+one specific moment inside an hour-long
 
 10
-00:00:24,080 --> 00:00:25,440
-Gemini's superpower.
+00:00:20,727 --> 00:00:22,487
+video? That’s Gemini.
 
 11
-00:00:25,367 --> 00:00:26,647
-And when you hit tough logic
+00:00:22,500 --> 00:00:24,020
+Switch on Thinking Mode when you
 
 12
-00:00:26,727 --> 00:00:28,647
-puzzles, switch on a Thinking mode
+00:00:24,100 --> 00:00:26,260
+need the AI to double-check logic,
 
 13
-00:00:28,727 --> 00:00:30,327
-so the AI double-checks its own
+00:00:26,340 --> 00:00:28,420
+or run an open-weight model offline
 
 14
-00:00:30,407 --> 00:00:33,287
-work—or run open-weight models like DeepSeek
+00:00:28,460 --> 00:00:30,340
+on your laptop for private files.
 
 15
-00:00:33,367 --> 00:00:34,647
-locally for free.
+00:00:30,350 --> 00:00:32,030
+Watch the full visual cheat sheet
 
 16
-00:00:34,567 --> 00:00:36,727
-Watch the full six-minute visual cheat
+00:00:32,110 --> 00:00:33,870
+linked below so you never pick
 
 17
-00:00:36,807 --> 00:00:38,567
-sheet linked right below so you
-
-18
-00:00:38,647 --> 00:00:40,727
-never pick the wrong AI again.
+00:00:33,910 --> 00:00:35,470
+the wrong AI again.

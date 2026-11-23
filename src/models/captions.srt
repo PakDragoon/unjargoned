@@ -1,511 +1,471 @@
 1
-00:00:00,000 --> 00:00:03,200
-If you open ChatGPT, Claude, Gemini,
+00:00:00,000 --> 00:00:02,720
+You missed an hour-long lecture. Somewhere
 
 2
-00:00:03,240 --> 00:00:05,280
-or DeepSeek today, they all look
+00:00:02,800 --> 00:00:04,560
+in the recording, your professor draws
 
 3
-00:00:05,360 --> 00:00:07,200
-like the exact same blank white
+00:00:04,640 --> 00:00:07,200
+the exact diagram you need. Four
 
 4
-00:00:07,360 --> 00:00:09,440
-box waiting for a question. Because
+00:00:07,280 --> 00:00:09,120
+identical chat boxes are sitting in
 
 5
-00:00:09,520 --> 00:00:11,520
-they look identical on the outside,
+00:00:09,200 --> 00:00:10,640
+front of you. Which box would
 
 6
-00:00:11,640 --> 00:00:12,960
-most people assume they are all
+00:00:10,720 --> 00:00:12,800
+you open? I’d start with Gemini.
 
 7
-00:00:13,040 --> 00:00:14,720
-doing the exact same thing behind
+00:00:13,440 --> 00:00:15,200
+Now you’ve found the diagram, but
 
 8
-00:00:14,760 --> 00:00:16,880
-the scenes—and just pick whichever icon
+00:00:15,280 --> 00:00:16,880
+your rough explanation reads like a
 
 9
-00:00:16,920 --> 00:00:18,160
-happens to be closest on their
+00:00:17,080 --> 00:00:19,680
+tax form. Different job. Which box
 
 10
-00:00:18,320 --> 00:00:21,040
-phone. That is a mistake. Under
+00:00:19,760 --> 00:00:22,560
+now? That’s a Claude task. Every
 
 11
-00:00:21,120 --> 00:00:22,880
-the hood, these AI systems have
+00:00:22,640 --> 00:00:24,480
+major AI looks like the exact
 
 12
-00:00:22,960 --> 00:00:25,760
-evolved into very different specialists, built
+00:00:24,560 --> 00:00:26,480
+same blank box, so most people
 
 13
-00:00:25,840 --> 00:00:28,320
-with different strengths, different trade-offs, and
+00:00:26,560 --> 00:00:28,560
+just click whichever icon is closest.
 
 14
-00:00:28,400 --> 00:00:30,160
-completely different ways of solving a
+00:00:28,800 --> 00:00:29,920
+Once you see the four jobs
 
 15
-00:00:30,240 --> 00:00:32,800
-problem. Instead of memorizing dozens of
+00:00:29,960 --> 00:00:31,680
+they’re actually built for, you’ll know
 
 16
-00:00:32,880 --> 00:00:35,200
-confusing version numbers, you only need
+00:00:31,760 --> 00:00:33,680
+which box to open in seconds.
 
 17
-00:00:35,280 --> 00:00:38,000
-to understand four simple buckets. Once
+00:00:33,600 --> 00:00:37,360
+Bucket one is the Everyday All-Rounder—ChatGPT.
 
 18
-00:00:38,080 --> 00:00:39,360
-you see how they are wired,
+00:00:37,920 --> 00:00:39,840
+Think of ChatGPT as the Swiss
 
 19
-00:00:39,440 --> 00:00:40,800
-you will know exactly which one
+00:00:40,000 --> 00:00:42,160
+Army knife of AI. Its biggest
 
 20
-00:00:40,880 --> 00:00:42,640
-to open in five seconds.
+00:00:42,240 --> 00:00:44,640
+strength is handling messy, everyday tasks
 
 21
-00:00:42,567 --> 00:00:44,487
-Bucket number one is the Everyday
+00:00:44,720 --> 00:00:47,040
+in one place—especially when you’re speaking
 
 22
-00:00:44,647 --> 00:00:48,087
-All-Rounder—led by OpenAI’s ChatGPT and its
+00:00:47,120 --> 00:00:48,960
+out loud. Watch what happens when
 
 23
-00:00:48,167 --> 00:00:51,047
-GPT models. Think of ChatGPT as
+00:00:49,040 --> 00:00:51,360
+Dot leaves a rambling voice note:
 
 24
-00:00:51,087 --> 00:00:52,807
-the Swiss Army knife of AI.
+00:00:51,400 --> 00:00:53,280
+"Hey uh, can we push Thursday’s
 
 25
-00:00:53,207 --> 00:00:55,207
-Its biggest superpower isn't just one
+00:00:53,360 --> 00:00:55,280
+sync to Friday at 2? My
 
 26
-00:00:55,367 --> 00:00:58,447
-narrow benchmark—it is breadth and polish.
+00:00:55,400 --> 00:00:56,560
+dentist ran late and I still
 
 27
-00:00:58,727 --> 00:01:00,887
-Whether you are brainstorming gift ideas,
+00:00:56,640 --> 00:00:59,600
+haven’t finished the slides..." ChatGPT cleans
 
 28
-00:01:00,927 --> 00:01:02,727
-talking hands-free in voice mode while
+00:00:59,680 --> 00:01:00,960
+up the filler, pulls out the
 
 29
-00:01:02,807 --> 00:01:05,367
-driving, generating an image, or drafting
+00:01:01,040 --> 00:01:02,560
+new time, and hands back a
 
 30
-00:01:05,407 --> 00:01:08,087
-a quick email, ChatGPT handles everyday
+00:01:02,640 --> 00:01:05,360
+crisp two-sentence email ready to send.
 
 31
-00:01:08,167 --> 00:01:11,047
-tasks smoothly without much friction. Because
+00:01:05,440 --> 00:01:07,440
+When you want fast brainstorming, voice
 
 32
-00:01:11,127 --> 00:01:13,687
-OpenAI built the largest consumer ecosystem
+00:01:07,520 --> 00:01:10,240
+conversation, or quick everyday cleanup, start
 
 33
-00:01:13,847 --> 00:01:16,927
-around it—with custom assistants, canvas workspaces,
+00:01:10,360 --> 00:01:10,800
+here.
 
 34
-00:01:16,967 --> 00:01:19,367
-and deep app integrations—it is designed
+00:01:10,733 --> 00:01:12,253
+Bucket two is where you reach
 
 35
-00:01:19,447 --> 00:01:20,967
-to be the default starting point
+00:01:12,333 --> 00:01:15,853
+when tone and precision matter—Claude. Instead
 
 36
-00:01:21,047 --> 00:01:23,607
-for general knowledge work. The catch?
+00:01:15,893 --> 00:01:17,453
+of talking in theory, look at
 
 37
-00:01:23,687 --> 00:01:25,847
-When you throw massive, messy documents
+00:01:17,533 --> 00:01:18,893
+two jobs where people switch to
 
 38
-00:01:25,927 --> 00:01:28,487
-or sprawling multi-file codebases at it,
+00:01:18,973 --> 00:01:22,093
+Claude. First, rewriting without losing your
 
 39
-00:01:28,527 --> 00:01:30,407
-a generalist can occasionally skim the
+00:01:22,173 --> 00:01:24,533
+voice. Take a stiff line like:
 
 40
-00:01:30,487 --> 00:01:32,407
-surface or take shortcuts instead of
+00:01:24,733 --> 00:01:27,053
+"Per our previous correspondence, failure to
 
 41
-00:01:32,487 --> 00:01:33,287
-digging deep.
+00:01:27,133 --> 00:01:29,053
+submit assets by Friday will delay
 
 42
-00:01:33,233 --> 00:01:34,913
-Bucket number two is the Deep
+00:01:29,133 --> 00:01:31,773
+launch." Tell Claude: "Make this sound
 
 43
-00:01:35,073 --> 00:01:38,353
-Writer and Builder—led by Anthropic’s Claude.
+00:01:31,853 --> 00:01:33,453
+like me, but keep the deadline
 
 44
-00:01:38,393 --> 00:01:40,993
-If ChatGPT is a fast generalist,
+00:01:33,613 --> 00:01:36,173
+firm." You get back: "Hey Alex
 
 45
-00:01:41,073 --> 00:01:42,993
-Claude is the meticulous editor and
+00:01:36,493 --> 00:01:37,613
+— quick heads-up that we still
 
 46
-00:01:43,153 --> 00:01:45,633
-senior software engineer. People who work
+00:01:37,693 --> 00:01:39,293
+need the final assets by Friday
 
 47
-00:01:45,673 --> 00:01:47,713
-heavily with text and code gravitate
+00:01:39,373 --> 00:01:40,973
+so we don’t push back launch."
 
 48
-00:01:47,753 --> 00:01:50,353
-toward Claude for two distinct reasons.
+00:01:41,293 --> 00:01:45,053
+Direct, natural, and still firm. Second,
 
 49
-00:01:50,513 --> 00:01:52,753
-First, its writing sounds noticeably more
+00:01:45,133 --> 00:01:47,813
+tracing bugs across files. Suppose a
 
 50
-00:01:52,833 --> 00:01:55,473
-human and nuanced. Where other chatbots
+00:01:48,013 --> 00:01:49,213
+checkout button on your site still
 
 51
-00:01:55,553 --> 00:01:57,793
-often lean on stiff, repetitive corporate
+00:01:49,453 --> 00:01:51,933
+shows the old forty-nine-dollar price. Instead
 
 52
-00:01:57,833 --> 00:02:01,313
-clichés, Claude follows tone instructions closely
+00:01:52,013 --> 00:01:53,853
+of guessing, Claude reads across your
 
 53
-00:02:01,393 --> 00:02:03,233
-and reads large policy documents or
+00:01:54,173 --> 00:01:55,613
+project folder and points straight to
 
 54
-00:02:03,593 --> 00:02:05,313
-contracts without losing track of fine
+00:01:55,693 --> 00:01:57,693
+the exact config file still holding
 
 55
-00:02:05,393 --> 00:02:08,753
-details. Second, Claude excels at building
+00:01:57,773 --> 00:01:58,573
+that old number.
 
 56
-00:02:08,993 --> 00:02:10,993
-software. Rather than just spitting out
+00:01:58,500 --> 00:02:00,420
+Bucket three is the Multimodal and
 
 57
-00:02:11,193 --> 00:02:13,073
-isolated snippets of code, it can
+00:02:00,500 --> 00:02:04,260
+Workspace Brain—Gemini. Unlike models that originally
 
 58
-00:02:13,153 --> 00:02:15,313
-read an entire project folder, trace
+00:02:04,340 --> 00:02:07,540
+only read text, Gemini processes video,
 
 59
-00:02:15,393 --> 00:02:17,633
-how different files connect, and refactor
+00:02:07,780 --> 00:02:10,500
+audio, images, and huge files natively
 
 60
-00:02:17,713 --> 00:02:20,433
-complex logic step by step. The
+00:02:10,660 --> 00:02:13,060
+inside Google’s ecosystem. And this is
 
 61
-00:02:20,553 --> 00:02:23,153
-trade-off is restraint: Claude is strictly
+00:02:13,100 --> 00:02:15,620
+where the buckets connect—because real tasks
 
 62
-00:02:23,233 --> 00:02:25,953
-focused on text, reasoning, and code,
+00:02:15,780 --> 00:02:18,020
+rarely stay in one lane. Suppose
 
 63
-00:02:26,033 --> 00:02:27,233
-so if you want native video
+00:02:18,100 --> 00:02:20,260
+Dot finishes a forty-minute meeting recording
 
 64
-00:02:27,313 --> 00:02:29,713
-understanding or live social feeds, you
+00:02:20,340 --> 00:02:21,620
+and needs to email a client
 
 65
-00:02:29,753 --> 00:02:30,993
-will need the next bucket.
+00:02:21,700 --> 00:02:24,020
+what changed. First, Dot drops the
 
 66
-00:02:30,933 --> 00:02:33,093
-Bucket number three is the Multimodal
+00:02:24,100 --> 00:02:26,020
+video into Gemini and asks: "Where
 
 67
-00:02:33,173 --> 00:02:36,053
-and Ecosystem Brain—led by Google’s Gemini.
+00:02:26,100 --> 00:02:28,020
+did we move the deadline?" Gemini
 
 68
-00:02:36,613 --> 00:02:38,373
-Most AI models started out reading
+00:02:28,100 --> 00:02:29,780
+jumps straight to minute twenty-eight and
 
 69
-00:02:38,533 --> 00:02:40,613
-only text, and later had image
+00:02:29,860 --> 00:02:32,340
+pulls the exact line: moving delivery
 
 70
-00:02:40,693 --> 00:02:42,293
-and audio tools bolted onto the
+00:02:32,380 --> 00:02:35,140
+from October twelfth to October nineteenth.
 
 71
-00:02:42,453 --> 00:02:44,613
-side. Gemini was built from day
+00:02:35,340 --> 00:02:37,460
+Next, Dot hands that timestamped clip
 
 72
-00:02:44,773 --> 00:02:47,253
-one to be natively multimodal. That
+00:02:37,580 --> 00:02:38,580
+over to Claude to write the
 
 73
-00:02:47,333 --> 00:02:50,053
-means it processes text, photos, audio
+00:02:38,660 --> 00:02:40,420
+client update—and right there in the
 
 74
-00:02:50,133 --> 00:02:53,093
-recordings, spreadsheets, and full video files
+00:02:40,620 --> 00:02:43,060
+draft, October twelfth is swapped cleanly
 
 75
-00:02:53,173 --> 00:02:55,493
-inside the exact same brain. You
+00:02:43,140 --> 00:02:45,460
+for October nineteenth. Gemini finds the
 
 76
-00:02:55,573 --> 00:02:57,013
-can hand it an hour-long video
+00:02:45,540 --> 00:02:47,460
+needle in the video; Claude writes
 
 77
-00:02:57,093 --> 00:02:59,013
-lecture or a massive archive of
+00:02:47,487 --> 00:02:48,260
+the message.
 
 78
-00:02:59,093 --> 00:03:00,773
-PDFs and ask it to find
-
-79
-00:03:00,853 --> 00:03:03,413
-a single visual moment or cross-reference
-
-80
-00:03:03,493 --> 00:03:05,893
-facts across hundreds of pages. On
-
-81
-00:03:06,013 --> 00:03:07,893
-top of that, Gemini lives directly
-
-82
-00:03:07,973 --> 00:03:09,813
-inside the tools billions of people
-
-83
-00:03:09,893 --> 00:03:13,733
-already use every day—Gmail, Docs, Drive,
-
-84
-00:03:13,773 --> 00:03:15,893
-and Android. Instead of copying and
-
-85
-00:03:15,973 --> 00:03:17,973
-pasting information back and forth between
-
-86
-00:03:18,053 --> 00:03:20,453
-tabs, it can pull context straight
-
-87
-00:03:20,533 --> 00:03:21,653
-from your workspace.
-
-88
-00:03:24,613 --> 00:03:25,573
+00:02:51,213 --> 00:02:52,173
 Subscribe!
 
+79
+00:02:53,200 --> 00:02:55,333
+Bucket four covers two very different
+
+80
+00:02:55,360 --> 00:02:58,208
+switches: Thinking Modes and Open-Weight Local
+
+81
+00:02:58,256 --> 00:03:00,880
+Models. People often mix these up,
+
+82
+00:03:01,000 --> 00:03:02,320
+so give each one its own
+
+83
+00:03:02,400 --> 00:03:05,280
+question. For Thinking Mode, ask: "Can
+
+84
+00:03:05,360 --> 00:03:07,680
+everyone work their assigned shift?" A
+
+85
+00:03:07,840 --> 00:03:09,360
+fast model might skim the schedule
+
+86
+00:03:09,440 --> 00:03:11,200
+and say yes. When you turn
+
+87
+00:03:11,280 --> 00:03:13,200
+on Thinking Mode, the model pauses
+
+88
+00:03:13,240 --> 00:03:15,360
+on a hidden scratchpad, checks every
+
 89
-00:03:26,600 --> 00:03:28,440
-Bucket number four isn't a single
+00:03:15,560 --> 00:03:17,440
+person hour by hour, and catches
 
 90
-00:03:28,520 --> 00:03:31,400
-company—it is two major shifts changing
+00:03:17,480 --> 00:03:20,000
+the real conflict—Maya is scheduled in
 
 91
-00:03:31,520 --> 00:03:33,400
-how AI works under the hood:
+00:03:20,080 --> 00:03:22,480
+two places at three p.m. For
 
 92
-00:03:33,480 --> 00:03:37,000
-Reasoning Models and Open-Weight Models. First,
+00:03:22,560 --> 00:03:25,040
+Open-Weight models like DeepSeek or Llama,
 
 93
-00:03:37,080 --> 00:03:39,240
-almost every major AI app now
+00:03:25,200 --> 00:03:27,200
+ask: "Can I summarize this private
 
 94
-00:03:39,320 --> 00:03:41,560
-offers a "Thinking" or "Reasoning" mode
+00:03:27,280 --> 00:03:28,960
+file while my laptop is offline?"
 
 95
-00:03:41,640 --> 00:03:44,360
-alongside its fast default mode. Standard
+00:03:29,680 --> 00:03:31,840
+Note the catch: using DeepSeek on
 
 96
-00:03:44,440 --> 00:03:46,920
-AI predicts words immediately, like someone
+00:03:31,920 --> 00:03:33,840
+a public website still sends your
 
 97
-00:03:47,000 --> 00:03:48,360
-answering a trivia question off the
+00:03:33,960 --> 00:03:35,600
+file to a cloud server. But
 
 98
-00:03:48,440 --> 00:03:50,600
-top of their head. Reasoning models
+00:03:35,760 --> 00:03:38,400
+because open-weight models publish their blueprints,
 
 99
-00:03:50,680 --> 00:03:52,360
-pause for ten to thirty seconds
+00:03:38,480 --> 00:03:39,680
+you can download one onto your
 
 100
-00:03:52,440 --> 00:03:53,640
-to talk through the problem on
+00:03:39,760 --> 00:03:42,560
+laptop, turn Wi-Fi completely off, and
 
 101
-00:03:53,720 --> 00:03:57,320
-a hidden scratchpad—testing logic, catching mistakes,
+00:03:42,720 --> 00:03:45,840
+summarize sensitive files locally. Thinking mode
 
 102
-00:03:57,400 --> 00:03:59,400
-and verifying math before showing you
+00:03:45,920 --> 00:03:47,440
+changes how the model tackles the
 
 103
-00:03:59,440 --> 00:04:02,040
-the final answer. Second, there are
+00:03:47,520 --> 00:03:49,920
+problem. Running locally changes where the
 
 104
-00:04:02,120 --> 00:04:04,360
-Open-Weight models like DeepSeek and Meta’s
+00:03:50,000 --> 00:03:52,480
+work happens. And on capable hardware,
 
 105
-00:04:04,440 --> 00:04:08,280
-Llama. Unlike ChatGPT, Claude, or Gemini—which
+00:03:52,520 --> 00:03:53,520
+you can do both.
 
 106
-00:04:08,360 --> 00:04:11,400
-stay locked inside private cloud servers—open-weight
+00:03:53,467 --> 00:03:55,787
+Before you go, quick test—pick the
 
 107
-00:04:11,480 --> 00:04:14,360
-models publish their underlying blueprints publicly.
+00:03:55,867 --> 00:03:58,267
+box before Dot stamps it. Messy
 
 108
-00:04:14,600 --> 00:04:15,880
-Developers can run them at a
+00:03:58,347 --> 00:03:59,947
+voice note into a clean email?
 
 109
-00:04:16,080 --> 00:04:17,480
-fraction of the cost, or even
+00:04:01,447 --> 00:04:04,567
+ChatGPT. Find one diagram buried inside
 
 110
-00:04:17,560 --> 00:04:19,720
-download smaller versions directly onto a
+00:04:04,647 --> 00:04:08,827
+a recorded lecture? Gemini. Summarize a
 
 111
-00:04:19,800 --> 00:04:22,120
-laptop to work completely offline with
+00:04:08,867 --> 00:04:10,387
+private file that has to stay
 
 112
-00:04:22,280 --> 00:04:24,040
-zero data leaving their device.
+00:04:10,467 --> 00:04:13,887
+on this laptop? A local open-weight
 
 113
-00:04:23,967 --> 00:04:25,167
-So the next time you stare
+00:04:13,967 --> 00:04:15,647
+model. Now that you know which
 
 114
-00:04:25,247 --> 00:04:26,927
-at a blinking cursor, skip the
+00:04:15,807 --> 00:04:18,047
+model handles which job, what happens
 
 115
-00:04:27,007 --> 00:04:28,367
-hype and match the job to
+00:04:18,127 --> 00:04:19,967
+when these AI systems stop waiting
 
 116
-00:04:28,407 --> 00:04:30,927
-the bucket: Everyday tasks, voice, and
+00:04:20,047 --> 00:04:21,487
+for your prompts and start running
 
 117
-00:04:31,007 --> 00:04:34,847
-quick ideas: open ChatGPT. Nuanced writing,
+00:04:21,567 --> 00:04:22,847
+tasks in the cloud while you
 
 118
-00:04:34,927 --> 00:04:37,487
-long documents, and coding: open Claude.
-
-119
-00:04:37,967 --> 00:04:40,527
-Video, audio, huge files, and Google
-
-120
-00:04:40,687 --> 00:04:43,567
-apps: open Gemini. Hard logic puzzles
-
-121
-00:04:43,647 --> 00:04:45,567
-or private local runs: switch on
-
-122
-00:04:45,647 --> 00:04:47,327
-a Reasoning mode or an Open-Weight
-
-123
-00:04:47,407 --> 00:04:49,007
-model. And if you want to
-
-124
-00:04:49,087 --> 00:04:50,367
-see what happens when these models
-
-125
-00:04:50,447 --> 00:04:51,967
-stop waiting for your prompts and
-
-126
-00:04:52,127 --> 00:04:53,407
-start running tasks in the cloud
-
-127
-00:04:53,487 --> 00:04:55,487
-while you sleep, watch this breakdown
-
-128
-00:04:55,687 --> 00:04:56,127
-next.
+00:04:22,927 --> 00:04:25,327
+sleep? Watch this breakdown next.
