@@ -14,9 +14,32 @@ export const seconds = (id: SceneId) => durations.scenes[id].seconds;
 export const Voice: React.FC<{ id: SceneId }> = ({ id }) => <Audio src={staticFile(durations.scenes[id].file)} />;
 
 export type SfxName = "slam" | "thud" | "chime" | "stamp" | "click" | "tick" | "snap" | "paper" | "slap" | "roll" | "vault" | "ding" | "whoosh" | "pop" | "hop";
+
+// These WAVs have different source levels from the long video's MP3s.
+// The caps use the WAVs' measured loudness (short hits padded to 400 ms for
+// measurement) and the long mix's targets: hits ~10 dB below the -25.5 LUFS
+// narration reference and the rolling bed ~15 dB below it.
+const SFX_VOLUME_LIMIT: Record<SfxName, number> = {
+  slam: 0.113,
+  thud: 0.147,
+  chime: 0.138,
+  stamp: 0.145,
+  click: 0.454,
+  tick: 0.549,
+  snap: 0.223,
+  paper: 0.104,
+  slap: 0.177,
+  roll: 0.106,
+  vault: 0.149,
+  ding: 0.11,
+  whoosh: 0.089,
+  pop: 0.247,
+  hop: 0.294,
+};
+
 export const Sfx: React.FC<{ at: number; name: SfxName; vol?: number }> = ({ at, name, vol = 0.5 }) => (
   <Sequence from={Math.max(0, Math.round(at * FPS))} layout="none">
-    <Audio src={staticFile(`audio/sfx/${name}.wav`)} volume={vol} />
+    <Audio src={staticFile(`audio/sfx/${name}.wav`)} volume={Math.min(vol, SFX_VOLUME_LIMIT[name])} />
   </Sequence>
 );
 
