@@ -1,0 +1,54 @@
+name: Generate Models narration
+on:
+  push:
+    branches: [ai_models_episode]
+    paths: ['.github/workflows/models-narration.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: models-narration-ai-models-episode
+  cancel-in-progress: false
+
+jobs:
+  narrate:
+    if: github.ref == 'refs/heads/ai_models_episode'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install audio tools
+        run: |
+          if ! command -v ffprobe >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+      - name: Generate scene narration and aligned subtitles
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          test -n "$ELEVENLABS_API_KEY" || { echo "::error::ELEVENLABS_API_KEY is missing"; exit 1; }
+          python3 tools/tts_models.py
+      - name: Verify all ten recordings and commit
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          for src, count in [('src/models', 6), ('src/shorts/models', 4)]:
+              scenes = json.loads(Path(src, 'durations.json').read_text())
+              timings = json.loads(Path(src, 'words.json').read_text())
+              assert len(scenes) == len(timings) == count
+              for scene, words in zip(scenes, timings):
+                  assert scene['file'] and Path('public', scene['file']).stat().st_size > 0
+                  assert words and 0 <= words[0][1] < words[-1][2] <= scene['seconds'] + .1
+          PY
+          git add -f public/audio/{models,short_models}/s*.mp3
+          git add -u src/models src/shorts/models
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Add generated Models narration and aligned scene timings"
+            git push origin HEAD:refs/heads/ai_models_episode
+          fi
