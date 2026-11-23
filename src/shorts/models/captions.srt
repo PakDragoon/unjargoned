@@ -7,7 +7,7 @@ Stop using ChatGPT for every single
 task. Every major AI is built
 
 3
-00:00:05,240 --> 00:00:07,040
+00:00:05,240 --> 00:00:06,960
 for a completely different job.
 
 4
@@ -63,5 +63,5 @@ Watch the full visual cheat sheet
 linked below so you never pick
 
 17
-00:00:33,910 --> 00:00:35,470
+00:00:33,910 --> 00:00:35,390
 the wrong AI again.

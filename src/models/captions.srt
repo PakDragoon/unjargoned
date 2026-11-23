@@ -59,413 +59,429 @@ Once you see the four jobs
 they’re actually built for, you’ll know
 
 16
-00:00:31,760 --> 00:00:33,680
+00:00:31,760 --> 00:00:33,600
 which box to open in seconds.
 
 17
-00:00:33,600 --> 00:00:37,360
+00:00:33,600 --> 00:00:37,972
 Bucket one is the Everyday All-Rounder—ChatGPT.
 
 18
-00:00:37,920 --> 00:00:39,840
+00:00:39,823 --> 00:00:42,056
 Think of ChatGPT as the Swiss
 
 19
-00:00:40,000 --> 00:00:42,160
+00:00:42,242 --> 00:00:44,754
 Army knife of AI. Its biggest
 
 20
-00:00:42,240 --> 00:00:44,640
+00:00:44,846 --> 00:00:47,637
 strength is handling messy, everyday tasks
 
 21
-00:00:44,720 --> 00:00:47,040
+00:00:47,730 --> 00:00:50,428
 in one place—especially when you’re speaking
 
 22
-00:00:47,120 --> 00:00:48,960
+00:00:50,521 --> 00:00:52,660
 out loud. Watch what happens when
 
 23
-00:00:49,040 --> 00:00:51,360
+00:00:52,754 --> 00:00:55,451
 Dot leaves a rambling voice note:
 
 24
-00:00:51,400 --> 00:00:53,280
+00:00:55,498 --> 00:00:57,684
 "Hey uh, can we push Thursday’s
 
 25
-00:00:53,360 --> 00:00:55,280
+00:00:57,777 --> 00:01:00,009
 sync to Friday at 2? My
 
 26
-00:00:55,400 --> 00:00:56,560
+00:01:00,149 --> 00:01:01,498
 dentist ran late and I still
 
 27
-00:00:56,640 --> 00:00:59,600
-haven’t finished the slides..." ChatGPT cleans
+00:01:01,591 --> 00:01:03,637
+haven’t finished the slides..."
 
 28
-00:00:59,680 --> 00:01:00,960
-up the filler, pulls out the
+00:01:06,823 --> 00:01:09,335
+ChatGPT cleans up the filler, pulls
 
 29
-00:01:01,040 --> 00:01:02,560
-new time, and hands back a
+00:01:09,428 --> 00:01:11,009
+out the new time, and hands
 
 30
-00:01:02,640 --> 00:01:05,360
-crisp two-sentence email ready to send.
+00:01:11,149 --> 00:01:13,614
+back a crisp two-sentence email ready
 
 31
-00:01:05,440 --> 00:01:07,440
-When you want fast brainstorming, voice
+00:01:13,707 --> 00:01:14,730
+to send.
 
 32
-00:01:07,520 --> 00:01:10,240
-conversation, or quick everyday cleanup, start
+00:01:18,823 --> 00:01:21,149
+When you want fast brainstorming, voice
 
 33
-00:01:10,360 --> 00:01:10,800
-here.
+00:01:21,242 --> 00:01:24,405
+conversation, or quick everyday cleanup, start
 
 34
-00:01:10,733 --> 00:01:12,253
-Bucket two is where you reach
+00:01:24,544 --> 00:01:24,922
+here.
 
 35
-00:01:12,333 --> 00:01:15,853
-when tone and precision matter—Claude. Instead
+00:01:24,933 --> 00:01:26,701
+Bucket two is where you reach
 
 36
-00:01:15,893 --> 00:01:17,453
-of talking in theory, look at
+00:01:26,794 --> 00:01:30,887
+when tone and precision matter—Claude. Instead
 
 37
-00:01:17,533 --> 00:01:18,893
-two jobs where people switch to
+00:01:30,933 --> 00:01:32,747
+of talking in theory, look at
 
 38
-00:01:18,973 --> 00:01:22,093
-Claude. First, rewriting without losing your
+00:01:32,840 --> 00:01:34,422
+two jobs where people switch to
 
 39
-00:01:22,173 --> 00:01:24,533
-voice. Take a stiff line like:
+00:01:34,515 --> 00:01:38,143
+Claude. First, rewriting without losing your
 
 40
-00:01:24,733 --> 00:01:27,053
-"Per our previous correspondence, failure to
+00:01:38,236 --> 00:01:40,980
+voice. Take a stiff line like:
 
 41
-00:01:27,133 --> 00:01:29,053
-submit assets by Friday will delay
+00:01:41,212 --> 00:01:43,910
+"Per our previous correspondence, failure to
 
 42
-00:01:29,133 --> 00:01:31,773
-launch." Tell Claude: "Make this sound
+00:01:44,003 --> 00:01:46,236
+submit assets by Friday will delay
 
 43
-00:01:31,853 --> 00:01:33,453
-like me, but keep the deadline
+00:01:46,329 --> 00:01:47,166
+launch."
 
 44
-00:01:33,613 --> 00:01:36,173
-firm." You get back: "Hey Alex
+00:01:49,938 --> 00:01:52,078
+Tell Claude: "Make this sound like
 
 45
-00:01:36,493 --> 00:01:37,613
-— quick heads-up that we still
+00:01:52,171 --> 00:01:54,310
+me, but keep the deadline firm."
 
 46
-00:01:37,693 --> 00:01:39,293
-need the final assets by Friday
+00:01:56,461 --> 00:01:58,848
+You get back: "Hey Alex —
 
 47
-00:01:39,373 --> 00:01:40,973
-so we don’t push back launch."
+00:01:58,911 --> 00:02:00,275
+quick heads-up that we still need
 
 48
-00:01:41,293 --> 00:01:45,053
-Direct, natural, and still firm. Second,
+00:02:00,368 --> 00:02:02,229
+the final assets by Friday so
 
 49
-00:01:45,133 --> 00:01:47,813
-tracing bugs across files. Suppose a
+00:02:02,322 --> 00:02:03,996
+we don’t push back launch."
 
 50
-00:01:48,013 --> 00:01:49,213
-checkout button on your site still
+00:02:06,868 --> 00:02:11,240
+Direct, natural, and still firm. Second,
 
 51
-00:01:49,453 --> 00:01:51,933
-shows the old forty-nine-dollar price. Instead
+00:02:11,333 --> 00:02:14,450
+tracing bugs across files. Suppose a
 
 52
-00:01:52,013 --> 00:01:53,853
-of guessing, Claude reads across your
+00:02:14,682 --> 00:02:16,078
+checkout button on your site still
 
 53
-00:01:54,173 --> 00:01:55,613
-project folder and points straight to
+00:02:16,357 --> 00:02:19,008
+shows the old forty-nine-dollar price.
 
 54
-00:01:55,693 --> 00:01:57,693
-the exact config file still holding
+00:02:21,547 --> 00:02:23,733
+Instead of guessing, Claude reads across
 
 55
-00:01:57,773 --> 00:01:58,573
-that old number.
+00:02:23,780 --> 00:02:25,780
+your project folder and points straight
 
 56
-00:01:58,500 --> 00:02:00,420
-Bucket three is the Multimodal and
+00:02:25,826 --> 00:02:27,966
+to the exact config file still
 
 57
-00:02:00,500 --> 00:02:04,260
-Workspace Brain—Gemini. Unlike models that originally
+00:02:28,245 --> 00:02:29,207
+holding that old number.
 
 58
-00:02:04,340 --> 00:02:07,540
-only read text, Gemini processes video,
+00:02:29,233 --> 00:02:31,466
+Bucket three is the Multimodal and
 
 59
-00:02:07,780 --> 00:02:10,500
-audio, images, and huge files natively
+00:02:31,559 --> 00:02:35,931
+Workspace Brain—Gemini. Unlike models that originally
 
 60
-00:02:10,660 --> 00:02:13,060
-inside Google’s ecosystem. And this is
+00:02:36,024 --> 00:02:39,745
+only read text, Gemini processes video,
 
 61
-00:02:13,100 --> 00:02:15,620
-where the buckets connect—because real tasks
+00:02:40,024 --> 00:02:43,187
+audio, images, and huge files natively
 
 62
-00:02:15,780 --> 00:02:18,020
-rarely stay in one lane. Suppose
+00:02:43,373 --> 00:02:46,164
+inside Google’s ecosystem. And this is
 
 63
-00:02:18,100 --> 00:02:20,260
-Dot finishes a forty-minute meeting recording
+00:02:46,210 --> 00:02:49,140
+where the buckets connect—because real tasks
 
 64
-00:02:20,340 --> 00:02:21,620
-and needs to email a client
+00:02:49,326 --> 00:02:51,931
+rarely stay in one lane. Suppose
 
 65
-00:02:21,700 --> 00:02:24,020
-what changed. First, Dot drops the
+00:02:52,024 --> 00:02:54,536
+Dot finishes a forty-minute meeting recording
 
 66
-00:02:24,100 --> 00:02:26,020
-video into Gemini and asks: "Where
+00:02:54,629 --> 00:02:56,117
+and needs to email a client
 
 67
-00:02:26,100 --> 00:02:28,020
-did we move the deadline?" Gemini
+00:02:56,210 --> 00:02:58,908
+what changed. First, Dot drops the
 
 68
-00:02:28,100 --> 00:02:29,780
-jumps straight to minute twenty-eight and
+00:02:59,001 --> 00:03:01,233
+video into Gemini and asks: "Where
 
 69
-00:02:29,860 --> 00:02:32,340
-pulls the exact line: moving delivery
+00:03:01,326 --> 00:03:03,001
+did we move the deadline?"
 
 70
-00:02:32,380 --> 00:02:35,140
-from October twelfth to October nineteenth.
+00:03:05,094 --> 00:03:07,419
+Gemini jumps straight to minute twenty-eight
 
 71
-00:02:35,340 --> 00:02:37,460
-Next, Dot hands that timestamped clip
+00:03:07,512 --> 00:03:10,024
+and pulls the exact line: moving
 
 72
-00:02:37,580 --> 00:02:38,580
-over to Claude to write the
+00:03:10,117 --> 00:03:12,443
+delivery from October twelfth to October
 
 73
-00:02:38,660 --> 00:02:40,420
-client update—and right there in the
+00:03:12,536 --> 00:03:13,838
+nineteenth.
 
 74
-00:02:40,620 --> 00:02:43,060
-draft, October twelfth is swapped cleanly
+00:03:17,671 --> 00:03:20,136
+Next, Dot hands that timestamped clip
 
 75
-00:02:43,140 --> 00:02:45,460
-for October nineteenth. Gemini finds the
+00:03:20,275 --> 00:03:21,438
+over to Claude to write the
 
 76
-00:02:45,540 --> 00:02:47,460
-needle in the video; Claude writes
+00:03:21,531 --> 00:03:23,578
+client update—and right there in the
 
 77
-00:02:47,487 --> 00:02:48,260
-the message.
+00:03:23,810 --> 00:03:26,647
+draft, October twelfth is swapped cleanly
 
 78
-00:02:51,213 --> 00:02:52,173
-Subscribe!
+00:03:26,740 --> 00:03:28,508
+for October nineteenth.
 
 79
-00:02:53,200 --> 00:02:55,333
-Bucket four covers two very different
+00:03:33,047 --> 00:03:34,396
+Gemini finds the needle in the
 
 80
-00:02:55,360 --> 00:02:58,208
-switches: Thinking Modes and Open-Weight Local
+00:03:34,489 --> 00:03:36,955
+video; Claude writes the message.
 
 81
-00:02:58,256 --> 00:03:00,880
-Models. People often mix these up,
+00:03:39,980 --> 00:03:40,940
+Subscribe!
 
 82
-00:03:01,000 --> 00:03:02,320
-so give each one its own
+00:03:41,967 --> 00:03:44,447
+Bucket four covers two very different
 
 83
-00:03:02,400 --> 00:03:05,280
-question. For Thinking Mode, ask: "Can
+00:03:44,478 --> 00:03:47,790
+switches: Thinking Modes and Open-Weight Local
 
 84
-00:03:05,360 --> 00:03:07,680
-everyone work their assigned shift?" A
+00:03:47,846 --> 00:03:50,897
+Models. People often mix these up,
 
 85
-00:03:07,840 --> 00:03:09,360
-fast model might skim the schedule
+00:03:51,036 --> 00:03:52,571
+so give each one its own
 
 86
-00:03:09,440 --> 00:03:11,200
-and say yes. When you turn
+00:03:52,664 --> 00:03:56,013
+question. For Thinking Mode, ask: "Can
 
 87
-00:03:11,280 --> 00:03:13,200
-on Thinking Mode, the model pauses
+00:03:56,106 --> 00:03:58,618
+everyone work their assigned shift?"
 
 88
-00:03:13,240 --> 00:03:15,360
-on a hidden scratchpad, checks every
+00:04:00,911 --> 00:04:02,446
+A fast model might skim the
 
 89
-00:03:15,560 --> 00:03:17,440
-person hour by hour, and catches
+00:04:02,492 --> 00:04:04,818
+schedule and say yes. When you
 
 90
-00:03:17,480 --> 00:03:20,000
-the real conflict—Maya is scheduled in
+00:04:04,957 --> 00:04:06,864
+turn on Thinking Mode, the model
 
 91
-00:03:20,080 --> 00:03:22,480
-two places at three p.m. For
+00:04:06,957 --> 00:04:09,562
+pauses on a hidden scratchpad, checks
 
 92
-00:03:22,560 --> 00:03:25,040
-Open-Weight models like DeepSeek or Llama,
+00:04:09,748 --> 00:04:11,888
+every person hour by hour, and
 
 93
-00:03:25,200 --> 00:03:27,200
-ask: "Can I summarize this private
+00:04:12,027 --> 00:04:15,143
+catches the real conflict—Maya is scheduled
 
 94
-00:03:27,280 --> 00:03:28,960
-file while my laptop is offline?"
+00:04:15,236 --> 00:04:17,190
+in two places at three p.m.
 
 95
-00:03:29,680 --> 00:03:31,840
-Note the catch: using DeepSeek on
+00:04:20,027 --> 00:04:22,353
+For Open-Weight models like DeepSeek or
 
 96
-00:03:31,920 --> 00:03:33,840
-a public website still sends your
+00:04:22,446 --> 00:04:25,143
+Llama, ask: "Can I summarize this
 
 97
-00:03:33,960 --> 00:03:35,600
-file to a cloud server. But
+00:04:25,329 --> 00:04:27,097
+private file while my laptop is
 
 98
-00:03:35,760 --> 00:03:38,400
-because open-weight models publish their blueprints,
+00:04:27,190 --> 00:04:31,004
+offline?" Note the catch: using DeepSeek
 
 99
-00:03:38,480 --> 00:03:39,680
-you can download one onto your
+00:04:31,050 --> 00:04:33,236
+on a public website still sends
 
 100
-00:03:39,760 --> 00:03:42,560
-laptop, turn Wi-Fi completely off, and
+00:04:33,329 --> 00:04:35,097
+your file to a cloud server.
 
 101
-00:03:42,720 --> 00:03:45,840
-summarize sensitive files locally. Thinking mode
+00:04:35,376 --> 00:04:37,702
+But because open-weight models publish their
 
 102
-00:03:45,920 --> 00:03:47,440
-changes how the model tackles the
+00:04:37,795 --> 00:04:40,027
+blueprints, you can download one onto
 
 103
-00:03:47,520 --> 00:03:49,920
-problem. Running locally changes where the
+00:04:40,120 --> 00:04:43,469
+your laptop, turn Wi-Fi completely off,
 
 104
-00:03:50,000 --> 00:03:52,480
-work happens. And on capable hardware,
+00:04:43,515 --> 00:04:45,888
+and summarize sensitive files locally.
 
 105
-00:03:52,520 --> 00:03:53,520
-you can do both.
+00:04:49,725 --> 00:04:51,585
+Thinking mode changes how the model
 
 106
-00:03:53,467 --> 00:03:55,787
-Before you go, quick test—pick the
+00:04:51,678 --> 00:04:54,748
+tackles the problem. Running locally changes
 
 107
-00:03:55,867 --> 00:03:58,267
-box before Dot stamps it. Messy
+00:04:54,841 --> 00:04:56,702
+where the work happens. And on
 
 108
-00:03:58,347 --> 00:03:59,947
-voice note into a clean email?
+00:04:56,795 --> 00:04:59,162
+capable hardware, you can do both.
 
 109
-00:04:01,447 --> 00:04:04,567
-ChatGPT. Find one diagram buried inside
+00:04:59,167 --> 00:05:01,487
+Before you go, quick test—pick the
 
 110
-00:04:04,647 --> 00:04:08,827
-a recorded lecture? Gemini. Summarize a
+00:05:01,567 --> 00:05:03,967
+box before Dot stamps it. Messy
 
 111
-00:04:08,867 --> 00:04:10,387
-private file that has to stay
+00:05:04,047 --> 00:05:05,647
+voice note into a clean email?
 
 112
-00:04:10,467 --> 00:04:13,887
-on this laptop? A local open-weight
+00:05:07,147 --> 00:05:10,267
+ChatGPT. Find one diagram buried inside
 
 113
-00:04:13,967 --> 00:04:15,647
-model. Now that you know which
+00:05:10,347 --> 00:05:11,547
+a recorded lecture?
 
 114
-00:04:15,807 --> 00:04:18,047
-model handles which job, what happens
+00:05:13,047 --> 00:05:15,447
+Gemini. Summarize a private file that
 
 115
-00:04:18,127 --> 00:04:19,967
-when these AI systems stop waiting
+00:05:15,527 --> 00:05:16,967
+has to stay on this laptop?
 
 116
-00:04:20,047 --> 00:04:21,487
-for your prompts and start running
+00:05:18,467 --> 00:05:20,787
+A local open-weight model. Now that
 
 117
-00:04:21,567 --> 00:04:22,847
-tasks in the cloud while you
+00:05:20,867 --> 00:05:22,387
+you know which model handles which
 
 118
-00:04:22,927 --> 00:04:25,327
-sleep? Watch this breakdown next.
+00:05:22,547 --> 00:05:24,547
+job, what happens when these AI
+
+119
+00:05:24,627 --> 00:05:26,467
+systems stop waiting for your prompts
+
+120
+00:05:26,547 --> 00:05:27,827
+and start running tasks in the
+
+121
+00:05:27,907 --> 00:05:29,907
+cloud while you sleep? Watch this
+
+122
+00:05:29,987 --> 00:05:31,027
+breakdown next.
