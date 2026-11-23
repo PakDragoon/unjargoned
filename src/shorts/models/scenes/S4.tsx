@@ -12,6 +12,8 @@ import {
 } from "../../../models/Editorial";
 export const S4 = ({ words }: SceneProps) => {
   const { t, cue } = useBeat(words);
+  const linkCue = cue("below");
+  const arrow = progress(t, linkCue, 0.2);
   return (
     <Stage short title="Your pocket cheat sheet" label="RELATED VIDEO">
       {taxonomy.map(([name, label], i) => {
@@ -44,7 +46,7 @@ export const S4 = ({ words }: SceneProps) => {
         );
       })}
       <svg
-        style={box(330, 1015 + 8 * Math.sin(t * 4))}
+        style={{ ...box(330, 1015 + 8 * Math.sin(t * 4)), opacity: arrow, transform: `translateY(${(arrow - 1) * 30}px)` }}
         width="210"
         height="230"
         viewBox="0 0 200 220"
@@ -56,7 +58,7 @@ export const S4 = ({ words }: SceneProps) => {
           strokeWidth="6"
         />
       </svg>
-      <Foley at={cue("below")} name="pop" />
+      <Foley at={linkCue} name="pop" />
     </Stage>
   );
 };

@@ -6,8 +6,12 @@ export const Captions = ({ words }: SceneProps) => {
   const { fps } = useVideoConfig();
   const t = useCurrentFrame() / fps;
   const current = words.findIndex(([, a, b]) => a <= t && t < b);
-  if (current < 0) return null;
-  const start = current - (current % 3);
+  // Keep the phrase readable between words; only spoken words light up.
+  const visible = current >= 0 ? current : words.findIndex(([, , end], i) =>
+    end <= t && t < Math.min(end + 0.3, words[i + 1]?.[1] ?? end),
+  );
+  if (visible < 0) return null;
+  const start = visible - (visible % 3);
   return (
     <div
       style={{
