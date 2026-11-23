@@ -1,26 +1,26 @@
 [
   {
-    "file": null,
-    "seconds": 8,
+    "file": "audio/short_models/s1.mp3",
+    "seconds": 8.0,
     "frames": 480,
     "hash": "531c7d29e23be5086878ad49414be7fbf267dac89981984a475b6368bb0b4cf8"
   },
   {
-    "file": null,
-    "seconds": 15,
-    "frames": 900,
+    "file": "audio/short_models/s2.mp3",
+    "seconds": 17.36,
+    "frames": 1042,
     "hash": "770bd42e9216bcd6acfe278b400e52bce5af118838d1d2b06b13aedf300df7fe"
   },
   {
-    "file": null,
-    "seconds": 9,
-    "frames": 540,
+    "file": "audio/short_models/s3.mp3",
+    "seconds": 9.2,
+    "frames": 552,
     "hash": "b6d1013fd7d5dd33f6c217a9737d0ba5eec927d681bf678e508cfd254f6cc05f"
   },
   {
-    "file": null,
-    "seconds": 6,
-    "frames": 360,
+    "file": "audio/short_models/s4.mp3",
+    "seconds": 6.08,
+    "frames": 365,
     "hash": "28320cb3b512feeabd1fe0e8b6e03ac64e5ce5ecb204d936ec255243c14073a1"
   }
 ]

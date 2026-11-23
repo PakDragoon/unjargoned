@@ -1,71 +1,71 @@
 1
-00:00:00,000 --> 00:00:02,824
+00:00:00,000 --> 00:00:02,800
 Stop using ChatGPT for every single
 
 2
-00:00:02,824 --> 00:00:05,647
+00:00:02,880 --> 00:00:05,600
 task. Every major AI has evolved
 
 3
-00:00:05,647 --> 00:00:08,000
+00:00:05,720 --> 00:00:08,080
 into a completely different specialist.
 
 4
-00:00:08,000 --> 00:00:10,368
+00:00:08,000 --> 00:00:10,480
 Need fast brainstorming, voice mode, or
 
 5
-00:00:10,368 --> 00:00:12,737
+00:00:10,640 --> 00:00:13,760
 everyday help? Use ChatGPT. Writing long
 
 6
-00:00:12,737 --> 00:00:15,105
+00:00:13,840 --> 00:00:16,560
 documents or building real software? Claude
 
 7
-00:00:15,105 --> 00:00:17,474
+00:00:16,640 --> 00:00:18,320
 is sharper and sounds more human.
 
 8
-00:00:17,474 --> 00:00:19,842
+00:00:18,640 --> 00:00:21,520
 Analyzing full videos, audio, or massive
 
 9
-00:00:19,842 --> 00:00:22,210
+00:00:21,600 --> 00:00:24,000
 PDFs inside Google apps? That is
 
 10
-00:00:22,210 --> 00:00:23,000
+00:00:24,080 --> 00:00:25,440
 Gemini's superpower.
 
 11
-00:00:23,000 --> 00:00:25,000
+00:00:25,367 --> 00:00:26,647
 And when you hit tough logic
 
 12
-00:00:25,000 --> 00:00:27,000
+00:00:26,727 --> 00:00:28,647
 puzzles, switch on a Thinking mode
 
 13
-00:00:27,000 --> 00:00:29,000
+00:00:28,727 --> 00:00:30,327
 so the AI double-checks its own
 
 14
-00:00:29,000 --> 00:00:31,000
+00:00:30,407 --> 00:00:33,287
 work—or run open-weight models like DeepSeek
 
 15
-00:00:31,000 --> 00:00:32,000
+00:00:33,367 --> 00:00:34,647
 locally for free.
 
 16
-00:00:32,000 --> 00:00:34,000
+00:00:34,567 --> 00:00:36,727
 Watch the full six-minute visual cheat
 
 17
-00:00:34,000 --> 00:00:36,000
+00:00:36,807 --> 00:00:38,567
 sheet linked right below so you
 
 18
-00:00:36,000 --> 00:00:38,000
+00:00:38,647 --> 00:00:40,727
 never pick the wrong AI again.
