@@ -1,0 +1,26 @@
+[
+  {
+    "text": "If you open ChatGPT, Claude, Gemini, or DeepSeek today, they all look like the exact same blank white box waiting for a question. Because they look identical on the outside, most people assume they are all doing the exact same thing behind the scenes—and just pick whichever icon happens to be closest on their phone. That is a mistake. Under the hood, these AI systems have evolved into very different specialists, built with different strengths, different trade-offs, and completely different ways of solving a problem. Instead of memorizing dozens of confusing version numbers, you only need to understand four simple buckets. Once you see how they are wired, you will know exactly which one to open in five seconds.",
+    "seconds": 45
+  },
+  {
+    "text": "Bucket number one is the Everyday All-Rounder—led by OpenAI’s ChatGPT and its GPT models. Think of ChatGPT as the Swiss Army knife of AI. Its biggest superpower isn't just one narrow benchmark—it is breadth and polish. Whether you are brainstorming gift ideas, talking hands-free in voice mode while driving, generating an image, or drafting a quick email, ChatGPT handles everyday tasks smoothly without much friction. Because OpenAI built the largest consumer ecosystem around it—with custom assistants, canvas workspaces, and deep app integrations—it is designed to be the default starting point for general knowledge work. The catch? When you throw massive, messy documents or sprawling multi-file codebases at it, a generalist can occasionally skim the surface or take shortcuts instead of digging deep.",
+    "seconds": 70
+  },
+  {
+    "text": "Bucket number two is the Deep Writer and Builder—led by Anthropic’s Claude. If ChatGPT is a fast generalist, Claude is the meticulous editor and senior software engineer. People who work heavily with text and code gravitate toward Claude for two distinct reasons. First, its writing sounds noticeably more human and nuanced. Where other chatbots often lean on stiff, repetitive corporate clichés, Claude follows tone instructions closely and reads large policy documents or contracts without losing track of fine details. Second, Claude excels at building software. Rather than just spitting out isolated snippets of code, it can read an entire project folder, trace how different files connect, and refactor complex logic step by step. The trade-off is restraint: Claude is strictly focused on text, reasoning, and code, so if you want native video understanding or live social feeds, you will need the next bucket.",
+    "seconds": 70
+  },
+  {
+    "text": "Bucket number three is the Multimodal and Ecosystem Brain—led by Google’s Gemini. Most AI models started out reading only text, and later had image and audio tools bolted onto the side. Gemini was built from day one to be natively multimodal. That means it processes text, photos, audio recordings, spreadsheets, and full video files inside the exact same brain. You can hand it an hour-long video lecture or a massive archive of PDFs and ask it to find a single visual moment or cross-reference facts across hundreds of pages. On top of that, Gemini lives directly inside the tools billions of people already use every day—Gmail, Docs, Drive, and Android. Instead of copying and pasting information back and forth between tabs, it can pull context straight from your workspace.",
+    "seconds": 70
+  },
+  {
+    "text": "Bucket number four isn't a single company—it is two major shifts changing how AI works under the hood: Reasoning Models and Open-Weight Models. First, almost every major AI app now offers a \"Thinking\" or \"Reasoning\" mode alongside its fast default mode. Standard AI predicts words immediately, like someone answering a trivia question off the top of their head. Reasoning models pause for ten to thirty seconds to talk through the problem on a hidden scratchpad—testing logic, catching mistakes, and verifying math before showing you the final answer. Second, there are Open-Weight models like DeepSeek and Meta’s Llama. Unlike ChatGPT, Claude, or Gemini—which stay locked inside private cloud servers—open-weight models publish their underlying blueprints publicly. Developers can run them at a fraction of the cost, or even download smaller versions directly onto a laptop to work completely offline with zero data leaving their device.",
+    "seconds": 75
+  },
+  {
+    "text": "So the next time you stare at a blinking cursor, skip the hype and match the job to the bucket: Everyday tasks, voice, and quick ideas: open ChatGPT. Nuanced writing, long documents, and coding: open Claude. Video, audio, huge files, and Google apps: open Gemini. Hard logic puzzles or private local runs: switch on a Reasoning mode or an Open-Weight model. And if you want to see what happens when these models stop waiting for your prompts and start running tasks in the cloud while you sleep, watch this breakdown next.",
+    "seconds": 30
+  }
+]

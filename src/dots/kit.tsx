@@ -1,12 +1,8 @@
 // v2 Tactile Editorial kit — built only from the Dots production spec.
 import React from "react";
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig, Easing } from "remotion";
-import { loadFont as loadSpace } from "@remotion/google-fonts/SpaceGrotesk";
-import { loadFont as loadMono } from "@remotion/google-fonts/JetBrainsMono";
+import { HEAD, MONO } from "../shorts/dots/theme";
 import timing from "./timing.json";
-
-const space = loadSpace("normal", { weights: ["500", "700"], subsets: ["latin"] });
-const mono = loadMono("normal", { weights: ["600"], subsets: ["latin"] });
 
 export const C = {
   paper: "#F7F4EB",
@@ -18,7 +14,7 @@ export const C = {
   green: "#2E9E66",
   white: "#FFFFFF",
 };
-export const F = { head: space.fontFamily, mono: mono.fontFamily };
+export const F = { head: HEAD, mono: MONO };
 export const STROKE = `3px solid ${C.ink}`;
 export const SHADOW = `8px 8px 0px ${C.ink}`;
 export const FPS = 60;
