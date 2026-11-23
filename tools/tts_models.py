@@ -23,7 +23,33 @@ def save(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
 
 
-def synthesize(text, key, destination):
+def add_quiz_pauses(path, words, answers):
+    tokens = [w[0] for w in words]
+    cuts = []
+    for answer in answers:
+        phrase = answer.split()
+        index = next(i for i in range(1, len(words)) if tokens[i:i+len(phrase)] == phrase)
+        gap = max(0, words[index][1] - words[index-1][2])
+        cuts.append((index, words[index][1], max(0, 1.5-gap)))
+    filters = []
+    start = 0
+    for n, (_, end, pause) in enumerate(cuts):
+        filters.append(f"[0:a]atrim=start={start}:end={end},asetpts=PTS-STARTPTS,apad=pad_dur={pause}[s{n}]")
+        start = end
+    filters.append(f"[0:a]atrim=start={start},asetpts=PTS-STARTPTS[last]")
+    filters.append("".join(f"[s{n}]" for n in range(len(cuts))) + f"[last]concat=n={len(cuts)+1}:v=0:a=1[out]")
+    with tempfile.TemporaryDirectory(dir=path.parent) as directory:
+        out = Path(directory, 'quiz.mp3')
+        subprocess.run(['ffmpeg','-v','error','-i',path,'-filter_complex',';'.join(filters),
+                        '-map','[out]','-b:a','128k',out], check=True)
+        out.replace(path)
+    for i, word in enumerate(words):
+        shift = sum(pause for index, _, pause in cuts if index <= i)
+        word[1] += shift
+        word[2] += shift
+
+
+def synthesize(text, key, destination, pauses):
     body = {"text": text, "model_id": MODEL, "voice_settings": SETTINGS}
     request = urllib.request.Request(
         f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE}/with-timestamps",
@@ -39,6 +65,8 @@ def synthesize(text, key, destination):
         tmp.write(base64.b64decode(data["audio_base64"]))
     tmp = Path(tmp.name)
     try:
+        if pauses:
+            add_quiz_pauses(tmp, words, pauses)
         duration = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries",
                          "format=duration", "-of", "csv=p=0", tmp]))
         tmp.replace(destination)
@@ -68,14 +96,14 @@ def build(short, only, key):
     for i, line in enumerate(script):
         text = line["text"]
         file = f"audio/{'short_models' if short else 'models'}/s{i+1}.mp3"
-        digest = hashlib.sha256((text + MODEL + VOICE + str(SETTINGS)).encode()).hexdigest()
+        digest = hashlib.sha256((text + MODEL + VOICE + str(SETTINGS) + "".join(line.get("pauseBefore", []))).encode()).hexdigest()
         prior = scenes[i] if i < len(scenes) else None
         valid = prior and prior['hash'] == digest and (ROOT / "public" / file).exists() and prior["file"]
         if valid and only != i+1:
             words, scene = timings[i], prior
         else:
             if key and only in (None, i+1):
-                words, seconds = synthesize(text, key, ROOT / "public" / file)
+                words, seconds = synthesize(text, key, ROOT / "public" / file, line.get("pauseBefore", []))
             elif valid:
                 words, seconds = timings[i], prior["seconds"]
             else:

@@ -1,18 +1,18 @@
 [
   {
-    "text": "Stop using ChatGPT for every single task. Every major AI has evolved into a completely different specialist.",
+    "text": "Stop using ChatGPT for every single task. Every major AI is built for a completely different job.",
+    "seconds": 6
+  },
+  {
+    "text": "Turning a rambling voice note into a clean email? Open ChatGPT. Rewriting a stiff message in your own voice or tracing a bug across code files? Reach for Claude. Finding one specific moment inside an hour-long video? That’s Gemini.",
+    "seconds": 16
+  },
+  {
+    "text": "Switch on Thinking Mode when you need the AI to double-check logic, or run an open-weight model offline on your laptop for private files.",
     "seconds": 8
   },
   {
-    "text": "Need fast brainstorming, voice mode, or everyday help? Use ChatGPT. Writing long documents or building real software? Claude is sharper and sounds more human. Analyzing full videos, audio, or massive PDFs inside Google apps? That is Gemini's superpower.",
-    "seconds": 15
-  },
-  {
-    "text": "And when you hit tough logic puzzles, switch on a Thinking mode so the AI double-checks its own work—or run open-weight models like DeepSeek locally for free.",
-    "seconds": 9
-  },
-  {
-    "text": "Watch the full six-minute visual cheat sheet linked right below so you never pick the wrong AI again.",
+    "text": "Watch the full visual cheat sheet linked below so you never pick the wrong AI again.",
     "seconds": 6
   }
 ]

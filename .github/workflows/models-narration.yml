@@ -2,7 +2,7 @@ name: Generate Models narration
 on:
   push:
     branches: [ai_models_episode]
-    paths: ['.github/workflows/models-narration.yml']
+    paths: ['.github/workflows/models-narration.yml', 'src/models/script.json', 'src/shorts/models/script.json']
   workflow_dispatch:
 
 permissions:
