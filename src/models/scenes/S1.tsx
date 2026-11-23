@@ -10,8 +10,10 @@ import {
   useBeat,
 } from "../Editorial";
 export const S1 = ({ words }: SceneProps) => {
-  const { t } = useBeat(words);
-  const selected = t >= 15 ? 1 : t >= 8 ? 2 : -1;
+  const { t, cue } = useBeat(words);
+  const gemini = cue("gemini");
+  const claude = cue("claude");
+  const selected = t >= claude ? 1 : t >= gemini ? 2 : -1;
   return (
     <Stage title="Which box would you open?" label="FIELD GUIDE / THE CHOICE">
       {["ChatGPT", "Claude", "Gemini", "DeepSeek"].map((name, i) => {
@@ -36,7 +38,7 @@ export const S1 = ({ words }: SceneProps) => {
       <div style={box(106, 310)}>
         <Stamp
           size={34}
-          text={selected === 1 ? "REWRITE THE EXPLANATION" : "FIND THE DIAGRAM"}
+          text={t >= cue("rough") ? "REWRITE THE EXPLANATION" : "FIND THE DIAGRAM"}
         />
       </div>
       <Actor
@@ -46,8 +48,8 @@ export const S1 = ({ words }: SceneProps) => {
         worried={selected < 0}
       />
       <Foley at={0} name="pop" />
-      <Foley at={8} name="ding" />
-      <Foley at={15} name="click" />
+      <Foley at={gemini} name="ding" />
+      <Foley at={claude} name="click" />
     </Stage>
   );
 };

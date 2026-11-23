@@ -71,7 +71,7 @@ export const S5 = ({ words }: SceneProps) => {
           </>
         )}
       </Window>
-      <Window right title="Local model / laptop" t={t}>
+      <Window right title="Local model / laptop" t={t} at={local}>
         <Label>CAN I SUMMARIZE THIS PRIVATE FILE OFFLINE?</Label>
         {t < local ? (
           <Prop kind="laptop" width={455} />

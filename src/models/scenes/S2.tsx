@@ -10,12 +10,11 @@ import {
 } from "../Editorial";
 import { Label, Slip, Wave, Window } from "../Demo";
 import { Prop } from "../Props";
-const transcript =
-  "Hey uh, can we push Thursday’s sync to Friday at 2? My dentist appointment ran late and I still haven't finished the slides, sorry about that...";
 export const S2 = ({ words }: SceneProps) => {
   const { t, cue } = useBeat(words),
     note = cue("hey"),
     email = cue("cleans");
+  const transcript = words.filter(([,start]) => start >= note && start <= cue("slides") && start <= t).map(([word]) => word).join(" ");
   return (
     <Stage title="A voice note becomes an email" label="BUCKET 01 / CHATGPT">
       <Window title="ChatGPT" t={t}>
@@ -36,15 +35,7 @@ export const S2 = ({ words }: SceneProps) => {
         ) : (
           <>
             <Wave t={t} />
-            <Slip>
-              {transcript.slice(
-                0,
-                Math.ceil(
-                  transcript.length *
-                    Math.max(0, Math.min(1, (t - note) / (email - note))),
-                ),
-              )}
-            </Slip>
+            <Slip>{transcript}</Slip>
           </>
         )}
       </Window>

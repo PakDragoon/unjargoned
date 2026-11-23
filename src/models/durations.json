@@ -7,27 +7,27 @@
   },
   {
     "file": "audio/models/s2.mp3",
-    "seconds": 51.322381,
-    "frames": 1540,
-    "hash": "85751e36c49e3731bcf237ddd8d841c0f765c137edf26e6a1bf436a959ad1472"
+    "seconds": 37.12,
+    "frames": 1114,
+    "hash": "dab2f30c5f14b1d2879910ebc68145459ae954632131b81c4227eba34e7716aa"
   },
   {
     "file": "audio/models/s3.mp3",
-    "seconds": 64.274127,
-    "frames": 1929,
-    "hash": "8264eb56b6077c988b3651c9ad03112b443ae5a3bcb1a4fd0c610f893374adba"
+    "seconds": 47.76,
+    "frames": 1433,
+    "hash": "9c27c9addba03c38769bb50853427452b971bba1f4e9dfe91f096f62cdcc5740"
   },
   {
     "file": "audio/models/s4.mp3",
-    "seconds": 67.72127,
-    "frames": 2032,
-    "hash": "cc233ede486f0db8aac80d1f1d05182c40c41eb8b341d4c449d3129399c085f0"
+    "seconds": 49.68,
+    "frames": 1491,
+    "hash": "fb58d42637f76b77798d978ce9a19a41652f3e8ce7d77a1a9ba3ceedd8f57241"
   },
   {
     "file": "audio/models/s5.mp3",
-    "seconds": 77.195374,
-    "frames": 2316,
-    "hash": "d02e1c4b832e8cdbcfc825f81cdfb0850ba63dba440257284fdc0d40d86e9050"
+    "seconds": 60.24,
+    "frames": 1808,
+    "hash": "b33acebed8bb11e6d12d920ca19128e5960769094715d2864cc595d21ab6b1c3"
   },
   {
     "file": "audio/models/s6.mp3",

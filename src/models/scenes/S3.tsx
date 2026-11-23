@@ -31,7 +31,7 @@ export const S3 = ({ words }: SceneProps) => {
           </>
         )}
       </Window>
-      <Window right title="Claude / checkout" t={t}>
+      <Window right title="Claude / checkout" t={t} at={code}>
         <Label>CHECKOUT PREVIEW</Label>
         <Stamp text="BUY · $49" />
         <span style={{ marginLeft: 28 }}>Expected $29</span>
